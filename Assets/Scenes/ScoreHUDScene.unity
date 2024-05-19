@@ -702,8 +702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc032a02a6cc65247ac6a33723861be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownTimer: {fileID: 0}
-  scoreBoardManager: {fileID: 0}
+  countdownTimerObject: {fileID: 1717159234}
+  scoreBoardManagerObject: {fileID: 916577149}
 --- !u!1 &1717159234
 GameObject:
   m_ObjectHideFlags: 0
