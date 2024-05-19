@@ -32,6 +32,7 @@ public class CountdownTimer : MonoBehaviour
         {
             StopTimer();
         }
+        CurrentTime = startTime;
         timerText.text = (FloatToTimeString(startTime));
         Debug.Log("Timer reset");
     }
