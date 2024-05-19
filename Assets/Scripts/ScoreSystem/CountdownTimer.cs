@@ -7,11 +7,11 @@ public class CountdownTimer : MonoBehaviour
 {
     public TextMeshProUGUI timerText; // UI text object
     [SerializeField] private float startTime; // start time in seconds
-    private float currentTime = 0;
-    private bool isRunning = false;
+    public float CurrentTime { get; private set; } // current time in seconds
+    public bool IsTimerRunning { get; private set; }
 
 
-    private string floatToTimeString(float time)
+    public string FloatToTimeString(float time)
     {
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
@@ -19,48 +19,54 @@ public class CountdownTimer : MonoBehaviour
         return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    private void StopTimer()
+    public void StopTimer()
     {
-        isRunning = false;
+        IsTimerRunning = false;
         Debug.Log("Timer stopped");
     }
 
     // reset to start time
     public void ResetTimer()
     {
-        if (isRunning)
+        if (IsTimerRunning)
         {
             StopTimer();
         }
-        timerText.text = (floatToTimeString(startTime));
+        timerText.text = (FloatToTimeString(startTime));
         Debug.Log("Timer reset");
     }
 
     public void StartTimer()
     {
-        if (!isRunning)
+        if (!IsTimerRunning)
         {
-            isRunning = true;
-            currentTime = startTime;
+            IsTimerRunning = true;
+            CurrentTime = startTime;
         }
         Debug.Log("Timer started");
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        ResetTimer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isRunning)
+        if (IsTimerRunning)
         {
-            currentTime -= Time.deltaTime;
-            timerText.text = (floatToTimeString(currentTime));
-            if (currentTime <= 0)
+            CurrentTime -= Time.deltaTime;
+            timerText.text = (FloatToTimeString(CurrentTime));
+            if (CurrentTime <= 0)
             {
                 StopTimer();
-                currentTime = 0;
+                CurrentTime = 0;
+                timerText.text = (FloatToTimeString(CurrentTime));
                 Debug.Log("Timer ended");
             }
         }
-
     }
 
     // On Application pause
