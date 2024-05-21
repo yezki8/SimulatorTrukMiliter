@@ -9,6 +9,7 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] private float startTime; // start time in seconds
     public float CurrentTime { get; private set; } // current time in seconds
     public bool IsTimerRunning { get; private set; }
+    public bool IsTimerPaused { get; private set; }
 
 
     public string FloatToTimeString(float time)
@@ -25,6 +26,19 @@ public class CountdownTimer : MonoBehaviour
         Debug.Log("Timer stopped");
     }
 
+    public void HandlePauseTimer()
+    {
+        if (IsTimerPaused)
+        {
+            IsTimerPaused = false;
+            Debug.Log("Timer unpaused");
+        } else
+        {
+            IsTimerPaused = true;
+            Debug.Log("Timer paused");
+        }
+    }
+
     // reset to start time
     public void ResetTimer()
     {
@@ -33,6 +47,7 @@ public class CountdownTimer : MonoBehaviour
             StopTimer();
         }
         CurrentTime = startTime;
+        IsTimerPaused = false;
         timerText.text = (FloatToTimeString(startTime));
         Debug.Log("Timer reset");
     }
@@ -42,8 +57,8 @@ public class CountdownTimer : MonoBehaviour
         if (!IsTimerRunning)
         {
             IsTimerRunning = true;
-            CurrentTime = startTime;
         }
+        CurrentTime = startTime;
         Debug.Log("Timer started");
     }
 
@@ -56,7 +71,7 @@ public class CountdownTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsTimerRunning)
+        if (IsTimerRunning && !IsTimerPaused)
         {
             CurrentTime -= Time.deltaTime;
             timerText.text = (FloatToTimeString(CurrentTime));

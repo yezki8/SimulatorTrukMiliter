@@ -38,7 +38,7 @@ public class ScoreManager : MonoBehaviour
         {
             if (countdownTimer.IsTimerRunning)
             {
-                countdownTimer.StopTimer();
+                countdownTimer.HandlePauseTimer();
             }
             else
             {
