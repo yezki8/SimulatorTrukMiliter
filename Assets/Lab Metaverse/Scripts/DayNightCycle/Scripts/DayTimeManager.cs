@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TimeManager : MonoBehaviour
+public class DayTimeManager : MonoBehaviour
 {
     [Range(0, 24)]
     public float timeOfDay;  // Current time of day (0-24)
