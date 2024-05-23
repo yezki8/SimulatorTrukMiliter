@@ -11,6 +11,27 @@ public class CountdownTimer : MonoBehaviour
     public bool IsTimerRunning { get; private set; }
     public bool IsTimerPaused { get; private set; }
 
+    public static CountdownTimer Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 
     public string FloatToTimeString(float time)
     {
@@ -60,6 +81,12 @@ public class CountdownTimer : MonoBehaviour
         }
         CurrentTime = startTime;
         Debug.Log("Timer started");
+    }
+
+    //Get and Set Data ===============================================================
+    public float GetStartTime()
+    {
+        return startTime;
     }
 
     // Start is called before the first frame update
