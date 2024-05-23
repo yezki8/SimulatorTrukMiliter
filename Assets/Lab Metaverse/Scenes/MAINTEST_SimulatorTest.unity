@@ -874,7 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sun: {fileID: 1235687942}
-  dayTimeManager: {fileID: 0}
+  dayTimeManager: {fileID: 1703301384}
 --- !u!114 &1703301384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1200,7 +1200,13 @@ MonoBehaviour:
   OnChangeStateToAny:
     m_PersistentCalls:
       m_Calls: []
-  OnChangeGameState: []
+  OnChangeGameState:
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
   OnRestartStage:
     m_PersistentCalls:
       m_Calls: []

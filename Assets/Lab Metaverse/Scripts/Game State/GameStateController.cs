@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum StateOfGame
+{
+    Intro,
+    Match,
+    End
+}
 public class GameStateController : MonoBehaviour
 {
-    public enum StateOfGame
-    {
-        Intro,
-        Match,
-        End
-    }
     [Header("Game State Parameter")]
     public StateOfGame GameState = StateOfGame.Intro;
 

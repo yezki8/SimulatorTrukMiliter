@@ -58,7 +58,7 @@ public class CheckpointManager : MonoBehaviour
 
     public void ActivateCheckpoint(GameObject targetCheckpoint)
     {
-        if (GameStateController.Instance.GameState == GameStateController.StateOfGame.Match)
+        if (GameStateController.Instance.GameState == StateOfGame.Match)
         {
             foreach (var spawnPlace in Checkpoints)
             {
