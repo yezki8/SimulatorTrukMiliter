@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class CountdownTimer : MonoBehaviour
@@ -11,7 +12,9 @@ public class CountdownTimer : MonoBehaviour
     public bool IsTimerRunning { get; private set; }
     public bool IsTimerPaused { get; private set; }
 
+    //for references in other scripts
     public static CountdownTimer Instance;
+    public UnityEvent OnCountdownEnd;
 
     private void Awake()
     {
@@ -108,6 +111,8 @@ public class CountdownTimer : MonoBehaviour
                 CurrentTime = 0;
                 timerText.text = (FloatToTimeString(CurrentTime));
                 Debug.Log("Timer ended");
+
+                OnCountdownEnd?.Invoke();
             }
         }
     }
