@@ -11,6 +11,9 @@ public enum StateOfGame
 }
 public class GameStateController : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private GameStateUIHandler _gameStateUIHandler;
+
     [Header("Game State Parameter")]
     public StateOfGame GameState = StateOfGame.Intro;
 
@@ -49,6 +52,8 @@ public class GameStateController : MonoBehaviour
     {
         GameState = (StateOfGame)targetState;
         OnChangeStateToAny?.Invoke();
+
+        _gameStateUIHandler.ActivatePanel((int)GameState);
         OnChangeGameState[targetState]?.Invoke();
     }
 

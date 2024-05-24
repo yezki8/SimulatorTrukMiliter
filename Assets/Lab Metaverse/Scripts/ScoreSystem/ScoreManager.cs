@@ -36,26 +36,46 @@ public class ScoreManager : MonoBehaviour
         // space to start/pause/unpause, r to reset
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (countdownTimer.IsTimerRunning)
-            {
-                countdownTimer.HandlePauseTimer();
-            }
-            else
-            {
-                countdownTimer.StartTimer();
-            }
+            ChangeCountdownState();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             // add timer to scoreboard
-            scoreBoardManager.AddScore(new Score("Player", System.DateTime.Now, countdownTimer.CurrentTime));
-            countdownTimer.ResetTimer();
+            RecordAndReset();
         }
         // show score board when tab is pressed
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            scoreBoardManager.UpdateScoreBoard();
-            scoreBoardManager.ShowScoreBoard();
+            PrintScore();
         }
+    }
+
+    public void ChangeCountdownState()
+    {
+        if (countdownTimer.IsTimerRunning)
+        {
+            countdownTimer.HandlePauseTimer();
+        }
+        else
+        {
+            countdownTimer.StartTimer();
+        }
+    }
+
+    public void RecordAndReset()
+    {
+        RecordScore();
+        countdownTimer.ResetTimer();
+    }
+
+    public void RecordScore()
+    {
+        scoreBoardManager.AddScore(new Score("Player", System.DateTime.Now, countdownTimer.CurrentTime));
+    }
+
+    public void PrintScore()
+    {
+        scoreBoardManager.UpdateScoreBoard();
+        scoreBoardManager.ShowScoreBoard();
     }
 }

@@ -19,8 +19,8 @@ public class GameStateUIHandler : MonoBehaviour
     {
         
     }
-
-    public void ActivatePanel(int targetPanel)
+        
+    public void ActivatePanel(int targetPanel)      //Called directly by GameStateController
     {
         for (int i = 0; i < _gameStatePanels.Length; i++)
         {
