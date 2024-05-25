@@ -33,6 +33,11 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         // temporary control handling
+        //ControlTimerDirectly();
+    }
+
+    void ControlTimerDirectly()
+    {
         // space to start/pause/unpause, r to reset
         if (Input.GetKeyDown(KeyCode.Space))
         {

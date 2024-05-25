@@ -8,20 +8,26 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private CarController _carController;
     public void StopTruck()
     {
-        this.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        _carController.StopEngine();
-        _carController.enabled = false;
+        _carController.StopEngine();        //Disable engine mechanically
+        _carController.enabled = false;     //Disable engine script
+
+        //TODO: do lerp / gradual slow down
+        this.GetComponent<Rigidbody>().velocity = Vector3.zero;     //Stop truck's velocity
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Checkpoint")
+        //To Ensure these trigger calls only happen during gameplay
+        if (GameStateController.Instance.GameState == StateOfGame.Match)
         {
-            CheckpointManager.Instance.ActivateCheckpoint(other.gameObject);
-        }
-        else if (other.tag == "Finish")
-        {
-            GameStateController.Instance.ChangeGameState((int)StateOfGame.End);
+            if (other.tag == "Checkpoint")
+            {
+                CheckpointManager.Instance.ActivateCheckpoint(other.gameObject);
+            }
+            else if (other.tag == "Finish")
+            {
+                GameStateController.Instance.ChangeGameState((int)StateOfGame.End);
+            }
         }
     }
 }
