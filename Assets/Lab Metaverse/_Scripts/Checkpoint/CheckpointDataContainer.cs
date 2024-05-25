@@ -21,7 +21,7 @@ public class CheckpointDataContainer : MonoBehaviour
 
     [Header("Timer Variables")]
     public float RecordedTimer;               //records the time player has left when touching this checkpoint
-    public float RecordedTimerTreshold;     //the minimum of how much player has time left when it respawns
+    public float RecordedTimerThreshold;     //the minimum of how much player has time left when it respawns
     public bool IsActive;
 
     [Header("Distance Variables")]

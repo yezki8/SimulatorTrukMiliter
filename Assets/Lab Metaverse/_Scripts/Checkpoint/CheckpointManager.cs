@@ -42,7 +42,7 @@ public class CheckpointManager : MonoBehaviour
         }
         if (CountdownTimer.Instance != null)
         {
-            Checkpoints[0].RecordedTimerTreshold = CountdownTimer.Instance.GetStartTime();
+            Checkpoints[0].RecordedTimerThreshold = CountdownTimer.Instance.GetStartTime();
             Checkpoints[0].RecordedTimer = CountdownTimer.Instance.GetStartTime();
         }
         Checkpoints[0].IsActive = true;
@@ -72,9 +72,9 @@ public class CheckpointManager : MonoBehaviour
                     if (CountdownTimer.Instance != null)
                     {
                         spawnPlace.RecordedTimer = CountdownTimer.Instance.CurrentTime;
-                        if (spawnPlace.RecordedTimer < spawnPlace.RecordedTimerTreshold)
+                        if (spawnPlace.RecordedTimer < spawnPlace.RecordedTimerThreshold)
                         {
-                            spawnPlace.RecordedTimer = spawnPlace.RecordedTimerTreshold;
+                            spawnPlace.RecordedTimer = spawnPlace.RecordedTimerThreshold;
                         }
                     }
 
@@ -99,15 +99,22 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
-    public float GetRecordedData()
+    public float GetRecordedData()          //invoked by 
     {
         CheckpointDataContainer spawnPlace = GetActiveCheckpoint();
 
         //Get recorded Collectibles here
 
         //Get Recorded Timer
-
         float recordedTime = spawnPlace.RecordedTimer;
+
+        //to make sure there's a minimum value of timer recalled 
+        if (spawnPlace.RecordedTimer < spawnPlace.RecordedTimerThreshold)
+        {
+            recordedTime = spawnPlace.RecordedTimerThreshold;
+        }
+
+
         return recordedTime;
     }
 

@@ -8,7 +8,7 @@ public class CountdownTimer : MonoBehaviour
 {
     public TextMeshProUGUI timerText; // UI text object
     [SerializeField] private float startTime; // start time in seconds
-    public float CurrentTime { get; private set; } // current time in seconds
+    public float CurrentTime;  // current time in seconds
     public bool IsTimerRunning { get; private set; }
     public bool IsTimerPaused { get; private set; }
 
@@ -63,6 +63,16 @@ public class CountdownTimer : MonoBehaviour
         }
     }
 
+    public void ManuallyPauseTimer()        //pause timer no matter what
+    {
+        IsTimerPaused = true;
+    }
+
+    public void ManuallyUnpauseTimer()      //unpause timer no matter what
+    {
+        IsTimerPaused = false;
+    }
+
     // reset to start time
     public void ResetTimer()
     {
@@ -82,7 +92,7 @@ public class CountdownTimer : MonoBehaviour
         {
             IsTimerRunning = true;
         }
-        CurrentTime = startTime;
+        CurrentTime = CheckpointManager.Instance.GetRecordedData();            //changed to Get Recorded Time
         Debug.Log("Timer started");
     }
 
