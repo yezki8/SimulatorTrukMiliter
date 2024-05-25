@@ -6,13 +6,18 @@ using PG;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private CarController _carController;
-    public void StopTruck()
-    {
-        _carController.StopEngine();        //Disable engine mechanically
-        _carController.enabled = false;     //Disable engine script
+    [SerializeField] private CarControllerInput _carControllerInput;
 
-        //TODO: do lerp / gradual slow down
-        this.GetComponent<Rigidbody>().velocity = Vector3.zero;     //Stop truck's velocity
+    public void EnableTruck()
+    {
+        _carControllerInput.AllowToMove = true;
+    }
+
+    public void DisableTruck()
+    {
+        _carController.CurrentGear = 0;
+        _carController.StopEngine();
+        _carControllerInput.AllowToMove = false;
     }
 
     private void OnTriggerEnter(Collider other)

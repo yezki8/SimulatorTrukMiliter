@@ -103,8 +103,6 @@ public class CheckpointManager : MonoBehaviour
     {
         CheckpointDataContainer spawnPlace = GetActiveCheckpoint();
 
-        //Get recorded Collectibles here
-
         //Get Recorded Timer
         float recordedTime = spawnPlace.RecordedTimer;
 

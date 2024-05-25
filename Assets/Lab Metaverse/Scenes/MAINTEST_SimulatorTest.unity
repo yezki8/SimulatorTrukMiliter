@@ -640,6 +640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetVehicle: {fileID: 2372521551581667543}
+  AllowToMove: 1
   HorizontalChangeSpeed: 10
   RotateCameraWithMousePressed: 0
   UseBindingsFromInputManager: 0
@@ -51116,7 +51117,7 @@ GameObject:
   - component: {fileID: 2372521551581667546}
   - component: {fileID: 7907576348399302431}
   m_Layer: 0
-  m_Name: Truck
+  m_Name: PLAYER_Truck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124393,7 +124394,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7907576348399302432}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: StopTruck
+        m_MethodName: DisableTruck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -124429,22 +124430,10 @@ MonoBehaviour:
         m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 465046091}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 2372521551581667543}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 7907576348399302432}
+        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+        m_MethodName: EnableTruck
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -124465,23 +124454,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 5377556448122882643}
-        m_TargetAssemblyTypeName: CountdownTimer, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7907576348399302432}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: StopTruck
+        m_MethodName: DisableTruck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -130629,6 +130606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carController: {fileID: 2372521551581667543}
+  _carControllerInput: {fileID: 465046091}
 --- !u!4 &7962576853935294746
 Transform:
   m_ObjectHideFlags: 0
