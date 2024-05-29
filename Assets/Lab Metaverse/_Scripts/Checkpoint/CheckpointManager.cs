@@ -50,9 +50,13 @@ public class CheckpointManager : MonoBehaviour
 
     public void RespawnAtCheckpoint()
     {
+        ResetPlayerState();
         CheckpointDataContainer targetSpawnPlace = GetActiveCheckpoint();
-        Player.transform.SetPositionAndRotation(targetSpawnPlace.SpawnArea.transform.position, 
-            targetSpawnPlace.SpawnArea.transform.rotation);
+        Debug.Log("Ceckpoint = " + targetSpawnPlace.gameObject.name);
+        Vector3 spawnPos = targetSpawnPlace.SpawnArea.transform.position;
+        Quaternion spawnRot = targetSpawnPlace.SpawnArea.transform.rotation;
+
+        Player.transform.SetPositionAndRotation(spawnPos, spawnRot);
         Player.SetActive(true);
     }
 
@@ -79,7 +83,6 @@ public class CheckpointManager : MonoBehaviour
                     }
 
                     //Record Level Progression here
-
                     OnActivateCheckpoint?.Invoke();
                 }
                 else
@@ -90,12 +93,12 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
-    public void DisablePlayer()
+    public void ResetPlayerState()
     {
         if (Player != null)
         {
             //add reset stats or animations here
-            Player.SetActive(false);
+            Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
 
