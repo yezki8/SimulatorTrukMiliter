@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class TimeManager : MonoBehaviour
@@ -12,6 +13,12 @@ public class TimeManager : MonoBehaviour
     private int _currentDay = 1;
     [SerializeField]
     private TextMeshProUGUI _timeText;  // Time Text UI
+    [SerializeField]
+    private Image _moon; // Moon icon
+    [SerializeField]
+    private Image _sun; // Sun icon
+    [SerializeField]
+    private Image _sunrise; // Sunset & sunrise icon
 
     void Update()
     {
@@ -36,6 +43,46 @@ public class TimeManager : MonoBehaviour
         if (_timeText != null)
         {
             _timeText.text = timeString;
+        }
+    }
+
+    void UpdateHUDIcons(float timeOfDay)
+    {
+        if (timeOfDay >= 18.5 || timeOfDay < 4.5) // Night phase
+        {
+            DeactivateIcon(_sunrise);
+            ActivateIcon(_moon);
+        }
+        else if (timeOfDay >= 4.5 && timeOfDay < 6) // Sunrise transition
+        {
+            DeactivateIcon(_moon);
+            ActivateIcon(_sunrise);
+        }
+        else if (timeOfDay >= 7 && timeOfDay < 17.5) // Day phase
+        {
+            DeactivateIcon(_sunrise);
+            ActivateIcon(_sun);
+        }
+        else if (timeOfDay >= 17.5 && timeOfDay < 18.5) // Sunset transition
+        {
+            DeactivateIcon(_sun);
+            ActivateIcon(_sunrise);
+        }
+    }
+
+    void ActivateIcon(Image icon)
+    {
+        if (icon != null)
+        {
+            icon.gameObject.SetActive(true);
+        }
+    }
+
+    void DeactivateIcon(Image icon)
+    {
+        if (icon != null)
+        {
+            icon.gameObject.SetActive(false);
         }
     }
 
