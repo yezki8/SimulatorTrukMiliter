@@ -14,6 +14,9 @@ namespace PG
     /// </summary>
     public class CarControllerInput :InitializePlayer, ICarControl
     {
+        //Added by user to stop player input midgame
+        public bool AllowToMove = true;
+
         public float HorizontalChangeSpeed = 10;            //To simulate the use of a keyboard trigger.
         public bool RotateCameraWithMousePressed;
 
@@ -157,7 +160,19 @@ namespace PG
                 ViewDelta = new Vector2 (Input.GetAxis (MouseX), Input.GetAxis (MouseY));
             }
 
-            UpdateKeys ();
+            //Added by player to stop midway
+            if (AllowToMove)
+            {
+                UpdateKeys();
+            }
+            else
+            {
+                SetAcceleration(0);
+                SetBrakeReverse(-1);
+                SetBoost(false);
+                SetHandBrake(true);
+                SetPitch(0);
+            }
         }
 
         void UpdateKeys ()

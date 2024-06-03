@@ -43,11 +43,12 @@ public class ScoreBoardManager : MonoBehaviour
 
     public void ShowScoreBoard()
     {
-        Debug.Log("Scoreboard:");
+        Debug.Log("Scoreboard ======================================================");
         foreach (Score score in ScoreBoard)
         {
             Debug.Log(score.Name + " " + score.DateTime + " " + score.ScoreValue);
         }
+        Debug.Log("End Scoreboard ======================================================");
     }
 
     // Start is called before the first frame update

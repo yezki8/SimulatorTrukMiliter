@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+[Serializable]
 public class ScoreBoardEntry : MonoBehaviour
 {
     // data class for scoreboard entry
