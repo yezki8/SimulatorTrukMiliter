@@ -11,14 +11,14 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private float _dayDuration = 120f;  // Duration of a full day in seconds
     private int _currentDay = 1;
-    [SerializeField]
-    private TextMeshProUGUI _timeText;  // Time Text UI
+    
     [SerializeField]
     private Image _moon; // Moon icon
     [SerializeField]
     private Image _sun; // Sun icon
+
     [SerializeField]
-    private Image _sunrise; // Sunset & sunrise icon
+    private TextMeshProUGUI _timeText;  // Time Text UI
 
     void Update()
     {
@@ -36,8 +36,14 @@ public class TimeManager : MonoBehaviour
         int hour = Mathf.FloorToInt(_timeOfDay) % 24;
         int minute = Mathf.FloorToInt((_timeOfDay - Mathf.Floor(_timeOfDay)) * 60);
 
+        // Update sun & moon icon
+        UpdateHUDIcons(hour);
+
+        // Set Morning or Night status
+        string period = getPeriodOfDay(hour);
+
         // Format the time as a string
-        string timeString = $"Day {_currentDay}, {hour:00}:{minute:00}";
+        string timeString = $"Day {_currentDay}, {period}\n{hour:00}:{minute:00}";
 
         // Update the TextMeshProUGUI component
         if (_timeText != null)
@@ -48,25 +54,15 @@ public class TimeManager : MonoBehaviour
 
     void UpdateHUDIcons(float timeOfDay)
     {
-        if (timeOfDay >= 18.5 || timeOfDay < 4.5) // Night phase
-        {
-            DeactivateIcon(_sunrise);
-            ActivateIcon(_moon);
-        }
-        else if (timeOfDay >= 4.5 && timeOfDay < 6) // Sunrise transition
-        {
-            DeactivateIcon(_moon);
-            ActivateIcon(_sunrise);
-        }
-        else if (timeOfDay >= 7 && timeOfDay < 17.5) // Day phase
-        {
-            DeactivateIcon(_sunrise);
-            ActivateIcon(_sun);
-        }
-        else if (timeOfDay >= 17.5 && timeOfDay < 18.5) // Sunset transition
+        if (timeOfDay >= 18 || timeOfDay < 6) // Night phase
         {
             DeactivateIcon(_sun);
-            ActivateIcon(_sunrise);
+            ActivateIcon(_moon);
+        }
+        else if (timeOfDay >= 6 && timeOfDay < 18) // Day phase
+        {
+            DeactivateIcon(_moon);
+            ActivateIcon(_sun);
         }
     }
 
@@ -83,6 +79,26 @@ public class TimeManager : MonoBehaviour
         if (icon != null)
         {
             icon.gameObject.SetActive(false);
+        }
+    }
+
+    string getPeriodOfDay(float timeOfDay)
+    {
+        if (timeOfDay >= 6 && timeOfDay < 12)
+        {
+            return "Morning";
+        }
+        else if (timeOfDay >= 12 && timeOfDay < 18)
+        {
+            return "Afternoon";
+        }
+        else if (timeOfDay >= 18 && timeOfDay < 21)
+        {
+            return "Evening";
+        }
+        else
+        {
+            return "Night";
         }
     }
 
