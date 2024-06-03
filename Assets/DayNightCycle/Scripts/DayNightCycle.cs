@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
-    public Light sun;  // Reference to the sun light
-    public TimeManager timeManager;  // Reference to the TimeManager
+    [SerializeField]
+    private Light _sun;  // Reference to the sun light
+    [SerializeField]
+    private TimeManager _timeManager;  // Reference to the TimeManager
 
     void Update()
     {
-        if (timeManager != null && sun != null)
+        if (_timeManager != null && _sun != null)
         {
             // Calculate the sun's rotation based on the time of day
-            float sunAngle = (timeManager.timeOfDay / 24f) * 360f;
-            sun.transform.rotation = Quaternion.Euler(new Vector3(sunAngle - 90, 170, 0));
+            float sunAngle = (_timeManager.getTimeOfDay() / 24f) * 360f;
+            _sun.transform.rotation = Quaternion.Euler(new Vector3(sunAngle - 90, 170, 0));
         }
     }
 }

@@ -6,35 +6,42 @@ using TMPro;
 public class TimeManager : MonoBehaviour
 {
     [Range(0, 24)]
-    public float timeOfDay;  // Current time of day (0-24)
-    public float dayDuration = 120f;  // Duration of a full day in seconds
-    public int currentDay = 1;
-    public TextMeshProUGUI timeText;  // Time Text UI
+    private float _timeOfDay;  // Current time of day (0-24)
+    [SerializeField]
+    private float _dayDuration = 120f;  // Duration of a full day in seconds
+    private int _currentDay = 1;
+    [SerializeField]
+    private TextMeshProUGUI _timeText;  // Time Text UI
 
     void Update()
     {
         // Calculate how much time to add to timeOfDay this frame
-        timeOfDay += (24 / dayDuration) * Time.deltaTime;
+        _timeOfDay += (24 / _dayDuration) * Time.deltaTime;
 
         // Ensure timeOfDay stays within 0-24 range
-        if (timeOfDay >= 24)
+        if (_timeOfDay >= 24)
         {
-            timeOfDay = 0;
-            currentDay += 1;
+            _timeOfDay = 0;
+            _currentDay += 1;
         }
 
         // Convert timeOfDay to hour:minute format
-        int hour = Mathf.FloorToInt(timeOfDay) % 24;
-        int minute = Mathf.FloorToInt((timeOfDay - Mathf.Floor(timeOfDay)) * 60);
+        int hour = Mathf.FloorToInt(_timeOfDay) % 24;
+        int minute = Mathf.FloorToInt((_timeOfDay - Mathf.Floor(_timeOfDay)) * 60);
 
         // Format the time as a string
-        string timeString = $"Day {currentDay}, {hour:00}:{minute:00}";
+        string timeString = $"Day {_currentDay}, {hour:00}:{minute:00}";
 
         // Update the TextMeshProUGUI component
-        if (timeText != null)
+        if (_timeText != null)
         {
-            timeText.text = timeString;
+            _timeText.text = timeString;
         }
+    }
+
+    public float getTimeOfDay()
+    {
+        return _timeOfDay;
     }
 }
 
