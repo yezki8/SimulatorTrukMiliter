@@ -45,7 +45,7 @@ public class CheckpointManager : MonoBehaviour
             Checkpoints[0].RecordedTimerThreshold = CountdownTimer.Instance.GetStartTime();
             Checkpoints[0].RecordedTimer = CountdownTimer.Instance.GetStartTime();
         }
-        Checkpoints[0].IsActive = true;
+        Checkpoints[0].SetActiveCheckpoint(true);
     }
 
     public void RespawnAtCheckpoint()
@@ -68,7 +68,7 @@ public class CheckpointManager : MonoBehaviour
             {
                 if (spawnPlace.gameObject == targetCheckpoint)
                 {
-                    spawnPlace.IsActive = true;
+                    spawnPlace.SetActiveCheckpoint(true);
 
                     //Record Collectibles here
 
@@ -87,7 +87,7 @@ public class CheckpointManager : MonoBehaviour
                 }
                 else
                 {
-                    spawnPlace.IsActive = false;
+                    spawnPlace.SetActiveCheckpoint(false);
                 }
             }
         }

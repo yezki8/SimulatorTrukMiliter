@@ -5,6 +5,11 @@ using UnityEngine;
 public class CheckpointDataContainer : MonoBehaviour
 {
     public GameObject SpawnArea;
+
+    [Header("Visual Parameter")]
+    public MeshRenderer VisualRenderer;
+    public CapsuleCollider CheckpointCollider;
+
     public enum CheckpointType
     {
         RecordStats,
@@ -26,4 +31,16 @@ public class CheckpointDataContainer : MonoBehaviour
 
     [Header("Distance Variables")]
     public float LastDistance;
+
+    [Header("Quest Variables")]
+    public bool HasActivatedOnce = false;
+
+    public void SetActiveCheckpoint(bool status)
+    {
+        IsActive = status;
+
+        //TODO: add animation of checkpoint activation here
+        VisualRenderer.enabled = !status;
+        CheckpointCollider.enabled = !status;
+    }
 }

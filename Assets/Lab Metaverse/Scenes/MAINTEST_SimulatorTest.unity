@@ -1089,6 +1089,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 884537911}
+  VisualRenderer: {fileID: 520788174}
+  CheckpointCollider: {fileID: 520788173}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -1098,6 +1100,7 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  HasActivatedOnce: 0
 --- !u!1 &523825846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,6 +1359,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 1059056612}
+  VisualRenderer: {fileID: 576679463}
+  CheckpointCollider: {fileID: 576679462}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -1365,6 +1370,7 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  HasActivatedOnce: 0
 --- !u!1 &631951411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,6 +1926,50 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &803856226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 803856227}
+  - component: {fileID: 803856228}
+  m_Layer: 0
+  m_Name: Quest System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &803856227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803856226}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8000537566854816342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &803856228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803856226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a82231c66717440ae89b82f94c9dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &878142852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1929,7 +1979,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 878142853}
-  - component: {fileID: 878142857}
   - component: {fileID: 878142856}
   - component: {fileID: 878142855}
   - component: {fileID: 878142854}
@@ -2029,28 +2078,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878142852}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &878142857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878142852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bef6c3f79b533d42b73df401713b978, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnArea: {fileID: 1800163923}
-  TypeOfCheckpoint: 1
-  RecordedHealth: 0
-  RecordedArmor: 0
-  HealthThreshold: 0
-  ArmorThreshold: 0
-  RecordedTimer: 0
-  RecordedTimerThreshold: 0
-  IsActive: 0
-  LastDistance: 0
 --- !u!1 &884537911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2667,6 +2694,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 707808760}
+  VisualRenderer: {fileID: 1162653631}
+  CheckpointCollider: {fileID: 1162653630}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -2676,6 +2705,7 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  HasActivatedOnce: 0
 --- !u!1 &1182507148
 GameObject:
   m_ObjectHideFlags: 0
@@ -3485,6 +3515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 88882234}
+  VisualRenderer: {fileID: 1547390204}
+  CheckpointCollider: {fileID: 1547390203}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -3494,6 +3526,7 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  HasActivatedOnce: 0
 --- !u!1 &1703301380
 GameObject:
   m_ObjectHideFlags: 0
@@ -3802,6 +3835,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 665184327}
+  VisualRenderer: {fileID: 1773192313}
+  CheckpointCollider: {fileID: 1773192312}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -3811,6 +3846,7 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  HasActivatedOnce: 0
 --- !u!1 &1800163923
 GameObject:
   m_ObjectHideFlags: 0
@@ -4315,6 +4351,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 136490988}
+  VisualRenderer: {fileID: 1959560463}
+  CheckpointCollider: {fileID: 1959560462}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -4324,6 +4362,7 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  HasActivatedOnce: 0
 --- !u!4 &1959560461
 Transform:
   m_ObjectHideFlags: 0
@@ -130654,6 +130693,7 @@ Transform:
   - {fileID: 6206224128930741742}
   - {fileID: 6843798920550593175}
   - {fileID: 941811171}
+  - {fileID: 803856227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &8016622928859733166
