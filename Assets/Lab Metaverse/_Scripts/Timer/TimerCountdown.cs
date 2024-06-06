@@ -97,7 +97,7 @@ public class TimerCountdown : MonoBehaviour
         {
             IsTimerRunning = true;
         }
-        CurrentTime = CheckpointManager.Instance.GetRecordedData();            //changed to Get Recorded Time
+        CurrentTime = CheckpointManager.Instance.GetRecordedTimer();            //changed to Get Recorded Time
         Debug.Log("Timer started");
     }
 

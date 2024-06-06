@@ -93,7 +93,7 @@ public class TimerStopwatch : MonoBehaviour
         {
             IsStopwatchRunning = true;
         }
-        CurrentTime = CheckpointManager.Instance.GetRecordedData();            //changed to Get Recorded Time
+        CurrentTime = CheckpointManager.Instance.GetRecordedStopwatch();            //changed to Get Recorded Time
         Debug.Log("Stopwatch started");
     }
 
