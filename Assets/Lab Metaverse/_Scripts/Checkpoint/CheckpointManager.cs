@@ -85,10 +85,6 @@ public class CheckpointManager : MonoBehaviour
                         {
                             spawnPlace.RecordedTimer = spawnPlace.RecordedTimerThreshold;
                         }
-                        if (spawnPlace.RecordedStopwatch > spawnPlace.RecordedStopwatchThreshold)
-                        {
-                            spawnPlace.RecordedStopwatch = spawnPlace.RecordedStopwatchThreshold;
-                        }
                     }
 
                     //Record Level Progression here
@@ -133,12 +129,6 @@ public class CheckpointManager : MonoBehaviour
 
         //Get Recorded Stopwatch
         float recordedStopwatch = spawnPlace.RecordedStopwatch;
-
-        //to make sure there's a minimum value of timer recalled 
-        if (spawnPlace.RecordedStopwatch > spawnPlace.RecordedStopwatchThreshold)
-        {
-            recordedStopwatch = spawnPlace.RecordedStopwatchThreshold;
-        }
 
         return recordedStopwatch;
     }
