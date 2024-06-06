@@ -127,7 +127,7 @@ public class CheckpointManager : MonoBehaviour
         return recordedTime;
     }
 
-    public float GetRecordedStopwatch()          //invoked by 
+    public float GetRecordedStopwatch()     // same as above but for stopwatch
     {
         CheckpointDataContainer spawnPlace = GetActiveCheckpoint();
 

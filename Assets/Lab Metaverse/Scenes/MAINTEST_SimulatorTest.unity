@@ -697,6 +697,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &479766263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479766264}
+  - component: {fileID: 479766265}
+  m_Layer: 0
+  m_Name: Scoreboard Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479766264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479766263}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8000537566854816342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &479766265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479766263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d93b9363799a0b4db52239b5931b8b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreBoardEntries: []
 --- !u!1 &486455306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,7 +1141,10 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsActive: 0
+  IsTimerActive: 0
+  RecordedStopwatch: 0
+  RecordedStopwatchThreshold: 0
+  IsStopwatchActive: 0
   LastDistance: 0
 --- !u!1 &523825846
 GameObject:
@@ -1363,7 +1411,10 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsActive: 0
+  IsTimerActive: 0
+  RecordedStopwatch: 0
+  RecordedStopwatchThreshold: 0
+  IsStopwatchActive: 0
   LastDistance: 0
 --- !u!1 &598400394
 GameObject:
@@ -2183,7 +2234,10 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsActive: 0
+  IsTimerActive: 0
+  RecordedStopwatch: 0
+  RecordedStopwatchThreshold: 0
+  IsStopwatchActive: 0
   LastDistance: 0
 --- !u!1 &884537911
 GameObject:
@@ -2226,7 +2280,6 @@ GameObject:
   m_Component:
   - component: {fileID: 941811171}
   - component: {fileID: 941811170}
-  - component: {fileID: 941811172}
   m_Layer: 0
   m_Name: Scoring System
   m_TagString: Untagged
@@ -2246,8 +2299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc032a02a6cc65247ac6a33723861be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownTimerObject: {fileID: 1703301380}
-  scoreBoardManagerObject: {fileID: 941811169}
+  _timerCountdown: {fileID: 1703301385}
+  _timerStopwatch: {fileID: 1703301386}
+  _scoreBoardManager: {fileID: 479766265}
 --- !u!4 &941811171
 Transform:
   m_ObjectHideFlags: 0
@@ -2263,20 +2317,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8000537566854816342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &941811172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 941811169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d93b9363799a0b4db52239b5931b8b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScoreBoardEntries: []
-  ScoreBoard: []
 --- !u!1 &995266804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,7 +2848,10 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsActive: 0
+  IsTimerActive: 0
+  RecordedStopwatch: 0
+  RecordedStopwatchThreshold: 0
+  IsStopwatchActive: 0
   LastDistance: 0
 --- !u!1 &1182507148
 GameObject:
@@ -3626,7 +3669,10 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsActive: 0
+  IsTimerActive: 0
+  RecordedStopwatch: 0
+  RecordedStopwatchThreshold: 0
+  IsStopwatchActive: 0
   LastDistance: 0
 --- !u!1 &1703301380
 GameObject:
@@ -3951,7 +3997,10 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsActive: 0
+  IsTimerActive: 0
+  RecordedStopwatch: 0
+  RecordedStopwatchThreshold: 0
+  IsStopwatchActive: 0
   LastDistance: 0
 --- !u!1 &1800163923
 GameObject:
@@ -4464,7 +4513,10 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsActive: 0
+  IsTimerActive: 0
+  RecordedStopwatch: 0
+  RecordedStopwatchThreshold: 0
+  IsStopwatchActive: 0
   LastDistance: 0
 --- !u!4 &1959560461
 Transform:
@@ -124558,9 +124610,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CountdownTimer, Assembly-CSharp
+      - m_Target: {fileID: 1703301385}
+        m_TargetAssemblyTypeName: TimerCountdown, Assembly-CSharp
         m_MethodName: StopTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1703301386}
+        m_TargetAssemblyTypeName: TimerStopwatch, Assembly-CSharp
+        m_MethodName: StopStopwatch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -124584,9 +124648,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CountdownTimer, Assembly-CSharp
+      - m_Target: {fileID: 1703301385}
+        m_TargetAssemblyTypeName: TimerCountdown, Assembly-CSharp
         m_MethodName: StartTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1703301386}
+        m_TargetAssemblyTypeName: TimerStopwatch, Assembly-CSharp
+        m_MethodName: StartStopwatch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -124610,9 +124686,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CountdownTimer, Assembly-CSharp
+      - m_Target: {fileID: 1703301385}
+        m_TargetAssemblyTypeName: TimerCountdown, Assembly-CSharp
         m_MethodName: StopTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1703301386}
+        m_TargetAssemblyTypeName: TimerStopwatch, Assembly-CSharp
+        m_MethodName: StopStopwatch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -124634,7 +124722,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 941811172}
+      - m_Target: {fileID: 479766265}
         m_TargetAssemblyTypeName: ScoreBoardManager, Assembly-CSharp
         m_MethodName: ShowScoreBoard
         m_Mode: 1
@@ -124674,8 +124762,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1703301385}
-        m_TargetAssemblyTypeName: CountdownTimer, Assembly-CSharp
-        m_MethodName: StartTimer
+        m_TargetAssemblyTypeName: TimerCountdown, Assembly-CSharp
+        m_MethodName: ResetTimer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -124687,7 +124775,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1703301386}
         m_TargetAssemblyTypeName: TimerStopwatch, Assembly-CSharp
-        m_MethodName: StartStopwatch
+        m_MethodName: ResetStopwatch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -130808,6 +130896,7 @@ Transform:
   - {fileID: 6206224128930741742}
   - {fileID: 6843798920550593175}
   - {fileID: 941811171}
+  - {fileID: 479766264}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &8016622928859733166
