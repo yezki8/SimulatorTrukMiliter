@@ -9,13 +9,13 @@ public class ScoreManager : MonoBehaviour
     // countdown timer and scoreboard manager game objects
     public GameObject countdownTimerObject;
     public GameObject scoreBoardManagerObject;
-    private CountdownTimer countdownTimer;
+    private TimerCountdown countdownTimer;
     private ScoreBoardManager scoreBoardManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        countdownTimer = countdownTimerObject.GetComponent<CountdownTimer>();
+        countdownTimer = countdownTimerObject.GetComponent<TimerCountdown>();
         scoreBoardManager = scoreBoardManagerObject.GetComponent<ScoreBoardManager>();
 
         // test if the objects are found

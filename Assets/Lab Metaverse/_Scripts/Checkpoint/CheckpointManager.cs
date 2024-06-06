@@ -40,10 +40,10 @@ public class CheckpointManager : MonoBehaviour
         {
             spawnPlace.IsActive = false;
         }
-        if (CountdownTimer.Instance != null)
+        if (TimerCountdown.Instance != null)
         {
-            Checkpoints[0].RecordedTimerThreshold = CountdownTimer.Instance.GetStartTime();
-            Checkpoints[0].RecordedTimer = CountdownTimer.Instance.GetStartTime();
+            Checkpoints[0].RecordedTimerThreshold = TimerCountdown.Instance.GetStartTime();
+            Checkpoints[0].RecordedTimer = TimerCountdown.Instance.GetStartTime();
         }
         Checkpoints[0].IsActive = true;
     }
@@ -73,9 +73,9 @@ public class CheckpointManager : MonoBehaviour
                     //Record Collectibles here
 
                     //Record Timer
-                    if (CountdownTimer.Instance != null)
+                    if (TimerCountdown.Instance != null)
                     {
-                        spawnPlace.RecordedTimer = CountdownTimer.Instance.CurrentTime;
+                        spawnPlace.RecordedTimer = TimerCountdown.Instance.CurrentTime;
                         if (spawnPlace.RecordedTimer < spawnPlace.RecordedTimerThreshold)
                         {
                             spawnPlace.RecordedTimer = spawnPlace.RecordedTimerThreshold;
