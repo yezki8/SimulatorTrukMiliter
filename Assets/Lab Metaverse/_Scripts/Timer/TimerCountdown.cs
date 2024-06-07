@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
-public class CountdownTimer : MonoBehaviour
+public class TimerCountdown : MonoBehaviour
 {
     public TextMeshProUGUI timerText; // UI text object
     [SerializeField] private float startTime; // start time in seconds
@@ -13,7 +13,7 @@ public class CountdownTimer : MonoBehaviour
     public bool IsTimerPaused { get; private set; }
 
     //for references in other scripts
-    public static CountdownTimer Instance;
+    public static TimerCountdown Instance;
     public UnityEvent OnCountdownEnd;
 
     private void Awake()
@@ -40,7 +40,12 @@ public class CountdownTimer : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
-        // possible extra: add milliseconds below 30 seconds
+        // milliseconds below 30 seconds
+        if (time < 30)
+        {
+            int milliseconds = Mathf.FloorToInt((time - Mathf.Floor(time)) * 100);
+            return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+        }
         return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
@@ -92,7 +97,7 @@ public class CountdownTimer : MonoBehaviour
         {
             IsTimerRunning = true;
         }
-        CurrentTime = CheckpointManager.Instance.GetRecordedData();            //changed to Get Recorded Time
+        CurrentTime = CheckpointManager.Instance.GetRecordedTimer();            //changed to Get Recorded Time
         Debug.Log("Timer started");
     }
 

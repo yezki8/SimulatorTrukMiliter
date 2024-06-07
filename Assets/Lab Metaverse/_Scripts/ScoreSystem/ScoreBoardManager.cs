@@ -7,13 +7,14 @@ public class ScoreBoardManager : MonoBehaviour
     // create dynamic list of TextMeshProUGUI objects
     public List<ScoreBoardEntry> ScoreBoardEntries;
 
-    public List<Score> ScoreBoard;
+    private List<Score> ScoreBoard;
 
     // consider where players set their name
     public void AddScore(Score score)
     {
         ScoreBoard.Add(score);
-        ScoreBoard.Sort((a, b) => a.ScoreValue.CompareTo(b.ScoreValue));
+        // sort based on stopwatch value
+        ScoreBoard.Sort((a, b) => a.StopwatchValue.CompareTo(b.StopwatchValue));
     }
 
     public void DeleteScore(Score score)
@@ -30,13 +31,15 @@ public class ScoreBoardManager : MonoBehaviour
             {
                 ScoreBoardEntries[i].NameText.text = ScoreBoard[i].Name;
                 ScoreBoardEntries[i].DateTimeText.text = ScoreBoard[i].DateTime.ToString("dd-MM-yyyy HH:mm:ss");
-                ScoreBoardEntries[i].ScoreValueText.text = ScoreBoard[i].ScoreValue.ToString();
+                ScoreBoardEntries[i].TimerValueText.text = ScoreBoard[i].TimerValue.ToString();
+                ScoreBoardEntries[i].StopwatchValueText.text = ScoreBoard[i].StopwatchValue.ToString();
             }
             else
             {
                 ScoreBoardEntries[i].NameText.text = "";
                 ScoreBoardEntries[i].DateTimeText.text = "";
-                ScoreBoardEntries[i].ScoreValueText.text = "";
+                ScoreBoardEntries[i].TimerValueText.text = "";
+                ScoreBoardEntries[i].StopwatchValueText.text = "";
             }
         }
     }
@@ -44,9 +47,10 @@ public class ScoreBoardManager : MonoBehaviour
     public void ShowScoreBoard()
     {
         Debug.Log("Scoreboard ======================================================");
+        Debug.Log("Name         DateTime        Countdown       Stopwatch");
         foreach (Score score in ScoreBoard)
         {
-            Debug.Log(score.Name + " " + score.DateTime + " " + score.ScoreValue);
+            Debug.Log(score.Name + " " + score.DateTime + " " + score.TimerValue + " " + score.StopwatchValue);
         }
         Debug.Log("End Scoreboard ======================================================");
     }

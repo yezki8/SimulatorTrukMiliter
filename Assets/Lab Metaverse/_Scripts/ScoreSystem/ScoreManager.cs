@@ -5,28 +5,37 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    // for now it's intermediate for
-    // countdown timer and scoreboard manager game objects
-    public GameObject countdownTimerObject;
-    public GameObject scoreBoardManagerObject;
-    private CountdownTimer countdownTimer;
-    private ScoreBoardManager scoreBoardManager;
+    
+    [SerializeField] private TimerCountdown _timerCountdown;
+    [SerializeField] private TimerStopwatch _timerStopwatch;
+    [SerializeField] private ScoreBoardManager _scoreBoardManager;
+
+    public static ScoreManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        countdownTimer = countdownTimerObject.GetComponent<CountdownTimer>();
-        scoreBoardManager = scoreBoardManagerObject.GetComponent<ScoreBoardManager>();
 
-        // test if the objects are found
-        if (countdownTimer == null)
-        {
-            Debug.LogError("Countdown timer object not found");
-        }
-        if (scoreBoardManager == null)
-        {
-            Debug.LogError("Scoreboard manager object not found");
-        }
     }
 
     // Update is called once per frame
@@ -57,30 +66,30 @@ public class ScoreManager : MonoBehaviour
 
     public void ChangeCountdownState()
     {
-        if (countdownTimer.IsTimerRunning)
+        if (_timerCountdown.IsTimerRunning)
         {
-            countdownTimer.HandlePauseTimer();
+            _timerCountdown.HandlePauseTimer();
         }
         else
         {
-            countdownTimer.StartTimer();
+            _timerCountdown.StartTimer();
         }
     }
 
     public void RecordAndReset()
     {
         RecordScore();
-        countdownTimer.ResetTimer();
+        _timerCountdown.ResetTimer();
     }
 
     public void RecordScore()
     {
-        scoreBoardManager.AddScore(new Score("Player", System.DateTime.Now, countdownTimer.CurrentTime));
+        _scoreBoardManager.AddScore(new Score("Player", System.DateTime.Now, _timerCountdown.CurrentTime, _timerStopwatch.CurrentTime));
     }
 
     public void PrintScore()
     {
-        scoreBoardManager.UpdateScoreBoard();
-        scoreBoardManager.ShowScoreBoard();
+        _scoreBoardManager.UpdateScoreBoard();
+        _scoreBoardManager.ShowScoreBoard();
     }
 }

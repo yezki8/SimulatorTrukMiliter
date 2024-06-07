@@ -38,14 +38,17 @@ public class CheckpointManager : MonoBehaviour
     {
         foreach(var spawnPlace in Checkpoints)
         {
-            spawnPlace.IsActive = false;
+            spawnPlace.IsTimerActive = false;
+            spawnPlace.IsStopwatchActive = false;
         }
-        if (CountdownTimer.Instance != null)
+        // both countdown and stopwatch must work
+        if (TimerCountdown.Instance != null && TimerStopwatch.Instance != null)
         {
-            Checkpoints[0].RecordedTimerThreshold = CountdownTimer.Instance.GetStartTime();
-            Checkpoints[0].RecordedTimer = CountdownTimer.Instance.GetStartTime();
+            Checkpoints[0].RecordedTimerThreshold = TimerCountdown.Instance.GetStartTime();
+            Checkpoints[0].RecordedTimer = TimerCountdown.Instance.GetStartTime();
         }
-        Checkpoints[0].IsActive = true;
+        Checkpoints[0].IsTimerActive = true;
+        Checkpoints[0].IsStopwatchActive = true;
     }
 
     public void RespawnAtCheckpoint()
@@ -68,14 +71,16 @@ public class CheckpointManager : MonoBehaviour
             {
                 if (spawnPlace.gameObject == targetCheckpoint)
                 {
-                    spawnPlace.IsActive = true;
+                    spawnPlace.IsTimerActive = true;
 
                     //Record Collectibles here
 
-                    //Record Timer
-                    if (CountdownTimer.Instance != null)
+                    //Record Timer & Stopwatch
+                    if (TimerCountdown.Instance != null && TimerStopwatch.Instance != null)
                     {
-                        spawnPlace.RecordedTimer = CountdownTimer.Instance.CurrentTime;
+                        spawnPlace.RecordedTimer = TimerCountdown.Instance.CurrentTime;
+                        spawnPlace.RecordedStopwatch = TimerStopwatch.Instance.CurrentTime;
+
                         if (spawnPlace.RecordedTimer < spawnPlace.RecordedTimerThreshold)
                         {
                             spawnPlace.RecordedTimer = spawnPlace.RecordedTimerThreshold;
@@ -87,7 +92,7 @@ public class CheckpointManager : MonoBehaviour
                 }
                 else
                 {
-                    spawnPlace.IsActive = false;
+                    spawnPlace.IsTimerActive = false;
                 }
             }
         }
@@ -102,7 +107,7 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
-    public float GetRecordedData()          //invoked by 
+    public float GetRecordedTimer()          //invoked by 
     {
         CheckpointDataContainer spawnPlace = GetActiveCheckpoint();
 
@@ -115,8 +120,17 @@ public class CheckpointManager : MonoBehaviour
             recordedTime = spawnPlace.RecordedTimerThreshold;
         }
 
-
         return recordedTime;
+    }
+
+    public float GetRecordedStopwatch()     // same as above but for stopwatch
+    {
+        CheckpointDataContainer spawnPlace = GetActiveCheckpoint();
+
+        //Get Recorded Stopwatch
+        float recordedStopwatch = spawnPlace.RecordedStopwatch;
+
+        return recordedStopwatch;
     }
 
     public CheckpointDataContainer GetActiveCheckpoint()
@@ -124,7 +138,7 @@ public class CheckpointManager : MonoBehaviour
         CheckpointDataContainer targetPoint = null;
         foreach (var point in Checkpoints)
         {
-            if (point.IsActive)
+            if (point.IsTimerActive)
             {
                 targetPoint = point;
                 break;
