@@ -1,22 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
-public class CountdownTimer : MonoBehaviour
+public class TimerCountdown : MonoBehaviour
 {
     public TextMeshProUGUI timerText; // UI text object
     [SerializeField] private float startTime; // start time in seconds
-    public float CurrentTime { get; private set; } // current time in seconds
+    public float CurrentTime;  // current time in seconds
     public bool IsTimerRunning { get; private set; }
     public bool IsTimerPaused { get; private set; }
 
+    //for references in other scripts
+    public static TimerCountdown Instance;
+    public UnityEvent OnCountdownEnd;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 
     public string FloatToTimeString(float time)
     {
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
-        // possible extra: add milliseconds below 30 seconds
+        // milliseconds below 30 seconds
+        if (time < 30)
+        {
+            int milliseconds = Mathf.FloorToInt((time - Mathf.Floor(time)) * 100);
+            return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+        }
         return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
@@ -39,6 +68,16 @@ public class CountdownTimer : MonoBehaviour
         }
     }
 
+    public void ManuallyPauseTimer()        //pause timer no matter what
+    {
+        IsTimerPaused = true;
+    }
+
+    public void ManuallyUnpauseTimer()      //unpause timer no matter what
+    {
+        IsTimerPaused = false;
+    }
+
     // reset to start time
     public void ResetTimer()
     {
@@ -58,8 +97,14 @@ public class CountdownTimer : MonoBehaviour
         {
             IsTimerRunning = true;
         }
-        CurrentTime = startTime;
+        CurrentTime = CheckpointManager.Instance.GetRecordedTimer();            //changed to Get Recorded Time
         Debug.Log("Timer started");
+    }
+
+    //Get and Set Data ===============================================================
+    public float GetStartTime()
+    {
+        return startTime;
     }
 
     // Start is called before the first frame update
@@ -81,6 +126,8 @@ public class CountdownTimer : MonoBehaviour
                 CurrentTime = 0;
                 timerText.text = (FloatToTimeString(CurrentTime));
                 Debug.Log("Timer ended");
+
+                OnCountdownEnd?.Invoke();
             }
         }
     }

@@ -4,8 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class TimeManager : MonoBehaviour
+public class DayTimeManager : MonoBehaviour
 {
+    //TODO: Convert this float to Scriptable object when needed in the future
+    [Range(0, 24)]
+    public float DefaultDayStart = 9;   //The hour of the game started
+    
     [Range(0, 24)]
     private float _timeOfDay;  // Current time of day (0-24)
     [SerializeField]
@@ -20,7 +24,27 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _timeText;  // Time Text UI
 
+    private void Start()
+    {
+        InitializeDayTime();
+    }
+
     void Update()
+    {
+        //Make sure that day clock only run when game is active
+        if (GameStateController.Instance.GameState == StateOfGame.Match)
+        {
+            CalculateDayTime();
+        }
+    }
+
+    public void InitializeDayTime()
+    {
+        timeOfDay = DefaultDayStart;
+        CalculateDayTime();
+    }
+
+    void CalculateDayTime()
     {
         // Calculate how much time to add to timeOfDay this frame
         _timeOfDay += (24 / _dayDuration) * Time.deltaTime;
