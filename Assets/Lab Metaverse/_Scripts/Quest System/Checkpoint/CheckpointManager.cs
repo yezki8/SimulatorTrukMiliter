@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class CheckpointManager : MonoBehaviour
 {
-    public CheckpointDataContainer[] Checkpoints;        //0 is the initial spawn place
+    public CheckpointController[] Checkpoints;        //0 is the initial spawn place
 
     public GameObject Player;
 
@@ -39,6 +39,7 @@ public class CheckpointManager : MonoBehaviour
         foreach(var spawnPlace in Checkpoints)
         {
             spawnPlace.IsActive = false;
+            spawnPlace.CheckQuestReuqirement();
         }
         if (CountdownTimer.Instance != null)
         {
@@ -51,7 +52,7 @@ public class CheckpointManager : MonoBehaviour
     public void RespawnAtCheckpoint()
     {
         ResetPlayerState();
-        CheckpointDataContainer targetSpawnPlace = GetActiveCheckpoint();
+        CheckpointController targetSpawnPlace = GetActiveCheckpoint();
         Debug.Log("Ceckpoint = " + targetSpawnPlace.gameObject.name);
         Vector3 spawnPos = targetSpawnPlace.SpawnArea.transform.position;
         Quaternion spawnRot = targetSpawnPlace.SpawnArea.transform.rotation;
@@ -64,6 +65,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if (GameStateController.Instance.GameState == StateOfGame.Match)
         {
+            //First loop for checkpoint activation
             foreach (var spawnPlace in Checkpoints)
             {
                 if (spawnPlace.gameObject == targetCheckpoint)
@@ -85,9 +87,14 @@ public class CheckpointManager : MonoBehaviour
                     //Record Level Progression here
                     OnActivateCheckpoint?.Invoke();
                 }
-                else
+            }
+
+            //Second loop for quest checking
+            foreach (var spawnPlace in Checkpoints)
+            {
+                if (spawnPlace.gameObject != targetCheckpoint)
                 {
-                    spawnPlace.SetActiveCheckpoint(false);
+                    spawnPlace.CheckQuestReuqirement();
                 }
             }
         }
@@ -104,7 +111,7 @@ public class CheckpointManager : MonoBehaviour
 
     public float GetRecordedData()          //invoked by 
     {
-        CheckpointDataContainer spawnPlace = GetActiveCheckpoint();
+        CheckpointController spawnPlace = GetActiveCheckpoint();
 
         //Get Recorded Timer
         float recordedTime = spawnPlace.RecordedTimer;
@@ -119,9 +126,9 @@ public class CheckpointManager : MonoBehaviour
         return recordedTime;
     }
 
-    public CheckpointDataContainer GetActiveCheckpoint()
+    public CheckpointController GetActiveCheckpoint()
     {
-        CheckpointDataContainer targetPoint = null;
+        CheckpointController targetPoint = null;
         foreach (var point in Checkpoints)
         {
             if (point.IsActive)
