@@ -94,6 +94,7 @@ public class CheckpointManager : MonoBehaviour
             {
                 if (spawnPlace.gameObject != targetCheckpoint)
                 {
+                    spawnPlace.IsActive = false;
                     spawnPlace.CheckQuestReuqirement();
                 }
             }

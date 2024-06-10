@@ -33,10 +33,9 @@ public class CheckpointController : MonoBehaviour
     public float LastDistance;
 
     [Header("Quest Variables")]
+    [SerializeField] private bool _deactivateOnceActive = true;
     public bool HasActivatedOnce = false;
     [SerializeField] private List<CheckpointController> _checkpointQuestList;
-
-
 
     public void SetActiveCheckpoint(bool status)
     {
@@ -52,8 +51,20 @@ public class CheckpointController : MonoBehaviour
     public void SetCheckpointVisual(bool status)
     {
         //TODO: add animation of checkpoint activation here
-        VisualRenderer.enabled = status;
-        CheckpointCollider.enabled = status;
+        if (status == true)
+        {
+            if ((_deactivateOnceActive && !HasActivatedOnce) ||
+                !_deactivateOnceActive)
+            {
+                VisualRenderer.enabled = status;
+                CheckpointCollider.enabled = status;
+            }
+        }
+        else
+        {
+            VisualRenderer.enabled = status;
+            CheckpointCollider.enabled = status;
+        }        
     }
 
     public void CheckQuestReuqirement()

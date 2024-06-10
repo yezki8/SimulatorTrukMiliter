@@ -1100,7 +1100,9 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
   HasActivatedOnce: 0
+  _checkpointQuestList: []
 --- !u!1 &523825846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,7 +1372,9 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
   HasActivatedOnce: 0
+  _checkpointQuestList: []
 --- !u!1 &631951411
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,7 +2709,10 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
   HasActivatedOnce: 0
+  _checkpointQuestList:
+  - {fileID: 1547390206}
 --- !u!1 &1182507148
 GameObject:
   m_ObjectHideFlags: 0
@@ -3526,7 +3533,9 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
   HasActivatedOnce: 0
+  _checkpointQuestList: []
 --- !u!1 &1703301380
 GameObject:
   m_ObjectHideFlags: 0
@@ -3559,7 +3568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 394659238}
-  startTime: 30
+  startTime: 400
   CurrentTime: 0
   OnCountdownEnd:
     m_PersistentCalls:
@@ -3846,7 +3855,9 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
   HasActivatedOnce: 0
+  _checkpointQuestList: []
 --- !u!1 &1800163923
 GameObject:
   m_ObjectHideFlags: 0
@@ -4362,7 +4373,12 @@ MonoBehaviour:
   RecordedTimerThreshold: 0
   IsActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
   HasActivatedOnce: 0
+  _checkpointQuestList:
+  - {fileID: 1162653633}
+  - {fileID: 1773192315}
+  - {fileID: 576679465}
 --- !u!4 &1959560461
 Transform:
   m_ObjectHideFlags: 0
