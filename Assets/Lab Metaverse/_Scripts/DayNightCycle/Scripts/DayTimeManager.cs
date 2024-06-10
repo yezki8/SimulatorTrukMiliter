@@ -9,7 +9,9 @@ public class DayTimeManager : MonoBehaviour
     //TODO: Convert this float to Scriptable object when needed in the future
     [Range(0, 24)]
     public float DefaultDayStart = 9;   //The hour of the game started
-    
+
+    public float CheckpointTimeOfDay; //The hour of the game started
+
     [Range(0, 24)]
     private float _timeOfDay;  // Current time of day (0-24)
     [SerializeField]
@@ -40,7 +42,14 @@ public class DayTimeManager : MonoBehaviour
 
     public void InitializeDayTime()
     {
-        timeOfDay = DefaultDayStart;
+        _timeOfDay = DefaultDayStart;
+        CheckpointTimeOfDay = _timeOfDay;
+        CalculateDayTime();
+    }
+
+    public void StartByCheckpoint()
+    {
+        _timeOfDay = CheckpointTimeOfDay;
         CalculateDayTime();
     }
 
