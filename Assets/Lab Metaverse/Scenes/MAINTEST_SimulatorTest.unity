@@ -1984,6 +1984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 878142853}
   - component: {fileID: 878142856}
+  - component: {fileID: 878142857}
   - component: {fileID: 878142855}
   - component: {fileID: 878142854}
   m_Layer: 0
@@ -2082,6 +2083,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878142852}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &878142857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878142852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bef6c3f79b533d42b73df401713b978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnArea: {fileID: 1800163923}
+  VisualRenderer: {fileID: 878142855}
+  CheckpointCollider: {fileID: 878142854}
+  TypeOfCheckpoint: 0
+  RecordedHealth: 0
+  RecordedArmor: 0
+  HealthThreshold: 0
+  ArmorThreshold: 0
+  RecordedTimer: 0
+  RecordedTimerThreshold: 0
+  IsActive: 0
+  LastDistance: 0
+  _deactivateOnceActive: 1
+  HasActivatedOnce: 0
+  _checkpointQuestList:
+  - {fileID: 520788176}
+  - {fileID: 1547390206}
+  - {fileID: 1162653633}
+  - {fileID: 576679465}
+  - {fileID: 1773192315}
+  - {fileID: 1959560460}
 --- !u!1 &884537911
 GameObject:
   m_ObjectHideFlags: 0
@@ -119443,6 +119477,7 @@ MonoBehaviour:
   - {fileID: 576679465}
   - {fileID: 1773192315}
   - {fileID: 1959560460}
+  - {fileID: 878142857}
   Player: {fileID: 2372521551581667542}
   OnActivateCheckpoint:
     m_PersistentCalls:
