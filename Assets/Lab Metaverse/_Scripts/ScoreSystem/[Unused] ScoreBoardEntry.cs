@@ -13,12 +13,12 @@ public class ScoreBoardEntry : MonoBehaviour
     public TextMeshProUGUI TimerValueText { get; private set; }
     public TextMeshProUGUI StopwatchValueText { get; private set; }
 
-    public ScoreBoardEntry(string name, DateTime dateTime, float timerValue, float stopwatchValue)
+    public ScoreBoardEntry(string name, DateTime dateTime, float stopwatchValue, float timerValue)
     {
         this.NameText.text = name;
         // format date to DD/MM/YYYY
         this.DateTimeText.text = dateTime.ToString("dd-MM-yyyy HH:mm:ss");
-        this.TimerValueText.text = timerValue.ToString();
         this.StopwatchValueText.text = stopwatchValue.ToString();
+        this.TimerValueText.text = timerValue.ToString();
     }
 }
