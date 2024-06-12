@@ -54,13 +54,8 @@ public class ScoreBoardManager : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
-        // milliseconds below 30 seconds
-        if (time < 30)
-        {
-            int milliseconds = Mathf.FloorToInt((time - Mathf.Floor(time)) * 100);
-            return string.Format("{0:00}:{1:00}:{2:0000}", minutes, seconds, milliseconds);
-        }
-        return string.Format("{0:00}:{1:00}", minutes, seconds);
+        int milliseconds = Mathf.FloorToInt((time - Mathf.Floor(time)) * 1000000);
+        return string.Format("{0:00}:{1:00}.{2:000000}", minutes, seconds, milliseconds);
     }
 
     // called by game state manager
