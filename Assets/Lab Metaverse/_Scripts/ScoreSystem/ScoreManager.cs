@@ -89,7 +89,6 @@ public class ScoreManager : MonoBehaviour
 
     public void PrintScore()
     {
-        _scoreBoardManager.UpdateScoreBoard();
         _scoreBoardManager.ShowScoreBoard();
     }
 }

@@ -44,7 +44,7 @@ public class TimerCountdown : MonoBehaviour
         if (time < 30)
         {
             int milliseconds = Mathf.FloorToInt((time - Mathf.Floor(time)) * 100);
-            return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+            return string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, milliseconds);
         }
         return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
@@ -124,10 +124,9 @@ public class TimerCountdown : MonoBehaviour
             {
                 StopTimer();
                 CurrentTime = 0;
+                OnCountdownEnd?.Invoke();           // reconsider alternative to sync timer and stopwatch
                 timerText.text = (FloatToTimeString(CurrentTime));
                 Debug.Log("Timer ended");
-
-                OnCountdownEnd?.Invoke();
             }
         }
     }
