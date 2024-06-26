@@ -13,9 +13,10 @@ public class WeatherSystem : MonoBehaviour
     public WeatherType CurrentWeather { get; private set; }
     // player to get the player's position
     [SerializeField] private GameObject _player;
-    // rain spawner gameobject
-    [Header("Rain Manager")]
+
+    [Header("Weather Related Object")]
     [SerializeField] private GameObject _rainSpawner;
+    [SerializeField] private GameObject _sunLight;
 
     public static WeatherSystem Instance;
 
@@ -52,6 +53,35 @@ public class WeatherSystem : MonoBehaviour
         }
     }
 
+    // manage lighting based on weather
+    private void HandleSkyLighting()
+    {
+        // change directional light color and intensity
+        switch (CurrentWeather)
+        {
+            case WeatherType.Sunny:
+                _sunLight.GetComponent<Light>().intensity = 1.0f;
+                _sunLight.GetComponent<Light>().color = new Color(1.0f, 0.9f, 0.8f);
+                break;
+            case WeatherType.Cloudy:
+                _sunLight.GetComponent<Light>().intensity = 0.8f;
+                _sunLight.GetComponent<Light>().color = new Color(0.9f, 0.9f, 0.8f);
+                break;
+            case WeatherType.Rainy:
+                _sunLight.GetComponent<Light>().intensity = 0.8f;
+                _sunLight.GetComponent<Light>().color = new Color(0.8f, 0.8f, 0.8f);
+                break;
+            // case WeatherType.Snowy:
+            //     _sunLight.SetActive(false);
+            //     break;
+            default:
+                // default to sunny
+                _sunLight.GetComponent<Light>().intensity = 1.0f;
+                _sunLight.GetComponent<Light>().color = new Color(1.0f, 0.9f, 0.8f);
+                break;
+        }
+    }
+
     public WeatherType GetCurrentWeather()
     {
         return CurrentWeather;
@@ -78,6 +108,7 @@ public class WeatherSystem : MonoBehaviour
                 break;
         }
         HandleRainSpawner();
+        HandleSkyLighting();
         Debug.Log("Weather set to " + CurrentWeather);
     }
 
@@ -113,7 +144,7 @@ public class WeatherSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // rain spawner follow the player
-        _rainSpawner.transform.position = new Vector3(_player.transform.position.x, _rainSpawner.transform.position.y, _player.transform.position.z);
+        // rain spawner follow the player, offset to the front and top of the player direction
+        _rainSpawner.transform.position = _player.transform.position + _player.transform.forward * 10 + _player.transform.up * 10;
     }
 }

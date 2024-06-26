@@ -48260,6 +48260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 660267450}
   _rainSpawner: {fileID: 513312766}
+  _sunLight: {fileID: 1332921998}
 --- !u!1 &487814359
 GameObject:
   m_ObjectHideFlags: 0
@@ -54053,7 +54054,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 20, y: 1, z: 20}
+    m_Scale: {x: 30, y: 1, z: 30}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -54251,7 +54252,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 400
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -73715,7 +73716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.0058021545, b: 1, a: 0.47843137}
+  m_Color: {r: 0, g: 0.0058021545, b: 1, a: 0.078431375}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -90510,7 +90511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.97980684, b: 0, a: 0.46666667}
+  m_Color: {r: 1, g: 0.97980684, b: 0, a: 0.078431375}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -101559,9 +101560,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93c6ae1db5c4c64192898e3f9d41d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultDayStart: 9
+  DefaultDayStart: 18
   CheckpointTimeOfDay: 0
-  _dayDuration: 120
+  _dayDuration: 240
   _moon: {fileID: 1575699928}
   _sun: {fileID: 1658590252}
   _timeText: {fileID: 624602283}
