@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
+using System;
 
 namespace PG
 {
@@ -78,6 +80,7 @@ namespace PG
         public bool VehicleIsGrounded { get; private set; }
         public float CurrentSpeed { get; private set; }                                     //Vehicle speed, measured in "units per second".
         public float SpeedInHour { get { return CurrentSpeed * (B.GameSettings.EnumMeasurementSystem == MeasurementSystem.KM? C.KPHMult: C.MPHMult); } }    //Vehicle speed in selected units.
+        [SerializeField] private TextMeshProUGUI _truckSpeed;                               // Truck Speedometer
         public int VehicleDirection { get { return CurrentSpeed < 1 ? 0 : (VelocityAngle.Abs() < 90? 1 : -1); } }
         public float VelocityAngle { get; private set; }                                    //The angle of the vehicle body relative to the Velocity vector.
         public float PrevVelocityAngle { get; private set; }
@@ -132,6 +135,11 @@ namespace PG
         {
             //Calculating body speed and angle
             CurrentSpeed = RB.velocity.magnitude;
+            string truckSpeed = $"{(int)Math.Truncate(SpeedInHour)} Km/h";
+            if (_truckSpeed != null)
+            {
+                _truckSpeed.text = truckSpeed;
+            }
             PrevVelocityAngle = VelocityAngle;
             Vector3 horizontalLocalVelocity = transform.InverseTransformDirection(RB.velocity).ZeroHeight ();
             if (horizontalLocalVelocity.sqrMagnitude > 0.01f)
