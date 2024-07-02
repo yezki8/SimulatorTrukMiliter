@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using PG;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -36,11 +37,14 @@ public class CheckpointManager : MonoBehaviour
     //Spawn Methods =====================================================================================
     public void ResetSpawnPlace()
     {
+        //Reset the states of checkpoints
         foreach(var spawnPlace in Checkpoints)
         {
-            spawnPlace.IsActive = false;
+            spawnPlace.ResetCheckpointStates();
             spawnPlace.CheckQuestReuqirement();
         }
+
+        //Reset the place player spawns to checkpoint 0
         if (CountdownTimer.Instance != null)
         {
             Checkpoints[0].RecordedTimerThreshold = CountdownTimer.Instance.GetStartTime();
@@ -53,12 +57,11 @@ public class CheckpointManager : MonoBehaviour
     {
         ResetPlayerState();
         CheckpointController targetSpawnPlace = GetActiveCheckpoint();
-        Debug.Log("Ceckpoint = " + targetSpawnPlace.gameObject.name);
         Vector3 spawnPos = targetSpawnPlace.SpawnArea.transform.position;
         Quaternion spawnRot = targetSpawnPlace.SpawnArea.transform.rotation;
 
+        Player.GetComponent<CarController>().ResetVehicle();
         Player.transform.SetPositionAndRotation(spawnPos, spawnRot);
-        Player.SetActive(true);
     }
 
     public void ActivateCheckpoint(GameObject targetCheckpoint)

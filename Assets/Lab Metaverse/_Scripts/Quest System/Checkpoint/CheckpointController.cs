@@ -67,6 +67,12 @@ public class CheckpointController : MonoBehaviour
         }        
     }
 
+    public void ResetCheckpointStates()
+    {
+        IsActive = false;
+        HasActivatedOnce = false;
+    }
+
     public void CheckQuestReuqirement()
     {
         bool checkpointQuestFlow = CheckCheckpointQuest();
@@ -95,8 +101,6 @@ public class CheckpointController : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log(this.name + isCompleted);
         return isCompleted;
     }
 }
