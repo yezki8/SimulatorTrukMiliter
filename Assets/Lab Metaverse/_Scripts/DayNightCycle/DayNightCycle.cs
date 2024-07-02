@@ -12,7 +12,7 @@ public class DayNightCycle : MonoBehaviour
         if (dayTimeManager != null && sun != null)
         {
             // Calculate the sun's rotation based on the time of day
-            float sunAngle = (dayTimeManager.timeOfDay / 24f) * 360f;
+            float sunAngle = (dayTimeManager.getTimeOfDay() / 24f) * 360f;
             sun.transform.rotation = Quaternion.Euler(new Vector3(sunAngle - 90, 170, 0));
         }
     }

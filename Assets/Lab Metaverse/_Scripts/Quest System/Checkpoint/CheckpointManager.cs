@@ -45,10 +45,10 @@ public class CheckpointManager : MonoBehaviour
         }
 
         //Reset the place player spawns to checkpoint 0
-        if (CountdownTimer.Instance != null)
+        if (TimerCountdown.Instance != null)
         {
-            Checkpoints[0].RecordedTimerThreshold = CountdownTimer.Instance.GetStartTime();
-            Checkpoints[0].RecordedTimer = CountdownTimer.Instance.GetStartTime();
+            Checkpoints[0].RecordedTimerThreshold = TimerCountdown.Instance.GetStartTime();
+            Checkpoints[0].RecordedTimer = TimerCountdown.Instance.GetStartTime();
         }
         Checkpoints[0].SetActiveCheckpoint(true);
     }
@@ -78,9 +78,9 @@ public class CheckpointManager : MonoBehaviour
                     //Record Collectibles here
 
                     //Record Timer
-                    if (CountdownTimer.Instance != null)
+                    if (TimerCountdown.Instance != null)
                     {
-                        spawnPlace.RecordedTimer = CountdownTimer.Instance.CurrentTime;
+                        spawnPlace.RecordedTimer = TimerCountdown.Instance.CurrentTime;
                         if (spawnPlace.RecordedTimer < spawnPlace.RecordedTimerThreshold)
                         {
                             spawnPlace.RecordedTimer = spawnPlace.RecordedTimerThreshold;
@@ -113,7 +113,8 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
-    public float GetRecordedData()          //invoked by 
+    #region Get Recorded Data
+    public float GetRecordedTimer()          //Called By TimerCountdown
     {
         CheckpointController spawnPlace = GetActiveCheckpoint();
 
@@ -126,9 +127,20 @@ public class CheckpointManager : MonoBehaviour
             recordedTime = spawnPlace.RecordedTimerThreshold;
         }
 
-
         return recordedTime;
     }
+
+    public float GetRecordedStopwatch()     // same as above but for stopwatch
+    {
+        CheckpointController spawnPlace = GetActiveCheckpoint();
+
+        //Get Recorded Stopwatch
+        float recordedStopwatch = spawnPlace.RecordedStopwatch;
+
+        return recordedStopwatch;
+    }
+
+    #endregion
 
     public CheckpointController GetActiveCheckpoint()
     {

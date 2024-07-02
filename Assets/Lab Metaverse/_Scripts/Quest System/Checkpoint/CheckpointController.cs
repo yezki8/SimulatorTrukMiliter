@@ -29,6 +29,11 @@ public class CheckpointController : MonoBehaviour
     public float RecordedTimerThreshold;     //the minimum of how much player has time left when it respawns
     public bool IsActive;
 
+    [Header("Stopwatch Variables")]
+    public float RecordedStopwatch;
+    public float RecordedStopwatchThreshold;    // zero
+    public bool IsStopwatchActive;
+
     [Header("Distance Variables")]
     public float LastDistance;
 

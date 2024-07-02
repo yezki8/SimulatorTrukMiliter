@@ -4,65 +4,100 @@ using TMPro;
 
 public class ScoreBoardManager : MonoBehaviour
 {
-    // create dynamic list of TextMeshProUGUI objects
-    public List<ScoreBoardEntry> ScoreBoardEntries;
+    // print score using ScoreEntryContainer prefab
+    [SerializeField] private GameObject ScoreEntryPrefab;
+    public GameObject ScoreTable;
+    // create dynamic list of objects
+    public List<GameObject> ScoreBoardEntries;
 
-    public List<Score> ScoreBoard;
+    private List<Score> _scoreBoard;
+
+    // entry height 40
+    [SerializeField] private float _entryHeight = 40f;
+
+    public static ScoreBoardManager Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 
     // consider where players set their name
     public void AddScore(Score score)
     {
-        ScoreBoard.Add(score);
-        ScoreBoard.Sort((a, b) => a.ScoreValue.CompareTo(b.ScoreValue));
+        _scoreBoard.Add(score);
+        // sort based on stopwatch value
+        _scoreBoard.Sort((a, b) => a.StopwatchValue.CompareTo(b.StopwatchValue));
     }
 
     public void DeleteScore(Score score)
     {
-        ScoreBoard.Remove(score);
+        _scoreBoard.Remove(score);
     }
 
-    // update the scoreboard
-    public void UpdateScoreBoard()
+    // duplicate of timer
+    public string FloatToTimeString(float time)
     {
-        for (int i = 0; i < ScoreBoardEntries.Count; i++)
-        {
-            if (i < ScoreBoard.Count)
-            {
-                ScoreBoardEntries[i].NameText.text = ScoreBoard[i].Name;
-                ScoreBoardEntries[i].DateTimeText.text = ScoreBoard[i].DateTime.ToString("dd-MM-yyyy HH:mm:ss");
-                ScoreBoardEntries[i].ScoreValueText.text = ScoreBoard[i].ScoreValue.ToString();
-            }
-            else
-            {
-                ScoreBoardEntries[i].NameText.text = "";
-                ScoreBoardEntries[i].DateTimeText.text = "";
-                ScoreBoardEntries[i].ScoreValueText.text = "";
-            }
-        }
+        int minutes = Mathf.FloorToInt(time / 60);
+        int seconds = Mathf.FloorToInt(time % 60);
+        int milliseconds = Mathf.FloorToInt((time - Mathf.Floor(time)) * 1000000);
+        return string.Format("{0:00}:{1:00}.{2:000000}", minutes, seconds, milliseconds);
     }
 
+    // called by game state manager
     public void ShowScoreBoard()
     {
-        Debug.Log("Scoreboard ======================================================");
-        foreach (Score score in ScoreBoard)
+        // disable when adding entries
+        ScoreTable.SetActive(false);
+        Debug.Log("Showing Score Board with count:");
+        Debug.Log(_scoreBoard.Count);
+        for (int i = 0; i < _scoreBoard.Count; i++)
         {
-            Debug.Log(score.Name + " " + score.DateTime + " " + score.ScoreValue);
+            GameObject entry = Instantiate(ScoreEntryPrefab, ScoreTable.transform);
+            entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -i * _entryHeight);
+            // get every tmp text component
+            entry.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
+            entry.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _scoreBoard[i].PlayerName;
+            entry.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = _scoreBoard[i].DateTime.ToString("dd-MM-yyyy HH:mm:ss");
+            entry.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = FloatToTimeString(_scoreBoard[i].StopwatchValue);
+            entry.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = FloatToTimeString(_scoreBoard[i].TimerValue);
+            ScoreBoardEntries.Add(entry);
         }
-        Debug.Log("End Scoreboard ======================================================");
+        ScoreTable.SetActive(true);
+    }
+    
+    // Debug
+    public void RemoveScoreBoard() {
+        if (ScoreBoardEntries.Count > 0)
+        {
+            foreach (GameObject entry in ScoreBoardEntries)
+            {
+                Destroy(entry);
+            }
+            ScoreBoardEntries.Clear();
+            Debug.Log("Score Board Cleared");
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // get the scoreboard entries
-        ScoreBoardEntries = new List<ScoreBoardEntry>();
-        foreach (Transform child in transform)
-        {
-            ScoreBoardEntries.Add(child.GetComponent<ScoreBoardEntry>());
-        }
-
-        // get the scoreboard
-        ScoreBoard = new List<Score>();
+        _scoreBoard = new List<Score>();
+        ScoreBoardEntries = new List<GameObject>();
     }
 
     // Update is called once per frame
