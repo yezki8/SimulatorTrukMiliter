@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 namespace PG
 {
@@ -83,6 +84,9 @@ namespace PG
         [SerializeField]
         private TextMeshProUGUI _truckSpeed;                               // Truck Speedometer
         public AIPath aIPath;                                                 // Road class, can be change in the future
+        [SerializeField]
+        private Image _warning;
+        private Coroutine blinkingCoroutine;
         public int VehicleDirection { get { return CurrentSpeed < 1 ? 0 : (VelocityAngle.Abs() < 90? 1 : -1); } }
         public float VelocityAngle { get; private set; }                                    //The angle of the vehicle body relative to the Velocity vector.
         public float PrevVelocityAngle { get; private set; }
@@ -135,6 +139,7 @@ namespace PG
 
         protected virtual void FixedUpdate ()
         {
+            DeactivateIcon(_warning);
             //Calculating body speed and angle
             CurrentSpeed = RB.velocity.magnitude;
             string truckSpeed = $"{(int)Math.Truncate(SpeedInHour)} Km/h";
@@ -146,14 +151,18 @@ namespace PG
                     if (SpeedInHour < aIPath.getMinSpeedLimit())
                     {
                         _truckSpeed.color = Color.blue;
+                        DeactivateIcon(_warning);
+                        
                     }
                     else if (SpeedInHour > aIPath.getMaxSpeedLimit())
                     {
                         _truckSpeed.color = Color.red;
+                        ActivateIcon(_warning);
                     }
                     else
                     {
                         _truckSpeed.color = Color.white;
+                        DeactivateIcon(_warning);
                     }
                 }
             }
@@ -282,6 +291,21 @@ namespace PG
 
         }
 
+        void ActivateIcon(Image icon)
+        {
+            if (icon != null)
+            {
+                icon.gameObject.SetActive(true);
+            }
+        }
+
+        void DeactivateIcon(Image icon)
+        {
+            if (icon != null)
+            {
+                icon.gameObject.SetActive(false);
+            }
+        }
     }
 
     public enum VehicleType
