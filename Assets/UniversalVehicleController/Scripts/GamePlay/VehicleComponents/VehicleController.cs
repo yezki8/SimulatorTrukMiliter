@@ -80,7 +80,9 @@ namespace PG
         public bool VehicleIsGrounded { get; private set; }
         public float CurrentSpeed { get; private set; }                                     //Vehicle speed, measured in "units per second".
         public float SpeedInHour { get { return CurrentSpeed * (B.GameSettings.EnumMeasurementSystem == MeasurementSystem.KM? C.KPHMult: C.MPHMult); } }    //Vehicle speed in selected units.
-        [SerializeField] private TextMeshProUGUI _truckSpeed;                               // Truck Speedometer
+        [SerializeField]
+        private TextMeshProUGUI _truckSpeed;                               // Truck Speedometer
+        public AIPath aIPath;                                                 // Road class, can be change in the future
         public int VehicleDirection { get { return CurrentSpeed < 1 ? 0 : (VelocityAngle.Abs() < 90? 1 : -1); } }
         public float VelocityAngle { get; private set; }                                    //The angle of the vehicle body relative to the Velocity vector.
         public float PrevVelocityAngle { get; private set; }
@@ -139,6 +141,21 @@ namespace PG
             if (_truckSpeed != null)
             {
                 _truckSpeed.text = truckSpeed;
+                if (aIPath != null)
+                {
+                    if (SpeedInHour < aIPath.getMinSpeedLimit())
+                    {
+                        _truckSpeed.color = Color.blue;
+                    }
+                    else if (SpeedInHour > aIPath.getMaxSpeedLimit())
+                    {
+                        _truckSpeed.color = Color.red;
+                    }
+                    else
+                    {
+                        _truckSpeed.color = Color.white;
+                    }
+                }
             }
             PrevVelocityAngle = VelocityAngle;
             Vector3 horizontalLocalVelocity = transform.InverseTransformDirection(RB.velocity).ZeroHeight ();

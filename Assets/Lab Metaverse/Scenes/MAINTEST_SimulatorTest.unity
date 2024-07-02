@@ -53603,6 +53603,7 @@ GameObject:
   - component: {fileID: 2372521551581667543}
   - component: {fileID: 2372521551581667546}
   - component: {fileID: 7907576348399302431}
+  - component: {fileID: 7907576348399302433}
   m_Layer: 0
   m_Name: PLAYER_Truck
   m_TagString: Untagged
@@ -53636,6 +53637,7 @@ MonoBehaviour:
   - {fileID: 1583336955066141355}
   FirstPersonCameraPos: {fileID: 2339024100728419307}
   _truckSpeed: {fileID: 2013932324}
+  aIPath: {fileID: 7907576348399302433}
   TrailerConnectorMask:
     serializedVersion: 2
     m_Bits: 4
@@ -133132,6 +133134,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carController: {fileID: 2372521551581667543}
   _carControllerInput: {fileID: 465046091}
+--- !u!114 &7907576348399302433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2372521551581667542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb4d7fc75cef2a4785cedcf021a4354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoopedPath: 1
+  MaxSpeedLimit: 40
+  MinSpeedLimit: 10
+  AIConfigAsset: {fileID: 0}
+  Waypoints: []
+  ShowGizmo: 1
+  EditorVisualisationSubsteps: 2
+  ShowOvertakeGizmo: 1
+  SelectedWaypoint:
+    Point: {fileID: 0}
+    OvertakeZoneLeft: 0
+    OvertakeZoneRight: 0
+    SpeedLimit: 0
 --- !u!4 &7962576853935294746
 Transform:
   m_ObjectHideFlags: 0
