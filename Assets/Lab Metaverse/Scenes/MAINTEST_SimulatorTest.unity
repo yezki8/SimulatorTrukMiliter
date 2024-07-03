@@ -126930,6 +126930,7 @@ MonoBehaviour:
   - {fileID: 576679465}
   - {fileID: 1773192315}
   - {fileID: 1959560460}
+  - {fileID: 878142857}
   Player: {fileID: 2372521551581667542}
   OnActivateCheckpoint:
     m_PersistentCalls:
