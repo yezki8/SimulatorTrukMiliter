@@ -23,7 +23,10 @@ namespace PG
 #pragma warning disable 0649
 
         public bool LoopedPath = true;
-        public float MaxSpeedLimit = 150;
+        [SerializeField]
+        public float MaxSpeedLimit = 100; //SerializeField can be deleted in the future
+        [SerializeField]
+        public float MinSpeedLimit = 60; //SerializeField can be deleted in the future
         public PG.BaseAIConfigAsset AIConfigAsset;
 
         [Header("Waypoints settings")]
@@ -227,6 +230,16 @@ namespace PG
                 OvertakeZoneRight = overtakeZoneRight;
                 SpeedLimit = speedLimit;
             }
+        }
+
+        public float getMaxSpeedLimit()
+        {
+            return MaxSpeedLimit;
+        }
+
+        public float getMinSpeedLimit()
+        {
+            return MinSpeedLimit;
         }
     }
 }
