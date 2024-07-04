@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
             else if (other.tag == "Finish")
             {
                 GameStateController.Instance.ChangeGameState((int)StateOfGame.End);
+                other.GetComponent<CheckpointController>().SetCheckpointVisual(false);
             }
         }
     }

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using PG;
 
 public class CheckpointManager : MonoBehaviour
 {
-    public CheckpointDataContainer[] Checkpoints;        //0 is the initial spawn place
+    public CheckpointController[] Checkpoints;        //0 is the initial spawn place
 
     public GameObject Player;
 
@@ -36,51 +37,50 @@ public class CheckpointManager : MonoBehaviour
     //Spawn Methods =====================================================================================
     public void ResetSpawnPlace()
     {
+        //Reset the states of checkpoints
         foreach(var spawnPlace in Checkpoints)
         {
-            spawnPlace.IsTimerActive = false;
-            spawnPlace.IsStopwatchActive = false;
+            spawnPlace.ResetCheckpointStates();
+            spawnPlace.CheckQuestReuqirement();
         }
-        // both countdown and stopwatch must work
-        if (TimerCountdown.Instance != null && TimerStopwatch.Instance != null)
+
+        //Reset the place player spawns to checkpoint 0
+        if (TimerCountdown.Instance != null)
         {
             Checkpoints[0].RecordedTimerThreshold = TimerCountdown.Instance.GetStartTime();
             Checkpoints[0].RecordedTimer = TimerCountdown.Instance.GetStartTime();
         }
-        Checkpoints[0].IsTimerActive = true;
-        Checkpoints[0].IsStopwatchActive = true;
+        Checkpoints[0].SetActiveCheckpoint(true);
     }
 
     public void RespawnAtCheckpoint()
     {
         ResetPlayerState();
-        CheckpointDataContainer targetSpawnPlace = GetActiveCheckpoint();
-        Debug.Log("Ceckpoint = " + targetSpawnPlace.gameObject.name);
+        CheckpointController targetSpawnPlace = GetActiveCheckpoint();
         Vector3 spawnPos = targetSpawnPlace.SpawnArea.transform.position;
         Quaternion spawnRot = targetSpawnPlace.SpawnArea.transform.rotation;
 
+        Player.GetComponent<CarController>().ResetVehicle();
         Player.transform.SetPositionAndRotation(spawnPos, spawnRot);
-        Player.SetActive(true);
     }
 
     public void ActivateCheckpoint(GameObject targetCheckpoint)
     {
         if (GameStateController.Instance.GameState == StateOfGame.Match)
         {
+            //First loop for checkpoint activation
             foreach (var spawnPlace in Checkpoints)
             {
                 if (spawnPlace.gameObject == targetCheckpoint)
                 {
-                    spawnPlace.IsTimerActive = true;
+                    spawnPlace.SetActiveCheckpoint(true);
 
                     //Record Collectibles here
 
-                    //Record Timer & Stopwatch
-                    if (TimerCountdown.Instance != null && TimerStopwatch.Instance != null)
+                    //Record Timer
+                    if (TimerCountdown.Instance != null)
                     {
                         spawnPlace.RecordedTimer = TimerCountdown.Instance.CurrentTime;
-                        spawnPlace.RecordedStopwatch = TimerStopwatch.Instance.CurrentTime;
-
                         if (spawnPlace.RecordedTimer < spawnPlace.RecordedTimerThreshold)
                         {
                             spawnPlace.RecordedTimer = spawnPlace.RecordedTimerThreshold;
@@ -90,9 +90,15 @@ public class CheckpointManager : MonoBehaviour
                     //Record Level Progression here
                     OnActivateCheckpoint?.Invoke();
                 }
-                else
+            }
+
+            //Second loop for quest checking
+            foreach (var spawnPlace in Checkpoints)
+            {
+                if (spawnPlace.gameObject != targetCheckpoint)
                 {
-                    spawnPlace.IsTimerActive = false;
+                    spawnPlace.IsActive = false;
+                    spawnPlace.CheckQuestReuqirement();
                 }
             }
         }
@@ -107,9 +113,10 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
-    public float GetRecordedTimer()          //invoked by 
+    #region Get Recorded Data
+    public float GetRecordedTimer()          //Called By TimerCountdown
     {
-        CheckpointDataContainer spawnPlace = GetActiveCheckpoint();
+        CheckpointController spawnPlace = GetActiveCheckpoint();
 
         //Get Recorded Timer
         float recordedTime = spawnPlace.RecordedTimer;
@@ -125,7 +132,7 @@ public class CheckpointManager : MonoBehaviour
 
     public float GetRecordedStopwatch()     // same as above but for stopwatch
     {
-        CheckpointDataContainer spawnPlace = GetActiveCheckpoint();
+        CheckpointController spawnPlace = GetActiveCheckpoint();
 
         //Get Recorded Stopwatch
         float recordedStopwatch = spawnPlace.RecordedStopwatch;
@@ -133,12 +140,14 @@ public class CheckpointManager : MonoBehaviour
         return recordedStopwatch;
     }
 
-    public CheckpointDataContainer GetActiveCheckpoint()
+    #endregion
+
+    public CheckpointController GetActiveCheckpoint()
     {
-        CheckpointDataContainer targetPoint = null;
+        CheckpointController targetPoint = null;
         foreach (var point in Checkpoints)
         {
-            if (point.IsTimerActive)
+            if (point.IsActive)
             {
                 targetPoint = point;
                 break;

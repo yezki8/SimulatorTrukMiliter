@@ -2224,6 +2224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 884537911}
+  VisualRenderer: {fileID: 520788174}
+  CheckpointCollider: {fileID: 520788173}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -2231,11 +2233,14 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsTimerActive: 0
+  IsActive: 0
   RecordedStopwatch: 0
   RecordedStopwatchThreshold: 0
   IsStopwatchActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
+  HasActivatedOnce: 0
+  _checkpointQuestList: []
 --- !u!1 &523825846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2495,6 +2500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 1059056612}
+  VisualRenderer: {fileID: 576679463}
+  CheckpointCollider: {fileID: 576679462}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -2502,11 +2509,14 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsTimerActive: 0
+  IsActive: 0
   RecordedStopwatch: 0
   RecordedStopwatchThreshold: 0
   IsStopwatchActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
+  HasActivatedOnce: 0
+  _checkpointQuestList: []
 --- !u!1 &598400394
 GameObject:
   m_ObjectHideFlags: 0
@@ -3475,6 +3485,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 1800163923}
+  VisualRenderer: {fileID: 878142855}
+  CheckpointCollider: {fileID: 878142854}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -3482,11 +3494,20 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsTimerActive: 0
+  IsActive: 0
   RecordedStopwatch: 0
   RecordedStopwatchThreshold: 0
   IsStopwatchActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
+  HasActivatedOnce: 0
+  _checkpointQuestList:
+  - {fileID: 520788176}
+  - {fileID: 1547390206}
+  - {fileID: 1162653633}
+  - {fileID: 576679465}
+  - {fileID: 1773192315}
+  - {fileID: 1959560460}
 --- !u!1 &884537911
 GameObject:
   m_ObjectHideFlags: 0
@@ -4493,6 +4514,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 707808760}
+  VisualRenderer: {fileID: 1162653631}
+  CheckpointCollider: {fileID: 1162653630}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -4500,11 +4523,15 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsTimerActive: 0
+  IsActive: 0
   RecordedStopwatch: 0
   RecordedStopwatchThreshold: 0
   IsStopwatchActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
+  HasActivatedOnce: 0
+  _checkpointQuestList:
+  - {fileID: 1547390206}
 --- !u!1 &1182507148
 GameObject:
   m_ObjectHideFlags: 0
@@ -5633,6 +5660,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 88882234}
+  VisualRenderer: {fileID: 1547390204}
+  CheckpointCollider: {fileID: 1547390203}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -5640,11 +5669,14 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsTimerActive: 0
+  IsActive: 0
   RecordedStopwatch: 0
   RecordedStopwatchThreshold: 0
   IsStopwatchActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
+  HasActivatedOnce: 0
+  _checkpointQuestList: []
 --- !u!1 &1568441804
 GameObject:
   m_ObjectHideFlags: 0
@@ -6173,7 +6205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 394659238}
-  startTime: 50
+  startTime: 400
   CurrentTime: 0
   OnCountdownEnd:
     m_PersistentCalls:
@@ -6436,6 +6468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 665184327}
+  VisualRenderer: {fileID: 1773192313}
+  CheckpointCollider: {fileID: 1773192312}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -6443,11 +6477,14 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsTimerActive: 0
+  IsActive: 0
   RecordedStopwatch: 0
   RecordedStopwatchThreshold: 0
   IsStopwatchActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
+  HasActivatedOnce: 0
+  _checkpointQuestList: []
 --- !u!1 &1800163923
 GameObject:
   m_ObjectHideFlags: 0
@@ -11970,6 +12007,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnArea: {fileID: 136490988}
+  VisualRenderer: {fileID: 1959560463}
+  CheckpointCollider: {fileID: 1959560462}
   TypeOfCheckpoint: 1
   RecordedHealth: 0
   RecordedArmor: 0
@@ -11977,11 +12016,17 @@ MonoBehaviour:
   ArmorThreshold: 0
   RecordedTimer: 0
   RecordedTimerThreshold: 0
-  IsTimerActive: 0
+  IsActive: 0
   RecordedStopwatch: 0
   RecordedStopwatchThreshold: 0
   IsStopwatchActive: 0
   LastDistance: 0
+  _deactivateOnceActive: 1
+  HasActivatedOnce: 0
+  _checkpointQuestList:
+  - {fileID: 1162653633}
+  - {fileID: 576679465}
+  - {fileID: 1773192315}
 --- !u!4 &1959560461
 Transform:
   m_ObjectHideFlags: 0
@@ -127187,6 +127232,7 @@ MonoBehaviour:
   - {fileID: 576679465}
   - {fileID: 1773192315}
   - {fileID: 1959560460}
+  - {fileID: 878142857}
   Player: {fileID: 2372521551581667542}
   OnActivateCheckpoint:
     m_PersistentCalls:
