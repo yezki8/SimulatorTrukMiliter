@@ -14,7 +14,6 @@ namespace PG
     public partial class CarController :VehicleController
     {
         [Header("CarController")]
-
         public LayerMask TrailerConnectorMask;
         public Transform TrailerConnectorPosition;
 
