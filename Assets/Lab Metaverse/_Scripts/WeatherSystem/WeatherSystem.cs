@@ -145,6 +145,6 @@ public class WeatherSystem : MonoBehaviour
     void Update()
     {
         // rain spawner follow the player, offset to the front and top of the player direction
-        _rainSpawner.transform.position = _player.transform.position + _player.transform.forward * 10 + _player.transform.up * 10;
+        _rainSpawner.transform.position = _player.transform.position + _player.transform.forward * 10 + _player.transform.up * 15;
     }
 }
