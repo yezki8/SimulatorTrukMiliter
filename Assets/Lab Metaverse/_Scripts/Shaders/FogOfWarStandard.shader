@@ -3,7 +3,7 @@ Shader "Unlit/FogOfWarStandard"
     Properties
     {
         _MainTex ("Fog Texture", 2D) = "white" {}
-        _FogColor ("Fog Color", Color) = (0.8,0.8,0.8,0.5)
+        _FogColor ("Fog Color", Color) = (0,0,0,1)
     }
     SubShader
     {

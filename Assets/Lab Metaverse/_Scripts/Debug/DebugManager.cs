@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 #if UNITY_EDITOR
 public class DebugManager : MonoBehaviour
@@ -62,9 +63,11 @@ public class DebugManager : MonoBehaviour
     {
         stringBuilder.Clear();
 
-        stringBuilder.AppendLine($"FPS: {fps:F1}");
-        stringBuilder.AppendLine($"Frame Time: {frameTime:F2} ms");
-        stringBuilder.AppendLine($"Memory Usage: {System.GC.GetTotalMemory(false) / (1024 * 1024):F2} MB");
+        stringBuilder.AppendLine($"FPS: {fps:F1} \t\t\t\tTotal Allocated: {Profiler.GetTotalAllocatedMemoryLong() / (1024 * 1024):F2} MB");
+        stringBuilder.AppendLine($"Frame Time: {frameTime:F2} ms \t\tTotal Reserved: {Profiler.GetTotalReservedMemoryLong() / (1024 * 1024):F2} MB");
+        stringBuilder.AppendLine($"Memory Usage: {System.GC.GetTotalMemory(false) / (1024 * 1024):F2} MB " +
+            $"\tTotal Unused: {Profiler.GetTotalUnusedReservedMemoryLong() / (1024 * 1024):F2} MB");
+
 
         // Add more debug info as needed
 
