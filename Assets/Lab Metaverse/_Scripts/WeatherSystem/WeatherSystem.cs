@@ -138,6 +138,8 @@ public class WeatherSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // instantiate rain spawner prefab
+        _rainSpawner = Instantiate(_rainSpawner);
         setWeather(0);
     }
 
