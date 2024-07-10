@@ -94,7 +94,7 @@ public class FogOfWar : MonoBehaviour
         vertices[0] = Vector3.zero;
         for (int i = 0; i < vertexCount - 1; i++)
         {
-            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
+            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]) + Vector3.up * fogYOffset;
 
             if (i < vertexCount - 2)
             {
