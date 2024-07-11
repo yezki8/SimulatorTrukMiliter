@@ -46,7 +46,7 @@ public class FogOfWar : MonoBehaviour
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
         // move mesh so it's visible in the scene
-        viewMeshFilter.transform.position = new Vector3(0, fogYOffset, 0);
+        viewMeshFilter.transform.position = new Vector3(0, 0, 0);
     }
 
     private void LateUpdate()
@@ -94,7 +94,7 @@ public class FogOfWar : MonoBehaviour
         vertices[0] = Vector3.zero;
         for (int i = 0; i < vertexCount - 1; i++)
         {
-            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]) + Vector3.up * fogYOffset;
+            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
 
             if (i < vertexCount - 2)
             {
@@ -143,13 +143,16 @@ public class FogOfWar : MonoBehaviour
         Vector3 dir = DirFromAngle(globalAngle, true);
         RaycastHit hit;
 
-        if (Physics.Raycast(player.position, dir, out hit, viewRadius, obstaclesMask))
+        // offset y pos
+        Vector3 startPosition= new Vector3(player.position.x, player.position.y + fogYOffset, player.position.z);
+
+        if (Physics.Raycast(startPosition, dir, out hit, viewRadius, obstaclesMask))
         {
             return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
         }
         else
         {
-            return new ViewCastInfo(false, player.position + dir * viewRadius, viewRadius, globalAngle);
+            return new ViewCastInfo(false, startPosition + dir * viewRadius, viewRadius, globalAngle);
         }
     }
 

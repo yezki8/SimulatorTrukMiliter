@@ -11,6 +11,10 @@ public class DebugManager : MonoBehaviour
     [SerializeField] private TMP_Text debugText;
     [SerializeField] private float updateInterval = 0.5f;
 
+    // add header for performance stats
+    [Header("Stats")]
+    public Transform playerTransform;
+
     private StringBuilder stringBuilder = new StringBuilder();
 
     private float fps;
@@ -67,6 +71,7 @@ public class DebugManager : MonoBehaviour
         stringBuilder.AppendLine($"Frame Time: {frameTime:F2} ms \t\tTotal Reserved: {Profiler.GetTotalReservedMemoryLong() / (1024 * 1024):F2} MB");
         stringBuilder.AppendLine($"Memory Usage: {System.GC.GetTotalMemory(false) / (1024 * 1024):F2} MB " +
             $"\tTotal Unused: {Profiler.GetTotalUnusedReservedMemoryLong() / (1024 * 1024):F2} MB");
+        stringBuilder.AppendLine($"Player Position: {playerTransform.position}");
 
 
         // Add more debug info as needed
