@@ -7,7 +7,8 @@ Shader "Custom/StencilStandard"
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
 
-        _RevealColor ("Reveal Color", Color) = (1,1,1,0.5)
+        _FogColor ("Fog Color", Color) = (0,0,0,0.5)
+        _FogDistance ("Fog Distance", Range(0, 100)) = 0
         [IntRange] _StencilRef ("Stencil Reference Value", Range(0, 255)) = 1
     }
     SubShader
@@ -21,15 +22,21 @@ Shader "Custom/StencilStandard"
 
         sampler2D _MainTex;
         fixed4 _FogColor;
+        float _FogDistance;
 
         struct Input
         {
             float2 uv_MainTex;
+            float3 worldPos;
         };
 
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
+
+        float easeInOut(float x) {
+            return x < 0.5 ? 2 * x * x : 1 - pow(-2 * x + 2, 2) / 2;
+        }
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -42,6 +49,15 @@ Shader "Custom/StencilStandard"
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+            // get Distance
+			float distance = length(IN.worldPos - _WorldSpaceCameraPos);
+			// get fog factor
+			float fogFactor = easeInOut(min(1.0, distance / _FogDistance));
+            // discard if fog factor is 1
+            if (fogFactor == 1) discard;
+
+			// apply fog
+			c.rgb = lerp(c.rgb, _FogColor.rgb, fogFactor);
             o.Albedo = c.rgb;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
@@ -49,53 +65,6 @@ Shader "Custom/StencilStandard"
             o.Alpha = c.a;
         }
         ENDCG
-
-        // stencil pass
-        Pass
-        {
-            Stencil
-            {
-                Ref [_StencilRef]
-                Comp Equal
-                Pass Keep
-            }
-
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
-
-            struct appdata_t
-            {
-                float4 vertex : POSITION;
-                float2 texcoord : TEXCOORD0;
-            };
-
-            struct v2f
-            {
-                float4 vertex : SV_POSITION;
-                float2 texcoord : TEXCOORD0;
-            };
-
-            sampler2D _MainTex;
-            fixed4 _RevealColor;
-            fixed4 _Color;
-
-            v2f vert (appdata_t v)
-            {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.texcoord = v.texcoord;
-                return o;
-            }
-
-            fixed4 frag (v2f i) : SV_Target
-            {
-                fixed4 col = tex2D(_MainTex, i.texcoord) * _Color;
-                return lerp(col, col + _RevealColor, _RevealColor.a);
-            }
-            ENDCG
-        }
     }
     FallBack "Diffuse"
 }
