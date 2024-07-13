@@ -668,7 +668,7 @@ GameObject:
   - component: {fileID: 212277105}
   - component: {fileID: 212277104}
   m_Layer: 5
-  m_Name: Scoreboard
+  m_Name: Scoreboard Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -738,17 +738,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7100753514640069967}
-        m_TargetAssemblyTypeName: GameStateController, Assembly-CSharp
-        m_MethodName: ViewScore
-        m_Mode: 1
+      - m_Target: {fileID: 479766265}
+        m_TargetAssemblyTypeName: ScoreBoardManager, Assembly-CSharp
+        m_MethodName: ShowScoreBoardPanel
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 479766265}
         m_TargetAssemblyTypeName: ScoreBoardManager, Assembly-CSharp
@@ -1473,7 +1473,7 @@ GameObject:
   - component: {fileID: 436061427}
   - component: {fileID: 436061426}
   m_Layer: 5
-  m_Name: Scoreboard
+  m_Name: Scoreboard Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1543,17 +1543,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7100753514640069967}
-        m_TargetAssemblyTypeName: GameStateController, Assembly-CSharp
-        m_MethodName: ViewScore
-        m_Mode: 1
+      - m_Target: {fileID: 479766265}
+        m_TargetAssemblyTypeName: ScoreBoardManager, Assembly-CSharp
+        m_MethodName: ShowScoreBoardPanel
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 479766265}
         m_TargetAssemblyTypeName: ScoreBoardManager, Assembly-CSharp
@@ -1739,6 +1739,7 @@ MonoBehaviour:
   ScoreEntryPrefab: {fileID: 622965120068752499, guid: d84b0f9310a03004e85f086f13d1bf86, type: 3}
   ScoreTable: {fileID: 1674816211}
   ScoreBoardEntries: []
+  _scoreBoardCanvasGroup: {fileID: 481945684}
   _entryHeight: 40
 --- !u!1 &481945682
 GameObject:
@@ -1790,9 +1791,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 481945682}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &481945685
 MonoBehaviour:
@@ -1807,7 +1808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.0058021545, b: 1, a: 0.47843137}
+  m_Color: {r: 1, g: 0.010242208, b: 0, a: 0.47843137}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5894,10 +5895,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7100753514640069967}
-        m_TargetAssemblyTypeName: GameStateController, Assembly-CSharp
-        m_MethodName: LeaveScore
-        m_Mode: 1
+      - m_Target: {fileID: 479766265}
+        m_TargetAssemblyTypeName: ScoreBoardManager, Assembly-CSharp
+        m_MethodName: ShowScoreBoardPanel
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -132217,7 +132218,6 @@ MonoBehaviour:
   - {fileID: 2086284400}
   - {fileID: 1722038011}
   - {fileID: 723525543}
-  - {fileID: 481945684}
   SetWeatherButton: {fileID: 398183866}
   _weatherSystem: {fileID: 1387342327}
 --- !u!114 &7100753514640069967

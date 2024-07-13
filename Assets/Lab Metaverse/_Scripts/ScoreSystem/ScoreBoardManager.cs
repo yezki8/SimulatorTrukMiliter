@@ -11,6 +11,7 @@ public class ScoreBoardManager : MonoBehaviour
     public List<GameObject> ScoreBoardEntries;
 
     private List<Score> _scoreBoard;
+    [SerializeField] private CanvasGroup _scoreBoardCanvasGroup;
 
     // entry height 40
     [SerializeField] private float _entryHeight = 40f;
@@ -91,6 +92,21 @@ public class ScoreBoardManager : MonoBehaviour
             ScoreBoardEntries.Clear();
             Debug.Log("Score Board Cleared");
         }
+    }
+
+    //For UI: Expand it to new script
+    public void ShowScoreBoardPanel(bool showStatus)
+    {
+        int alpha = 1;
+        if (!showStatus)
+        {
+            alpha = 0;
+        }
+
+        //TO DO: replace this with animation
+        _scoreBoardCanvasGroup.alpha = alpha;
+        _scoreBoardCanvasGroup.blocksRaycasts = showStatus;
+        _scoreBoardCanvasGroup.interactable = showStatus;
     }
 
     // Start is called before the first frame update

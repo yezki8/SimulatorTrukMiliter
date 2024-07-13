@@ -7,8 +7,7 @@ public enum StateOfGame
 {
     Intro,
     Match,
-    End,
-    ViewScore
+    End
 }
 public class GameStateController : MonoBehaviour
 {
@@ -62,17 +61,6 @@ public class GameStateController : MonoBehaviour
     {
         OnRestartStage?.Invoke();
         ChangeGameState((int)StateOfGame.Intro);
-    }
-
-    // reconsider how to handle this
-    public void ViewScore()
-    {
-        _gameStateUIHandler.ActivatePanel((int)StateOfGame.ViewScore);
-    }
-
-    public void LeaveScore()
-    {
-        _gameStateUIHandler.ActivatePanel((int)GameState);
     }
 
     public void CloseStage(string SceneName)       //As in, finish the stage / back to menu
