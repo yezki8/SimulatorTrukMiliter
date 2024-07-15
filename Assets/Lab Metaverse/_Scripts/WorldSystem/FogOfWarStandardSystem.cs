@@ -12,7 +12,7 @@ public class FogOfWar : MonoBehaviour
     public float meshResolution = 1f;
     public int edgeResolveIterations = 4;
     public float edgeDstThreshold = 0.5f;
-    public float fogYOffset = 0.5f;
+    public float castYOffset = 0.5f;
 
     public MeshFilter viewMeshFilter;
     private Mesh viewMesh;
@@ -52,7 +52,7 @@ public class FogOfWar : MonoBehaviour
     private void LateUpdate()
     {
         // move view mesh to player position
-        transform.position = new Vector3(player.position.x, player.position.y + fogYOffset, player.position.z);
+        transform.position = new Vector3(player.position.x, player.position.y + castYOffset, player.position.z);
         DrawFieldOfView();
     }
 
@@ -144,7 +144,7 @@ public class FogOfWar : MonoBehaviour
         RaycastHit hit;
 
         // offset y pos
-        Vector3 startPosition= new Vector3(player.position.x, player.position.y + fogYOffset, player.position.z);
+        Vector3 startPosition= new Vector3(player.position.x, player.position.y + castYOffset, player.position.z);
 
         if (Physics.Raycast(startPosition, dir, out hit, viewRadius, obstaclesMask))
         {
