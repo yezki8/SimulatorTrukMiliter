@@ -231,15 +231,5 @@ namespace PG
                 SpeedLimit = speedLimit;
             }
         }
-
-        public float getMaxSpeedLimit()
-        {
-            return MaxSpeedLimit;
-        }
-
-        public float getMinSpeedLimit()
-        {
-            return MinSpeedLimit;
-        }
     }
 }
