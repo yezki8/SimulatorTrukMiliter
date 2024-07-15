@@ -150,8 +150,8 @@ namespace PG
                 _truckSpeed.text = truckSpeed;
                 if (currentRoadSegment != null)
                 {
-                    float maxSpeed = currentRoadSegment.MaxSpeedLimit;
-                    float minSpeed = currentRoadSegment.MinSpeedLimit;
+                    float maxSpeed = currentRoadSegment.getMaxSpeedLimit();
+                    float minSpeed = currentRoadSegment.getMinSpeedLimit();
                     if (maxSpeed == -1)
                     {
                         _truckSpeed.color = Color.white;
@@ -215,7 +215,7 @@ namespace PG
                 if (roadSegment != null)
                 {
                     currentRoadSegment = roadSegment;
-                    Debug.Log("Detected road segment: " + roadSegment.roadSegmentID + "\nMax speed: " + roadSegment.MaxSpeedLimit + ", Min speed: " + roadSegment.MinSpeedLimit);
+                    Debug.Log("Detected road segment: " + roadSegment.roadSegmentID + "\nMax speed: " + roadSegment.getMaxSpeedLimit() + ", Min speed: " + roadSegment.getMinSpeedLimit());
                 }
                 else
                 {
