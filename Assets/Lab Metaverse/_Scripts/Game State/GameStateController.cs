@@ -65,6 +65,6 @@ public class GameStateController : MonoBehaviour
 
     public void CloseStage(string SceneName)       //As in, finish the stage / back to menu
     {
-        //SceneNavigatorController.Instance.LoadAndClose(SceneName, this.gameObject.scene.name);
+        SceneLoader.LoadAndClose(SceneName, this.gameObject.scene.name);
     }
 }
