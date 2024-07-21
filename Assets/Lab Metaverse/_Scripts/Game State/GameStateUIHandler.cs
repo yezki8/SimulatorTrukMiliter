@@ -33,12 +33,6 @@ public class GameStateUIHandler : MonoBehaviour
         // listener to change button text
         SetWeatherButton.onClick.AddListener(() => updateButtonText(SetWeatherButton, "Current Weather: " + _weatherSystem.GetCurrentWeather()));
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
         
     public void ActivatePanel(int targetPanel)      //Called directly by GameStateController
     {

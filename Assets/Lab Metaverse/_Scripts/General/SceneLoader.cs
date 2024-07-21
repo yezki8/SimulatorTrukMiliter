@@ -8,21 +8,20 @@ public static class SceneLoader
 {
     public static async void LoadAndClose(string sceneToOpen, string sceneToClose)
     {
-        await Task.Run(() => LoadSceneOnly(sceneToOpen));
+        await LoadSceneAsync(sceneToOpen);
         CloseSceneAsync(sceneToClose);
     }
 
     public static async void LoadSceneOnly(string sceneToOpen)
     {
-        LoadSceneAsync(sceneToOpen);
-        await Task.Yield();
+        await LoadSceneAsync(sceneToOpen);
     }
     public static void CloseSceneAsync(string sceneToClose)
     {
         SceneManager.UnloadSceneAsync(sceneToClose);
     }
 
-    async static void LoadSceneAsync(string sceneName)
+    async static Task LoadSceneAsync(string sceneName)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 

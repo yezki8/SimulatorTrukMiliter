@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Lab Metaverse/Scenes/MAINTEST_TrainerTest.unity
     guid: 12ee89bc8fafae541b19b073bcbee7d1
   - enabled: 1
-    path: Assets/Lab Metaverse/Scenes/Simulation Scenes/SIMULATION_Garage.unity
-    guid: b8cc5a2adec9bef479f13e47313fabde
+    path: Assets/Lab Metaverse/Scenes/MAINTEST_SimulatorTest.unity
+    guid: bc74c05b8ccdfeb468d5f2aa8a3783c8
   m_configObjects: {}
