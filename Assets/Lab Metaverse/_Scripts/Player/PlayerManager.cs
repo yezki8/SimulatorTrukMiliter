@@ -6,7 +6,7 @@ using PG;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private CarController _carController;
-    [SerializeField] private CarControllerInput _carControllerInput;
+    [SerializeField] private ControllerInput _carControllerInput;
 
     public void EnableTruck()
     {

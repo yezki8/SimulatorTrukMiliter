@@ -225,7 +225,7 @@ namespace PG
             else
             {
                 currentRoadSegment = null; // No road segment detected
-                Debug.LogWarning("Raycast did not hit any object on the road layer.");
+                // Debug.LogWarning("Raycast did not hit any object on the road layer.");
             }
         }
 

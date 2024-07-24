@@ -50,6 +50,7 @@ public class GameStateUIHandler : MonoBehaviour
                 _gameStatePanels[i].alpha = 1;
                 _gameStatePanels[i].blocksRaycasts = true;
                 _gameStatePanels[i].interactable = true;
+                _gameStatePanels[i].GetComponentInChildren<Button>().Select();
             }
             else
             {
@@ -57,6 +58,7 @@ public class GameStateUIHandler : MonoBehaviour
                 _gameStatePanels[i].alpha = 0;
                 _gameStatePanels[i].blocksRaycasts = false;
                 _gameStatePanels[i].interactable = false;
+                _gameStatePanels[i].GetComponentInChildren<Button>().Select();
             }
         }
     }
