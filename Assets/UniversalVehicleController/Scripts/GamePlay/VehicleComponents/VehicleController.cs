@@ -83,10 +83,10 @@ namespace PG
         public float SpeedInHour { get { return CurrentSpeed * (B.GameSettings.EnumMeasurementSystem == MeasurementSystem.KM? C.KPHMult: C.MPHMult); } }    //Vehicle speed in selected units.
         [SerializeField]
         private TextMeshProUGUI _truckSpeed;                               // Truck Speedometer
-        public AIPath aIPath;                                                 // Road class, can be change in the future
+        public LayerMask roadLayerMask;
+        public RoadSegment currentRoadSegment;                            // Road class, can be change in the future
         [SerializeField]
         private Image _warning;
-        private Coroutine blinkingCoroutine;
         public int VehicleDirection { get { return CurrentSpeed < 1 ? 0 : (VelocityAngle.Abs() < 90? 1 : -1); } }
         public float VelocityAngle { get; private set; }                                    //The angle of the vehicle body relative to the Velocity vector.
         public float PrevVelocityAngle { get; private set; }
@@ -139,31 +139,48 @@ namespace PG
 
         protected virtual void FixedUpdate ()
         {
+            DetectCurrentRoadSegment();
             DeactivateIcon(_warning);
+
             //Calculating body speed and angle
             CurrentSpeed = RB.velocity.magnitude;
             string truckSpeed = $"{(int)Math.Truncate(SpeedInHour)} Km/h";
             if (_truckSpeed != null)
             {
                 _truckSpeed.text = truckSpeed;
-                if (aIPath != null)
+                if (currentRoadSegment != null)
                 {
-                    if (SpeedInHour < aIPath.getMinSpeedLimit())
-                    {
-                        _truckSpeed.color = Color.blue;
-                        DeactivateIcon(_warning);
-                        
-                    }
-                    else if (SpeedInHour > aIPath.getMaxSpeedLimit())
-                    {
-                        _truckSpeed.color = Color.red;
-                        ActivateIcon(_warning);
-                    }
-                    else
+                    float maxSpeed = currentRoadSegment.getMaxSpeedLimit();
+                    float minSpeed = currentRoadSegment.getMinSpeedLimit();
+                    if (maxSpeed == -1)
                     {
                         _truckSpeed.color = Color.white;
                         DeactivateIcon(_warning);
                     }
+                    else
+                    {
+                        if (SpeedInHour < minSpeed)
+                        {
+                            _truckSpeed.color = Color.blue;
+                            DeactivateIcon(_warning);
+
+                        }
+                        else if (SpeedInHour > maxSpeed)
+                        {
+                            _truckSpeed.color = Color.red;
+                            ActivateIcon(_warning);
+                        }
+                        else
+                        {
+                            _truckSpeed.color = Color.white;
+                            DeactivateIcon(_warning);
+                        }
+                    }
+                }
+                else
+                {
+                    _truckSpeed.color = Color.white;
+                    DeactivateIcon(_warning);
                 }
             }
             PrevVelocityAngle = VelocityAngle;
@@ -182,6 +199,33 @@ namespace PG
             for (int i = 0; i < Wheels.Length; i++)
             {
                 VehicleIsGrounded |= Wheels[i].IsGrounded;
+            }
+        }
+
+        private void DetectCurrentRoadSegment()
+        {
+            RaycastHit hit;
+            // float raycastDistance = 10f;
+            Vector3 raycastStartPosition = transform.position + Vector3.up * 1.0f; // Offset the starting position
+            // Debug.DrawRay(raycastStartPosition, Vector3.down * raycastDistance, Color.red);
+
+            if (Physics.Raycast(raycastStartPosition, Vector3.down, out hit, Mathf.Infinity, roadLayerMask))
+            {
+                RoadSegment roadSegment = hit.collider.GetComponent<RoadSegment>();
+                if (roadSegment != null)
+                {
+                    currentRoadSegment = roadSegment;
+                    Debug.Log("Detected road segment: " + roadSegment.roadSegmentID + "\nMax speed: " + roadSegment.getMaxSpeedLimit() + ", Min speed: " + roadSegment.getMinSpeedLimit());
+                }
+                else
+                {
+                    Debug.LogWarning("Hit object does not have a RoadSegment component.");
+                }
+            }
+            else
+            {
+                currentRoadSegment = null; // No road segment detected
+                Debug.LogWarning("Raycast did not hit any object on the road layer.");
             }
         }
 
