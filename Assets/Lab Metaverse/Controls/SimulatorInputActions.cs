@@ -100,6 +100,78 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextGear"",
+                    ""type"": ""Button"",
+                    ""id"": ""d3791576-1497-4ca5-828f-3de632f9f620"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PrevGear"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b8d4e87-2654-44c3-aaa3-518ffd5720ce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""3519e220-ae77-454a-8ee9-2b31ef496d34"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchLeftTurnLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""655eecd6-cc28-459e-97a7-f80d48c590cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchRightTurnLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa6d216e-9503-47ba-b328-0d81457595a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetCar"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea295667-fb5f-4de7-86fa-c621dd534be5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ConnectTrailer"",
+                    ""type"": ""Button"",
+                    ""id"": ""b4af782f-13e6-45b2-9fb5-3b0376e76d42"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchAlarm"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab1da180-ebfd-44e6-803d-7cd8c2ab0a17"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,116 +182,6 @@ namespace UnityEngine.InputSystem
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""00ca640b-d935-4593-8157-c05846ea39b3"",
-                    ""path"": ""Dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""e2062cb9-1b15-46a2-838c-2f8d72a0bdd9"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""8180e8bd-4097-4f4e-ab88-4523101a6ce9"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""320bffee-a40b-4347-ac70-c210eb8bc73a"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""1c5327b5-f71c-4f60-99c7-4e737386f1d1"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""d2581a9b-1d11-4566-b27d-b92aff5fabbc"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""2e46982e-44cc-431b-9f0b-c11910bf467a"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""fcfe95b8-67b9-4526-84b5-5d0bc98d6400"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""77bff152-3580-4b21-b6de-dcd0c7e41164"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1635d3fe-58b6-4ba9-a4e2-f4b964f6b5c8"",
-                    ""path"": ""<XRController>/{Primary2DAxis}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -256,61 +218,6 @@ namespace UnityEngine.InputSystem
                     ""action"": ""Dpad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""IJKL"",
-                    ""id"": ""1a5e2b0e-1624-45c0-b562-4a2b8d08d664"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dpad"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""bd9890b9-692a-4a4e-8e12-07b18e382f5e"",
-                    ""path"": ""<Keyboard>/i"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dpad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""49a6ba3a-14fa-41f8-8150-b834b54d00d8"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dpad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""6cd19765-6ae3-439a-a742-71de931f4e61"",
-                    ""path"": ""<Keyboard>/j"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dpad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""2db24f63-4869-4911-bb0f-85d4077f4dd7"",
-                    ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dpad"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -463,6 +370,94 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ChangeView"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe902887-509a-4161-a85e-3c67b493964f"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextGear"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2639f33-4c1c-419a-b9bc-428135cbc9c7"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrevGear"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abbed4be-fbb8-44df-aa95-014d3147fac1"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2be2266d-a825-415e-a8b7-cbb3c0ae79a7"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLeftTurnLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec59c523-84c3-4467-afb2-3e1676eca983"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchRightTurnLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""056ba78c-59ba-45ca-a2cb-8aa1e3d71578"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetCar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9667e8ab-bb05-4a36-a34e-6fd83533c503"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConnectTrailer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a23c665-f8c4-467e-a72a-467176ac673d"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchAlarm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -798,6 +793,14 @@ namespace UnityEngine.InputSystem
             m_Player_BrakeReverse = m_Player.FindAction("BrakeReverse", throwIfNotFound: true);
             m_Player_HandBrake = m_Player.FindAction("HandBrake", throwIfNotFound: true);
             m_Player_ChangeView = m_Player.FindAction("ChangeView", throwIfNotFound: true);
+            m_Player_NextGear = m_Player.FindAction("NextGear", throwIfNotFound: true);
+            m_Player_PrevGear = m_Player.FindAction("PrevGear", throwIfNotFound: true);
+            m_Player_SwitchLights = m_Player.FindAction("SwitchLights", throwIfNotFound: true);
+            m_Player_SwitchLeftTurnLights = m_Player.FindAction("SwitchLeftTurnLights", throwIfNotFound: true);
+            m_Player_SwitchRightTurnLights = m_Player.FindAction("SwitchRightTurnLights", throwIfNotFound: true);
+            m_Player_ResetCar = m_Player.FindAction("ResetCar", throwIfNotFound: true);
+            m_Player_ConnectTrailer = m_Player.FindAction("ConnectTrailer", throwIfNotFound: true);
+            m_Player_SwitchAlarm = m_Player.FindAction("SwitchAlarm", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -877,6 +880,14 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_BrakeReverse;
         private readonly InputAction m_Player_HandBrake;
         private readonly InputAction m_Player_ChangeView;
+        private readonly InputAction m_Player_NextGear;
+        private readonly InputAction m_Player_PrevGear;
+        private readonly InputAction m_Player_SwitchLights;
+        private readonly InputAction m_Player_SwitchLeftTurnLights;
+        private readonly InputAction m_Player_SwitchRightTurnLights;
+        private readonly InputAction m_Player_ResetCar;
+        private readonly InputAction m_Player_ConnectTrailer;
+        private readonly InputAction m_Player_SwitchAlarm;
         public struct PlayerActions
         {
             private @SimulatorInputActions m_Wrapper;
@@ -889,6 +900,14 @@ namespace UnityEngine.InputSystem
             public InputAction @BrakeReverse => m_Wrapper.m_Player_BrakeReverse;
             public InputAction @HandBrake => m_Wrapper.m_Player_HandBrake;
             public InputAction @ChangeView => m_Wrapper.m_Player_ChangeView;
+            public InputAction @NextGear => m_Wrapper.m_Player_NextGear;
+            public InputAction @PrevGear => m_Wrapper.m_Player_PrevGear;
+            public InputAction @SwitchLights => m_Wrapper.m_Player_SwitchLights;
+            public InputAction @SwitchLeftTurnLights => m_Wrapper.m_Player_SwitchLeftTurnLights;
+            public InputAction @SwitchRightTurnLights => m_Wrapper.m_Player_SwitchRightTurnLights;
+            public InputAction @ResetCar => m_Wrapper.m_Player_ResetCar;
+            public InputAction @ConnectTrailer => m_Wrapper.m_Player_ConnectTrailer;
+            public InputAction @SwitchAlarm => m_Wrapper.m_Player_SwitchAlarm;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -922,6 +941,30 @@ namespace UnityEngine.InputSystem
                 @ChangeView.started += instance.OnChangeView;
                 @ChangeView.performed += instance.OnChangeView;
                 @ChangeView.canceled += instance.OnChangeView;
+                @NextGear.started += instance.OnNextGear;
+                @NextGear.performed += instance.OnNextGear;
+                @NextGear.canceled += instance.OnNextGear;
+                @PrevGear.started += instance.OnPrevGear;
+                @PrevGear.performed += instance.OnPrevGear;
+                @PrevGear.canceled += instance.OnPrevGear;
+                @SwitchLights.started += instance.OnSwitchLights;
+                @SwitchLights.performed += instance.OnSwitchLights;
+                @SwitchLights.canceled += instance.OnSwitchLights;
+                @SwitchLeftTurnLights.started += instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.performed += instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.canceled += instance.OnSwitchLeftTurnLights;
+                @SwitchRightTurnLights.started += instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.performed += instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.canceled += instance.OnSwitchRightTurnLights;
+                @ResetCar.started += instance.OnResetCar;
+                @ResetCar.performed += instance.OnResetCar;
+                @ResetCar.canceled += instance.OnResetCar;
+                @ConnectTrailer.started += instance.OnConnectTrailer;
+                @ConnectTrailer.performed += instance.OnConnectTrailer;
+                @ConnectTrailer.canceled += instance.OnConnectTrailer;
+                @SwitchAlarm.started += instance.OnSwitchAlarm;
+                @SwitchAlarm.performed += instance.OnSwitchAlarm;
+                @SwitchAlarm.canceled += instance.OnSwitchAlarm;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -950,6 +993,30 @@ namespace UnityEngine.InputSystem
                 @ChangeView.started -= instance.OnChangeView;
                 @ChangeView.performed -= instance.OnChangeView;
                 @ChangeView.canceled -= instance.OnChangeView;
+                @NextGear.started -= instance.OnNextGear;
+                @NextGear.performed -= instance.OnNextGear;
+                @NextGear.canceled -= instance.OnNextGear;
+                @PrevGear.started -= instance.OnPrevGear;
+                @PrevGear.performed -= instance.OnPrevGear;
+                @PrevGear.canceled -= instance.OnPrevGear;
+                @SwitchLights.started -= instance.OnSwitchLights;
+                @SwitchLights.performed -= instance.OnSwitchLights;
+                @SwitchLights.canceled -= instance.OnSwitchLights;
+                @SwitchLeftTurnLights.started -= instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.performed -= instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.canceled -= instance.OnSwitchLeftTurnLights;
+                @SwitchRightTurnLights.started -= instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.performed -= instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.canceled -= instance.OnSwitchRightTurnLights;
+                @ResetCar.started -= instance.OnResetCar;
+                @ResetCar.performed -= instance.OnResetCar;
+                @ResetCar.canceled -= instance.OnResetCar;
+                @ConnectTrailer.started -= instance.OnConnectTrailer;
+                @ConnectTrailer.performed -= instance.OnConnectTrailer;
+                @ConnectTrailer.canceled -= instance.OnConnectTrailer;
+                @SwitchAlarm.started -= instance.OnSwitchAlarm;
+                @SwitchAlarm.performed -= instance.OnSwitchAlarm;
+                @SwitchAlarm.canceled -= instance.OnSwitchAlarm;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1124,6 +1191,14 @@ namespace UnityEngine.InputSystem
             void OnBrakeReverse(InputAction.CallbackContext context);
             void OnHandBrake(InputAction.CallbackContext context);
             void OnChangeView(InputAction.CallbackContext context);
+            void OnNextGear(InputAction.CallbackContext context);
+            void OnPrevGear(InputAction.CallbackContext context);
+            void OnSwitchLights(InputAction.CallbackContext context);
+            void OnSwitchLeftTurnLights(InputAction.CallbackContext context);
+            void OnSwitchRightTurnLights(InputAction.CallbackContext context);
+            void OnResetCar(InputAction.CallbackContext context);
+            void OnConnectTrailer(InputAction.CallbackContext context);
+            void OnSwitchAlarm(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

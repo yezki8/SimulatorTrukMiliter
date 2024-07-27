@@ -50,10 +50,7 @@ namespace PG
         public string RestoreCarButton = "RestoreCar";
         public string ChangeViewButton = "ChangeView";
         public string HandBrakeButton = "HandBrake";
-        public string BoostButton = "Boost";
-        public string EnterExitButton = "EnterExit";
         public string Dpad = "Dpad";
-        public string Look = "Look";
 
         public string MouseX = "Mouse X";
         public string MouseY = "Mouse Y";
@@ -115,112 +112,30 @@ namespace PG
             controls.Player.Steer.performed += ctx => SetSteer(controls.Player.Steer.ReadValue<Vector2>().x);
             controls.Player.Steer.canceled += ctx => SetSteer(0);
 
+            // driving
             controls.Player.Acceleration.performed += ctx => SetAcceleration(controls.Player.Acceleration.ReadValue<float>());
             controls.Player.Acceleration.canceled += ctx => SetAcceleration(0);
             controls.Player.BrakeReverse.performed += ctx => SetBrakeReverse(controls.Player.BrakeReverse.ReadValue<float>());
             controls.Player.BrakeReverse.canceled += ctx => SetBrakeReverse(0);
             controls.Player.HandBrake.performed += ctx => SetHandBrake(controls.Player.HandBrake.ReadValue<float>() > 0);
             controls.Player.HandBrake.canceled += ctx => SetHandBrake(false);
+            controls.Player.NextGear.performed += ctx => NextGear();
+            controls.Player.PrevGear.performed += ctx => PrevGear();
+
+            // car lights
+            controls.Player.SwitchLights.performed += ctx => SwitchLights();
+            controls.Player.SwitchLeftTurnLights.performed += ctx => SwitchLeftTurnSignal();
+            controls.Player.SwitchRightTurnLights.performed += ctx => SwitchRightTurnSignal();
+            controls.Player.SwitchAlarm.performed += ctx => SwitchAlarm();
+
+            // car actions
+            controls.Player.ConnectTrailer.performed += ctx => ConnectTrailer();
+            controls.Player.ResetCar.performed += ctx => ResetCar();
         }
 
         private void Update()
         {
             Horizontal = Mathf.MoveTowards (Horizontal, TargetHorizontal, Time.deltaTime * HorizontalChangeSpeed);
-
-            // ManualCameraRotation = RotateCameraWithMousePressed ? Input.GetMouseButton(0) : ViewDelta.sqrMagnitude > 0.05f;
-            // ViewDelta = new Vector2(Input.GetAxis(MouseX), Input.GetAxis(MouseY));
-
-            //Added by player to stop midway
-            if (AllowToMove)
-            {
-                UpdateKeys();
-            }
-            else
-            {
-                SetAcceleration(0);
-                SetBrakeReverse(-1);
-                SetBoost(false);
-                SetHandBrake(true);
-                SetPitch(0);
-            }
-        }
-
-        void UpdateKeys ()
-        {
-            if (GameController.Instance)
-            {
-                if (Input.GetKeyDown (KeyCode.F3))
-                {
-                    GameController.Instance.RestartScene ();
-                }
-
-                if (!GameController.SplitScreen && Input.GetKeyDown (KeyCode.N))
-                {
-                    GameController.Instance.SetNextCar ();
-                }
-
-                if (Input.GetKeyDown (KeyCode.Equals))
-                {
-                    GameController.Instance.ChangeTimeScale (0.1f);
-                }
-
-                if (Input.GetKeyDown (KeyCode.Minus))
-                {
-                    GameController.Instance.ChangeTimeScale (-0.1f);
-                }
-            }
-
-            // SetSteer(Input.GetAxis(SteerAxis));
-            // SetAcceleration(Input.GetAxis(AccelerationAxis));
-            // SetBrakeReverse(Input.GetAxis(BrakeReverseAxis));
-            // SetBoost(Input.GetButton(BoostButton));
-            // SetHandBrake(Input.GetButton(HandBrakeButton));
-            // SetPitch(Input.GetAxis(PitchAxis));
-            // 
-            // if (Input.GetButtonDown(NextGearButton))
-            // {
-            //     NextGear();
-            // }
-            // if (Input.GetButtonDown(PrevGearButton))
-            // {
-            //     PrevGear();
-            // }
-            // if (Input.GetButtonDown(SwitchLightsButton))
-            // {
-            //     SwitchLights();
-            // }
-            // if (Input.GetButtonDown(SwitchLeftTurnLightsButton) || DpadLeftDown)
-            // {
-            //     SwitchLeftTurnSignal();
-            // }
-            // if (Input.GetButtonDown(SwitchRightTurnLightsButton) || DpadRightDown)
-            // {
-            //     SwitchRightTurnSignal();
-            // }
-            // if (Input.GetButtonDown(SwitchAlarmButton) || DpadDownDown)
-            // {
-            //     SwitchAlarm();
-            // }
-            // if (Input.GetButtonDown(ConnectTrailerButton) || DpadUpDown)
-            // {
-            //     ConnectTrailer();
-            // }
-            // if (Input.GetButtonDown(ResetCarButton))
-            // {
-            //     ResetCar();
-            // }
-            // if (Input.GetKeyDown(RestoreCarButton))
-            // {
-            //     RestoreCar();
-            // }
-            // if (Input.GetButtonDown(ChangeViewButton))
-            // {
-            //     ChangeView();
-            // }
-            // if (Input.GetButtonDown(EnterExitButton))
-            // {
-            //     TryExitFromCar();
-            // }
         }
 
         void UpdateCamera(Vector2 value)
