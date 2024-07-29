@@ -10,14 +10,14 @@ public class PlayerManager : MonoBehaviour
 
     public void EnableTruck()
     {
-        _carControllerInput.AllowToMove = true;
+        _carControllerInput.EnableControls();
     }
 
     public void DisableTruck()
     {
-        _carController.CurrentGear = 0;
+        _carControllerInput.DisableControls();
         _carController.StopEngine();
-        _carControllerInput.AllowToMove = false;
+        _carControllerInput.ResetCar();
     }
 
     private void OnTriggerEnter(Collider other)
