@@ -1150,9 +1150,9 @@ MonoBehaviour:
   _cameraState: 0
   ObjectToFollow: {fileID: 2339024100728419307}
   ChaseOffset: {x: 0, y: 2, z: -12}
-  FirstPersonCameraAnchor: {x: -0.4, y: 2.3, z: 3.874}
-  ChaseCameraAnchor: {x: 0, y: 2.3, z: 3.874}
-  FirstPersonCameraPosition: {x: 0, y: 0, z: -2.65}
+  FirstPersonCameraAnchor: {x: -0.4, y: 2, z: 3.874}
+  ChaseCameraAnchor: {x: 0, y: 2.8, z: 0.85}
+  FirstPersonCameraPosition: {x: 0, y: 0.4, z: -2.65}
   FollowSpeed: 10
   LookSpeed: 10
   maxAngle: 90

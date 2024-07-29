@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,7 +25,7 @@ public class ChaseController : MonoBehaviour
     public Vector3 FirstPersonCameraPosition;
     public float FollowSpeed = 10;
     public float LookSpeed = 10;
-    public float maxAngle = 90;
+    public float MaxAngle = 80;
 
     [Header("Follow Restriction")]
     public bool MoveX = true;
@@ -87,6 +88,8 @@ public class ChaseController : MonoBehaviour
         {
             // add additional rotation
             transform.Rotate(Vector3.up, _turnDegree * LookSpeed * Time.deltaTime);
+            // slight rotation downward
+            transform.Rotate(Vector3.forward, -0.1f * _turnDegree * LookSpeed * Time.deltaTime);
         }
     }
 
@@ -172,7 +175,7 @@ public class ChaseController : MonoBehaviour
             if (value != 0)
             {
                 _isLooking = true;
-                _turnDegree = value * maxAngle;
+                _turnDegree = value * MaxAngle;
             }
             else
             {
