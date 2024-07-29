@@ -23,9 +23,6 @@ namespace PG
         // target camera
         public ChaseController TargetCamera;
 
-        //Added by user to stop player input midgame
-        public bool AllowToMove = true;
-
         // InputAction
         public SimulatorInputActions controls;
 
@@ -79,18 +76,13 @@ namespace PG
         public static int GamepadP2no;
 
         Vector2 PrevDpadValue;
-        bool DpadUpDown;
-        bool DpadDownDown;
-        bool DpadLeftDown;
-        bool DpadRightDown;
 
-        // enabling and disabling input
-        public void OnEnable()
+        // enabling and disabling control
+        public void EnableControls()
         {
             controls.Enable();
         }
-
-        public void OnDisable()
+        public void DisableControls()
         {
             controls.Disable();
         }
@@ -99,8 +91,6 @@ namespace PG
         private void Awake()
         {
             controls = new SimulatorInputActions();
-            controls.Player.Dpad.performed += ctx => UpdateDpad(controls.Player.Dpad.ReadValue<Vector2>());
-            controls.Player.Dpad.canceled += ctx => UpdateDpad(Vector2.zero);
 
             controls.Player.ChangeView.performed += ctx => ChangeView();
 
@@ -140,26 +130,8 @@ namespace PG
 
         void UpdateCamera(Vector2 value)
         {
-            if (AllowToMove)
-            {
-                TargetCamera.UpdateOffset(value.x);
-                Debug.Log("Camera: " + value);
-            }
-        }
-
-        // read from ReadValue
-        void UpdateDpad(Vector2 currentDpad)
-        {
-            if (AllowToMove)
-            {
-                DpadUpDown = currentDpad.y > 0 && PrevDpadValue.y == 0;
-                DpadDownDown = currentDpad.y < 0 && PrevDpadValue.y == 0;
-                DpadRightDown = currentDpad.x > 0 && PrevDpadValue.x == 0;
-                DpadLeftDown = currentDpad.x < 0 && PrevDpadValue.x == 0;
-
-                PrevDpadValue = currentDpad;
-                Debug.Log("Dpad: " + currentDpad);
-            }
+            TargetCamera.UpdateOffset(value.x);
+            Debug.Log("Camera: " + value);
         }
 
         private void OnDestroy ()
@@ -199,29 +171,22 @@ namespace PG
 
 
         #region Set input
+        // Allow to Move is checked in each method
+        // consider 
 
         public void SetAcceleration (float value)
         {
-            if (AllowToMove) 
-            { 
-                Acceleration = value;
-                Debug.Log("Acceleration: " + value);
-            }
+            Acceleration = value;
         }
 
         public void SetBrakeReverse (float value)
         {
-            if (AllowToMove) 
-            { 
-                BrakeReverse = value;
-                Debug.Log("BrakeReverse: " + value);
-            }
+            BrakeReverse = value;
         }
 
         public void SetSteer (float value)
         {
             TargetHorizontal = value;
-            Debug.Log("Steer: " + value);
         }
 
         public void SetPitch (float value)
@@ -233,7 +198,7 @@ namespace PG
         {
             if (Car)
             {
-                Car.NextGear ();
+                Car.NextGear();
             }
         }
 
@@ -241,55 +206,48 @@ namespace PG
         {
             if (Car)
             {
-                Car.PrevGear ();
+                Car.PrevGear();
             }
         }
 
         public void SwitchLights ()
         {
-            CarLighting.SwitchMainLights ();
+            CarLighting.SwitchMainLights();
         }
 
         public void SwitchLeftTurnSignal ()
         {
-            CarLighting.TurnsEnable (TurnsStates.Left);
+            CarLighting.TurnsEnable(TurnsStates.Left);
         }
 
         public void SwitchRightTurnSignal ()
         {
-            CarLighting.TurnsEnable (TurnsStates.Right);
+            CarLighting.TurnsEnable(TurnsStates.Right);
         }
 
         public void SwitchAlarm ()
         {
-            CarLighting.TurnsEnable (TurnsStates.Alarm);
+            CarLighting.TurnsEnable(TurnsStates.Alarm);
         }
 
         public void ConnectTrailer ()
         {
-            if (Car)
-            {
-                Car.TryConnectDisconnectTrailer ();
-            }
+            Car.TryConnectDisconnectTrailer();
         }
 
         public void ResetCar ()
         {
-            Vehicle.ResetVehicle ();
+            Vehicle.ResetVehicle();
         }
 
         public void RestoreCar ()
         {
-            Vehicle.RestoreVehicle ();
+            Vehicle.RestoreVehicle();
         }
 
         public void ChangeView ()
         {
-            if (AllowToMove)
-            {
-                OnChangeViewAction.Invoke();
-            }
-            Debug.Log("ChangeView");
+            OnChangeViewAction.Invoke();
         }
 
         public void TryExitFromCar ()
@@ -309,11 +267,7 @@ namespace PG
 
         public void SetHandBrake (bool value)
         {
-            if (AllowToMove) 
-            { 
-                HandBrake = value;
-                Debug.Log("HandBrake: " + value);
-            }
+            HandBrake = value;
         }
 
         public void SetBoost (bool value)
