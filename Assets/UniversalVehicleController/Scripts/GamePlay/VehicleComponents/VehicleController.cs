@@ -202,6 +202,7 @@ namespace PG
             }
         }
 
+        // Function to detect the road segment
         private void DetectCurrentRoadSegment()
         {
             RaycastHit hit;
