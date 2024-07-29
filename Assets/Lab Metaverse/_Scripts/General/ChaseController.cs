@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum CameraState
+// Probably should've been implemented in separate script,
+// if separation of concerns is deemed necessary
+
+public enum CameraMode
 {
     FirstPerson,
     Chase
@@ -11,7 +14,8 @@ public enum CameraState
 
 public class ChaseController : MonoBehaviour
 {
-    [SerializeField] private CameraState _cameraState = CameraState.Chase;
+    // alternative: Strategy Pattern
+    [SerializeField] private CameraMode _cameraState;
 
     public Transform ObjectToFollow;
     public Vector3 ChaseOffset;
@@ -32,6 +36,7 @@ public class ChaseController : MonoBehaviour
     public bool LookY = true;
     public bool LookZ = true;
 
+    [Header("Changing Values")]
     [SerializeField] private bool _isLooking = false;
     [SerializeField] private float _turnDegree;
     [SerializeField] private Vector3 _offset;
@@ -47,14 +52,24 @@ public class ChaseController : MonoBehaviour
     // invoked by controller
     public void ChangeCameraState()
     {
-        _cameraState = _cameraState == CameraState.Chase ? CameraState.FirstPerson : CameraState.Chase;
-        // set new anchor if state changed
-        if (_cameraState == CameraState.FirstPerson)
+        _cameraState = _cameraState == CameraMode.Chase ? CameraMode.FirstPerson : CameraMode.Chase;
+        SetAnchorAndOffsetAfterChange();
+    }
+
+    public void SetCameraState(CameraMode state)
+    {
+        _cameraState = state;
+        SetAnchorAndOffsetAfterChange();
+    }
+
+    public void SetAnchorAndOffsetAfterChange()
+    {
+        if (_cameraState == CameraMode.FirstPerson)
         {
             _offset = FirstPersonCameraPosition;
             ObjectToFollow.localPosition = FirstPersonCameraAnchor;
         }
-        else if (_cameraState == CameraState.Chase)
+        else if (_cameraState == CameraMode.Chase)
         {
             _offset = ChaseOffset;
             ObjectToFollow.localPosition = ChaseCameraAnchor;
@@ -84,11 +99,11 @@ public class ChaseController : MonoBehaviour
 
         targetPos = CheckMovementRestriction(targetPos);
 
-        if (_cameraState == CameraState.Chase)
+        if (_cameraState == CameraMode.Chase)
         {
             transform.position = Vector3.Lerp(transform.position, targetPos, FollowSpeed * Time.deltaTime);
         }
-        else if (_cameraState == CameraState.FirstPerson)
+        else if (_cameraState == CameraMode.FirstPerson)
         {
             transform.position = targetPos;
         }
@@ -130,7 +145,7 @@ public class ChaseController : MonoBehaviour
 
     public void Start()
     {
-        _offset = ChaseOffset;
+        SetCameraState(_cameraState);
     }
 
     public void Update()
@@ -144,7 +159,7 @@ public class ChaseController : MonoBehaviour
     // note to dev: refactor to using interfaces if this feature ever needed later
     public void UpdateOffset(float value)
     {
-        if (_cameraState == CameraState.Chase)
+        if (_cameraState == CameraMode.Chase)
         {
             // _offset.y = value.y > 0 ? _offset.z + value.y : InitialOffset.y;
             // circle camera around player, max 90 degree
@@ -152,7 +167,7 @@ public class ChaseController : MonoBehaviour
             _offset.x = Mathf.Sin(value) * ChaseOffset.z; // left right
             _offset.z = Mathf.Cos(value) * ChaseOffset.z;
             Debug.Log("Offset: " + _offset);
-        } else if (_cameraState == CameraState.FirstPerson)
+        } else if (_cameraState == CameraMode.FirstPerson)
         {
             if (value != 0)
             {
