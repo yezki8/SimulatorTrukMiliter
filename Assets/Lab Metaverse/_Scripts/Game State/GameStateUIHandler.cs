@@ -23,6 +23,7 @@ public class GameStateUIHandler : MonoBehaviour
         if (button == SetWeatherButton)
         {
             SetWeatherButton.GetComponentInChildren<TMP_Text>().text = text;
+            Debug.Log("Button text updated");
         }
     }
 
