@@ -84,7 +84,9 @@ namespace PG
         [SerializeField]
         private TextMeshProUGUI _truckSpeed;                               // Truck Speedometer
         public LayerMask roadLayerMask;
-        public RoadSegment currentRoadSegment;                            // Road class, can be change in the future
+        private RoadSegment _currentRoadSegment;                            // Road class, can be change in the future
+        private GameObject _detectedRoadObject;
+        private GameObject _currentRoadObject;
         [SerializeField]
         private Image _warning;
         public int VehicleDirection { get { return CurrentSpeed < 1 ? 0 : (VelocityAngle.Abs() < 90? 1 : -1); } }
@@ -148,10 +150,10 @@ namespace PG
             if (_truckSpeed != null)
             {
                 _truckSpeed.text = truckSpeed;
-                if (currentRoadSegment != null)
+                if (_currentRoadSegment != null)
                 {
-                    float maxSpeed = currentRoadSegment.getMaxSpeedLimit();
-                    float minSpeed = currentRoadSegment.getMinSpeedLimit();
+                    float maxSpeed = _currentRoadSegment.getMaxSpeedLimit();
+                    float minSpeed = _currentRoadSegment.getMinSpeedLimit();
                     if (maxSpeed == -1)
                     {
                         _truckSpeed.color = Color.white;
@@ -212,11 +214,15 @@ namespace PG
 
             if (Physics.Raycast(raycastStartPosition, Vector3.down, out hit, Mathf.Infinity, roadLayerMask))
             {
+                _detectedRoadObject = hit.collider.gameObject;
                 RoadSegment roadSegment = hit.collider.GetComponent<RoadSegment>();
                 if (roadSegment != null)
                 {
-                    currentRoadSegment = roadSegment;
-                    Debug.Log("Detected road segment: " + roadSegment.roadSegmentID + "\nMax speed: " + roadSegment.getMaxSpeedLimit() + ", Min speed: " + roadSegment.getMinSpeedLimit());
+                    if (_detectedRoadObject != _currentRoadObject)
+                    {
+                        _currentRoadSegment = roadSegment;
+                        Debug.Log("Detected road segment: " + roadSegment.roadSegmentID + "\nMax speed: " + roadSegment.getMaxSpeedLimit() + ", Min speed: " + roadSegment.getMinSpeedLimit());
+                    }
                 }
                 else
                 {
@@ -225,8 +231,13 @@ namespace PG
             }
             else
             {
-                currentRoadSegment = null; // No road segment detected
+                _currentRoadSegment = null; // No road segment detected
                 Debug.LogWarning("Raycast did not hit any object on the road layer.");
+            }
+
+            if (_detectedRoadObject != null)
+            {
+                _currentRoadObject = _detectedRoadObject;
             }
         }
 
