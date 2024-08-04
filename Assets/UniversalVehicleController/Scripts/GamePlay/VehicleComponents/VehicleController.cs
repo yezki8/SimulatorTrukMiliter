@@ -85,8 +85,8 @@ namespace PG
         private TextMeshProUGUI _truckSpeed;                               // Truck Speedometer
         public LayerMask roadLayerMask;
         private RoadSegment _currentRoadSegment;                            // Road class, can be change in the future
-        private GameObject _detectedRoadObject;
-        private GameObject _currentRoadObject;
+        private GameObject _detectedRoadObject;                             // Terdeteksi sebelumnya
+        private GameObject _currentRoadObject;                              // Baru terdeteksi
         [SerializeField]
         private Image _warning;
         public int VehicleDirection { get { return CurrentSpeed < 1 ? 0 : (VelocityAngle.Abs() < 90? 1 : -1); } }
@@ -214,31 +214,30 @@ namespace PG
 
             if (Physics.Raycast(raycastStartPosition, Vector3.down, out hit, Mathf.Infinity, roadLayerMask))
             {
-                _detectedRoadObject = hit.collider.gameObject;
-                RoadSegment roadSegment = hit.collider.GetComponent<RoadSegment>();
-                if (roadSegment != null)
+                _currentRoadObject = hit.collider.gameObject;
+                _currentRoadSegment = hit.collider.GetComponent<RoadSegment>();
+                if (_currentRoadObject != _detectedRoadObject)
                 {
-                    if (_detectedRoadObject != _currentRoadObject)
+                    if (_currentRoadSegment != null)
                     {
-                        _currentRoadSegment = roadSegment;
-                        Debug.Log("Detected road segment: " + roadSegment.roadSegmentID + "\nMax speed: " + roadSegment.getMaxSpeedLimit() + ", Min speed: " + roadSegment.getMinSpeedLimit());
+                        Debug.Log("Detected road segment: " + _currentRoadSegment.roadSegmentID + "\nMax speed: " + _currentRoadSegment.getMaxSpeedLimit() + ", Min speed: " + _currentRoadSegment.getMinSpeedLimit());
                     }
-                }
-                else
-                {
-                    Debug.LogWarning("Hit object does not have a RoadSegment component.");
+                    else
+                    {
+                        Debug.LogWarning("Hit object does not have a RoadSegment component.");
+                    }
                 }
             }
             else
             {
-                _currentRoadSegment = null; // No road segment detected
-                Debug.LogWarning("Raycast did not hit any object on the road layer.");
+                _currentRoadObject = null;
+                _currentRoadSegment = null;                                                     // No road segment detected
+                if (_currentRoadObject != _detectedRoadObject)
+                {
+                    Debug.LogWarning("Raycast did not hit any object on the road layer.");
+                }
             }
-
-            if (_detectedRoadObject != null)
-            {
-                _currentRoadObject = _detectedRoadObject;
-            }
+            _detectedRoadObject = _currentRoadObject;
         }
 
         protected virtual void Update () { }
