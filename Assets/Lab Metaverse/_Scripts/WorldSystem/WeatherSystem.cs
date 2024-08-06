@@ -60,24 +60,24 @@ public class WeatherSystem : MonoBehaviour
         switch (CurrentWeather)
         {
             case WeatherType.Sunny:
-                _sunLight.GetComponent<Light>().intensity = 1.0f;
-                _sunLight.GetComponent<Light>().color = new Color(1.0f, 0.9f, 0.8f);
+                _sunLight.GetComponent<Light>().intensity = 100000;
+                _sunLight.GetComponent<Light>().colorTemperature = 7500;
                 break;
             case WeatherType.Cloudy:
-                _sunLight.GetComponent<Light>().intensity = 0.8f;
-                _sunLight.GetComponent<Light>().color = new Color(0.9f, 0.9f, 0.8f);
+                _sunLight.GetComponent<Light>().intensity = 70000;
+                _sunLight.GetComponent<Light>().colorTemperature = 9000;
                 break;
             case WeatherType.Rainy:
-                _sunLight.GetComponent<Light>().intensity = 0.8f;
-                _sunLight.GetComponent<Light>().color = new Color(0.8f, 0.8f, 0.8f);
+                _sunLight.GetComponent<Light>().intensity = 60000;
+                _sunLight.GetComponent<Light>().colorTemperature = 9000;
                 break;
             // case WeatherType.Snowy:
             //     _sunLight.SetActive(false);
             //     break;
             default:
                 // default to sunny
-                _sunLight.GetComponent<Light>().intensity = 1.0f;
-                _sunLight.GetComponent<Light>().color = new Color(1.0f, 0.9f, 0.8f);
+                _sunLight.GetComponent<Light>().intensity = 100000;
+                _sunLight.GetComponent<Light>().colorTemperature = 7500;
                 break;
         }
     }
