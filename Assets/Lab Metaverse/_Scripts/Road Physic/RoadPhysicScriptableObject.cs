@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Road Physic SO", menuName = "ScriptableObjects/", order = 1)]
+[CreateAssetMenu(fileName = "RoadPhysicSO", menuName = "ScriptableObjects/Physic", order = 1)]
 public class RoadPhysicScriptableObject : ScriptableObject
 {
     [Header("Forward Friction")]
