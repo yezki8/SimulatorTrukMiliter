@@ -50,4 +50,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/UniversalVehicleController/Scenes/PrototypeScene_RaceAI.unity
     guid: 8005b71dc9fcbf04ba9f64eebfaa279b
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: f590a05e7c66b0e4686d53e750ca4a22, type: 2}
