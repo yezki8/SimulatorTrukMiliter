@@ -738,7 +738,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: DEBUG_MODE
+    Standalone: DEBUG_MODE;EASYROADS3D_PRO
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
