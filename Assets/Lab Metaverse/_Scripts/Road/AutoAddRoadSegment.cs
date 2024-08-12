@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 [InitializeOnLoad]
 public class AutoAddRoadSegment
 {
@@ -90,3 +91,4 @@ public class AutoAddRoadSegment
     }
 }
 
+#endif
