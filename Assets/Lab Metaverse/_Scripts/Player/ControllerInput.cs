@@ -99,7 +99,7 @@ namespace PG
             controls.Player.Look.canceled += ctx => UpdateCamera(Vector2.zero);
 
             // convert vector2 x to steer value
-            controls.Player.Steer.performed += ctx => SetSteer(controls.Player.Steer.ReadValue<Vector2>().x);
+            controls.Player.Steer.performed += ctx => SetSteer(controls.Player.Steer.ReadValue<float>());
             controls.Player.Steer.canceled += ctx => SetSteer(0);
 
             // driving
@@ -186,6 +186,7 @@ namespace PG
 
         public void SetSteer (float value)
         {
+            Debug.Log("SetSteer: " + value);
             TargetHorizontal = value;
         }
 
@@ -267,6 +268,7 @@ namespace PG
 
         public void SetHandBrake (bool value)
         {
+            Debug.Log("Handbrake: " + value);
             HandBrake = value;
         }
 

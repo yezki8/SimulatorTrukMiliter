@@ -26,14 +26,14 @@ namespace UnityEngine.InputSystem
     ""name"": ""SimulatorInputActions"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""Player3"",
             ""id"": ""df70fa95-8a34-4494-b137-73ab6b9c7d37"",
             ""actions"": [
                 {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""351f2ccd-1f9f-44bf-9bec-d62ac5c5f408"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -60,7 +60,7 @@ namespace UnityEngine.InputSystem
                     ""name"": ""Steer"",
                     ""type"": ""Value"",
                     ""id"": ""fab6fc17-096a-43df-9138-1fdad530e547"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -76,12 +76,12 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": ""BrakeReverse"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""e59fed34-b820-4ad6-b0dc-022c1f35b256"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""HandBrake"",
@@ -178,7 +178,7 @@ namespace UnityEngine.InputSystem
                 {
                     ""name"": """",
                     ""id"": ""978bfe49-cc26-4a3d-ab7b-7d7a29327403"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -209,15 +209,37 @@ namespace UnityEngine.InputSystem
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""324c63d9-cd35-4432-a7ba-daf53afa9d5c"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""22e5ff94-3e7a-43bc-9ca4-739b52e29204"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""d52a28fb-6a15-4625-96e7-088d5d45a897"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Steer"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""725ac886-05c6-4af5-9835-aba7636e2117"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -348,6 +370,334 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwitchAlarm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Player"",
+            ""id"": ""50d5c611-19f8-4549-8edd-fbeb337f64ea"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""49c94694-90be-4011-930d-9aa5ebdb2d30"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""13eae6a6-98bc-438d-8dce-af7c625455c3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dpad"",
+                    ""type"": ""Value"",
+                    ""id"": ""9bea3da7-a8e9-4346-9173-66486e86211f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Steer"",
+                    ""type"": ""Value"",
+                    ""id"": ""cd3060cb-504c-4e88-a0b5-5bd91e79e70e"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Acceleration"",
+                    ""type"": ""Value"",
+                    ""id"": ""b51f8c35-6634-4779-951d-d1422c522c53"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""BrakeReverse"",
+                    ""type"": ""Value"",
+                    ""id"": ""0902cc17-1636-4fb4-af96-e8ebc12a20b4"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""HandBrake"",
+                    ""type"": ""Button"",
+                    ""id"": ""65438fec-d638-40f3-8dd3-7c5f11e2be8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeView"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e0c2d91-82bf-4aee-ad25-69acb4ae964b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextGear"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f669272-9b1e-4bc2-85f7-6ac49e5ac76f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PrevGear"",
+                    ""type"": ""Button"",
+                    ""id"": ""d632b41a-ca7d-4a32-8445-4ccd030323e2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""968ed024-8be5-46ce-8f0c-993401d2008a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchLeftTurnLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd0cfe58-0180-4733-9c73-a9dcca320810"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchRightTurnLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd61f3b7-f96b-44d8-8c24-56fdbb0d1d82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetCar"",
+                    ""type"": ""Button"",
+                    ""id"": ""59337102-bf69-471d-8b3e-a4c8f82128e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ConnectTrailer"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc2b8a66-cdab-4775-a544-513af3d36860"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchAlarm"",
+                    ""type"": ""Button"",
+                    ""id"": ""daccc926-b98f-432b-a697-66c2b4b52bbd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7b0d17cf-cc7e-4381-9312-15a5b65f7211"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/stick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48d7ad8b-e87c-4e4b-b830-b815ca57c97e"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/rz"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert,Clamp(max=1)"",
+                    ""groups"": """",
+                    ""action"": ""BrakeReverse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8020a103-ab4d-4fbb-88ba-399e1936b39f"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandBrake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd64f93d-34d3-4019-9a97-4516b0730de4"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeView"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47428f97-c705-41b0-87a5-aafc40c222aa"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextGear"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4343cba-986d-4d7d-9b07-33d2bf0c8ee6"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrevGear"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0213aa12-e18c-4256-863a-b8938f4eac60"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8449f293-4c71-4ac9-9f57-45dd00dced24"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLeftTurnLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a96507dd-ac09-448e-8801-975aed0d1bf2"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchRightTurnLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a9924a4-0e30-4e93-ac38-6d4d18f5073b"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetCar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08bef7e3-35ef-41a4-8f0e-2d7bb28c1011"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConnectTrailer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d274ad90-432a-406b-b972-c5535c42d3c9"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchAlarm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""a901ccab-58be-4696-a3c7-d1ffcf3594ba"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""8c0fbc9b-cbf7-4b91-a845-77148178ccb7"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/stick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""3368a068-fc62-4629-870f-156c961a7b72"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/stick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""312f83e8-073f-498c-bdbd-17e8190e0095"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/z"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert,Clamp(max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Acceleration"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -673,6 +1023,24 @@ namespace UnityEngine.InputSystem
         }
     ]
 }");
+            // Player3
+            m_Player3 = asset.FindActionMap("Player3", throwIfNotFound: true);
+            m_Player3_Move = m_Player3.FindAction("Move", throwIfNotFound: true);
+            m_Player3_Look = m_Player3.FindAction("Look", throwIfNotFound: true);
+            m_Player3_Dpad = m_Player3.FindAction("Dpad", throwIfNotFound: true);
+            m_Player3_Steer = m_Player3.FindAction("Steer", throwIfNotFound: true);
+            m_Player3_Acceleration = m_Player3.FindAction("Acceleration", throwIfNotFound: true);
+            m_Player3_BrakeReverse = m_Player3.FindAction("BrakeReverse", throwIfNotFound: true);
+            m_Player3_HandBrake = m_Player3.FindAction("HandBrake", throwIfNotFound: true);
+            m_Player3_ChangeView = m_Player3.FindAction("ChangeView", throwIfNotFound: true);
+            m_Player3_NextGear = m_Player3.FindAction("NextGear", throwIfNotFound: true);
+            m_Player3_PrevGear = m_Player3.FindAction("PrevGear", throwIfNotFound: true);
+            m_Player3_SwitchLights = m_Player3.FindAction("SwitchLights", throwIfNotFound: true);
+            m_Player3_SwitchLeftTurnLights = m_Player3.FindAction("SwitchLeftTurnLights", throwIfNotFound: true);
+            m_Player3_SwitchRightTurnLights = m_Player3.FindAction("SwitchRightTurnLights", throwIfNotFound: true);
+            m_Player3_ResetCar = m_Player3.FindAction("ResetCar", throwIfNotFound: true);
+            m_Player3_ConnectTrailer = m_Player3.FindAction("ConnectTrailer", throwIfNotFound: true);
+            m_Player3_SwitchAlarm = m_Player3.FindAction("SwitchAlarm", throwIfNotFound: true);
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
@@ -758,6 +1126,172 @@ namespace UnityEngine.InputSystem
         {
             return asset.FindBinding(bindingMask, out action);
         }
+
+        // Player3
+        private readonly InputActionMap m_Player3;
+        private List<IPlayer3Actions> m_Player3ActionsCallbackInterfaces = new List<IPlayer3Actions>();
+        private readonly InputAction m_Player3_Move;
+        private readonly InputAction m_Player3_Look;
+        private readonly InputAction m_Player3_Dpad;
+        private readonly InputAction m_Player3_Steer;
+        private readonly InputAction m_Player3_Acceleration;
+        private readonly InputAction m_Player3_BrakeReverse;
+        private readonly InputAction m_Player3_HandBrake;
+        private readonly InputAction m_Player3_ChangeView;
+        private readonly InputAction m_Player3_NextGear;
+        private readonly InputAction m_Player3_PrevGear;
+        private readonly InputAction m_Player3_SwitchLights;
+        private readonly InputAction m_Player3_SwitchLeftTurnLights;
+        private readonly InputAction m_Player3_SwitchRightTurnLights;
+        private readonly InputAction m_Player3_ResetCar;
+        private readonly InputAction m_Player3_ConnectTrailer;
+        private readonly InputAction m_Player3_SwitchAlarm;
+        public struct Player3Actions
+        {
+            private @SimulatorInputActions m_Wrapper;
+            public Player3Actions(@SimulatorInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_Player3_Move;
+            public InputAction @Look => m_Wrapper.m_Player3_Look;
+            public InputAction @Dpad => m_Wrapper.m_Player3_Dpad;
+            public InputAction @Steer => m_Wrapper.m_Player3_Steer;
+            public InputAction @Acceleration => m_Wrapper.m_Player3_Acceleration;
+            public InputAction @BrakeReverse => m_Wrapper.m_Player3_BrakeReverse;
+            public InputAction @HandBrake => m_Wrapper.m_Player3_HandBrake;
+            public InputAction @ChangeView => m_Wrapper.m_Player3_ChangeView;
+            public InputAction @NextGear => m_Wrapper.m_Player3_NextGear;
+            public InputAction @PrevGear => m_Wrapper.m_Player3_PrevGear;
+            public InputAction @SwitchLights => m_Wrapper.m_Player3_SwitchLights;
+            public InputAction @SwitchLeftTurnLights => m_Wrapper.m_Player3_SwitchLeftTurnLights;
+            public InputAction @SwitchRightTurnLights => m_Wrapper.m_Player3_SwitchRightTurnLights;
+            public InputAction @ResetCar => m_Wrapper.m_Player3_ResetCar;
+            public InputAction @ConnectTrailer => m_Wrapper.m_Player3_ConnectTrailer;
+            public InputAction @SwitchAlarm => m_Wrapper.m_Player3_SwitchAlarm;
+            public InputActionMap Get() { return m_Wrapper.m_Player3; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(Player3Actions set) { return set.Get(); }
+            public void AddCallbacks(IPlayer3Actions instance)
+            {
+                if (instance == null || m_Wrapper.m_Player3ActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_Player3ActionsCallbackInterfaces.Add(instance);
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
+                @Dpad.started += instance.OnDpad;
+                @Dpad.performed += instance.OnDpad;
+                @Dpad.canceled += instance.OnDpad;
+                @Steer.started += instance.OnSteer;
+                @Steer.performed += instance.OnSteer;
+                @Steer.canceled += instance.OnSteer;
+                @Acceleration.started += instance.OnAcceleration;
+                @Acceleration.performed += instance.OnAcceleration;
+                @Acceleration.canceled += instance.OnAcceleration;
+                @BrakeReverse.started += instance.OnBrakeReverse;
+                @BrakeReverse.performed += instance.OnBrakeReverse;
+                @BrakeReverse.canceled += instance.OnBrakeReverse;
+                @HandBrake.started += instance.OnHandBrake;
+                @HandBrake.performed += instance.OnHandBrake;
+                @HandBrake.canceled += instance.OnHandBrake;
+                @ChangeView.started += instance.OnChangeView;
+                @ChangeView.performed += instance.OnChangeView;
+                @ChangeView.canceled += instance.OnChangeView;
+                @NextGear.started += instance.OnNextGear;
+                @NextGear.performed += instance.OnNextGear;
+                @NextGear.canceled += instance.OnNextGear;
+                @PrevGear.started += instance.OnPrevGear;
+                @PrevGear.performed += instance.OnPrevGear;
+                @PrevGear.canceled += instance.OnPrevGear;
+                @SwitchLights.started += instance.OnSwitchLights;
+                @SwitchLights.performed += instance.OnSwitchLights;
+                @SwitchLights.canceled += instance.OnSwitchLights;
+                @SwitchLeftTurnLights.started += instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.performed += instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.canceled += instance.OnSwitchLeftTurnLights;
+                @SwitchRightTurnLights.started += instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.performed += instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.canceled += instance.OnSwitchRightTurnLights;
+                @ResetCar.started += instance.OnResetCar;
+                @ResetCar.performed += instance.OnResetCar;
+                @ResetCar.canceled += instance.OnResetCar;
+                @ConnectTrailer.started += instance.OnConnectTrailer;
+                @ConnectTrailer.performed += instance.OnConnectTrailer;
+                @ConnectTrailer.canceled += instance.OnConnectTrailer;
+                @SwitchAlarm.started += instance.OnSwitchAlarm;
+                @SwitchAlarm.performed += instance.OnSwitchAlarm;
+                @SwitchAlarm.canceled += instance.OnSwitchAlarm;
+            }
+
+            private void UnregisterCallbacks(IPlayer3Actions instance)
+            {
+                @Move.started -= instance.OnMove;
+                @Move.performed -= instance.OnMove;
+                @Move.canceled -= instance.OnMove;
+                @Look.started -= instance.OnLook;
+                @Look.performed -= instance.OnLook;
+                @Look.canceled -= instance.OnLook;
+                @Dpad.started -= instance.OnDpad;
+                @Dpad.performed -= instance.OnDpad;
+                @Dpad.canceled -= instance.OnDpad;
+                @Steer.started -= instance.OnSteer;
+                @Steer.performed -= instance.OnSteer;
+                @Steer.canceled -= instance.OnSteer;
+                @Acceleration.started -= instance.OnAcceleration;
+                @Acceleration.performed -= instance.OnAcceleration;
+                @Acceleration.canceled -= instance.OnAcceleration;
+                @BrakeReverse.started -= instance.OnBrakeReverse;
+                @BrakeReverse.performed -= instance.OnBrakeReverse;
+                @BrakeReverse.canceled -= instance.OnBrakeReverse;
+                @HandBrake.started -= instance.OnHandBrake;
+                @HandBrake.performed -= instance.OnHandBrake;
+                @HandBrake.canceled -= instance.OnHandBrake;
+                @ChangeView.started -= instance.OnChangeView;
+                @ChangeView.performed -= instance.OnChangeView;
+                @ChangeView.canceled -= instance.OnChangeView;
+                @NextGear.started -= instance.OnNextGear;
+                @NextGear.performed -= instance.OnNextGear;
+                @NextGear.canceled -= instance.OnNextGear;
+                @PrevGear.started -= instance.OnPrevGear;
+                @PrevGear.performed -= instance.OnPrevGear;
+                @PrevGear.canceled -= instance.OnPrevGear;
+                @SwitchLights.started -= instance.OnSwitchLights;
+                @SwitchLights.performed -= instance.OnSwitchLights;
+                @SwitchLights.canceled -= instance.OnSwitchLights;
+                @SwitchLeftTurnLights.started -= instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.performed -= instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.canceled -= instance.OnSwitchLeftTurnLights;
+                @SwitchRightTurnLights.started -= instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.performed -= instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.canceled -= instance.OnSwitchRightTurnLights;
+                @ResetCar.started -= instance.OnResetCar;
+                @ResetCar.performed -= instance.OnResetCar;
+                @ResetCar.canceled -= instance.OnResetCar;
+                @ConnectTrailer.started -= instance.OnConnectTrailer;
+                @ConnectTrailer.performed -= instance.OnConnectTrailer;
+                @ConnectTrailer.canceled -= instance.OnConnectTrailer;
+                @SwitchAlarm.started -= instance.OnSwitchAlarm;
+                @SwitchAlarm.performed -= instance.OnSwitchAlarm;
+                @SwitchAlarm.canceled -= instance.OnSwitchAlarm;
+            }
+
+            public void RemoveCallbacks(IPlayer3Actions instance)
+            {
+                if (m_Wrapper.m_Player3ActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IPlayer3Actions instance)
+            {
+                foreach (var item in m_Wrapper.m_Player3ActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_Player3ActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public Player3Actions @Player3 => new Player3Actions(this);
 
         // Player
         private readonly InputActionMap m_Player;
@@ -1070,6 +1604,25 @@ namespace UnityEngine.InputSystem
                 if (m_XRSchemeIndex == -1) m_XRSchemeIndex = asset.FindControlSchemeIndex("XR");
                 return asset.controlSchemes[m_XRSchemeIndex];
             }
+        }
+        public interface IPlayer3Actions
+        {
+            void OnMove(InputAction.CallbackContext context);
+            void OnLook(InputAction.CallbackContext context);
+            void OnDpad(InputAction.CallbackContext context);
+            void OnSteer(InputAction.CallbackContext context);
+            void OnAcceleration(InputAction.CallbackContext context);
+            void OnBrakeReverse(InputAction.CallbackContext context);
+            void OnHandBrake(InputAction.CallbackContext context);
+            void OnChangeView(InputAction.CallbackContext context);
+            void OnNextGear(InputAction.CallbackContext context);
+            void OnPrevGear(InputAction.CallbackContext context);
+            void OnSwitchLights(InputAction.CallbackContext context);
+            void OnSwitchLeftTurnLights(InputAction.CallbackContext context);
+            void OnSwitchRightTurnLights(InputAction.CallbackContext context);
+            void OnResetCar(InputAction.CallbackContext context);
+            void OnConnectTrailer(InputAction.CallbackContext context);
+            void OnSwitchAlarm(InputAction.CallbackContext context);
         }
         public interface IPlayerActions
         {
