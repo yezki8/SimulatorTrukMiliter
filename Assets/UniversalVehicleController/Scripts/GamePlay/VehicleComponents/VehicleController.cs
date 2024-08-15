@@ -271,7 +271,7 @@ namespace PG
             RB.angularVelocity = Vector3.zero;
 
             float y = transform.rotation.eulerAngles.y;
-            transform.position += Vector3.up * 2;
+            transform.position += Vector3.up * 0.2f;
             transform.rotation = Quaternion.AngleAxis (y, Vector3.up);
 
             AfterResetVehicleAction.SafeInvoke ();

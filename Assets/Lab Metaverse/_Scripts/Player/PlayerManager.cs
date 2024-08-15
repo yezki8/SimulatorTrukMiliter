@@ -6,18 +6,18 @@ using PG;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private CarController _carController;
-    [SerializeField] private CarControllerInput _carControllerInput;
+    [SerializeField] private ControllerInput _carControllerInput;
 
     public void EnableTruck()
     {
-        _carControllerInput.AllowToMove = true;
+        _carControllerInput.EnableControls();
     }
 
     public void DisableTruck()
     {
-        _carController.CurrentGear = 0;
+        _carControllerInput.DisableControls();
         _carController.StopEngine();
-        _carControllerInput.AllowToMove = false;
+        _carControllerInput.ResetCar();
     }
 
     private void OnTriggerEnter(Collider other)
