@@ -13,18 +13,30 @@ public class RoadPhysicController : MonoBehaviour
     [SerializeField] private float _rearSidewayExtremumDivider = 5 / 0.4f;
     [SerializeField] private float _rearSidewayAsymptoteParameter = 2 / 0.8f;
 
+    public RoadPhysicScriptableObject DefaultRoadPhysic;
 
+    public static RoadPhysicController Instance;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void OnDestroy()
     {
-        
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 
     public void UpdateWheelPhysic(RoadPhysicScriptableObject roadPhysicSO)

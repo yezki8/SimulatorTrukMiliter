@@ -190,14 +190,32 @@ namespace PG
         /// </summary>
         void ApplyStiffness ()
         {
-            float stiffness = GroundStiffness;
-            var friction = WheelCollider.forwardFriction;
-            friction.stiffness = stiffness;
-            WheelCollider.forwardFriction = friction;
+            //float stiffness = GroundStiffness;
+            //var friction = WheelCollider.forwardFriction;
+            //friction.stiffness = stiffness;
+            //WheelCollider.forwardFriction = friction;
 
-            friction = WheelCollider.sidewaysFriction;
-            friction.stiffness = stiffness * Mathf.Lerp(0.3f, 1, Mathf.InverseLerp (2, 1, ForwardSlipNormalized));
-            WheelCollider.sidewaysFriction = friction;
+            //friction = WheelCollider.sidewaysFriction;
+            //friction.stiffness = stiffness * Mathf.Lerp(0.3f, 1, Mathf.InverseLerp (2, 1, ForwardSlipNormalized));
+            //WheelCollider.sidewaysFriction = friction;
+
+            ///<summary>
+            ///By Yehezkiel
+            ///Apply details of forward friction
+            ///</summary>
+            ///
+
+            RoadPhysicController roadPhysicScript = RoadPhysicController.Instance;
+
+            RoadPhysicScriptableObject currentRoadPhysicSO = CurrentGroundConfig.RoadPhysicSO;
+            if (currentRoadPhysicSO == null)
+            {
+                currentRoadPhysicSO = roadPhysicScript.DefaultRoadPhysic;
+                Debug.Log($"No Road Physic Detected. using default");
+            }
+            Debug.Log($"Current Ground Config = {CurrentGroundConfig.GroundType}\n" +
+                $"Road Physic SO = {currentRoadPhysicSO}");
+            RoadPhysicController.Instance.UpdateWheelPhysic(currentRoadPhysicSO);
         }
 
         /// <summary>
