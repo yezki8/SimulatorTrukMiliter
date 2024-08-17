@@ -13,7 +13,7 @@ public class RoadPhysicController : MonoBehaviour
     [SerializeField] private float _rearSidewayExtremumDivider = 5 / 0.4f;
     [SerializeField] private float _rearSidewayAsymptoteParameter = 2 / 0.8f;
 
-    public RoadPhysicScriptableObject DefaultRoadPhysic;
+    [SerializeField] private List<RoadPhysicScriptableObject> _listOfPhysics;       //0 = default
 
     public static RoadPhysicController Instance;
 
@@ -39,9 +39,19 @@ public class RoadPhysicController : MonoBehaviour
         }
     }
 
-    public void UpdateWheelPhysic(RoadPhysicScriptableObject roadPhysicSO)
+    public void UpdateWheelPhysic()
     {
-        foreach(WheelCollider tires in _frontTires)
+        int weatherState = (int)WeatherSystem.Instance.CurrentWeather;
+        RoadPhysicScriptableObject roadPhysicSO;
+        if (weatherState > 0 && weatherState < _listOfPhysics.Count)
+        {
+            roadPhysicSO = _listOfPhysics[(int)WeatherSystem.Instance.CurrentWeather];
+        }
+        else
+        {
+            roadPhysicSO = _listOfPhysics[0]; //setDefault
+        }
+        foreach (WheelCollider tires in _frontTires)
         {
             WheelFrictionCurve forwardFrontWfc = tires.forwardFriction;
             forwardFrontWfc.extremumValue = roadPhysicSO.ForwardExtremumParameter;
@@ -61,5 +71,7 @@ public class RoadPhysicController : MonoBehaviour
 
             tires.sidewaysFriction = sideFrontWfc;
         }
+
+        Debug.Log("Road physics is set according to " + roadPhysicSO.name);
     }
 }

@@ -16,6 +16,4 @@ public class RoadPhysicScriptableObject : ScriptableObject
     [Header("Rear Sideway Friction")]
     public float RearSidewayExtremumParameter = 5;
     public float RearSidewayAsymptoteParameter = 2;
-
-    public float RainDivider = 2;
 }
