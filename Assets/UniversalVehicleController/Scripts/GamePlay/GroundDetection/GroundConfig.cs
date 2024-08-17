@@ -16,7 +16,6 @@ namespace PG
         public bool SpeedDependent;                 //Dependence of particle system operation on the speed of the car.
 
         public float WheelStiffness;                //Wheel friction multiplier.
-        public RoadPhysicScriptableObject RoadPhysicSO;
     }
 
     /// <summary>
