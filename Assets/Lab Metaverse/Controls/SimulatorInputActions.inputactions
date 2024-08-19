@@ -2,7 +2,7 @@
     "name": "SimulatorInputActions",
     "maps": [
         {
-            "name": "Player3",
+            "name": "PlayerGamepad",
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
@@ -419,6 +419,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Clutch",
+                    "type": "Value",
+                    "id": "92b8fd52-bad9-4b62-be8e-897c999f7bb5",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "ChangeView",
                     "type": "Button",
                     "id": "5e0c2d91-82bf-4aee-ad25-69acb4ae964b",
@@ -498,20 +507,72 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Gear1st",
+                    "type": "Button",
+                    "id": "06fce704-adcd-4f98-ab6d-1484b35ba388",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear2nd",
+                    "type": "Button",
+                    "id": "317bb459-0916-4928-ac35-15ef8fd57a1a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear3rd",
+                    "type": "Button",
+                    "id": "74114949-1a60-43e5-b379-9aef816c6f34",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear4th",
+                    "type": "Button",
+                    "id": "f4aba16a-dec8-451a-a4e6-1010bc0e5275",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear5th",
+                    "type": "Button",
+                    "id": "6538a2be-64e6-4272-bd18-dfba434ac951",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear6th",
+                    "type": "Button",
+                    "id": "079357ba-9ac5-4339-bd15-61e72d71fc05",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GearReverse",
+                    "type": "Button",
+                    "id": "0f5f22b6-253a-4b16-9131-61c68bee3283",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "7b0d17cf-cc7e-4381-9312-15a5b65f7211",
-                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/stick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "48d7ad8b-e87c-4e4b-b830-b815ca57c97e",
@@ -674,6 +735,94 @@
                     "processors": "Invert,Clamp(max=1)",
                     "groups": "",
                     "action": "Acceleration",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95a6d835-2ce0-44a5-bd52-d2a917f475fd",
+                    "path": "<Joystick>/stick/up",
+                    "interactions": "",
+                    "processors": "AxisDeadzone(min=0.2)",
+                    "groups": "",
+                    "action": "Clutch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da03808d-69c6-4413-90d1-ee856a7cdbb2",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button13",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear1st",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8886420-d9ab-4799-b705-7a6963a3bada",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button14",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear2nd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fee452fd-c739-42d4-915c-5b03d2400ffb",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button15",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear3rd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06a3e823-520a-4948-b869-4daf7bb2b413",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button16",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear4th",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3b50fd1-afca-4600-8fb3-0e2959b91c78",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button17",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear5th",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b775ecb-5356-447d-a76b-6cc90bbc27c0",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button18",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear6th",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbf91b62-b643-4936-933f-c85b1378f3c1",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button19",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GearReverse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

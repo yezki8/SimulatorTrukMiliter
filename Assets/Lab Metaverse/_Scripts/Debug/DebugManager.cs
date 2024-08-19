@@ -74,14 +74,12 @@ public class DebugManager : MonoBehaviour
             $"\tTotal Allocated Memory: {Profiler.GetTotalAllocatedMemoryLong() / (1024 * 1024):F2} MB");
         stringBuilder.AppendLine($"Total Unused: {Profiler.GetTotalUnusedReservedMemoryLong() / (1024 * 1024):F2} MB " + 
             $"\tTotal Reserved: {Profiler.GetTotalReservedMemoryLong() / (1024 * 1024):F2} MB\n");
-        stringBuilder.AppendLine($"Player Position: {playerTransform.position}\n");
+        stringBuilder.AppendLine($"Player Position: {playerTransform.position}");
 
         // inputs
         stringBuilder.AppendLine($"Acceleration: {controllerInput.Acceleration:F5}\t\tBrakeReverse: {controllerInput.BrakeReverse:F5}");
         stringBuilder.AppendLine($"Horizontal: {controllerInput.Horizontal:F5}\t\t Handbrake: {controllerInput.HandBrake:F5}");
-
-        // truck stats
-        stringBuilder.AppendLine($"Current Gear: {carController.CurrentGear}");
+        stringBuilder.AppendLine($"Clutch: {controllerInput.Clutch:F5}\t\t Current Gear: {carController.CurrentGear}");
 
         // Add more debug info as needed
 

@@ -26,7 +26,7 @@ namespace UnityEngine.InputSystem
     ""name"": ""SimulatorInputActions"",
     ""maps"": [
         {
-            ""name"": ""Player3"",
+            ""name"": ""PlayerGamepad"",
             ""id"": ""df70fa95-8a34-4494-b137-73ab6b9c7d37"",
             ""actions"": [
                 {
@@ -443,6 +443,15 @@ namespace UnityEngine.InputSystem
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Clutch"",
+                    ""type"": ""Value"",
+                    ""id"": ""92b8fd52-bad9-4b62-be8e-897c999f7bb5"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""ChangeView"",
                     ""type"": ""Button"",
                     ""id"": ""5e0c2d91-82bf-4aee-ad25-69acb4ae964b"",
@@ -522,20 +531,72 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Gear1st"",
+                    ""type"": ""Button"",
+                    ""id"": ""06fce704-adcd-4f98-ab6d-1484b35ba388"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Gear2nd"",
+                    ""type"": ""Button"",
+                    ""id"": ""317bb459-0916-4928-ac35-15ef8fd57a1a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Gear3rd"",
+                    ""type"": ""Button"",
+                    ""id"": ""74114949-1a60-43e5-b379-9aef816c6f34"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Gear4th"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4aba16a-dec8-451a-a4e6-1010bc0e5275"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Gear5th"",
+                    ""type"": ""Button"",
+                    ""id"": ""6538a2be-64e6-4272-bd18-dfba434ac951"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Gear6th"",
+                    ""type"": ""Button"",
+                    ""id"": ""079357ba-9ac5-4339-bd15-61e72d71fc05"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GearReverse"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f5f22b6-253a-4b16-9131-61c68bee3283"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""7b0d17cf-cc7e-4381-9312-15a5b65f7211"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/stick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""48d7ad8b-e87c-4e4b-b830-b815ca57c97e"",
@@ -698,6 +759,94 @@ namespace UnityEngine.InputSystem
                     ""processors"": ""Invert,Clamp(max=1)"",
                     ""groups"": """",
                     ""action"": ""Acceleration"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""95a6d835-2ce0-44a5-bd52-d2a917f475fd"",
+                    ""path"": ""<Joystick>/stick/up"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.2)"",
+                    ""groups"": """",
+                    ""action"": ""Clutch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da03808d-69c6-4413-90d1-ee856a7cdbb2"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button13"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear1st"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8886420-d9ab-4799-b705-7a6963a3bada"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button14"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear2nd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fee452fd-c739-42d4-915c-5b03d2400ffb"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button15"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear3rd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06a3e823-520a-4948-b869-4daf7bb2b413"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button16"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear4th"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3b50fd1-afca-4600-8fb3-0e2959b91c78"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button17"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear5th"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b775ecb-5356-447d-a76b-6cc90bbc27c0"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button18"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear6th"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbf91b62-b643-4936-933f-c85b1378f3c1"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button19"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GearReverse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1023,24 +1172,24 @@ namespace UnityEngine.InputSystem
         }
     ]
 }");
-            // Player3
-            m_Player3 = asset.FindActionMap("Player3", throwIfNotFound: true);
-            m_Player3_Move = m_Player3.FindAction("Move", throwIfNotFound: true);
-            m_Player3_Look = m_Player3.FindAction("Look", throwIfNotFound: true);
-            m_Player3_Dpad = m_Player3.FindAction("Dpad", throwIfNotFound: true);
-            m_Player3_Steer = m_Player3.FindAction("Steer", throwIfNotFound: true);
-            m_Player3_Acceleration = m_Player3.FindAction("Acceleration", throwIfNotFound: true);
-            m_Player3_BrakeReverse = m_Player3.FindAction("BrakeReverse", throwIfNotFound: true);
-            m_Player3_HandBrake = m_Player3.FindAction("HandBrake", throwIfNotFound: true);
-            m_Player3_ChangeView = m_Player3.FindAction("ChangeView", throwIfNotFound: true);
-            m_Player3_NextGear = m_Player3.FindAction("NextGear", throwIfNotFound: true);
-            m_Player3_PrevGear = m_Player3.FindAction("PrevGear", throwIfNotFound: true);
-            m_Player3_SwitchLights = m_Player3.FindAction("SwitchLights", throwIfNotFound: true);
-            m_Player3_SwitchLeftTurnLights = m_Player3.FindAction("SwitchLeftTurnLights", throwIfNotFound: true);
-            m_Player3_SwitchRightTurnLights = m_Player3.FindAction("SwitchRightTurnLights", throwIfNotFound: true);
-            m_Player3_ResetCar = m_Player3.FindAction("ResetCar", throwIfNotFound: true);
-            m_Player3_ConnectTrailer = m_Player3.FindAction("ConnectTrailer", throwIfNotFound: true);
-            m_Player3_SwitchAlarm = m_Player3.FindAction("SwitchAlarm", throwIfNotFound: true);
+            // PlayerGamepad
+            m_PlayerGamepad = asset.FindActionMap("PlayerGamepad", throwIfNotFound: true);
+            m_PlayerGamepad_Move = m_PlayerGamepad.FindAction("Move", throwIfNotFound: true);
+            m_PlayerGamepad_Look = m_PlayerGamepad.FindAction("Look", throwIfNotFound: true);
+            m_PlayerGamepad_Dpad = m_PlayerGamepad.FindAction("Dpad", throwIfNotFound: true);
+            m_PlayerGamepad_Steer = m_PlayerGamepad.FindAction("Steer", throwIfNotFound: true);
+            m_PlayerGamepad_Acceleration = m_PlayerGamepad.FindAction("Acceleration", throwIfNotFound: true);
+            m_PlayerGamepad_BrakeReverse = m_PlayerGamepad.FindAction("BrakeReverse", throwIfNotFound: true);
+            m_PlayerGamepad_HandBrake = m_PlayerGamepad.FindAction("HandBrake", throwIfNotFound: true);
+            m_PlayerGamepad_ChangeView = m_PlayerGamepad.FindAction("ChangeView", throwIfNotFound: true);
+            m_PlayerGamepad_NextGear = m_PlayerGamepad.FindAction("NextGear", throwIfNotFound: true);
+            m_PlayerGamepad_PrevGear = m_PlayerGamepad.FindAction("PrevGear", throwIfNotFound: true);
+            m_PlayerGamepad_SwitchLights = m_PlayerGamepad.FindAction("SwitchLights", throwIfNotFound: true);
+            m_PlayerGamepad_SwitchLeftTurnLights = m_PlayerGamepad.FindAction("SwitchLeftTurnLights", throwIfNotFound: true);
+            m_PlayerGamepad_SwitchRightTurnLights = m_PlayerGamepad.FindAction("SwitchRightTurnLights", throwIfNotFound: true);
+            m_PlayerGamepad_ResetCar = m_PlayerGamepad.FindAction("ResetCar", throwIfNotFound: true);
+            m_PlayerGamepad_ConnectTrailer = m_PlayerGamepad.FindAction("ConnectTrailer", throwIfNotFound: true);
+            m_PlayerGamepad_SwitchAlarm = m_PlayerGamepad.FindAction("SwitchAlarm", throwIfNotFound: true);
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
@@ -1050,6 +1199,7 @@ namespace UnityEngine.InputSystem
             m_Player_Acceleration = m_Player.FindAction("Acceleration", throwIfNotFound: true);
             m_Player_BrakeReverse = m_Player.FindAction("BrakeReverse", throwIfNotFound: true);
             m_Player_HandBrake = m_Player.FindAction("HandBrake", throwIfNotFound: true);
+            m_Player_Clutch = m_Player.FindAction("Clutch", throwIfNotFound: true);
             m_Player_ChangeView = m_Player.FindAction("ChangeView", throwIfNotFound: true);
             m_Player_NextGear = m_Player.FindAction("NextGear", throwIfNotFound: true);
             m_Player_PrevGear = m_Player.FindAction("PrevGear", throwIfNotFound: true);
@@ -1059,6 +1209,13 @@ namespace UnityEngine.InputSystem
             m_Player_ResetCar = m_Player.FindAction("ResetCar", throwIfNotFound: true);
             m_Player_ConnectTrailer = m_Player.FindAction("ConnectTrailer", throwIfNotFound: true);
             m_Player_SwitchAlarm = m_Player.FindAction("SwitchAlarm", throwIfNotFound: true);
+            m_Player_Gear1st = m_Player.FindAction("Gear1st", throwIfNotFound: true);
+            m_Player_Gear2nd = m_Player.FindAction("Gear2nd", throwIfNotFound: true);
+            m_Player_Gear3rd = m_Player.FindAction("Gear3rd", throwIfNotFound: true);
+            m_Player_Gear4th = m_Player.FindAction("Gear4th", throwIfNotFound: true);
+            m_Player_Gear5th = m_Player.FindAction("Gear5th", throwIfNotFound: true);
+            m_Player_Gear6th = m_Player.FindAction("Gear6th", throwIfNotFound: true);
+            m_Player_GearReverse = m_Player.FindAction("GearReverse", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1127,54 +1284,54 @@ namespace UnityEngine.InputSystem
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // Player3
-        private readonly InputActionMap m_Player3;
-        private List<IPlayer3Actions> m_Player3ActionsCallbackInterfaces = new List<IPlayer3Actions>();
-        private readonly InputAction m_Player3_Move;
-        private readonly InputAction m_Player3_Look;
-        private readonly InputAction m_Player3_Dpad;
-        private readonly InputAction m_Player3_Steer;
-        private readonly InputAction m_Player3_Acceleration;
-        private readonly InputAction m_Player3_BrakeReverse;
-        private readonly InputAction m_Player3_HandBrake;
-        private readonly InputAction m_Player3_ChangeView;
-        private readonly InputAction m_Player3_NextGear;
-        private readonly InputAction m_Player3_PrevGear;
-        private readonly InputAction m_Player3_SwitchLights;
-        private readonly InputAction m_Player3_SwitchLeftTurnLights;
-        private readonly InputAction m_Player3_SwitchRightTurnLights;
-        private readonly InputAction m_Player3_ResetCar;
-        private readonly InputAction m_Player3_ConnectTrailer;
-        private readonly InputAction m_Player3_SwitchAlarm;
-        public struct Player3Actions
+        // PlayerGamepad
+        private readonly InputActionMap m_PlayerGamepad;
+        private List<IPlayerGamepadActions> m_PlayerGamepadActionsCallbackInterfaces = new List<IPlayerGamepadActions>();
+        private readonly InputAction m_PlayerGamepad_Move;
+        private readonly InputAction m_PlayerGamepad_Look;
+        private readonly InputAction m_PlayerGamepad_Dpad;
+        private readonly InputAction m_PlayerGamepad_Steer;
+        private readonly InputAction m_PlayerGamepad_Acceleration;
+        private readonly InputAction m_PlayerGamepad_BrakeReverse;
+        private readonly InputAction m_PlayerGamepad_HandBrake;
+        private readonly InputAction m_PlayerGamepad_ChangeView;
+        private readonly InputAction m_PlayerGamepad_NextGear;
+        private readonly InputAction m_PlayerGamepad_PrevGear;
+        private readonly InputAction m_PlayerGamepad_SwitchLights;
+        private readonly InputAction m_PlayerGamepad_SwitchLeftTurnLights;
+        private readonly InputAction m_PlayerGamepad_SwitchRightTurnLights;
+        private readonly InputAction m_PlayerGamepad_ResetCar;
+        private readonly InputAction m_PlayerGamepad_ConnectTrailer;
+        private readonly InputAction m_PlayerGamepad_SwitchAlarm;
+        public struct PlayerGamepadActions
         {
             private @SimulatorInputActions m_Wrapper;
-            public Player3Actions(@SimulatorInputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Move => m_Wrapper.m_Player3_Move;
-            public InputAction @Look => m_Wrapper.m_Player3_Look;
-            public InputAction @Dpad => m_Wrapper.m_Player3_Dpad;
-            public InputAction @Steer => m_Wrapper.m_Player3_Steer;
-            public InputAction @Acceleration => m_Wrapper.m_Player3_Acceleration;
-            public InputAction @BrakeReverse => m_Wrapper.m_Player3_BrakeReverse;
-            public InputAction @HandBrake => m_Wrapper.m_Player3_HandBrake;
-            public InputAction @ChangeView => m_Wrapper.m_Player3_ChangeView;
-            public InputAction @NextGear => m_Wrapper.m_Player3_NextGear;
-            public InputAction @PrevGear => m_Wrapper.m_Player3_PrevGear;
-            public InputAction @SwitchLights => m_Wrapper.m_Player3_SwitchLights;
-            public InputAction @SwitchLeftTurnLights => m_Wrapper.m_Player3_SwitchLeftTurnLights;
-            public InputAction @SwitchRightTurnLights => m_Wrapper.m_Player3_SwitchRightTurnLights;
-            public InputAction @ResetCar => m_Wrapper.m_Player3_ResetCar;
-            public InputAction @ConnectTrailer => m_Wrapper.m_Player3_ConnectTrailer;
-            public InputAction @SwitchAlarm => m_Wrapper.m_Player3_SwitchAlarm;
-            public InputActionMap Get() { return m_Wrapper.m_Player3; }
+            public PlayerGamepadActions(@SimulatorInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_PlayerGamepad_Move;
+            public InputAction @Look => m_Wrapper.m_PlayerGamepad_Look;
+            public InputAction @Dpad => m_Wrapper.m_PlayerGamepad_Dpad;
+            public InputAction @Steer => m_Wrapper.m_PlayerGamepad_Steer;
+            public InputAction @Acceleration => m_Wrapper.m_PlayerGamepad_Acceleration;
+            public InputAction @BrakeReverse => m_Wrapper.m_PlayerGamepad_BrakeReverse;
+            public InputAction @HandBrake => m_Wrapper.m_PlayerGamepad_HandBrake;
+            public InputAction @ChangeView => m_Wrapper.m_PlayerGamepad_ChangeView;
+            public InputAction @NextGear => m_Wrapper.m_PlayerGamepad_NextGear;
+            public InputAction @PrevGear => m_Wrapper.m_PlayerGamepad_PrevGear;
+            public InputAction @SwitchLights => m_Wrapper.m_PlayerGamepad_SwitchLights;
+            public InputAction @SwitchLeftTurnLights => m_Wrapper.m_PlayerGamepad_SwitchLeftTurnLights;
+            public InputAction @SwitchRightTurnLights => m_Wrapper.m_PlayerGamepad_SwitchRightTurnLights;
+            public InputAction @ResetCar => m_Wrapper.m_PlayerGamepad_ResetCar;
+            public InputAction @ConnectTrailer => m_Wrapper.m_PlayerGamepad_ConnectTrailer;
+            public InputAction @SwitchAlarm => m_Wrapper.m_PlayerGamepad_SwitchAlarm;
+            public InputActionMap Get() { return m_Wrapper.m_PlayerGamepad; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(Player3Actions set) { return set.Get(); }
-            public void AddCallbacks(IPlayer3Actions instance)
+            public static implicit operator InputActionMap(PlayerGamepadActions set) { return set.Get(); }
+            public void AddCallbacks(IPlayerGamepadActions instance)
             {
-                if (instance == null || m_Wrapper.m_Player3ActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_Player3ActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_PlayerGamepadActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_PlayerGamepadActionsCallbackInterfaces.Add(instance);
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
@@ -1225,7 +1382,7 @@ namespace UnityEngine.InputSystem
                 @SwitchAlarm.canceled += instance.OnSwitchAlarm;
             }
 
-            private void UnregisterCallbacks(IPlayer3Actions instance)
+            private void UnregisterCallbacks(IPlayerGamepadActions instance)
             {
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
@@ -1277,21 +1434,21 @@ namespace UnityEngine.InputSystem
                 @SwitchAlarm.canceled -= instance.OnSwitchAlarm;
             }
 
-            public void RemoveCallbacks(IPlayer3Actions instance)
+            public void RemoveCallbacks(IPlayerGamepadActions instance)
             {
-                if (m_Wrapper.m_Player3ActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_PlayerGamepadActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IPlayer3Actions instance)
+            public void SetCallbacks(IPlayerGamepadActions instance)
             {
-                foreach (var item in m_Wrapper.m_Player3ActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_PlayerGamepadActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_Player3ActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_PlayerGamepadActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public Player3Actions @Player3 => new Player3Actions(this);
+        public PlayerGamepadActions @PlayerGamepad => new PlayerGamepadActions(this);
 
         // Player
         private readonly InputActionMap m_Player;
@@ -1303,6 +1460,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_Acceleration;
         private readonly InputAction m_Player_BrakeReverse;
         private readonly InputAction m_Player_HandBrake;
+        private readonly InputAction m_Player_Clutch;
         private readonly InputAction m_Player_ChangeView;
         private readonly InputAction m_Player_NextGear;
         private readonly InputAction m_Player_PrevGear;
@@ -1312,6 +1470,13 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_ResetCar;
         private readonly InputAction m_Player_ConnectTrailer;
         private readonly InputAction m_Player_SwitchAlarm;
+        private readonly InputAction m_Player_Gear1st;
+        private readonly InputAction m_Player_Gear2nd;
+        private readonly InputAction m_Player_Gear3rd;
+        private readonly InputAction m_Player_Gear4th;
+        private readonly InputAction m_Player_Gear5th;
+        private readonly InputAction m_Player_Gear6th;
+        private readonly InputAction m_Player_GearReverse;
         public struct PlayerActions
         {
             private @SimulatorInputActions m_Wrapper;
@@ -1323,6 +1488,7 @@ namespace UnityEngine.InputSystem
             public InputAction @Acceleration => m_Wrapper.m_Player_Acceleration;
             public InputAction @BrakeReverse => m_Wrapper.m_Player_BrakeReverse;
             public InputAction @HandBrake => m_Wrapper.m_Player_HandBrake;
+            public InputAction @Clutch => m_Wrapper.m_Player_Clutch;
             public InputAction @ChangeView => m_Wrapper.m_Player_ChangeView;
             public InputAction @NextGear => m_Wrapper.m_Player_NextGear;
             public InputAction @PrevGear => m_Wrapper.m_Player_PrevGear;
@@ -1332,6 +1498,13 @@ namespace UnityEngine.InputSystem
             public InputAction @ResetCar => m_Wrapper.m_Player_ResetCar;
             public InputAction @ConnectTrailer => m_Wrapper.m_Player_ConnectTrailer;
             public InputAction @SwitchAlarm => m_Wrapper.m_Player_SwitchAlarm;
+            public InputAction @Gear1st => m_Wrapper.m_Player_Gear1st;
+            public InputAction @Gear2nd => m_Wrapper.m_Player_Gear2nd;
+            public InputAction @Gear3rd => m_Wrapper.m_Player_Gear3rd;
+            public InputAction @Gear4th => m_Wrapper.m_Player_Gear4th;
+            public InputAction @Gear5th => m_Wrapper.m_Player_Gear5th;
+            public InputAction @Gear6th => m_Wrapper.m_Player_Gear6th;
+            public InputAction @GearReverse => m_Wrapper.m_Player_GearReverse;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1362,6 +1535,9 @@ namespace UnityEngine.InputSystem
                 @HandBrake.started += instance.OnHandBrake;
                 @HandBrake.performed += instance.OnHandBrake;
                 @HandBrake.canceled += instance.OnHandBrake;
+                @Clutch.started += instance.OnClutch;
+                @Clutch.performed += instance.OnClutch;
+                @Clutch.canceled += instance.OnClutch;
                 @ChangeView.started += instance.OnChangeView;
                 @ChangeView.performed += instance.OnChangeView;
                 @ChangeView.canceled += instance.OnChangeView;
@@ -1389,6 +1565,27 @@ namespace UnityEngine.InputSystem
                 @SwitchAlarm.started += instance.OnSwitchAlarm;
                 @SwitchAlarm.performed += instance.OnSwitchAlarm;
                 @SwitchAlarm.canceled += instance.OnSwitchAlarm;
+                @Gear1st.started += instance.OnGear1st;
+                @Gear1st.performed += instance.OnGear1st;
+                @Gear1st.canceled += instance.OnGear1st;
+                @Gear2nd.started += instance.OnGear2nd;
+                @Gear2nd.performed += instance.OnGear2nd;
+                @Gear2nd.canceled += instance.OnGear2nd;
+                @Gear3rd.started += instance.OnGear3rd;
+                @Gear3rd.performed += instance.OnGear3rd;
+                @Gear3rd.canceled += instance.OnGear3rd;
+                @Gear4th.started += instance.OnGear4th;
+                @Gear4th.performed += instance.OnGear4th;
+                @Gear4th.canceled += instance.OnGear4th;
+                @Gear5th.started += instance.OnGear5th;
+                @Gear5th.performed += instance.OnGear5th;
+                @Gear5th.canceled += instance.OnGear5th;
+                @Gear6th.started += instance.OnGear6th;
+                @Gear6th.performed += instance.OnGear6th;
+                @Gear6th.canceled += instance.OnGear6th;
+                @GearReverse.started += instance.OnGearReverse;
+                @GearReverse.performed += instance.OnGearReverse;
+                @GearReverse.canceled += instance.OnGearReverse;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1414,6 +1611,9 @@ namespace UnityEngine.InputSystem
                 @HandBrake.started -= instance.OnHandBrake;
                 @HandBrake.performed -= instance.OnHandBrake;
                 @HandBrake.canceled -= instance.OnHandBrake;
+                @Clutch.started -= instance.OnClutch;
+                @Clutch.performed -= instance.OnClutch;
+                @Clutch.canceled -= instance.OnClutch;
                 @ChangeView.started -= instance.OnChangeView;
                 @ChangeView.performed -= instance.OnChangeView;
                 @ChangeView.canceled -= instance.OnChangeView;
@@ -1441,6 +1641,27 @@ namespace UnityEngine.InputSystem
                 @SwitchAlarm.started -= instance.OnSwitchAlarm;
                 @SwitchAlarm.performed -= instance.OnSwitchAlarm;
                 @SwitchAlarm.canceled -= instance.OnSwitchAlarm;
+                @Gear1st.started -= instance.OnGear1st;
+                @Gear1st.performed -= instance.OnGear1st;
+                @Gear1st.canceled -= instance.OnGear1st;
+                @Gear2nd.started -= instance.OnGear2nd;
+                @Gear2nd.performed -= instance.OnGear2nd;
+                @Gear2nd.canceled -= instance.OnGear2nd;
+                @Gear3rd.started -= instance.OnGear3rd;
+                @Gear3rd.performed -= instance.OnGear3rd;
+                @Gear3rd.canceled -= instance.OnGear3rd;
+                @Gear4th.started -= instance.OnGear4th;
+                @Gear4th.performed -= instance.OnGear4th;
+                @Gear4th.canceled -= instance.OnGear4th;
+                @Gear5th.started -= instance.OnGear5th;
+                @Gear5th.performed -= instance.OnGear5th;
+                @Gear5th.canceled -= instance.OnGear5th;
+                @Gear6th.started -= instance.OnGear6th;
+                @Gear6th.performed -= instance.OnGear6th;
+                @Gear6th.canceled -= instance.OnGear6th;
+                @GearReverse.started -= instance.OnGearReverse;
+                @GearReverse.performed -= instance.OnGearReverse;
+                @GearReverse.canceled -= instance.OnGearReverse;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1605,7 +1826,7 @@ namespace UnityEngine.InputSystem
                 return asset.controlSchemes[m_XRSchemeIndex];
             }
         }
-        public interface IPlayer3Actions
+        public interface IPlayerGamepadActions
         {
             void OnMove(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
@@ -1633,6 +1854,7 @@ namespace UnityEngine.InputSystem
             void OnAcceleration(InputAction.CallbackContext context);
             void OnBrakeReverse(InputAction.CallbackContext context);
             void OnHandBrake(InputAction.CallbackContext context);
+            void OnClutch(InputAction.CallbackContext context);
             void OnChangeView(InputAction.CallbackContext context);
             void OnNextGear(InputAction.CallbackContext context);
             void OnPrevGear(InputAction.CallbackContext context);
@@ -1642,6 +1864,13 @@ namespace UnityEngine.InputSystem
             void OnResetCar(InputAction.CallbackContext context);
             void OnConnectTrailer(InputAction.CallbackContext context);
             void OnSwitchAlarm(InputAction.CallbackContext context);
+            void OnGear1st(InputAction.CallbackContext context);
+            void OnGear2nd(InputAction.CallbackContext context);
+            void OnGear3rd(InputAction.CallbackContext context);
+            void OnGear4th(InputAction.CallbackContext context);
+            void OnGear5th(InputAction.CallbackContext context);
+            void OnGear6th(InputAction.CallbackContext context);
+            void OnGearReverse(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

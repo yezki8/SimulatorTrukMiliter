@@ -27,7 +27,6 @@ namespace PG
         public SimulatorInputActions controls;
 
         public float HorizontalChangeSpeed = 10;            //To simulate the use of a keyboard trigger.
-        public bool RotateCameraWithMousePressed;
 
 
         #region String Binding
@@ -35,32 +34,40 @@ namespace PG
         public string SteerAxis = "Steer";
         public string AccelerationAxis = "Acceleration";
         public string BrakeReverseAxis = "BrakeReverse";
-        public string PitchAxis = "Pitch";
+        public string HandBrakeButton = "HandBrake";
+        // public string PitchAxis = "Pitch";
+        
         public string NextGearButton = "NextGear";
         public string PrevGearButton = "PrevGear";
+
+        public string ClutchButton = "Clutch";
+        public string Gear1stButton = "Gear1st";
+        public string Gear2ndButton = "Gear2nd";
+        public string Gear3rdButton = "Gear3rd";
+        public string Gear4thButton = "Gear4th";
+        public string Gear5thButton = "Gear5th";
+        public string Gear6thButton = "Gear6th";
+
         public string SwitchLightsButton = "SwitchLights";
         public string SwitchLeftTurnLightsButton=  "SwitchLeftTurnLights";
         public string SwitchRightTurnLightsButton = "SwitchRightTurnLights";
         public string SwitchAlarmButton = "SwitchAlarm";
-        public string ConnectTrailerButton = "ConnectTrailer";
+        // public string ConnectTrailerButton = "ConnectTrailer";
         public string ResetCarButton = "ResetCar";
         public string RestoreCarButton = "RestoreCar";
         public string ChangeViewButton = "ChangeView";
-        public string HandBrakeButton = "HandBrake";
-        public string Dpad = "Dpad";
 
-        public string MouseX = "Mouse X";
-        public string MouseY = "Mouse Y";
         #endregion
 
         public float Horizontal { get; private set; }
         public float Acceleration { get; private set; }
         public float BrakeReverse { get; private set; }
+
+        public float Clutch { get; private set; }
+
         public float Pitch { get; private set; }
         public bool HandBrake { get; private set; }
         public bool Boost { get; private set; }
-        public Vector2 ViewDelta { get; private set; }
-        public bool ManualCameraRotation { get; private set; }
 
         public UnityEvent OnChangeViewAction;
 
@@ -109,6 +116,7 @@ namespace PG
             controls.Player.BrakeReverse.canceled += ctx => SetBrakeReverse(0);
             controls.Player.HandBrake.performed += ctx => SetHandBrake(controls.Player.HandBrake.ReadValue<float>() > 0);
             controls.Player.HandBrake.canceled += ctx => SetHandBrake(false);
+            controls.Player.Clutch.performed += ctx => SetClutch(controls.Player.Clutch.ReadValue<float>());
             controls.Player.NextGear.performed += ctx => NextGear();
             controls.Player.PrevGear.performed += ctx => PrevGear();
 
@@ -207,6 +215,14 @@ namespace PG
             if (Car)
             {
                 Car.PrevGear();
+            }
+        }
+
+        public void SetClutch(float value)
+        {
+            if (Car)
+            {
+                Clutch = value;
             }
         }
 
