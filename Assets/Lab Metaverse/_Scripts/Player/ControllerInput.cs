@@ -186,7 +186,6 @@ namespace PG
 
         public void SetSteer (float value)
         {
-            Debug.Log("SetSteer: " + value);
             TargetHorizontal = value;
         }
 
@@ -268,7 +267,6 @@ namespace PG
 
         public void SetHandBrake (bool value)
         {
-            Debug.Log("Handbrake: " + value);
             HandBrake = value;
         }
 
