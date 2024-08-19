@@ -79,7 +79,8 @@ public class DebugManager : MonoBehaviour
         // inputs
         stringBuilder.AppendLine($"Acceleration: {controllerInput.Acceleration:F5}\t\tBrakeReverse: {controllerInput.BrakeReverse:F5}");
         stringBuilder.AppendLine($"Horizontal: {controllerInput.Horizontal:F5}\t\t Handbrake: {controllerInput.HandBrake:F5}");
-        stringBuilder.AppendLine($"Clutch: {controllerInput.Clutch:F5}\t\t Current Gear: {carController.CurrentGear}");
+        stringBuilder.AppendLine($"Clutch: {controllerInput.Clutch:F5}\t\t\t Current Gear: {carController.CurrentGear}");
+        stringBuilder.AppendLine($"IsClutchEngaged: {carController.IsClutchEngaged:F5}");
 
         // Add more debug info as needed
 

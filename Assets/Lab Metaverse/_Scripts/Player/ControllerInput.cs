@@ -47,6 +47,7 @@ namespace PG
         public string Gear4thButton = "Gear4th";
         public string Gear5thButton = "Gear5th";
         public string Gear6thButton = "Gear6th";
+        public string GearRevButton = "GearReverse";
 
         public string SwitchLightsButton = "SwitchLights";
         public string SwitchLeftTurnLightsButton=  "SwitchLeftTurnLights";
@@ -62,9 +63,7 @@ namespace PG
         public float Horizontal { get; private set; }
         public float Acceleration { get; private set; }
         public float BrakeReverse { get; private set; }
-
         public float Clutch { get; private set; }
-
         public float Pitch { get; private set; }
         public bool HandBrake { get; private set; }
         public bool Boost { get; private set; }
@@ -116,7 +115,24 @@ namespace PG
             controls.Player.BrakeReverse.canceled += ctx => SetBrakeReverse(0);
             controls.Player.HandBrake.performed += ctx => SetHandBrake(controls.Player.HandBrake.ReadValue<float>() > 0);
             controls.Player.HandBrake.canceled += ctx => SetHandBrake(false);
+
+            // gear and clutch
             controls.Player.Clutch.performed += ctx => SetClutch(controls.Player.Clutch.ReadValue<float>());
+            controls.Player.Clutch.canceled += ctx => SetClutch(0);
+            controls.Player.Gear1st.performed += ctx => SetGear(1);
+            controls.Player.Gear1st.canceled += ctx => SetGear(0);
+            controls.Player.Gear2nd.performed += ctx => SetGear(2);
+            controls.Player.Gear2nd.canceled += ctx => SetGear(0);
+            controls.Player.Gear3rd.performed += ctx => SetGear(3);
+            controls.Player.Gear3rd.canceled += ctx => SetGear(0);
+            controls.Player.Gear4th.performed += ctx => SetGear(4);
+            controls.Player.Gear4th.canceled += ctx => SetGear(0);
+            controls.Player.Gear5th.performed += ctx => SetGear(5);
+            controls.Player.Gear5th.canceled += ctx => SetGear(0);
+            controls.Player.Gear6th.performed += ctx => SetGear(6);
+            controls.Player.Gear6th.canceled += ctx => SetGear(0);
+            controls.Player.GearReverse.performed += ctx => SetGear(-1);
+            controls.Player.GearReverse.canceled += ctx => SetGear(0);
             controls.Player.NextGear.performed += ctx => NextGear();
             controls.Player.PrevGear.performed += ctx => PrevGear();
 
@@ -223,6 +239,17 @@ namespace PG
             if (Car)
             {
                 Clutch = value;
+            }
+        }
+
+        public void SetGear(int value)
+        {
+            if (Car)
+            {
+                if (Clutch > 0.8)
+                {
+                    Car.SetGear(value);
+                }
             }
         }
 

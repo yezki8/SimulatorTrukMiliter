@@ -5,7 +5,8 @@ using UnityEngine;
 namespace PG
 {
 
-    //Engine logic, current rpm, engine load, braking, etc.
+    // Engine logic, current rpm, engine load, braking, etc.
+    // Modified to include clutch action
     public partial class CarController :VehicleController
     {
         public bool StartEngineInAwake = false;
@@ -87,9 +88,11 @@ namespace PG
                 return;
             }
 
-            //Acceleration control logic. 
-            //If the automatic transmission is turned on, the gear is in reverse and the brake/reverse button is pressed, the car will drive in reverse and vice versa. 
-            //If the automatic transmission is turned off, then to drive back you need to select the reverse gear and press the acceleration button.
+            // Acceleration control logic. 
+            // If the automatic transmission is turned on, the gear is in reverse and the brake/reverse button is pressed, the car will drive in reverse and vice versa. 
+            // If the automatic transmission is turned off, then to drive back you need to select the reverse gear and press the acceleration button.
+
+            // Clutch action are handled in ControllerInput for now
 
             if (CarControl == null || BlockControl)
             {

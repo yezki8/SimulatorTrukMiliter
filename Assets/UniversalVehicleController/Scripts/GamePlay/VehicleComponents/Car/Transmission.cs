@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PG
 {
     //This part of the component contains the gear shift logic (automatic and manual), 
     //and the logic for transferring torque from the engine to the drive wheels.
+
+    // heavily modified to include clutch and shifter logics
     public partial class CarController :VehicleController
     {
         public GearboxConfig Gearbox;
@@ -28,6 +31,7 @@ namespace PG
 
         public int CurrentGearIndex { get { return CurrentGear + 1; } }     //Current gear index, starting at 0 for reverse gear: 0 - reverse, 1 - neutral, 2 - 1st gear, etc.
         public bool InChangeGear { get { return ChangeGearTimer > 0; } }
+        public bool IsClutchEngaged { get { return CarControl != null && CarControl.Clutch > 0.5; } }
 
         float ChangeGearTimer = 0;
         float[] AllGearsRatio;
@@ -62,7 +66,7 @@ namespace PG
             {
                 var motorTorque = CurrentAcceleration * (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
 
-                if (InChangeGear)
+                if (InChangeGear || IsClutchEngaged)
                 {
                     motorTorque = 0;
                 }
@@ -167,11 +171,23 @@ namespace PG
             }
         }
 
+        // clutch action are set in ControllerInput for now
+        // -1 = Reverse, 0 = Neutral, 2 = 1st Gear, etc.
+        public void SetGear(int gear)
+        {
+            if (!InChangeGear && (CurrentGear >= 0 || CurrentGear < (AllGearsRatio.Length - 2)))
+            {
+                CurrentGear = gear;
+                ChangeGearTimer = Gearbox.ChangeClutchedGearTime;
+            }
+        }
+
         [System.Serializable]
         public class GearboxConfig
         {
-            public float ChangeUpGearTime = 0.3f;                   //Delay after upshift.
-            public float ChangeDownGearTime = 0.2f;                 //Delay after downshift.
+            public float ChangeUpGearTime = 0.3f;                   // Delay after upshift.
+            public float ChangeDownGearTime = 0.2f;                 // Delay after downshift.
+            public float ChangeClutchedGearTime = 0.01f;             // Delay when using Clutch.
 
             [Header("Automatic gearbox")]
             public bool AutomaticGearBox = true;
