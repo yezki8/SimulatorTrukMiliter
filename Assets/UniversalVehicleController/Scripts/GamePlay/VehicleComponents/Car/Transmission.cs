@@ -66,6 +66,7 @@ namespace PG
             {
                 var motorTorque = CurrentAcceleration * (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
 
+                // Also check if clutch engaged
                 if (InChangeGear || IsClutchEngaged)
                 {
                     motorTorque = 0;
@@ -108,6 +109,14 @@ namespace PG
             if (InChangeGear)
             {
                 ChangeGearTimer -= Time.fixedDeltaTime;
+            }
+
+            // Engine stall logic here
+            // CurrentAcceleration directly translates to how much acceleration is applied from the pedal.
+            if (CurrentGear != 0 && !IsClutchEngaged && CurrentAcceleration < 0.05 && EngineRPM < Gearbox.EngineStallRPM)
+            {
+                Debug.Log("Stalled here");
+                StopEngine();
             }
 
             //Automatic gearbox logic. 
@@ -187,7 +196,8 @@ namespace PG
         {
             public float ChangeUpGearTime = 0.3f;                   // Delay after upshift.
             public float ChangeDownGearTime = 0.2f;                 // Delay after downshift.
-            public float ChangeClutchedGearTime = 0.01f;             // Delay when using Clutch.
+            public float ChangeClutchedGearTime = 0.01f;            // Delay when using Clutch.
+            public float EngineStallRPM = 440;                      // minimum RPM to reach engine stall (gear not neutral + acceleration not applied enough).
 
             [Header("Automatic gearbox")]
             public bool AutomaticGearBox = true;

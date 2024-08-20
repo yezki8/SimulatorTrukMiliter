@@ -92,7 +92,7 @@ namespace PG
             // If the automatic transmission is turned on, the gear is in reverse and the brake/reverse button is pressed, the car will drive in reverse and vice versa. 
             // If the automatic transmission is turned off, then to drive back you need to select the reverse gear and press the acceleration button.
 
-            // Clutch action are handled in ControllerInput for now
+            // Clutch action are handled in Transmission.cs
 
             if (CarControl == null || BlockControl)
             {

@@ -78,10 +78,6 @@ namespace PG
 
         public bool IsFirstPlayer { get; private set; }
 
-        public static int GamepadP1no;
-        public static int GamepadP2no;
-
-        Vector2 PrevDpadValue;
 
         // enabling and disabling control
         public void EnableControls()
