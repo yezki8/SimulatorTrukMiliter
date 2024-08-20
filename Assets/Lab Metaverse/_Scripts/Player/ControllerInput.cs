@@ -234,7 +234,9 @@ namespace PG
         {
             if (Car)
             {
-                Clutch = value;
+                // no suitable processor from input system
+                // transform from [-1, 1] to [0, 1]
+                Clutch = (value + 1) / 2;
             }
         }
 
