@@ -31,7 +31,8 @@ namespace PG
 
         public int CurrentGearIndex { get { return CurrentGear + 1; } }     //Current gear index, starting at 0 for reverse gear: 0 - reverse, 1 - neutral, 2 - 1st gear, etc.
         public bool InChangeGear { get { return ChangeGearTimer > 0; } }
-        public bool IsClutchEngaged { get { return CarControl != null && CarControl.Clutch > 0.5; } }
+
+        public float WheelTorque;
 
         float ChangeGearTimer = 0;
         float[] AllGearsRatio;
@@ -62,15 +63,22 @@ namespace PG
 
         void FixedUpdateTransmition ()
         {
-            if (!Mathf.Approximately (CurrentAcceleration, 0) && (Gearbox.HasRGear || CurrentGear >= 0))
+            if (Gearbox.HasRGear || CurrentGear >= 0)
             {
-                var motorTorque = CurrentAcceleration * (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
+                // Calculate power transfer from motor to wheel, quadratic
+                var powerTransfer = Mathf.Pow(CarControl.Clutch, 2);
 
-                // Also check if clutch engaged
-                if (InChangeGear || IsClutchEngaged)
+                // var motorTorque = CurrentAcceleration * (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
+                var motorTorque = (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * ((CurrentAcceleration * 0.9f) + 0.1f);
+
+                if (InChangeGear)
                 {
                     motorTorque = 0;
                 }
+
+                // Calculate clutchSlipRatio here to modify motorTorque
+                float clutchSlipRatio = Mathf.Abs(TargetRPM - EngineRPM) / Mathf.Max(TargetRPM, EngineRPM, 1f);
+                motorTorque *= (1 - clutchSlipRatio);
 
                 //Calculation of target rpm for driving wheels.
                 var targetWheelsRPM = AllGearsRatio[CurrentGearIndex] == 0? 0: EngineRPM / AllGearsRatio[CurrentGearIndex];
@@ -79,7 +87,9 @@ namespace PG
                 for (int i = 0; i < DriveWheels.Length; i++)
                 {
                     var wheel = DriveWheels[i];
-                    var wheelTorque = motorTorque;
+
+                    // implement powerTransfer to wheel
+                    WheelTorque = motorTorque * powerTransfer;
 
                     //The torque transmitted to the wheels depends on the difference between the target RPM and the current RPM. 
                     //If the current RPM is greater than the target RPM, the wheel will brake. 
@@ -90,12 +100,12 @@ namespace PG
                         var multiplier = wheel.RPM.Abs () / (targetWheelsRPM.Abs () + offset);
                         if (multiplier >= 1f)
                         {
-                            wheelTorque *= (1 - multiplier);
+                            WheelTorque *= (1 - multiplier);
                         }
                     }
 
                     //Apply of torque to the wheel.
-                    wheel.SetMotorTorque (wheelTorque);
+                    wheel.SetMotorTorque (WheelTorque);
                 }
             }
             else
@@ -109,14 +119,6 @@ namespace PG
             if (InChangeGear)
             {
                 ChangeGearTimer -= Time.fixedDeltaTime;
-            }
-
-            // Engine stall logic here
-            // CurrentAcceleration directly translates to how much acceleration is applied from the pedal.
-            if (CurrentGear != 0 && !IsClutchEngaged && CurrentAcceleration < 0.05 && EngineRPM < Gearbox.EngineStallRPM)
-            {
-                Debug.Log("Stalled here");
-                StopEngine();
             }
 
             //Automatic gearbox logic. 
@@ -197,7 +199,6 @@ namespace PG
             public float ChangeUpGearTime = 0.3f;                   // Delay after upshift.
             public float ChangeDownGearTime = 0.2f;                 // Delay after downshift.
             public float ChangeClutchedGearTime = 0.01f;            // Delay when using Clutch.
-            public float EngineStallRPM = 440;                      // minimum RPM to reach engine stall (gear not neutral + acceleration not applied enough).
 
             [Header("Automatic gearbox")]
             public bool AutomaticGearBox = true;

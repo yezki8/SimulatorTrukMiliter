@@ -77,13 +77,13 @@ public class DebugManager : MonoBehaviour
         stringBuilder.AppendLine($"Player Position: {playerTransform.position}");
 
         // inputs
-        stringBuilder.AppendLine($"Acceleration: {controllerInput.Acceleration:F5} \t\tBrake Reverse: {controllerInput.BrakeReverse:F5}");
-        stringBuilder.AppendLine($"Horizontal: {controllerInput.Horizontal:F5} \t\tHandbrake: {controllerInput.HandBrake:F5}");
-        stringBuilder.AppendLine($"Clutch: {controllerInput.Clutch:F5}\t\t\t Current Gear: {carController.CurrentGear}");
-        stringBuilder.AppendLine($"Is Clutch Engaged: {carController.IsClutchEngaged:F5}");
+        stringBuilder.AppendLine($"Acceleration: {controllerInput.Acceleration:F3} \t\tBrake Reverse: {controllerInput.BrakeReverse:F3}");
+        stringBuilder.AppendLine($"Horizontal: {controllerInput.Horizontal:F3} \t\t\tHandbrake: {controllerInput.HandBrake:F3}");
+        stringBuilder.AppendLine($"Clutch: {controllerInput.Clutch:F3} \t\t\tCurrent Gear: {carController.CurrentGear}");
 
         // truck
-        stringBuilder.AppendLine($"Engine RPM: {carController.EngineRPM}");
+        stringBuilder.AppendLine($"Engine RPM: {carController.EngineRPM:F3}");
+        stringBuilder.AppendLine($"Current Motor Torque: {carController.CurrentMotorTorque:F3} \tWheel Torque: {carController.WheelTorque:F3}");
 
         // Add more debug info as needed
 

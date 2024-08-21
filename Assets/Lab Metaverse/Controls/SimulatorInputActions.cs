@@ -94,7 +94,7 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": ""Clutch"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""92b8fd52-bad9-4b62-be8e-897c999f7bb5"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",

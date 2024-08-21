@@ -235,8 +235,8 @@ namespace PG
             if (Car)
             {
                 // no suitable processor from input system
-                // transform from [-1, 1] to [0, 1]
-                Clutch = (value + 1) / 2;
+                // transform from [-1, 1] to [1, 0] -> 0 = fully pressed, 1 = fully released
+                Clutch = 1 - ((value + 1) / 2);
             }
         }
 
@@ -244,7 +244,7 @@ namespace PG
         {
             if (Car)
             {
-                if (Clutch > 0.8)
+                if (Clutch < 0.2)
                 {
                     Car.SetGear(value);
                 }
