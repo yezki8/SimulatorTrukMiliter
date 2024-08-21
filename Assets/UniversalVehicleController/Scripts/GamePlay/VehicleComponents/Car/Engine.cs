@@ -201,6 +201,7 @@ namespace PG
 
             // Engine stall logic here
             // CurrentAcceleration directly translates to how much acceleration is applied from the pedal.
+            // CarControl.Clutch > 0.84 is arbitrary for now, fine-tune later.
             if (CurrentGear != 0 && CarControl.Clutch > 0.84 && EngineRPM < Engine.StallRPM && CurrentAcceleration < 0.1f)
             {
                 Debug.Log("Stalled here");
