@@ -55,7 +55,7 @@ public class CheckpointController : MonoBehaviour
 
     public void SetCheckpointVisual(bool status)
     {
-        //TODO: add animation of checkpoint activation here
+        // TODO: add animation of checkpoint activation here
         if (status == true)
         {
             if ((_deactivateOnceActive && !HasActivatedOnce) ||
@@ -69,8 +69,12 @@ public class CheckpointController : MonoBehaviour
         {
             VisualRenderer.enabled = status;
             CheckpointCollider.enabled = status;
-        }        
+        }
+
+        // Update the checkpoint icon status
+        UpdateCheckpointIcon(VisualRenderer.enabled);
     }
+
 
     public void ResetCheckpointStates()
     {
@@ -108,4 +112,27 @@ public class CheckpointController : MonoBehaviour
         }
         return isCompleted;
     }
+
+    private void UpdateCheckpointIcon(bool status)
+    {
+        Transform checkpointIcon = transform.Find("CheckpointIcon");
+        Transform finishIcon = transform.Find("FinishIcon");
+        
+        if (gameObject.name == "Finish")
+        {
+            finishIcon.gameObject.SetActive(status);
+        }
+        else
+        {
+            if (checkpointIcon != null)
+            {
+                checkpointIcon.gameObject.SetActive(status);
+            }
+            else
+            {
+                // Debug.LogWarning("CheckpointIcon child not found on " + gameObject.name);
+            }
+        }
+    }
+
 }
