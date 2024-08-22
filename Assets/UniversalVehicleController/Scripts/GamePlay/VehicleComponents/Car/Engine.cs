@@ -18,15 +18,17 @@ namespace PG
         public event System.Action<float> OnStartEngineAction;        //Start engine action with StartEngineDellay parametr
         public event System.Action OnStopEngineAction;
 
-        public float CurrentMotorTorque 
+        // Torque is calculated based on the EngineRPM, Turbo, Boost, TCS, and SpeedLimit.
+        // Turbo, Boost, TCS is not needed
+        public float CurrentMotorTorque
         { 
             get
             {
                 return
                     Engine.MotorTorqueFromRpmCurve.Evaluate (EngineRPM * 0.001f) *
-                    (1 + CurrentTurbo * Engine.TurboAdditionalTorque) *
-                    (InBoost ? 1 + Engine.BoostAdditionalPower : 1) *
-                    (Steer.TCS > 0 ? TCSMultiplayer : 1) *
+                    // (1 + CurrentTurbo * Engine.TurboAdditionalTorque) *
+                    // (InBoost ? 1 + Engine.BoostAdditionalPower : 1) *
+                    // (Steer.TCS > 0 ? TCSMultiplayer : 1) *
                     (Engine.SpeedLimit > 0? Mathf.InverseLerp(Engine.SpeedLimit, Engine.SpeedLimit * 0.5f, CurrentSpeed) : 1)
                     ;
             } 
@@ -34,8 +36,9 @@ namespace PG
 
         public bool EngineIsOn { get; private set; }
         public float EngineRPM { get; private set; }            //Current RPM.
-        public float TargetRPM { get; private set; }            //TargetRPM Calculated based on the drive wheel rpm and the current gear ratio
+        public float TargetRPM { get; private set; }            // TargetRPM Calculated based on the drive wheel rpm and the current gear ratio
         public float EngineLoad { get; private set; }           //Current Load
+        public float DrivetrainRPM { get; private set; }        // Drivetrain RPM, for clutch slip calculation.
 
         public float MaxRPM { get { return Engine.MaxRPM; } }
         public float MinRPM { get { return Engine.MinRPM; } }
@@ -92,8 +95,6 @@ namespace PG
             // If the automatic transmission is turned on, the gear is in reverse and the brake/reverse button is pressed, the car will drive in reverse and vice versa. 
             // If the automatic transmission is turned off, then to drive back you need to select the reverse gear and press the acceleration button.
 
-            // Clutch Slip applied here
-
             if (CarControl == null || BlockControl)
             {
                 CurrentAcceleration = 0;
@@ -144,25 +145,26 @@ namespace PG
                 }
             }
 
-            //Calculation of the average rpm of all driving wheels.
-            float avgRPM = 0;
+            // Calculation of the average rpm of all driving wheels
+            // No Final drive ratio is used here, as the engine rpm is calculated based on the drive wheel rpm and the current gear ratio
+            // Add the final drive ratio to the calculation of the engine rpm if needed.
             int enabledWheelsCount = 0;
             for (int i = 0; i < DriveWheels.Length; i++)
             {
                 if (DriveWheels[i].enabled)
                 {
-                    avgRPM += DriveWheels[i].RPM;
+                    DrivetrainRPM += DriveWheels[i].RPM;
                     enabledWheelsCount++;
                 }
             }
 
             if (enabledWheelsCount > 0)
             {
-                avgRPM /= enabledWheelsCount;
+                DrivetrainRPM = DrivetrainRPM / enabledWheelsCount;
             }
             else
             {
-                avgRPM = Engine.MinRPM;
+                DrivetrainRPM = Engine.MinRPM;
             }
             
             EngineLoad = 0;
@@ -176,7 +178,7 @@ namespace PG
                 }
                 else
                 {
-                    TargetRPM = (avgRPM * CurrentGear) <= 0 && !InHandBrake ? ((EngineRPM + 1000) * CurrentAcceleration) : (avgRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
+                    TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 && !InHandBrake ? ((EngineRPM + 1000) * CurrentAcceleration) : (DrivetrainRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
                 }
 
                 TargetRPM = TargetRPM.Clamp(MinRPM, MaxRPM);
@@ -294,7 +296,7 @@ namespace PG
             public float MinRPM = 700;
             public float RPMEngineToRPMWheelsFast = 15;         //Rpm change with increasing speed.
             public float RPMEngineToRPMWheelsSlow = 4;          //Rpm change with decreasing speed.
-            public float StallRPM = 440;                        // minimum RPM to reach engine stall.
+            public float StallRPM = 350;                        // minimum RPM to reach engine stall, StallRPM < IdleRPM.
 
             public float SpeedLimit = 0;
 

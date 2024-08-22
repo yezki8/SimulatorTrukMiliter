@@ -205,6 +205,7 @@ namespace PG
 
             [Header("Ratio")]
             public float[] GearsRatio;                              //Gear ratio. The values ​​are best take from the technical data of real transmissions.
+            public float FinalDriveRatio;                           //Final drive ratio. The value is best taken from the technical data of the real transmission. (UNUSED)
             public float MainRatio;
             public bool HasRGear = true;
             [ShowInInspectorIf ("HasRGear")]
