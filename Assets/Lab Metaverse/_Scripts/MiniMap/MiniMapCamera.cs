@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniMap : MonoBehaviour
+public class MiniMapCamera : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private Vector3 cameraOffset = new Vector3(0, 15, 0);
