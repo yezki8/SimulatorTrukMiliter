@@ -32,6 +32,8 @@ namespace PG
         public int CurrentGearIndex { get { return CurrentGear + 1; } }     //Current gear index, starting at 0 for reverse gear: 0 - reverse, 1 - neutral, 2 - 1st gear, etc.
         public bool InChangeGear { get { return ChangeGearTimer > 0; } }
 
+        // values after calc below
+        public float CurrentMotorTorque;
         public float WheelTorque;
 
         float ChangeGearTimer = 0;
@@ -69,16 +71,12 @@ namespace PG
                 var powerTransfer = Mathf.Pow(CarControl.Clutch, 2);
 
                 // var motorTorque = CurrentAcceleration * (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
-                var motorTorque = (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * ((CurrentAcceleration * 0.9f) + 0.1f);
+                CurrentMotorTorque = (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
 
                 if (InChangeGear)
                 {
-                    motorTorque = 0;
+                    CurrentMotorTorque = 0;
                 }
-
-                // Calculate clutchSlipRatio here to modify motorTorque
-                float clutchSlipRatio = Mathf.Abs(TargetRPM - EngineRPM) / Mathf.Max(TargetRPM, EngineRPM, 1f);
-                motorTorque *= (1 - clutchSlipRatio);
 
                 //Calculation of target rpm for driving wheels.
                 var targetWheelsRPM = AllGearsRatio[CurrentGearIndex] == 0? 0: EngineRPM / AllGearsRatio[CurrentGearIndex];
@@ -89,7 +87,7 @@ namespace PG
                     var wheel = DriveWheels[i];
 
                     // implement powerTransfer to wheel
-                    WheelTorque = motorTorque * powerTransfer;
+                    WheelTorque = CurrentMotorTorque * powerTransfer;
 
                     //The torque transmitted to the wheels depends on the difference between the target RPM and the current RPM. 
                     //If the current RPM is greater than the target RPM, the wheel will brake. 
@@ -141,7 +139,7 @@ namespace PG
                 {
                     NextGear ();
                 }
-                else if (CurrentGear > 0 && (EngineRPM + 10 <= MinRPM || CurrentGear != 1) &&
+                else if (CurrentGear > 0 && (EngineRPM + 10 <= IdleRPM || CurrentGear != 1) &&
                     Engine.RPMToNextGear > EngineRPM / AllGearsRatio[CurrentGearIndex] * AllGearsRatio[CurrentGearIndex - 1] + Engine.RPMToPrevGearDiff)
                 {
                     PrevGear ();
@@ -186,11 +184,20 @@ namespace PG
         // -1 = Reverse, 0 = Neutral, 2 = 1st Gear, etc.
         public void SetGear(int gear)
         {
-            if (!InChangeGear && (CurrentGear >= 0 || CurrentGear < (AllGearsRatio.Length - 2)))
+            // Implement failed clutch here -> force engine stop.
+            if (CarControl.Clutch < 0.2)
             {
-                CurrentGear = gear;
-                ChangeGearTimer = Gearbox.ChangeClutchedGearTime;
+                if (!InChangeGear && (CurrentGear >= 0 || CurrentGear < (AllGearsRatio.Length - 2)))
+                {
+                    CurrentGear = gear;
+                    ChangeGearTimer = Gearbox.ChangeClutchedGearTime;
+                }
             }
+            else
+            {
+                StopEngine();
+            }
+            
         }
 
         [System.Serializable]

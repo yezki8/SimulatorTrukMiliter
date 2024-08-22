@@ -244,10 +244,7 @@ namespace PG
         {
             if (Car)
             {
-                if (Clutch < 0.2)
-                {
-                    Car.SetGear(value);
-                }
+                Car.SetGear(value);
             }
         }
 

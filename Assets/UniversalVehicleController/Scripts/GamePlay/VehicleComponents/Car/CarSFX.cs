@@ -195,11 +195,11 @@ namespace PG
             {
                 if (EngineSources.Count == 0 && EngineSourceRef && EngineSourceRef.gameObject.activeInHierarchy)
                 {
-                    EngineSourceRef.pitch = Mathf.Lerp (MinEnginePitch, MaxEnginePitch, (Car.EngineRPM - Car.MinRPM) / (Car.MaxRPM - Car.MinRPM));
+                    EngineSourceRef.pitch = Mathf.Lerp (MinEnginePitch, MaxEnginePitch, (Car.EngineRPM - Car.IdleRPM) / (Car.MaxRPM - Car.IdleRPM));
                 }
                 else if (EngineSources.Count > 1)
                 {
-                    float rpmNorm = ((Car.EngineRPM - Car.MinRPM) / (Car.MaxRPM - Car.MinRPM)).Clamp();
+                    float rpmNorm = ((Car.EngineRPM - Car.IdleRPM) / (Car.MaxRPM - Car.IdleRPM)).Clamp();
                     float pith = Mathf.Lerp (MinEnginePitch, MaxEnginePitch, rpmNorm);
 
                     for (int i = 0; i < EngineSources.Count; i++)
@@ -233,7 +233,7 @@ namespace PG
             }
             else //if (!EngineIsON)
             {
-                float pith = Mathf.Lerp (0, MinEnginePitch, (Car.EngineRPM / Car.MinRPM).Clamp());
+                float pith = Mathf.Lerp (0, MinEnginePitch, (Car.EngineRPM / Car.IdleRPM).Clamp());
                 if (EngineSources.Count == 0 && EngineSourceRef && EngineSourceRef.gameObject.activeInHierarchy)
                 {
                     EngineSourceRef.pitch = Mathf.MoveTowards(EngineSourceRef.pitch, pith, Time.deltaTime);
