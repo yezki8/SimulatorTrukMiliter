@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PG
 {
     //This part of the component contains the gear shift logic (automatic and manual), 
     //and the logic for transferring torque from the engine to the drive wheels.
+
+    // heavily modified to include clutch and shifter logics
     public partial class CarController :VehicleController
     {
         public GearboxConfig Gearbox;
@@ -28,6 +31,8 @@ namespace PG
 
         public int CurrentGearIndex { get { return CurrentGear + 1; } }     //Current gear index, starting at 0 for reverse gear: 0 - reverse, 1 - neutral, 2 - 1st gear, etc.
         public bool InChangeGear { get { return ChangeGearTimer > 0; } }
+
+        public float WheelTorque;
 
         float ChangeGearTimer = 0;
         float[] AllGearsRatio;
@@ -58,14 +63,22 @@ namespace PG
 
         void FixedUpdateTransmition ()
         {
-            if (!Mathf.Approximately (CurrentAcceleration, 0) && (Gearbox.HasRGear || CurrentGear >= 0))
+            if (Gearbox.HasRGear || CurrentGear >= 0)
             {
-                var motorTorque = CurrentAcceleration * (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
+                // Calculate power transfer from motor to wheel, quadratic
+                var powerTransfer = Mathf.Pow(CarControl.Clutch, 2);
+
+                // var motorTorque = CurrentAcceleration * (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
+                var motorTorque = (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * ((CurrentAcceleration * 0.9f) + 0.1f);
 
                 if (InChangeGear)
                 {
                     motorTorque = 0;
                 }
+
+                // Calculate clutchSlipRatio here to modify motorTorque
+                float clutchSlipRatio = Mathf.Abs(TargetRPM - EngineRPM) / Mathf.Max(TargetRPM, EngineRPM, 1f);
+                motorTorque *= (1 - clutchSlipRatio);
 
                 //Calculation of target rpm for driving wheels.
                 var targetWheelsRPM = AllGearsRatio[CurrentGearIndex] == 0? 0: EngineRPM / AllGearsRatio[CurrentGearIndex];
@@ -74,7 +87,9 @@ namespace PG
                 for (int i = 0; i < DriveWheels.Length; i++)
                 {
                     var wheel = DriveWheels[i];
-                    var wheelTorque = motorTorque;
+
+                    // implement powerTransfer to wheel
+                    WheelTorque = motorTorque * powerTransfer;
 
                     //The torque transmitted to the wheels depends on the difference between the target RPM and the current RPM. 
                     //If the current RPM is greater than the target RPM, the wheel will brake. 
@@ -85,12 +100,12 @@ namespace PG
                         var multiplier = wheel.RPM.Abs () / (targetWheelsRPM.Abs () + offset);
                         if (multiplier >= 1f)
                         {
-                            wheelTorque *= (1 - multiplier);
+                            WheelTorque *= (1 - multiplier);
                         }
                     }
 
                     //Apply of torque to the wheel.
-                    wheel.SetMotorTorque (wheelTorque);
+                    wheel.SetMotorTorque (WheelTorque);
                 }
             }
             else
@@ -167,11 +182,23 @@ namespace PG
             }
         }
 
+        // clutch action are set in ControllerInput for now
+        // -1 = Reverse, 0 = Neutral, 2 = 1st Gear, etc.
+        public void SetGear(int gear)
+        {
+            if (!InChangeGear && (CurrentGear >= 0 || CurrentGear < (AllGearsRatio.Length - 2)))
+            {
+                CurrentGear = gear;
+                ChangeGearTimer = Gearbox.ChangeClutchedGearTime;
+            }
+        }
+
         [System.Serializable]
         public class GearboxConfig
         {
-            public float ChangeUpGearTime = 0.3f;                   //Delay after upshift.
-            public float ChangeDownGearTime = 0.2f;                 //Delay after downshift.
+            public float ChangeUpGearTime = 0.3f;                   // Delay after upshift.
+            public float ChangeDownGearTime = 0.2f;                 // Delay after downshift.
+            public float ChangeClutchedGearTime = 0.01f;            // Delay when using Clutch.
 
             [Header("Automatic gearbox")]
             public bool AutomaticGearBox = true;

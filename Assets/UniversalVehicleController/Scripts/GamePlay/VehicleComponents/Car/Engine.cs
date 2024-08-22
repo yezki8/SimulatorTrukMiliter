@@ -5,7 +5,8 @@ using UnityEngine;
 namespace PG
 {
 
-    //Engine logic, current rpm, engine load, braking, etc.
+    // Engine logic, current rpm, engine load, braking, etc.
+    // Modified to include clutch Slip
     public partial class CarController :VehicleController
     {
         public bool StartEngineInAwake = false;
@@ -87,9 +88,11 @@ namespace PG
                 return;
             }
 
-            //Acceleration control logic. 
-            //If the automatic transmission is turned on, the gear is in reverse and the brake/reverse button is pressed, the car will drive in reverse and vice versa. 
-            //If the automatic transmission is turned off, then to drive back you need to select the reverse gear and press the acceleration button.
+            // Acceleration control logic. 
+            // If the automatic transmission is turned on, the gear is in reverse and the brake/reverse button is pressed, the car will drive in reverse and vice versa. 
+            // If the automatic transmission is turned off, then to drive back you need to select the reverse gear and press the acceleration button.
+
+            // Clutch Slip applied here
 
             if (CarControl == null || BlockControl)
             {
@@ -179,10 +182,13 @@ namespace PG
                 TargetRPM = TargetRPM.Clamp(MinRPM, MaxRPM);
                 var changeRPMSpeed = CurrentAcceleration.Abs() > 0.1f && TargetRPM > EngineRPM? Engine.RPMEngineToRPMWheelsFast: Engine.RPMEngineToRPMWheelsSlow;
 
-                //Calculation of the current engine load.
-                EngineLoad = (TargetRPM - EngineRPM).Clamp (-300, 300) / 300 * CurrentAcceleration;
+                // Calculate clutchSlipRatio
+                float clutchSlipRatio = Mathf.Abs(TargetRPM - EngineRPM) / Mathf.Max(TargetRPM, EngineRPM, 1f);
 
-                EngineRPM = Mathf.Lerp (EngineRPM, TargetRPM, changeRPMSpeed * Time.fixedDeltaTime);
+                //Calculation of the current engine load.
+                EngineLoad = (TargetRPM - EngineRPM).Clamp (-300, 300) / 300 * CurrentAcceleration * (1f - clutchSlipRatio);
+
+                EngineRPM = Mathf.Lerp (EngineRPM, TargetRPM, changeRPMSpeed * Time.fixedDeltaTime * (1f - clutchSlipRatio));
             }
 
             //Check CutOff.
@@ -193,6 +199,14 @@ namespace PG
                 CutOffTimer = Engine.CutOffTime;
             }
 
+            // Engine stall logic here
+            // CurrentAcceleration directly translates to how much acceleration is applied from the pedal.
+            // CarControl.Clutch > 0.84 is arbitrary for now, fine-tune later.
+            if (CurrentGear != 0 && CarControl.Clutch > 0.84 && EngineRPM < Engine.StallRPM && CurrentAcceleration < 0.1f)
+            {
+                Debug.Log("Stalled here");
+                StopEngine();
+            }
 
             //Turbo logic. The speed and power of the turbo depends on the EnigneRPM and the Acceleration value.
             if (Engine.EnableTurbo)
@@ -280,6 +294,8 @@ namespace PG
             public float MinRPM = 700;
             public float RPMEngineToRPMWheelsFast = 15;         //Rpm change with increasing speed.
             public float RPMEngineToRPMWheelsSlow = 4;          //Rpm change with decreasing speed.
+            public float StallRPM = 440;                        // minimum RPM to reach engine stall.
+
             public float SpeedLimit = 0;
 
             [Header("Cut off")]
