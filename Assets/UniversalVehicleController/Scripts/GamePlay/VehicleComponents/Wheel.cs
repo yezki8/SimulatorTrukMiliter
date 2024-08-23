@@ -191,12 +191,13 @@ namespace PG
         void ApplyStiffness ()
         {
             float stiffness = GroundStiffness;
+            Debug.Log("Stiffness = " + stiffness);
             var friction = WheelCollider.forwardFriction;
             friction.stiffness = stiffness;
             WheelCollider.forwardFriction = friction;
 
             friction = WheelCollider.sidewaysFriction;
-            friction.stiffness = stiffness * Mathf.Lerp(0.3f, 1, Mathf.InverseLerp (2, 1, ForwardSlipNormalized));
+            friction.stiffness = stiffness * Mathf.Lerp(0.3f, 1, Mathf.InverseLerp(2, 1, ForwardSlipNormalized));
             WheelCollider.sidewaysFriction = friction;
         }
 
