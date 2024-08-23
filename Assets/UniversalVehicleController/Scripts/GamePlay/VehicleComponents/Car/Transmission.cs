@@ -33,6 +33,7 @@ namespace PG
         public bool InChangeGear { get { return ChangeGearTimer > 0; } }
 
         public float WheelTorque;
+        public float CurrentMotorTorque;
 
         float ChangeGearTimer = 0;
         float[] AllGearsRatio;
@@ -68,17 +69,17 @@ namespace PG
                 // Calculate power transfer from motor to wheel, quadratic
                 var powerTransfer = Mathf.Pow(CarControl.Clutch, 2);
 
-                // var motorTorque = CurrentAcceleration * (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
-                var motorTorque = (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * ((CurrentAcceleration * 0.9f) + 0.1f);
+                // var motorTorque = CurrentAcceleration * (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
+                CurrentMotorTorque = (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * ((CurrentAcceleration * 0.95f) + 0.05f);
 
                 if (InChangeGear)
                 {
-                    motorTorque = 0;
+                    CurrentMotorTorque = 0;
                 }
 
                 // Calculate clutchSlipRatio here to modify motorTorque
                 float clutchSlipRatio = Mathf.Abs(TargetRPM - EngineRPM) / Mathf.Max(TargetRPM, EngineRPM, 1f);
-                motorTorque *= (1 - clutchSlipRatio);
+                CurrentMotorTorque *= (1 - clutchSlipRatio);
 
                 //Calculation of target rpm for driving wheels.
                 var targetWheelsRPM = AllGearsRatio[CurrentGearIndex] == 0? 0: EngineRPM / AllGearsRatio[CurrentGearIndex];
@@ -89,7 +90,7 @@ namespace PG
                     var wheel = DriveWheels[i];
 
                     // implement powerTransfer to wheel
-                    WheelTorque = motorTorque * powerTransfer;
+                    WheelTorque = CurrentMotorTorque * powerTransfer;
 
                     //The torque transmitted to the wheels depends on the difference between the target RPM and the current RPM. 
                     //If the current RPM is greater than the target RPM, the wheel will brake. 
@@ -182,15 +183,23 @@ namespace PG
             }
         }
 
-        // clutch action are set in ControllerInput for now
         // -1 = Reverse, 0 = Neutral, 2 = 1st Gear, etc.
+        // Also add failed clutch handling, force stopping the engine
         public void SetGear(int gear)
         {
-            if (!InChangeGear && (CurrentGear >= 0 || CurrentGear < (AllGearsRatio.Length - 2)))
+            if (CarControl.Clutch < 0.2)
             {
-                CurrentGear = gear;
-                ChangeGearTimer = Gearbox.ChangeClutchedGearTime;
+                if (!InChangeGear && (CurrentGear >= 0 || CurrentGear < (AllGearsRatio.Length - 2)))
+                {
+                    CurrentGear = gear;
+                    ChangeGearTimer = Gearbox.ChangeClutchedGearTime;
+                }
             }
+            else
+            {
+                StopEngine();
+            }
+            
         }
 
         [System.Serializable]
