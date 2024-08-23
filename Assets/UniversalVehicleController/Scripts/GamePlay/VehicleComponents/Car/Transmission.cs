@@ -70,7 +70,9 @@ namespace PG
                 var powerTransfer = Mathf.Pow(CarControl.Clutch, 2);
 
                 // var motorTorque = CurrentAcceleration * (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
-                CurrentMotorTorque = (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * ((CurrentAcceleration * 0.95f) + 0.05f);
+                float rotorForce = 0.15f;
+                CurrentMotorTorque = (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * (CurrentAcceleration + 
+                    (EngineRPM < 600 ? rotorForce : 0));
 
                 if (InChangeGear)
                 {
