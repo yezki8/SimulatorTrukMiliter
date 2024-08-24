@@ -4,9 +4,9 @@ using UnityEditor;
 using UnityEngine;
 
 [InitializeOnLoad]
-public class CheckpointIcon
+public class CheckpointIconBigMap
 {
-    static CheckpointIcon()
+    static CheckpointIconBigMap()
     {
         EditorApplication.hierarchyChanged += OnHierarchyChanged;
     }
@@ -21,7 +21,6 @@ public class CheckpointIcon
         GameObject parentObject = GameObject.Find("CP");
         if (parentObject == null)
         {
-            // Debug.LogWarning("Parent object 'CP' tidak ditemukan.");
             return;
         }
 
@@ -31,16 +30,15 @@ public class CheckpointIcon
             {
                 if (!HasCheckpoint(child.gameObject))
                 {
-                    GameObject childPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Lab Metaverse/Prefabs/CheckpointIcon.prefab");
+                    GameObject childPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Lab Metaverse/Prefabs/Checkpoint Icon - bigmap.prefab");
                     if (childPrefab != null)
                     {
                         PrefabUtility.InstantiatePrefab(childPrefab, child);
-                        // Debug.Log($"Checkpoint Icon ditambahkan ke {child.name}");
                     }
                 }
                 foreach (Transform go in child.transform)
                 {
-                    if (go.name == "CheckpointIcon")
+                    if (go.name == "Checkpoint Icon - bigmap")
                     {
                         go.position = child.position;
                     }
@@ -53,13 +51,11 @@ public class CheckpointIcon
     {
         foreach (Transform child in parentObject.transform)
         {
-            if (child.name == "CheckpointIcon")
+            if (child.name == "Checkpoint Icon - bigmap")
             {
-                // Debug.Log($"{parentObject.name} sudah memiliki icon checkpoint");
                 return true;
             }
         }
-        // Debug.Log($"{parentObject.name} belum memiliki icon checkpoint");
         return false;
     }
 }
