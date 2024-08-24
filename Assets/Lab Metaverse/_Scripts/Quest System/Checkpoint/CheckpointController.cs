@@ -49,7 +49,7 @@ public class CheckpointController : MonoBehaviour
         iconHandler = FindObjectOfType<IconHandler>();
         if (iconHandler == null) 
         {
-            Debug.Log("iconHandler tidak ditemukan");
+            Debug.LogWarning("iconHandler tidak ditemukan");
         }
     }
 

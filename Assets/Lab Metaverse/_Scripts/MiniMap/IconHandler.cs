@@ -36,51 +36,51 @@ public class IconHandler : MonoBehaviour
 
     public void AddCheckpointIcon(GameObject gameObject)
     {
-        Debug.Log($"Adding Icon {gameObject.name}");
+        // Debug.Log($"Adding Icon {gameObject.name}");
         if (!icons.Exists(icon => icon.gameObject == gameObject))
         {
             RectTransform rectTransform = Instantiate(checkpointPrefab, miniMapRectTransform).GetComponent<RectTransform>();
             icons.Add((gameObject, rectTransform));
         }
-        Debug.Log($"Icons Remaining:");
-        if (icons != null)
-        {
-            foreach (var icon in icons)
-            {
-                Debug.Log($"{icon.gameObject.name}");
-            }
-        }
-        else
-        {
-            Debug.Log("Tidak ada icon lagi");
-        }
+        // Debug.Log($"Icons Remaining:");
+        // if (icons != null)
+        // {
+        //     foreach (var icon in icons)
+        //     {
+        //         Debug.Log($"{icon.gameObject.name}");
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.Log("Tidak ada icon lagi");
+        // }
     }
 
     public void AddFinishIcon(GameObject gameObject)
     {
-        Debug.Log($"Adding Icon {gameObject.name}");
+        // Debug.Log($"Adding Icon {gameObject.name}");
         if (!icons.Exists(icon => icon.gameObject == gameObject))
         {
             RectTransform rectTransform = Instantiate(finishPrefab, miniMapRectTransform).GetComponent<RectTransform>();
             icons.Add((gameObject, rectTransform));
         }
-        Debug.Log($"Icons Remaining:");
-        if (icons != null)
-        {
-            foreach (var icon in icons)
-            {
-                Debug.Log($"{icon.gameObject.name}");
-            }
-        }
-        else
-        {
-            Debug.Log("Tidak ada icon lagi");
-        }
+        // Debug.Log($"Icons Remaining:");
+        // if (icons != null)
+        // {
+        //     foreach (var icon in icons)
+        //     {
+        //         Debug.Log($"{icon.gameObject.name}");
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.Log("Tidak ada icon lagi");
+        // }
     }
 
     public void RemoveIcon(GameObject gameObject)
     {
-        Debug.Log($"Removing Icon {gameObject.name}");
+        // Debug.Log($"Removing Icon {gameObject.name}");
         if (!icons.Exists(icon => icon.gameObject == gameObject))
         {
             return;
@@ -88,17 +88,17 @@ public class IconHandler : MonoBehaviour
         (GameObject gameObject, RectTransform rectTransform) foundObject = icons.Find(icon => icon.gameObject == gameObject);
         Destroy(foundObject.rectTransform.gameObject);
         icons.Remove(foundObject);
-        Debug.Log($"Icon Remains:");
-        if (icons != null)
-        {
-            foreach (var icon in icons)
-            {
-                Debug.Log($"{icon.gameObject.name}");
-            }
-        }
-        else
-        {
-            Debug.Log("Tidak ada icon lagi");
-        }
+        // Debug.Log($"Icon Remains:");
+        // if (icons != null)
+        // {
+        //     foreach (var icon in icons)
+        //     {
+        //         Debug.Log($"{icon.gameObject.name}");
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.Log("Tidak ada icon lagi");
+        // }
     }
 }
