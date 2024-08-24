@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MiniMapClickHandler : MonoBehaviour, IPointerClickHandler
+public class MiniMapClickHandler : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Camera bigmapCamera;
@@ -11,7 +11,7 @@ public class MiniMapClickHandler : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject miniMapTexture;
     [SerializeField] private GameObject mainMapTexture;
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void MiniMapClick()
     {
         if (mainCamera.targetTexture != null)
         {
