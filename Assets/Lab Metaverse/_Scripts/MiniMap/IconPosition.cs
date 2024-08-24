@@ -5,8 +5,8 @@ using UnityEngine;
 public class IconPosition : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        FindObjectOfType<IconHandler>().AddIcons(this);
-    }
+    // void Start()
+    // {
+    //     FindObjectOfType<IconHandler>().AddCheckpointIcon(this);
+    // }
 }

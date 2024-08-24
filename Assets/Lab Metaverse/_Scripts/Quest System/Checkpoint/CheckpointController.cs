@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CheckpointController : MonoBehaviour
@@ -41,6 +42,16 @@ public class CheckpointController : MonoBehaviour
     [SerializeField] private bool _deactivateOnceActive = true;
     public bool HasActivatedOnce = false;
     [SerializeField] private List<CheckpointController> _checkpointQuestList;
+    private IconHandler iconHandler;
+
+    void Awake()
+    {
+        iconHandler = FindObjectOfType<IconHandler>();
+        if (iconHandler == null) 
+        {
+            Debug.Log("iconHandler tidak ditemukan");
+        }
+    }
 
     public void SetActiveCheckpoint(bool status)
     {
@@ -115,24 +126,33 @@ public class CheckpointController : MonoBehaviour
 
     private void UpdateCheckpointIcon(bool status)
     {
-        Transform checkpointIcon = transform.Find("CheckpointIcon");
-        Transform finishIcon = transform.Find("FinishIcon");
-        
-        if (gameObject.name == "Finish")
+        Transform checkpointIcon = transform.Find("Checkpoint Icon - bigmap");
+        Transform finishIcon = transform.Find("Finish Icon - bigmap");
+        if (status == true)
         {
-            finishIcon.gameObject.SetActive(status);
-        }
-        else
-        {
-            if (checkpointIcon != null)
+            if (gameObject.name == "Finish")
             {
-                checkpointIcon.gameObject.SetActive(status);
+                iconHandler.AddFinishIcon(gameObject);
+                finishIcon.gameObject.SetActive(status);
             }
             else
             {
-                // Debug.LogWarning("CheckpointIcon child not found on " + gameObject.name);
+                iconHandler.AddCheckpointIcon(gameObject);
+                checkpointIcon.gameObject.SetActive(status);
             }
+
+        }
+        else 
+        {
+            if (gameObject.name == "Finish")
+            {
+                finishIcon.gameObject.SetActive(status);
+            }
+            else
+            {
+                checkpointIcon.gameObject.SetActive(status);
+            }
+            iconHandler.RemoveIcon(gameObject);
         }
     }
-
 }
