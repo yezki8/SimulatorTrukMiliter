@@ -13,19 +13,19 @@ public class MiniMapClickHandler : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log($"texture: {mainCamera.targetTexture}");
         if (mainCamera.targetTexture != null)
         {
-            mainCamera.targetTexture = mainCameraRenderTexture;
-            miniMapTexture.SetActive(false);
-            mainMapTexture.SetActive(true);
-        }
-        else {
             mainCamera.targetTexture = null;
             miniMapTexture.SetActive(true);
             mainMapTexture.SetActive(false);
         }
-        
-        mainCamera.enabled = !mainCamera.enabled;
+        else {
+            mainCamera.targetTexture = mainCameraRenderTexture;
+            miniMapTexture.SetActive(false);
+            mainMapTexture.SetActive(true);
+        }
+        Debug.Log($"texture: {mainCamera.targetTexture}");
         bigmapCamera.enabled = !bigmapCamera.enabled;
     }
 }

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class BigMapCamera : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        gameObject.SetActive(false);
+        gameObject.GetComponent<Camera>().enabled = false;
     }
 }
