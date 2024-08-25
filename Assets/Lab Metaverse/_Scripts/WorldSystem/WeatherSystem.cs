@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 public class WeatherSystem : MonoBehaviour
 {
     public enum WeatherType
@@ -17,6 +19,8 @@ public class WeatherSystem : MonoBehaviour
     [Header("Weather Related Object")]
     [SerializeField] private GameObject _rainSpawner;
     [SerializeField] private GameObject _sunLight;
+
+    public UnityEvent OnWeatherChange;
 
     public static WeatherSystem Instance;
 
@@ -110,6 +114,8 @@ public class WeatherSystem : MonoBehaviour
         HandleRainSpawner();
         HandleSkyLighting();
         Debug.Log("Weather set to " + CurrentWeather);
+
+        OnWeatherChange?.Invoke();
     }
 
     // single button control to change weather
