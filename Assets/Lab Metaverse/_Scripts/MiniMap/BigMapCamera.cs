@@ -7,11 +7,14 @@ public class BigMapCamera : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 1f;
     [SerializeField] private float dragSpeed = 1f;
-    
-    [SerializeField] private float edgePanBorderThickness = 10f;
+    [SerializeField] private float edgePanBorderThickness = 1f;
     [SerializeField] private float edgePanSpeed = 1f;
+    [SerializeField] private float zoomSpeed = 50f;
+    [SerializeField] private float minZoom = 10f;
+    [SerializeField] private float maxZoom = 150f;
     [SerializeField] private Transform player;
     [SerializeField] private GameObject edgePanSwitch;
+    [SerializeField] private GameObject informationText;
     private Button _button;
     private Vector3 dragOrigin;
     private bool isDragging = false;
@@ -27,26 +30,28 @@ public class BigMapCamera : MonoBehaviour
     }
     void Start()
     {
-        gameObject.GetComponent<Camera>().enabled = false;
+        GetComponent<Camera>().enabled = false;
     }
 
     void Update()
     {
-        if (gameObject.GetComponent<Camera>().enabled)
+        if (GetComponent<Camera>().enabled)
         {
             UpdateSwitchColor();
             edgePanSwitch.SetActive(true);
+            informationText.SetActive(true);
             MoveCamera();                                                                                                                          
         }
         else
         {
             edgePanSwitch.SetActive(false);
+            informationText.SetActive(false);
         }
     }
 
     void LateUpdate()
     {
-        if (!gameObject.GetComponent<Camera>().enabled)
+        if (!GetComponent<Camera>().enabled)
         {
             Vector3 followPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
             transform.position = followPlayer;
@@ -57,6 +62,7 @@ public class BigMapCamera : MonoBehaviour
     {
         KeyboardMove();
         ClickAndDragMove();
+        Zoom();
         if (isPanning)
         {
             EdgePanMove();
@@ -128,8 +134,8 @@ public class BigMapCamera : MonoBehaviour
 
         if (isDragging)
         {
-            Vector3 mousePosition = gameObject.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
-            Vector3 origin = gameObject.GetComponent<Camera>().ScreenToWorldPoint(dragOrigin);
+            Vector3 mousePosition = GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
+            Vector3 origin = GetComponent<Camera>().ScreenToWorldPoint(dragOrigin);
 
             Vector3 move = new Vector3(mousePosition.x - origin.x, 0, mousePosition.z - origin.z);
             transform.position += (-1) * dragSpeed * move;
@@ -177,5 +183,19 @@ public class BigMapCamera : MonoBehaviour
         colorBlock.disabledColor = colorBlock.normalColor * 0.5f;
 
         _button.colors = colorBlock;
+    }
+
+    void Zoom()
+    {
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scrollInput != 0)
+        {
+            // Adjust the orthographic size based on the scroll input
+            GetComponent<Camera>().orthographicSize -= scrollInput * zoomSpeed;
+
+            // Clamp the orthographic size to stay within min and max zoom levels
+            GetComponent<Camera>().orthographicSize = Mathf.Clamp(GetComponent<Camera>().orthographicSize, minZoom, maxZoom);
+        }
     }
 }
