@@ -629,7 +629,7 @@ namespace UnityEngine.InputSystem
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Drag"",
@@ -659,7 +659,7 @@ namespace UnityEngine.InputSystem
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Go To Player"",
+                    ""name"": ""GoToPlayer"",
                     ""type"": ""Button"",
                     ""id"": ""6fe5a6e8-d4d4-4ee4-a1ba-86bb1cfd4c4f"",
                     ""expectedControlType"": ""Button"",
@@ -841,7 +841,7 @@ namespace UnityEngine.InputSystem
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Go To Player"",
+                    ""action"": ""GoToPlayer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -946,7 +946,7 @@ namespace UnityEngine.InputSystem
             m_Maps_Drag = m_Maps.FindAction("Drag", throwIfNotFound: true);
             m_Maps_Zoom = m_Maps.FindAction("Zoom", throwIfNotFound: true);
             m_Maps_EdgePan = m_Maps.FindAction("EdgePan", throwIfNotFound: true);
-            m_Maps_GoToPlayer = m_Maps.FindAction("Go To Player", throwIfNotFound: true);
+            m_Maps_GoToPlayer = m_Maps.FindAction("GoToPlayer", throwIfNotFound: true);
         }
 
         public void Dispose()
