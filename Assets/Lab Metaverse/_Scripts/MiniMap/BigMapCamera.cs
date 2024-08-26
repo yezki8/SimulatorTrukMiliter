@@ -54,16 +54,11 @@ public class BigMapCamera : MonoBehaviour
 
     void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
 
         if (GetComponent<Camera>().enabled)
         {
             if (isFollowing)
             {
-                Debug.Log("here");
                 FollowPlayer();
             }
             mapsSwitcher.SetActive(true);
@@ -92,7 +87,7 @@ public class BigMapCamera : MonoBehaviour
         transform.position += move;
         if (moveInput != new Vector2(0f, 0f))
         {
-            SwitchFollowing(false);
+            SwitchFollowingFalse();
         }
 
         if (isDragging)
@@ -104,13 +99,13 @@ public class BigMapCamera : MonoBehaviour
             transform.position -= dragSpeed * moveDrag;
 
             dragOrigin = mousePosition;
-            SwitchFollowing(false);
+            SwitchFollowingFalse();
         }
 
         if (isPanning)
         {
             EdgePanMove();
-            SwitchFollowing(false);
+            SwitchFollowingFalse();
         }
     }
 
@@ -162,18 +157,16 @@ public class BigMapCamera : MonoBehaviour
         transform.position = followPlayer;
     }
 
-    public void SwitchFollowing()
+    public void SwitchFollowingFalse()
     {
-        isFollowing = !isFollowing;
+        isFollowing = false;
         UpdateFollowingSwitchColor();
-        Debug.Log($"Is Following: {isFollowing}");
     }
 
-    public void SwitchFollowing(bool status)
+    public void SwitchFollowingTrue()
     {
-        isFollowing = status;
+        isFollowing = true;
         UpdateFollowingSwitchColor();
-        Debug.Log($"Is Following: {isFollowing}");
     }
 
     public void SwitchPanning()
@@ -199,7 +192,6 @@ public class BigMapCamera : MonoBehaviour
     void UpdateFollowingSwitchColor()
     {
         ColorBlock colorBlock = followPlayerSwitch.colors;
-        
         colorBlock.normalColor = isFollowing ? Color.cyan : Color.white;
 
         colorBlock.highlightedColor = colorBlock.normalColor * 1.1f;
