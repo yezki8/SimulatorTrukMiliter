@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class BigMapCamera : MonoBehaviour
 {
@@ -13,38 +15,64 @@ public class BigMapCamera : MonoBehaviour
     [SerializeField] private float minZoom = 10f;
     [SerializeField] private float maxZoom = 150f;
     [SerializeField] private Transform player;
-    [SerializeField] private GameObject edgePanSwitch;
+    [SerializeField] private GameObject mapsSwitcher;
+    [SerializeField] private Button edgePanSwitch;
+    [SerializeField] private Button followPlayerSwitch;
     [SerializeField] private GameObject informationText;
-    private Button _button;
     private Vector3 dragOrigin;
     private bool isDragging = false;
     private bool isPanning = false;
-    private Vector3 offsetUp = new Vector3(0, 0, 1);
-    private Vector3 offsetLeft = new Vector3(-1, 0, 0);
-    private Vector3 offsetDown = new Vector3(0, 0, -1);
-    private Vector3 offsetRight = new Vector3(1, 0, 0);
+    private bool isFollowing = true;
+    private SimulatorInputActions _controls;
+
 
     void Awake()
     {
-        _button = edgePanSwitch.GetComponent<Button>();
+        _controls = new SimulatorInputActions();
+
+        _controls.Maps.Click.started += ctx => StartDrag();
+        _controls.Maps.Click.canceled += ctx => EndDrag();
+        _controls.Maps.Zoom.performed += ctx => Zoom(ctx.ReadValue<float>());
+        _controls.Maps.GoToPlayer.performed += ctx => FollowPlayer();
     }
     void Start()
     {
         GetComponent<Camera>().enabled = false;
+        UpdateEdgePanSwitchColor();
+        UpdateFollowingSwitchColor();
+    }
+
+    void OnEnable()
+    {
+        _controls.Maps.Enable();
+    }
+
+    void OnDisable()
+    {
+        _controls.Maps.Disable();
     }
 
     void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         if (GetComponent<Camera>().enabled)
         {
-            UpdateSwitchColor();
-            edgePanSwitch.SetActive(true);
+            if (isFollowing)
+            {
+                Debug.Log("here");
+                FollowPlayer();
+            }
+            mapsSwitcher.SetActive(true);
             informationText.SetActive(true);
-            MoveCamera();                                                                                                                          
+            MoveCamera();                                                                                                                        
         }
         else
         {
-            edgePanSwitch.SetActive(false);
+            mapsSwitcher.SetActive(false);
             informationText.SetActive(false);
         }
     }
@@ -53,100 +81,53 @@ public class BigMapCamera : MonoBehaviour
     {
         if (!GetComponent<Camera>().enabled)
         {
-            Vector3 followPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
-            transform.position = followPlayer;
+            FollowPlayer();
         }
     }
 
     void MoveCamera()
     {
-        KeyboardMove();
-        ClickAndDragMove();
-        Zoom();
-        if (isPanning)
+        Vector2 moveInput = _controls.Maps.Move.ReadValue<Vector2>();
+        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * movementSpeed;
+        transform.position += move;
+        if (moveInput != new Vector2(0f, 0f))
         {
-            EdgePanMove();
-        }
-        if (Input.GetKey(KeyCode.F1))
-        {
-            Vector3 followPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
-            transform.position = followPlayer;
-        }
-    }
-
-    void KeyboardMove()
-    {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            MoveUp();
-        }
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            MoveLeft();
-        }
-
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            MoveDown();
-        }
-
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            MoveRight();
-        }
-    }
-
-    void MoveUp()
-    {
-        transform.position += offsetUp * movementSpeed;
-    }
-
-    void MoveLeft()
-    {
-        transform.position += offsetLeft * movementSpeed;
-    }
-
-    void MoveDown()
-    {
-        transform.position += offsetDown * movementSpeed;
-    }
-
-    void MoveRight()
-    {
-        transform.position += offsetRight * movementSpeed;
-    }
-
-    void ClickAndDragMove()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            isDragging = true;
-            dragOrigin = Input.mousePosition;
-            return;
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
-            return;
+            SwitchFollowing(false);
         }
 
         if (isDragging)
         {
-            Vector3 mousePosition = GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
-            Vector3 origin = GetComponent<Camera>().ScreenToWorldPoint(dragOrigin);
+            Vector2 mousePosition = _controls.Maps.Drag.ReadValue<Vector2>();
+            Vector3 mouseWorldPos = GetComponent<Camera>().ScreenToWorldPoint(mousePosition);
+            Vector3 originWorldPos = GetComponent<Camera>().ScreenToWorldPoint(dragOrigin);
+            Vector3 moveDrag = new Vector3(mouseWorldPos.x - originWorldPos.x, 0, mouseWorldPos.z - originWorldPos.z);
+            transform.position -= dragSpeed * moveDrag;
 
-            Vector3 move = new Vector3(mousePosition.x - origin.x, 0, mousePosition.z - origin.z);
-            transform.position += (-1) * dragSpeed * move;
+            dragOrigin = mousePosition;
+            SwitchFollowing(false);
+        }
 
-            dragOrigin = Input.mousePosition;
-        } 
+        if (isPanning)
+        {
+            EdgePanMove();
+            SwitchFollowing(false);
+        }
+    }
+
+    void StartDrag()
+    {
+        isDragging = true;
+        dragOrigin = _controls.Maps.Drag.ReadValue<Vector2>();
+    }
+
+    void EndDrag()
+    {
+        isDragging = false;
     }
 
     void EdgePanMove()
     {
-        Vector3 screenMousePosition = Input.mousePosition;
+        Vector3 screenMousePosition = _controls.Maps.EdgePan.ReadValue<Vector2>();
         if (screenMousePosition.x <= edgePanBorderThickness)
         {
             transform.position -= Vector3.right * edgePanSpeed;
@@ -166,14 +147,44 @@ public class BigMapCamera : MonoBehaviour
         }
     }
 
-    public void switchPanning()
+    void Zoom(float scrollInput)
     {
-        isPanning = !isPanning;
+        if (scrollInput != 0)
+        {
+            GetComponent<Camera>().orthographicSize -= scrollInput * zoomSpeed;
+            GetComponent<Camera>().orthographicSize = Mathf.Clamp(GetComponent<Camera>().orthographicSize, minZoom, maxZoom);
+        }
     }
 
-    void UpdateSwitchColor()
+    private void FollowPlayer()
     {
-        ColorBlock colorBlock = _button.colors;
+        Vector3 followPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
+        transform.position = followPlayer;
+    }
+
+    public void SwitchFollowing()
+    {
+        isFollowing = !isFollowing;
+        UpdateFollowingSwitchColor();
+        Debug.Log($"Is Following: {isFollowing}");
+    }
+
+    public void SwitchFollowing(bool status)
+    {
+        isFollowing = status;
+        UpdateFollowingSwitchColor();
+        Debug.Log($"Is Following: {isFollowing}");
+    }
+
+    public void SwitchPanning()
+    {
+        isPanning = !isPanning;
+        UpdateEdgePanSwitchColor();
+    }
+
+    void UpdateEdgePanSwitchColor()
+    {
+        ColorBlock colorBlock = edgePanSwitch.colors;
 
         colorBlock.normalColor = isPanning ? Color.green : Color.red;
 
@@ -182,20 +193,20 @@ public class BigMapCamera : MonoBehaviour
         colorBlock.selectedColor = colorBlock.normalColor * 1.05f;
         colorBlock.disabledColor = colorBlock.normalColor * 0.5f;
 
-        _button.colors = colorBlock;
+        edgePanSwitch.colors = colorBlock;
     }
 
-    void Zoom()
+    void UpdateFollowingSwitchColor()
     {
-        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        ColorBlock colorBlock = followPlayerSwitch.colors;
+        
+        colorBlock.normalColor = isFollowing ? Color.cyan : Color.white;
 
-        if (scrollInput != 0)
-        {
-            // Adjust the orthographic size based on the scroll input
-            GetComponent<Camera>().orthographicSize -= scrollInput * zoomSpeed;
+        colorBlock.highlightedColor = colorBlock.normalColor * 1.1f;
+        colorBlock.pressedColor = colorBlock.normalColor * 0.9f;
+        colorBlock.selectedColor = colorBlock.normalColor * 1.05f;
+        colorBlock.disabledColor = colorBlock.normalColor * 0.5f;
 
-            // Clamp the orthographic size to stay within min and max zoom levels
-            GetComponent<Camera>().orthographicSize = Mathf.Clamp(GetComponent<Camera>().orthographicSize, minZoom, maxZoom);
-        }
+        followPlayerSwitch.colors = colorBlock;
     }
 }
