@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using System;
+
 
 
 
@@ -22,9 +24,10 @@ namespace PG
     {
         // target camera
         public ChaseController TargetCamera;
-
         // InputAction
         public SimulatorInputActions controls;
+        // ForceFeedbackProvider
+        public ForceFeedbackProvider ForceFeedbackProvider;
 
         public float HorizontalChangeSpeed = 10;            //To simulate the use of a keyboard trigger.
 
@@ -141,11 +144,21 @@ namespace PG
             // car actions
             controls.Player.ConnectTrailer.performed += ctx => ConnectTrailer();
             controls.Player.ResetCar.performed += ctx => ResetCar();
+
+            // setup ffb provider
+            ForceFeedbackProvider.InitProvider();
         }
 
         private void Update()
         {
             Horizontal = Mathf.MoveTowards (Horizontal, TargetHorizontal, Time.deltaTime * HorizontalChangeSpeed);
+
+            // explicit update check for ffb
+            if (LogitechGSDK.LogiUpdate())
+            {
+                // apply centering spring ffb
+                ForceFeedbackProvider.ApplySpringForce(0);
+            }
         }
 
         void UpdateCamera(Vector2 value)
@@ -313,7 +326,11 @@ namespace PG
             Boost = value;
         }
 
-#endregion //Set input
+        #endregion //Set input
 
+        void OnApplicationQuit()
+        {
+            Debug.Log("SteeringShutdown:" + LogitechGSDK.LogiSteeringShutdown());
+        }
     }
 }
