@@ -20,7 +20,7 @@ namespace PG
 
         // Torque is calculated based on the EngineRPM, Turbo, Boost, TCS, and SpeedLimit.
         // Turbo, Boost, TCS is not needed
-        public float CurrentEngineTorque
+        public float CurrentMotorTorque
         { 
             get
             {
@@ -40,12 +40,8 @@ namespace PG
         public float EngineLoad { get; private set; }           //Current Load
         public float DrivetrainRPM { get; private set; }        // Drivetrain RPM, for clutch slip calculation.
 
-        public float EngineRPMIncreaseFromGas { get { return Engine.EngineRPMIncreaseFromGas; } }
         public float MaxRPM { get { return Engine.MaxRPM; } }
-        public float IdleRPM { get { return Engine.IdleRPM; } }
-        public float StallRPM { get { return Engine.StallRPM; } }
-        public float LoadInfluenceRate { get { return Engine.LoadInfluenceRate; } }
-        public float LoadDampening { get { return Engine.LoadDampening; } }
+        public float MinRPM { get { return Engine.MinRPM; } }
 
         public event System.Action BackFireAction;              //TODO Add BackFire vfx and sfx.
 
@@ -71,7 +67,7 @@ namespace PG
             if (StartEngineInAwake)
             {
                 EngineIsOn = true;
-                EngineRPM = IdleRPM;
+                EngineRPM = MinRPM;
             }
         }
 
@@ -164,20 +160,17 @@ namespace PG
 
             if (enabledWheelsCount > 0)
             {
-                DrivetrainRPM /= enabledWheelsCount;
+                DrivetrainRPM = DrivetrainRPM / enabledWheelsCount;
             }
             else
             {
-                DrivetrainRPM = Engine.IdleRPM;
+                DrivetrainRPM = Engine.MinRPM;
             }
             
             EngineLoad = 0;
 
             if (!InCutOff)
             {
-                // change RPM speed
-                var changeRPMSpeed = CurrentAcceleration.Abs() > 0.1f && TargetRPM > EngineRPM ? Engine.RPMEngineToRPMWheelsFast : Engine.RPMEngineToRPMWheelsSlow;
-
                 //Calculation of the current engine rpm.
                 if (!Gearbox.HasRGear && CurrentGear == -1)
                 {
@@ -185,44 +178,19 @@ namespace PG
                 }
                 else
                 {
-                    // Define a clutch slip ratio based on the current clutch engagement
-                    float clutchSlipRatio = Mathf.Clamp01(CarControl.Clutch); // ClutchInput ranges from 0 (disengaged) to 1 (fully engaged)
-
-                    // clutch engagement check
-                    if (DrivetrainRPM * CurrentGear <= 0 || clutchSlipRatio < 0.01f) 
-                    {
-                        // RPM primarily influenced by throttle input when the clutch is disengaged
-                        TargetRPM = Mathf.Lerp(EngineRPM, Engine.IdleRPM + EngineRPMIncreaseFromGas * CurrentAcceleration, changeRPMSpeed * Time.fixedDeltaTime);
-                    }
-                    else // Gear engaged and clutch partially or fully engaged
-                    {
-
-                        // Drivetrain influence reduced by clutch slip
-                        float drivetrainInfluence = DrivetrainRPM.Abs() * AllGearsRatio[CurrentGearIndex].Abs();
-
-                        // Incorporate clutch slip into the RPM calculation
-                        float slipInfluence = Mathf.Lerp(EngineRPM, drivetrainInfluence, clutchSlipRatio);
-
-                        // Set TargetRPM based on how much the clutch is engaged
-                        TargetRPM = Mathf.Lerp(EngineRPM, slipInfluence, Engine.LoadInfluenceRate * Time.fixedDeltaTime);
-
-                        // Apply damping to simulate engine load effects (e.g., going uphill, starting from stop)
-                        if (EngineRPM > TargetRPM && CurrentAcceleration < 0.1f)
-                        {
-                            TargetRPM -= Engine.LoadDampening * (EngineRPM - TargetRPM) * Time.fixedDeltaTime;
-                        }
-                    }
+                    TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 && !InHandBrake ? ((EngineRPM + 1000) * CurrentAcceleration) : (DrivetrainRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
                 }
 
-                // allow for RPM to reach stall
-                TargetRPM = TargetRPM.Clamp(0, MaxRPM);
-                
+                TargetRPM = TargetRPM.Clamp(MinRPM, MaxRPM);
+                var changeRPMSpeed = CurrentAcceleration.Abs() > 0.1f && TargetRPM > EngineRPM? Engine.RPMEngineToRPMWheelsFast: Engine.RPMEngineToRPMWheelsSlow;
+
+                // Calculate clutchSlipRatio
+                float clutchSlipRatio = Mathf.Abs(TargetRPM - EngineRPM) / Mathf.Max(TargetRPM, EngineRPM, 1f);
 
                 //Calculation of the current engine load.
-                EngineLoad = (TargetRPM - EngineRPM).Clamp (-300, 300) / 300 * CurrentAcceleration;
+                EngineLoad = (TargetRPM - EngineRPM).Clamp (-300, 300) / 300 * CurrentAcceleration * (1f - clutchSlipRatio);
 
-                // Adjust EngineRPM to TargetRPM
-                EngineRPM = Mathf.Lerp (EngineRPM, TargetRPM, changeRPMSpeed * Time.fixedDeltaTime);
+                EngineRPM = Mathf.Lerp (EngineRPM, TargetRPM, changeRPMSpeed * Time.fixedDeltaTime * (1f - clutchSlipRatio));
             }
 
             //Check CutOff.
@@ -235,7 +203,8 @@ namespace PG
 
             // Engine stall logic here
             // CurrentAcceleration directly translates to how much acceleration is applied from the pedal.
-            if (CurrentGear != 0 && EngineRPM < StallRPM && CurrentAcceleration < 0.1f)
+            // CarControl.Clutch > 0.84 is arbitrary for now, fine-tune later.
+            if (CurrentGear != 0 && CarControl.Clutch > 0.84 && EngineRPM < Engine.StallRPM && CurrentAcceleration < 0.1f)
             {
                 Debug.Log("Stalled here");
                 StopEngine();
@@ -286,10 +255,10 @@ namespace PG
             {
                 yield return null;
                 timer += Time.deltaTime;
-                EngineRPM = Mathf.Lerp (0, IdleRPM, Mathf.Pow(Mathf.InverseLerp (0, StartEngineDellay, timer), 2));
+                EngineRPM = Mathf.Lerp (0, MinRPM, Mathf.Pow(Mathf.InverseLerp (0, StartEngineDellay, timer), 2));
             }
 
-            EngineRPM = IdleRPM;
+            EngineRPM = MinRPM;
 
             if (EngineDamageableObject != null)
             {
@@ -324,16 +293,12 @@ namespace PG
             public float MaxMotorTorque = 150;                  //Maximum torque, reached at 1 value(y) of MotorTorqueFromRpmCurve.
             public AnimationCurve MotorTorqueFromRpmCurve;
             public float MaxRPM = 7000;
-            public float IdleRPM = 700;
+            public float MinRPM = 700;
             public float RPMEngineToRPMWheelsFast = 15;         //Rpm change with increasing speed.
             public float RPMEngineToRPMWheelsSlow = 4;          //Rpm change with decreasing speed.
             public float StallRPM = 350;                        // minimum RPM to reach engine stall, StallRPM < IdleRPM.
-            public float EngineRPMIncreaseFromGas = 1800;       // Maximum RPM when gas is applied
 
             public float SpeedLimit = 0;
-            [Header("On Load Behavior")]
-            public float LoadInfluenceRate = 0.5f;
-            public float LoadDampening = 0.4f;
 
             [Header("Cut off")]
             public float CutOffRPM = 6800;                      //The rpm at which the cut-off is triggered.
