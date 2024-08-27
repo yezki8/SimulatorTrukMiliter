@@ -66,7 +66,11 @@ namespace PG
 
             var steerMultiplayer = Steer.EnableSteerLimit && VehicleDirection > 0? Steer.SteerLimitCurve.Evaluate (CurrentSpeed): 1;
 
-            float targetSteerAngle = HorizontalControl * Steer.MaxSteerAngle * steerMultiplayer;
+            // Don't change target steer angle
+            // instead set spring force on steering wheel
+            //float targetSteerAngle = HorizontalControl * Steer.MaxSteerAngle * steerMultiplayer;
+            ForceFeedback.SetSpringMultiplier(1 - steerMultiplayer);
+            float targetSteerAngle = HorizontalControl * Steer.MaxSteerAngle;
 
             //Wheel turn limitation.
             var targetAngle = Mathf.Clamp (helpAngle + targetSteerAngle, -Steer.MaxSteerAngle, Steer.MaxSteerAngle);

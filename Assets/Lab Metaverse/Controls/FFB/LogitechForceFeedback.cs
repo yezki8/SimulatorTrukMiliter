@@ -7,8 +7,6 @@ public class LogitechForceFeedback : ForceFeedbackProvider
 {
     private StringBuilder steeringWheelName = new StringBuilder(256);
     private int deviceIdx;
-    public int SpringSaturation = 20;
-    public int SpringCoefficient = 10;
 
     public override void InitProvider()
     {
@@ -30,6 +28,11 @@ public class LogitechForceFeedback : ForceFeedbackProvider
     public override void ApplySpringForce(float force)
     {
         int magnitude = (int)(force * 100);
-        LogitechGSDK.LogiPlaySpringForce(deviceIdx, magnitude, SpringSaturation, SpringCoefficient);
+        LogitechGSDK.LogiPlaySpringForce(deviceIdx, magnitude, _springSaturation, _springCoefficient);
+    }
+    public override void SetSpringMultiplier(float saturation)
+    {
+        _springSaturation = (int)(saturation * SpringMultiplier);
+        _springCoefficient = (int)Mathf.Ceil(saturation * SpringMultiplier / 3);
     }
 }
