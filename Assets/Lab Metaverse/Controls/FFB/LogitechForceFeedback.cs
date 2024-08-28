@@ -24,15 +24,28 @@ public class LogitechForceFeedback : ForceFeedbackProvider
             Debug.Log("No Logitech device found");
         }
     }
-    // Main FFB from centering spring
-    public override void ApplySpringForce(float force)
+    public override int GetPosOffset()
     {
-        int magnitude = (int)(force * 100);
-        LogitechGSDK.LogiPlaySpringForce(deviceIdx, magnitude, _springSaturation, _springCoefficient);
+        return _springPosOffset;
     }
-    public override void SetSpringMultiplier(float saturation)
+    // Main FFB from centering spring
+    public override void ApplySpringForce()
     {
-        _springSaturation = (int)(saturation * SpringMultiplier);
-        _springCoefficient = (int)Mathf.Ceil(saturation * SpringMultiplier / 3);
+        int magnitude = _springPosOffset;
+        // sanity check
+        if (_springSaturation > 0)
+        {
+            LogitechGSDK.LogiPlaySpringForce(deviceIdx, magnitude, _springSaturation, _springCoefficient);
+        }
+    }
+    public override void SetSpringMultiplier(float multipler)
+    {
+        Debug.Log($"Spring Multiplier: {multipler}");
+        _springSaturation = (int)(multipler * SpringMultiplier);
+        _springCoefficient = (int)Mathf.Ceil(multipler * SpringMultiplier / 2f);
+    }
+    public override void SetSpringPosOffset(float offset)
+    {
+        _springPosOffset = (int)(offset * 90);
     }
 }

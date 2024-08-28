@@ -31,7 +31,8 @@ namespace PG
                     }
                 }
             }
-            SteeringWheels = steeringWheels.ToArray ();
+            // sort wheel so that the first wheel is the leftmost wheel
+            SteeringWheels = steeringWheels.OrderBy (x => x.transform.localPosition.x).ToArray ();
         }
 
         /// <summary>
@@ -64,12 +65,22 @@ namespace PG
 
             float helpWhenChangeAngle = VehicleDirection == 1? (VelocityAngle - PrevVelocityAngle) * (Steer.MaxSteerAngle / 90): 0;
 
-            var steerMultiplayer = Steer.EnableSteerLimit && VehicleDirection > 0? Steer.SteerLimitCurve.Evaluate (CurrentSpeed): 1;
+            var steerMultiplayer = Steer.EnableSteerLimit && VehicleDirection != 0? Steer.SteerLimitCurve.Evaluate (CurrentSpeed): 1;
+            Debug.Log($"VehicleDirection: {VehicleDirection}");
+            // Simulate wheel turn when through potholes or bumps
+            // check height difference between left and right wheels
+            // steer the wheels to the side of the wheel with greater height
+            // minus value means left wheel is higher
+            // plus value means right wheel is higher
+            float heightDifference = SteeringWheels[1].transform.position.y - SteeringWheels[0].transform.position.y;
+            Debug.Log($"Height Difference (Modified): {heightDifference * 2.5f:F3}");
+            ForceFeedback.SetSpringPosOffset(heightDifference);
 
             // Don't change target steer angle
             // instead set spring force on steering wheel
-            //float targetSteerAngle = HorizontalControl * Steer.MaxSteerAngle * steerMultiplayer;
-            ForceFeedback.SetSpringMultiplier(1 - steerMultiplayer);
+            // add height difference to spring multiplier
+            ForceFeedback.SetSpringMultiplier(Mathf.Clamp(1 - steerMultiplayer + (heightDifference.Abs() * 2.5f), 0, 1));
+            // add center offset after applying spring force
             float targetSteerAngle = HorizontalControl * Steer.MaxSteerAngle;
 
             //Wheel turn limitation.

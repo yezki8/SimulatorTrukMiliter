@@ -157,7 +157,7 @@ namespace PG
             if (LogitechGSDK.LogiUpdate())
             {
                 // apply centering spring ffb
-                ForceFeedbackProvider.ApplySpringForce(0);
+                ForceFeedbackProvider.ApplySpringForce();
             }
         }
 

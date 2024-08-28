@@ -10,10 +10,15 @@ using UnityEngine;
 public abstract class ForceFeedbackProvider : MonoBehaviour
 {
     [Header("Centering Spring")]
-    [SerializeField] protected int _springSaturation = 20;
-    [SerializeField] protected int _springCoefficient = 10;
+    [Range(0,100)]
+    [SerializeField] protected int _springSaturation = 0;
+    [Range(-100,100)]
+    [SerializeField] protected int _springCoefficient = 0;
+    [SerializeField] protected int _springPosOffset = 0;
     public int SpringMultiplier = 50;
     public abstract void InitProvider();
-    public abstract void ApplySpringForce(float force);
+    public abstract int GetPosOffset();
+    public abstract void ApplySpringForce();
     public abstract void SetSpringMultiplier(float saturation);
+    public abstract void SetSpringPosOffset(float offset);
 }
