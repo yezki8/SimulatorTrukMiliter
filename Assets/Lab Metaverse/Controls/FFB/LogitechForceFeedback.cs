@@ -38,14 +38,28 @@ public class LogitechForceFeedback : ForceFeedbackProvider
             LogitechGSDK.LogiPlaySpringForce(deviceIdx, magnitude, _springSaturation, _springCoefficient);
         }
     }
+    public override void ApplyDirtRoadEffect()
+    {
+        int magnitude = _dirtRoadFFBMagnitude;
+        Debug.Log(magnitude);
+        if (magnitude > 1)
+        {
+            LogitechGSDK.LogiPlayDirtRoadEffect(deviceIdx, magnitude);
+        }
+    }
+
     public override void SetSpringMultiplier(float multipler)
     {
-        Debug.Log($"Spring Multiplier: {multipler}");
         _springSaturation = (int)(multipler * SpringMultiplier);
         _springCoefficient = (int)Mathf.Ceil(multipler * SpringMultiplier / 2f);
     }
     public override void SetSpringPosOffset(float offset)
     {
         _springPosOffset = (int)(offset * 90);
+    }
+    public override void SetDirtRoadEffect(int magnitude)
+    {
+        // max wheel count + adjustments
+       _dirtRoadFFBMagnitude = (6 - magnitude) * 5;
     }
 }

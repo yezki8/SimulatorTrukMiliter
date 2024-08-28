@@ -149,6 +149,7 @@ namespace PG
             ForceFeedbackProvider.InitProvider();
         }
 
+        // Update ForceFeedbackProvider
         private void Update()
         {
             Horizontal = Mathf.MoveTowards (Horizontal, TargetHorizontal, Time.deltaTime * HorizontalChangeSpeed);
@@ -158,6 +159,8 @@ namespace PG
             {
                 // apply centering spring ffb
                 ForceFeedbackProvider.ApplySpringForce();
+                // apply dirt road ffb
+                ForceFeedbackProvider.ApplyDirtRoadEffect();
             }
         }
 

@@ -66,21 +66,9 @@ namespace PG
             float helpWhenChangeAngle = VehicleDirection == 1? (VelocityAngle - PrevVelocityAngle) * (Steer.MaxSteerAngle / 90): 0;
 
             var steerMultiplayer = Steer.EnableSteerLimit && VehicleDirection != 0? Steer.SteerLimitCurve.Evaluate (CurrentSpeed): 1;
-            Debug.Log($"VehicleDirection: {VehicleDirection}");
-            // Simulate wheel turn when through potholes or bumps
-            // check height difference between left and right wheels
-            // steer the wheels to the side of the wheel with greater height
-            // minus value means left wheel is higher
-            // plus value means right wheel is higher
-            float heightDifference = SteeringWheels[1].transform.position.y - SteeringWheels[0].transform.position.y;
-            Debug.Log($"Height Difference (Modified): {heightDifference * 2.5f:F3}");
-            ForceFeedback.SetSpringPosOffset(heightDifference);
 
-            // Don't change target steer angle
-            // instead set spring force on steering wheel
-            // add height difference to spring multiplier
-            ForceFeedback.SetSpringMultiplier(Mathf.Clamp(1 - steerMultiplayer + (heightDifference.Abs() * 2.5f), 0, 1));
-            // add center offset after applying spring force
+            ApplyForceFeedback(steerMultiplayer);
+
             float targetSteerAngle = HorizontalControl * Steer.MaxSteerAngle;
 
             //Wheel turn limitation.
@@ -110,6 +98,37 @@ namespace PG
             {
                 SteeringWheels[i].SetSteerAngle (CurrentSteerAngle);
             }
+        }
+        /// <summary>
+        /// Apply force feedback to the steering wheel.
+        /// </summary>
+        void ApplyForceFeedback(float steerMultiplayer)
+        {
+            // Simulate wheel turn when through potholes or bumps
+            // check height difference between left and right wheels
+            // steer the wheels to the side of the wheel with greater height
+
+            float heightDifference = SteeringWheels[1].transform.position.y - SteeringWheels[0].transform.position.y;
+            ForceFeedback.SetSpringPosOffset(heightDifference);
+            
+            // Simulate dirt road effect, based on stiffness
+            float avgMagnitude = 0;
+            foreach (var wheel in Wheels)
+            {
+                
+                if (wheel.IsGrounded)
+                {
+                    Debug.Log($"Wheel Stiffness: {wheel.CurrentGroundConfig.WheelStiffness}");
+                    avgMagnitude += wheel.CurrentGroundConfig.WheelStiffness;
+                }
+            }
+            // calculate dirt road effect based on stiffness
+            ForceFeedback.SetDirtRoadEffect((int)(avgMagnitude));
+
+            // Don't change target steer angle
+            // instead set spring force on steering wheel
+            // add height difference to spring multiplier
+            ForceFeedback.SetSpringMultiplier(Mathf.Clamp(1 - steerMultiplayer + (heightDifference.Abs() * 2.5f), 0, 1));
         }
 
         /// <summary>
