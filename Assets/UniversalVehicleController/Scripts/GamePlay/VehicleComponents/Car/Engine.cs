@@ -98,7 +98,6 @@ namespace PG
             // If the automatic transmission is turned off, then to drive back you need to select the reverse gear and press the acceleration button.
 
             float adjustedAcceleration = Engine.ThrottleCurve.Evaluate(CarControl.Acceleration);
-            Debug.Log(adjustedAcceleration);
 
             if (CarControl == null || BlockControl)
             {
