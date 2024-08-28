@@ -83,7 +83,7 @@ public class DebugManager : MonoBehaviour
 
         // truck
         stringBuilder.AppendLine($"Engine RPM: {carController.EngineRPM:F3} \t\tDrivetrain RPM: {carController.DrivetrainRPM:F3}");
-        stringBuilder.AppendLine($"Current Motor Torque: {carController.CurrentMotorTorque:F3} \tWheel Torque: {carController.WheelTorque:F3}");
+        stringBuilder.AppendLine($"Motor Torque: {carController.CurrentMotorTorque:F3} \tWheel Torque: {carController.WheelTorque:F3}");
 
         // Add more debug info as needed
 

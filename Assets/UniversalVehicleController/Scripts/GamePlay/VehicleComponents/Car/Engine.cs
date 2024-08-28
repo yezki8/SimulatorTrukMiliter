@@ -20,7 +20,8 @@ namespace PG
 
         // Torque is calculated based on the EngineRPM, Turbo, Boost, TCS, and SpeedLimit.
         // Turbo, Boost, TCS is not needed
-        public float CurrentMotorTorque
+        // added engine is on check
+        public float CurrentEngineTorque
         { 
             get
             {
@@ -29,7 +30,8 @@ namespace PG
                     // (1 + CurrentTurbo * Engine.TurboAdditionalTorque) *
                     // (InBoost ? 1 + Engine.BoostAdditionalPower : 1) *
                     // (Steer.TCS > 0 ? TCSMultiplayer : 1) *
-                    (Engine.SpeedLimit > 0? Mathf.InverseLerp(Engine.SpeedLimit, Engine.SpeedLimit * 0.5f, CurrentSpeed) : 1)
+                    (Engine.SpeedLimit > 0? Mathf.InverseLerp(Engine.SpeedLimit, Engine.SpeedLimit * 0.5f, CurrentSpeed) : 1) *
+                    (EngineIsOn? 1 : 0)
                     ;
             } 
         }
@@ -95,6 +97,9 @@ namespace PG
             // If the automatic transmission is turned on, the gear is in reverse and the brake/reverse button is pressed, the car will drive in reverse and vice versa. 
             // If the automatic transmission is turned off, then to drive back you need to select the reverse gear and press the acceleration button.
 
+            float adjustedAcceleration = Engine.ThrottleCurve.Evaluate(CarControl.Acceleration);
+            Debug.Log(adjustedAcceleration);
+
             if (CarControl == null || BlockControl)
             {
                 CurrentAcceleration = 0;
@@ -102,13 +107,13 @@ namespace PG
             }
             else if (!IsLocalVehicle || !Gearbox.AutomaticGearBox || CurrentGear >= 0)
             {
-                CurrentAcceleration = CarControl.Acceleration;
+                CurrentAcceleration = adjustedAcceleration;
                 CurrentBrake = CarControl.BrakeReverse;
             }
             else if (CurrentGear < 0)
             {
                 CurrentAcceleration = CarControl.BrakeReverse;
-                CurrentBrake = CarControl.Acceleration;
+                CurrentBrake = adjustedAcceleration;
             }
 
             //TCS Logic
@@ -204,7 +209,7 @@ namespace PG
             // Engine stall logic here
             // CurrentAcceleration directly translates to how much acceleration is applied from the pedal.
             // CarControl.Clutch > 0.84 is arbitrary for now, fine-tune later.
-            if (CurrentGear != 0 && CarControl.Clutch > 0.84 && EngineRPM < Engine.StallRPM && CurrentAcceleration < 0.1f)
+            if (CurrentGear != 0 && CarControl.Clutch > 0.95 && EngineRPM < Engine.StallRPM && CurrentAcceleration < 0.1f)
             {
                 Debug.Log("Stalled here");
                 StopEngine();
@@ -292,6 +297,7 @@ namespace PG
             [Header("Power")]
             public float MaxMotorTorque = 150;                  //Maximum torque, reached at 1 value(y) of MotorTorqueFromRpmCurve.
             public AnimationCurve MotorTorqueFromRpmCurve;
+            public AnimationCurve ThrottleCurve;
             public float MaxRPM = 7000;
             public float MinRPM = 700;
             public float RPMEngineToRPMWheelsFast = 15;         //Rpm change with increasing speed.
