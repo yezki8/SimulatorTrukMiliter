@@ -22,7 +22,7 @@ public class BigMapCamera : MonoBehaviour
     private Vector3 dragOrigin;
     private bool isDragging = false;
     private bool isPanning = false;
-    private bool isFollowing = true;
+    private bool isFollowing;
     private SimulatorInputActions _controls;
 
 
@@ -38,6 +38,7 @@ public class BigMapCamera : MonoBehaviour
     void Start()
     {
         GetComponent<Camera>().enabled = false;
+        SwitchFollowingTrue();
         UpdateEdgePanSwitchColor();
         UpdateFollowingSwitchColor();
     }
@@ -161,12 +162,14 @@ public class BigMapCamera : MonoBehaviour
     {
         isFollowing = false;
         UpdateFollowingSwitchColor();
+        followPlayerSwitch.gameObject.SetActive(true);
     }
 
     public void SwitchFollowingTrue()
     {
         isFollowing = true;
-        UpdateFollowingSwitchColor();
+        followPlayerSwitch.gameObject.SetActive(false);
+        
     }
 
     public void SwitchPanning()
