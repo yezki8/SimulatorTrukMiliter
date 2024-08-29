@@ -27,6 +27,14 @@ public class GameStateUIHandler : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        if (Display.displays.Length > 1)
+        {
+            Display.displays[1].Activate();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
