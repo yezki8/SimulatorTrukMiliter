@@ -118,10 +118,10 @@ namespace PG
                 
                 if (wheel.IsGrounded)
                 {
-                    Debug.Log($"Wheel Stiffness: {wheel.CurrentGroundConfig.WheelStiffness}");
                     avgMagnitude += wheel.CurrentGroundConfig.WheelStiffness;
                 }
             }
+            Debug.Log($"DirtRoad Effect mag. to be applied: {(6 - avgMagnitude) * 2}");
             // calculate dirt road effect based on stiffness
             ForceFeedback.SetDirtRoadEffect((int)(avgMagnitude));
 

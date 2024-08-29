@@ -86,10 +86,12 @@ namespace PG
         public void EnableControls()
         {
             controls.Enable();
+            ForceFeedbackProvider.EnableFFB(true);
         }
         public void DisableControls()
         {
             controls.Disable();
+            ForceFeedbackProvider.EnableFFB(false);
         }
 
         // create instance and hook up controls
@@ -155,7 +157,7 @@ namespace PG
             Horizontal = Mathf.MoveTowards (Horizontal, TargetHorizontal, Time.deltaTime * HorizontalChangeSpeed);
 
             // explicit update check for ffb
-            if (LogitechGSDK.LogiUpdate())
+            if (LogitechGSDK.LogiUpdate() && ForceFeedbackProvider.IsFFBEnabled())
             {
                 // apply centering spring ffb
                 ForceFeedbackProvider.ApplySpringForce();

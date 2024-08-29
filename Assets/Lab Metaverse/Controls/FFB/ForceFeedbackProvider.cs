@@ -9,6 +9,8 @@ using UnityEngine;
 
 public abstract class ForceFeedbackProvider : MonoBehaviour
 {
+    private bool _enableFFB = false;
+    [SerializeField] private int _springMaxPosOffset = 90;
     [Header("Centering Spring")]
     [Range(0,100)]
     [SerializeField] protected int _springSaturation = 0;
@@ -18,11 +20,29 @@ public abstract class ForceFeedbackProvider : MonoBehaviour
     [SerializeField] protected int _dirtRoadFFBMagnitude = 0;
     public int SpringMultiplier = 50;
 
+    // Applied to all FFB providers
+    public virtual void EnableFFB(bool enable) 
+    {
+        _enableFFB = enable;
+    }
+    public virtual bool IsFFBEnabled()
+    {
+        return _enableFFB;
+    }
+    public virtual void SetSpringPosOffset(float offset)
+    {
+        _springPosOffset = (int)(offset * _springMaxPosOffset);
+    }
+    public virtual void SetDirtRoadEffect(int magnitude)
+    {
+        // max wheel count + adjustments
+        _dirtRoadFFBMagnitude = (6 - magnitude) * 2;
+    }
+
     public abstract void InitProvider();
     public abstract int GetPosOffset();
     public abstract void ApplySpringForce();
     public abstract void ApplyDirtRoadEffect();
     public abstract void SetSpringMultiplier(float saturation);
-    public abstract void SetSpringPosOffset(float offset);
-    public abstract void SetDirtRoadEffect(int magnitude);
+    
 }

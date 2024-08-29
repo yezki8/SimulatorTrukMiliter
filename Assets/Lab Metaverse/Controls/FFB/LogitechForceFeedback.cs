@@ -31,20 +31,18 @@ public class LogitechForceFeedback : ForceFeedbackProvider
     // Main FFB from centering spring
     public override void ApplySpringForce()
     {
-        int magnitude = _springPosOffset;
         // sanity check
         if (_springSaturation > 0)
         {
-            LogitechGSDK.LogiPlaySpringForce(deviceIdx, magnitude, _springSaturation, _springCoefficient);
+            LogitechGSDK.LogiPlaySpringForce(deviceIdx, _springPosOffset, _springSaturation, _springCoefficient);
         }
     }
     public override void ApplyDirtRoadEffect()
     {
-        int magnitude = _dirtRoadFFBMagnitude;
-        Debug.Log(magnitude);
-        if (magnitude > 1)
+        if (_dirtRoadFFBMagnitude > 2)
         {
-            LogitechGSDK.LogiPlayDirtRoadEffect(deviceIdx, magnitude);
+            Debug.Log($"Applying Dirt Road Effect with magnitude: {_dirtRoadFFBMagnitude}");
+            LogitechGSDK.LogiPlayDirtRoadEffect(deviceIdx, _dirtRoadFFBMagnitude);
         }
     }
 
@@ -52,14 +50,5 @@ public class LogitechForceFeedback : ForceFeedbackProvider
     {
         _springSaturation = (int)(multipler * SpringMultiplier);
         _springCoefficient = (int)Mathf.Ceil(multipler * SpringMultiplier / 2f);
-    }
-    public override void SetSpringPosOffset(float offset)
-    {
-        _springPosOffset = (int)(offset * 90);
-    }
-    public override void SetDirtRoadEffect(int magnitude)
-    {
-        // max wheel count + adjustments
-       _dirtRoadFFBMagnitude = (6 - magnitude) * 5;
     }
 }
