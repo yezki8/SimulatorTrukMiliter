@@ -121,7 +121,9 @@ namespace PG
                     avgMagnitude += wheel.CurrentGroundConfig.WheelStiffness;
                 }
             }
-            Debug.Log($"DirtRoad Effect mag. to be applied: {(6 - avgMagnitude) * 2}");
+            avgMagnitude = (6 - avgMagnitude) * (Steer.SpeedToDirtRoadFFB.Evaluate(CurrentSpeed));
+
+            Debug.Log($"DirtRoad Effect mag. to be applied: {avgMagnitude * ForceFeedback.getDirtRoadEffectMaxSpeedInfluence()}");
             // calculate dirt road effect based on stiffness
             ForceFeedback.SetDirtRoadEffect((int)(avgMagnitude));
 
@@ -237,6 +239,7 @@ namespace PG
             public AnimationCurve SteerLimitCurve;                  //Limiting wheel turning if the EnableSteerLimit flag is enabled
             public AnimationCurve SteerChangeSpeedToVelocity;       //The speed of turn of the wheel in the direction of the velocity of the car.
             public AnimationCurve SteerChangeSpeedFromVelocity;     //The speed of turn of the wheel from the direction of the velocity of the car.
+            public AnimationCurve SpeedToDirtRoadFFB;               //The magnitude of the dirt road effect based on the speed of the car.
 
             [Header("Steer assistance")]
             public float MaxVelocityAngleForHelp = 120;             //The maximum degree of angle of the car relative to the velocity, at which the steering assistance will be provided.

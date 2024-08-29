@@ -11,6 +11,7 @@ public abstract class ForceFeedbackProvider : MonoBehaviour
 {
     private bool _enableFFB = false;
     [SerializeField] private int _springMaxPosOffset = 90;
+    [SerializeField] private int _dirtRoadEffectMaxSpeedInfluence = 15;
     [Header("Centering Spring")]
     [Range(0,100)]
     [SerializeField] protected int _springSaturation = 0;
@@ -29,14 +30,17 @@ public abstract class ForceFeedbackProvider : MonoBehaviour
     {
         return _enableFFB;
     }
+    public virtual int getDirtRoadEffectMaxSpeedInfluence()
+    {
+        return _dirtRoadEffectMaxSpeedInfluence;
+    }
     public virtual void SetSpringPosOffset(float offset)
     {
         _springPosOffset = (int)(offset * _springMaxPosOffset);
     }
     public virtual void SetDirtRoadEffect(int magnitude)
     {
-        // max wheel count + adjustments
-        _dirtRoadFFBMagnitude = (6 - magnitude) * 2;
+        _dirtRoadFFBMagnitude = magnitude * _dirtRoadEffectMaxSpeedInfluence;
     }
 
     public abstract void InitProvider();
