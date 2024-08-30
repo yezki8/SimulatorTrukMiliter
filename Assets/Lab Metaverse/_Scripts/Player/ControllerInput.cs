@@ -86,12 +86,16 @@ namespace PG
         public void EnableControls()
         {
             controls.Enable();
+            Debug.Log("Controls enabled");
             ForceFeedbackProvider.EnableFFB(true);
+            Debug.Log("FFB enabled");
         }
         public void DisableControls()
         {
             controls.Disable();
+            Debug.Log("Controls disabled");
             ForceFeedbackProvider.EnableFFB(false);
+            Debug.Log("FFB disabled");
         }
 
         // create instance and hook up controls

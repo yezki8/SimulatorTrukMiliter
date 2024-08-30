@@ -123,12 +123,10 @@ namespace PG
             }
             avgMagnitude = (6 - avgMagnitude) * (Steer.SpeedToDirtRoadFFB.Evaluate(CurrentSpeed));
 
-            Debug.Log($"DirtRoad Effect mag. to be applied: {avgMagnitude * ForceFeedback.getDirtRoadEffectMaxSpeedInfluence()}");
             // calculate dirt road effect based on stiffness
             ForceFeedback.SetDirtRoadEffect((int)(avgMagnitude));
 
-            // Don't change target steer angle
-            // instead set spring force on steering wheel
+            // set spring force on steering wheel
             // add height difference to spring multiplier
             ForceFeedback.SetSpringMultiplier(Mathf.Clamp(1 - steerMultiplier + (heightDifference.Abs() * 2.5f), 0, 1));
         }
