@@ -65,9 +65,9 @@ namespace PG
 
             float helpWhenChangeAngle = VehicleDirection == 1? (VelocityAngle - PrevVelocityAngle) * (Steer.MaxSteerAngle / 90): 0;
 
-            var steerMultiplayer = Steer.EnableSteerLimit && VehicleDirection != 0? Steer.SteerLimitCurve.Evaluate (CurrentSpeed): 1;
+            var steerMultiplier = Steer.EnableSteerLimit && VehicleDirection != 0? Steer.SteerLimitCurve.Evaluate (CurrentSpeed): 1;
 
-            ApplyForceFeedback(steerMultiplayer);
+            ApplyForceFeedback(steerMultiplier);
 
             float targetSteerAngle = HorizontalControl * Steer.MaxSteerAngle;
 
@@ -90,7 +90,7 @@ namespace PG
             }
 
             PrevSteerAngle = CurrentSteerAngle;
-            CurrentSteerAngle = Mathf.MoveTowards (CurrentSteerAngle, targetAngle, steerAngleChangeSpeed * steerMultiplayer * Time.fixedDeltaTime);
+            CurrentSteerAngle = Mathf.MoveTowards (CurrentSteerAngle, targetAngle, steerAngleChangeSpeed * steerMultiplier * Time.fixedDeltaTime);
             CurrentSteerAngle = (CurrentSteerAngle + helpWhenChangeAngle).Clamp (-Steer.MaxSteerAngle, Steer.MaxSteerAngle);
 
             //Apply a turn to the front wheels.
@@ -102,7 +102,7 @@ namespace PG
         /// <summary>
         /// Apply force feedback to the steering wheel.
         /// </summary>
-        void ApplyForceFeedback(float steerMultiplayer)
+        void ApplyForceFeedback(float steerMultiplier)
         {
             // Simulate wheel turn when through potholes or bumps
             // check height difference between left and right wheels
@@ -130,7 +130,7 @@ namespace PG
             // Don't change target steer angle
             // instead set spring force on steering wheel
             // add height difference to spring multiplier
-            ForceFeedback.SetSpringMultiplier(Mathf.Clamp(1 - steerMultiplayer + (heightDifference.Abs() * 2.5f), 0, 1));
+            ForceFeedback.SetSpringMultiplier(Mathf.Clamp(1 - steerMultiplier + (heightDifference.Abs() * 2.5f), 0, 1));
         }
 
         /// <summary>
