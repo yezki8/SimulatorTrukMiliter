@@ -9958,7 +9958,99 @@ MonoBehaviour:
     activeTrafficPostIndex: -1
     showTrafficPosts: 0
   crossingCornerPresets: []
-  sidewalkPresets: []
+  sidewalkPresets:
+  - name: Sidewalk 1
+    id: 1724832014.836178
+    timestamp: 1724832014.836178
+    layer: 0
+    sidewalkWidth: 1.5
+    curbHeight: 0.25
+    curbDepth: 0.25
+    beveledCurb: 0
+    beveledHeight: 0
+    beveledDepth: 0
+    outerCurb: 0
+    roadSideCurbUVControl: 0
+    outerSideCurbUVControl: 0
+    material: {fileID: 2100000, guid: d74dc327ca3fad8408eeeaf8ad54a110, type: 2}
+    pavementMaterial: {fileID: 0}
+    hardEdges: 0
+    hardEdgePadding: 0
+    shape:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0.25}
+    - {x: 0.25, y: 0.25}
+    - {x: 1.25, y: 0.25}
+    - {x: 1.5, y: 0.25}
+    shapePercentages: []
+    shapeCurbPercentages: []
+    sidewalkUVs:
+    - 0
+    - 0.14285715
+    - 0.2857141
+    - 0.85714245
+    - 1
+    curbUVs: []
+    doConnectionTri: 0000000000
+    tileRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tileSize: 1
+    tiling: 1
+    uvRatio: 1
+    minEnd: 1
+    maxEnd: 1
+    lockUVs: 0
+    planarUVs: 0
+    planarTileSize: 1
+    planarTiling: {x: 1, y: 1}
+    planarUVRatioX: 1
+    planarUVRatioY: 1
+    cornerRadius: 1
+    defaultCornerRadius: 1
+    cornerSegments: 5
+    defaultCornerSegments: 5
+    innerSegmentDistance: 0.5
+    pavementIndex: 2
+    pavementSize: 1
+    curbVecCount: 0
+    subdivision: 0
+    crosswalkPavement: 0
+    crosswalkPavementCurb: 0
+    includeOuterStrip: 0
+    useCrosswalkUVs: 0
+    crosswalkLevelDistance: 0.5
+    crosswalkdepth: 1
+    crosswalkUVs: []
+    crosswalkLevelYLeft: 0.9
+    crosswalkLevelYRight: 0.1
+    crosswalkStripYLeft: 0.95
+    crosswalkStripYRight: 0.05
+    crosswalkSize: 5
+    crosswalkWidth: 1
+    crosswalkMinHeight: 0.02
+    crosswalkMaxHeight: 0.05
+    bottomInnerDistance: 0
+    topInnerDistance: 0
+    bottomStripDistance: 0
+    topStripDistance: 0
+    yPositions:
+    - 0
+    - 0.5
+    - 2.5
+    - 4.5
+    - 5
+    realPavementIndex: 2
+    realColCount: 5
+    crosswalkOuterUVX: 0.85714245
+    crosswalkOuterOffset: 1
+    crosswalkOuterStripOffset: 0
+    crosswalkStripUVX: 0.2857141
+    texSizeRatio: 1
+    castShadow: 1
   textureData: []
   presetAssets:
   - 79afd725c8986ca4d823176c35b4f416
