@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AIConfig:
     MaxSpeed: 50
-    MinSpeed: 5
-    SetSteerAngleMultiplayer: 2
-    OffsetToTargetPoint: 14
-    SpeedFactorToTargetPoint: 0
-    OffsetTurnPrediction: 14
-    SpeedFactorToTurnPrediction: 2
+    MinSpeed: 2
+    SetSteerAngleMultiplayer: 1.2
+    OffsetToTargetPoint: 3
+    SpeedFactorToTargetPoint: 0.1
+    OffsetTurnPrediction: 3
+    SpeedFactorToTurnPrediction: 1.2
     LookAngleSppedFactor: 50
     ReverseWaitTime: 2
     ReverseTime: 2
