@@ -96,7 +96,8 @@ namespace PG
                     var wheel = DriveWheels[i];
 
                     // implement powerTransfer to wheel
-                    WheelTorque = CurrentMotorTorque * powerTransfer;
+                    // add checks for automatic gearbox
+                    WheelTorque = Gearbox.AutomaticGearBox ? CurrentMotorTorque : CurrentMotorTorque * powerTransfer;
 
                     //The torque transmitted to the wheels depends on the difference between the target RPM and the current RPM. 
                     //If the current RPM is greater than the target RPM, the wheel will brake. 
