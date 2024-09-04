@@ -38,9 +38,9 @@ public abstract class ForceFeedbackProvider : MonoBehaviour
     {
         _springPosOffset = (int)(offset * _springMaxPosOffset);
     }
-    public virtual void SetDirtRoadEffect(int magnitude)
+    public virtual void SetDirtRoadEffect(float magnitude)
     {
-        _dirtRoadFFBMagnitude = magnitude * _dirtRoadEffectMaxSpeedInfluence;
+        _dirtRoadFFBMagnitude = (int)(magnitude * _dirtRoadEffectMaxSpeedInfluence);
     }
 
     public abstract void InitProvider();

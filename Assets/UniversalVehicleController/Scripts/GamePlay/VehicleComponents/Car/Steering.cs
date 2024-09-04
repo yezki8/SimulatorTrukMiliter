@@ -122,9 +122,8 @@ namespace PG
                 }
             }
             avgMagnitude = (6 - avgMagnitude) * (Steer.SpeedToDirtRoadFFB.Evaluate(CurrentSpeed));
-
             // calculate dirt road effect based on stiffness
-            ForceFeedback.SetDirtRoadEffect((int)(avgMagnitude));
+            ForceFeedback.SetDirtRoadEffect(avgMagnitude);
 
             // set spring force on steering wheel
             // add height difference to spring multiplier
