@@ -31,7 +31,8 @@ namespace PG
                     }
                 }
             }
-            SteeringWheels = steeringWheels.ToArray ();
+            // sort wheel so that the first wheel is the leftmost wheel
+            SteeringWheels = steeringWheels.OrderBy (x => x.transform.localPosition.x).ToArray ();
         }
 
         /// <summary>
@@ -64,9 +65,11 @@ namespace PG
 
             float helpWhenChangeAngle = VehicleDirection == 1? (VelocityAngle - PrevVelocityAngle) * (Steer.MaxSteerAngle / 90): 0;
 
-            var steerMultiplayer = Steer.EnableSteerLimit && VehicleDirection > 0? Steer.SteerLimitCurve.Evaluate (CurrentSpeed): 1;
+            var steerMultiplier = Steer.EnableSteerLimit && VehicleDirection != 0? Steer.SteerLimitCurve.Evaluate (CurrentSpeed): 1;
 
-            float targetSteerAngle = HorizontalControl * Steer.MaxSteerAngle * steerMultiplayer;
+            ApplyForceFeedback(steerMultiplier);
+
+            float targetSteerAngle = HorizontalControl * Steer.MaxSteerAngle;
 
             //Wheel turn limitation.
             var targetAngle = Mathf.Clamp (helpAngle + targetSteerAngle, -Steer.MaxSteerAngle, Steer.MaxSteerAngle);
@@ -87,7 +90,7 @@ namespace PG
             }
 
             PrevSteerAngle = CurrentSteerAngle;
-            CurrentSteerAngle = Mathf.MoveTowards (CurrentSteerAngle, targetAngle, steerAngleChangeSpeed * steerMultiplayer * Time.fixedDeltaTime);
+            CurrentSteerAngle = Mathf.MoveTowards (CurrentSteerAngle, targetAngle, steerAngleChangeSpeed * steerMultiplier * Time.fixedDeltaTime);
             CurrentSteerAngle = (CurrentSteerAngle + helpWhenChangeAngle).Clamp (-Steer.MaxSteerAngle, Steer.MaxSteerAngle);
 
             //Apply a turn to the front wheels.
@@ -95,6 +98,36 @@ namespace PG
             {
                 SteeringWheels[i].SetSteerAngle (CurrentSteerAngle);
             }
+        }
+        /// <summary>
+        /// Apply force feedback to the steering wheel.
+        /// </summary>
+        void ApplyForceFeedback(float steerMultiplier)
+        {
+            // Simulate wheel turn when through potholes or bumps
+            // check height difference between left and right wheels
+            // steer the wheels to the side of the wheel with greater height
+
+            float heightDifference = SteeringWheels[1].transform.position.y - SteeringWheels[0].transform.position.y;
+            ForceFeedback.SetSpringPosOffset(heightDifference);
+            
+            // Simulate dirt road effect, based on stiffness
+            float avgMagnitude = 0;
+            foreach (var wheel in Wheels)
+            {
+                
+                if (wheel.IsGrounded)
+                {
+                    avgMagnitude += wheel.CurrentGroundConfig.WheelStiffness;
+                }
+            }
+            avgMagnitude = (6 - avgMagnitude) * (Steer.SpeedToDirtRoadFFB.Evaluate(CurrentSpeed));
+            // calculate dirt road effect based on stiffness
+            ForceFeedback.SetDirtRoadEffect(avgMagnitude);
+
+            // set spring force on steering wheel
+            // add height difference to spring multiplier
+            ForceFeedback.SetSpringMultiplier(Mathf.Clamp(1 - steerMultiplier + (heightDifference.Abs() * 2.5f), 0, 1));
         }
 
         /// <summary>
@@ -203,6 +236,7 @@ namespace PG
             public AnimationCurve SteerLimitCurve;                  //Limiting wheel turning if the EnableSteerLimit flag is enabled
             public AnimationCurve SteerChangeSpeedToVelocity;       //The speed of turn of the wheel in the direction of the velocity of the car.
             public AnimationCurve SteerChangeSpeedFromVelocity;     //The speed of turn of the wheel from the direction of the velocity of the car.
+            public AnimationCurve SpeedToDirtRoadFFB;               //The magnitude of the dirt road effect based on the speed of the car.
 
             [Header("Steer assistance")]
             public float MaxVelocityAngleForHelp = 120;             //The maximum degree of angle of the car relative to the velocity, at which the steering assistance will be provided.

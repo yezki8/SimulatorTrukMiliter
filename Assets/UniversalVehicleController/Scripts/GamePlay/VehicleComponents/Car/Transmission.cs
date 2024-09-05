@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PG
 {
     //This part of the component contains the gear shift logic (automatic and manual), 
     //and the logic for transferring torque from the engine to the drive wheels.
+
+    // heavily modified to include clutch and shifter logics
     public partial class CarController :VehicleController
     {
         public GearboxConfig Gearbox;
@@ -29,9 +33,15 @@ namespace PG
         public int CurrentGearIndex { get { return CurrentGear + 1; } }     //Current gear index, starting at 0 for reverse gear: 0 - reverse, 1 - neutral, 2 - 1st gear, etc.
         public bool InChangeGear { get { return ChangeGearTimer > 0; } }
 
+        public float WheelTorque;
+        public float CurrentMotorTorque;
+
         float ChangeGearTimer = 0;
         float[] AllGearsRatio;
         Wheel[] DriveWheels;
+
+        [SerializeField] private TextMeshProUGUI _currentGearUI;                               // Current Gear UI
+
 
         void AwakeTransmition ()
         {
@@ -58,14 +68,24 @@ namespace PG
 
         void FixedUpdateTransmition ()
         {
-            if (!Mathf.Approximately (CurrentAcceleration, 0) && (Gearbox.HasRGear || CurrentGear >= 0))
+            if (Gearbox.HasRGear || CurrentGear >= 0)
             {
-                var motorTorque = CurrentAcceleration * (CurrentMotorTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
+                // Calculate power transfer from motor to wheel, quadratic
+                var powerTransfer = Mathf.Pow(CarControl.Clutch, 2);
+
+                // var motorTorque = CurrentAcceleration * (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
+                float rotorForce = 0.15f;
+                CurrentMotorTorque = (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * (CurrentAcceleration + 
+                    (EngineRPM < 600 ? rotorForce : 0));
 
                 if (InChangeGear)
                 {
-                    motorTorque = 0;
+                    CurrentMotorTorque = 0;
                 }
+
+                // Calculate clutchSlipRatio here to modify motorTorque
+                float clutchSlipRatio = Mathf.Abs(TargetRPM - EngineRPM) / Mathf.Max(TargetRPM, EngineRPM, 1f);
+                CurrentMotorTorque *= (1 - clutchSlipRatio);
 
                 //Calculation of target rpm for driving wheels.
                 var targetWheelsRPM = AllGearsRatio[CurrentGearIndex] == 0? 0: EngineRPM / AllGearsRatio[CurrentGearIndex];
@@ -74,7 +94,9 @@ namespace PG
                 for (int i = 0; i < DriveWheels.Length; i++)
                 {
                     var wheel = DriveWheels[i];
-                    var wheelTorque = motorTorque;
+
+                    // implement powerTransfer to wheel
+                    WheelTorque = CurrentMotorTorque * powerTransfer;
 
                     //The torque transmitted to the wheels depends on the difference between the target RPM and the current RPM. 
                     //If the current RPM is greater than the target RPM, the wheel will brake. 
@@ -85,12 +107,12 @@ namespace PG
                         var multiplier = wheel.RPM.Abs () / (targetWheelsRPM.Abs () + offset);
                         if (multiplier >= 1f)
                         {
-                            wheelTorque *= (1 - multiplier);
+                            WheelTorque *= (1 - multiplier);
                         }
                     }
 
                     //Apply of torque to the wheel.
-                    wheel.SetMotorTorque (wheelTorque);
+                    wheel.SetMotorTorque (WheelTorque);
                 }
             }
             else
@@ -146,6 +168,23 @@ namespace PG
                     CurrentGear = 0;
                 }
             }
+
+            // update gear text
+            if (_currentGearUI)
+            {
+                if (_CurrentGear == 0)
+                {
+                    _currentGearUI.text = "N";
+                }
+                else if (_CurrentGear == -1)
+                {
+                    _currentGearUI.text = "R";
+                }
+                else
+                {
+                    _currentGearUI.text = _CurrentGear.ToString();
+                }
+            }
         }
 
         public void NextGear ()
@@ -167,17 +206,38 @@ namespace PG
             }
         }
 
+        // -1 = Reverse, 0 = Neutral, 2 = 1st Gear, etc.
+        // Also add failed clutch handling, force stopping the engine
+        public void SetGear(int gear)
+        {
+            if (CarControl.Clutch < 0.2)
+            {
+                if (!InChangeGear && (CurrentGear >= 0 || CurrentGear < (AllGearsRatio.Length - 2)))
+                {
+                    CurrentGear = gear;
+                    ChangeGearTimer = Gearbox.ChangeClutchedGearTime;
+                }
+            }
+            else
+            {
+                StopEngine();
+            }
+            
+        }
+
         [System.Serializable]
         public class GearboxConfig
         {
-            public float ChangeUpGearTime = 0.3f;                   //Delay after upshift.
-            public float ChangeDownGearTime = 0.2f;                 //Delay after downshift.
+            public float ChangeUpGearTime = 0.3f;                   // Delay after upshift.
+            public float ChangeDownGearTime = 0.2f;                 // Delay after downshift.
+            public float ChangeClutchedGearTime = 0.01f;            // Delay when using Clutch.
 
             [Header("Automatic gearbox")]
             public bool AutomaticGearBox = true;
 
             [Header("Ratio")]
             public float[] GearsRatio;                              //Gear ratio. The values ​​are best take from the technical data of real transmissions.
+            public float FinalDriveRatio;                           //Final drive ratio. The value is best taken from the technical data of the real transmission. (UNUSED)
             public float MainRatio;
             public bool HasRGear = true;
             [ShowInInspectorIf ("HasRGear")]
