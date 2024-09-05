@@ -3,13 +3,13 @@
     "maps": [
         {
             "name": "Player",
-            "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
+            "id": "50d5c611-19f8-4549-8edd-fbeb337f64ea",
             "actions": [
                 {
                     "name": "Move",
                     "type": "Value",
-                    "id": "351f2ccd-1f9f-44bf-9bec-d62ac5c5f408",
-                    "expectedControlType": "Vector2",
+                    "id": "49c94694-90be-4011-930d-9aa5ebdb2d30",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -17,7 +17,7 @@
                 {
                     "name": "Look",
                     "type": "Value",
-                    "id": "6b444451-8a00-4d00-a97e-f47457f736a8",
+                    "id": "13eae6a6-98bc-438d-8dce-af7c625455c3",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -26,7 +26,7 @@
                 {
                     "name": "Dpad",
                     "type": "Value",
-                    "id": "a37a84aa-dbf1-40b9-b789-9f829a05800b",
+                    "id": "9bea3da7-a8e9-4346-9173-66486e86211f",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -35,16 +35,16 @@
                 {
                     "name": "Steer",
                     "type": "Value",
-                    "id": "fab6fc17-096a-43df-9138-1fdad530e547",
-                    "expectedControlType": "Vector2",
+                    "id": "cd3060cb-504c-4e88-a0b5-5bd91e79e70e",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
                     "name": "Acceleration",
-                    "type": "Value",
-                    "id": "d6567370-c01d-4721-b0d3-1f67c9d459f7",
+                    "type": "PassThrough",
+                    "id": "b51f8c35-6634-4779-951d-d1422c522c53",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -52,26 +52,35 @@
                 },
                 {
                     "name": "BrakeReverse",
-                    "type": "Button",
-                    "id": "e59fed34-b820-4ad6-b0dc-022c1f35b256",
-                    "expectedControlType": "Button",
+                    "type": "PassThrough",
+                    "id": "0902cc17-1636-4fb4-af96-e8ebc12a20b4",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "HandBrake",
                     "type": "Button",
-                    "id": "138397f2-45c6-4cf8-8570-4cc0a5649a95",
+                    "id": "65438fec-d638-40f3-8dd3-7c5f11e2be8d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Clutch",
+                    "type": "PassThrough",
+                    "id": "92b8fd52-bad9-4b62-be8e-897c999f7bb5",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "ChangeView",
                     "type": "Button",
-                    "id": "d4ca48b0-e8f2-41dd-a1d9-a379a37cc2cc",
+                    "id": "5e0c2d91-82bf-4aee-ad25-69acb4ae964b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -80,7 +89,7 @@
                 {
                     "name": "NextGear",
                     "type": "Button",
-                    "id": "d3791576-1497-4ca5-828f-3de632f9f620",
+                    "id": "8f669272-9b1e-4bc2-85f7-6ac49e5ac76f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -89,7 +98,7 @@
                 {
                     "name": "PrevGear",
                     "type": "Button",
-                    "id": "2b8d4e87-2654-44c3-aaa3-518ffd5720ce",
+                    "id": "d632b41a-ca7d-4a32-8445-4ccd030323e2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -98,7 +107,7 @@
                 {
                     "name": "SwitchLights",
                     "type": "Button",
-                    "id": "3519e220-ae77-454a-8ee9-2b31ef496d34",
+                    "id": "968ed024-8be5-46ce-8f0c-993401d2008a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -107,7 +116,7 @@
                 {
                     "name": "SwitchLeftTurnLights",
                     "type": "Button",
-                    "id": "655eecd6-cc28-459e-97a7-f80d48c590cf",
+                    "id": "dd0cfe58-0180-4733-9c73-a9dcca320810",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -116,7 +125,7 @@
                 {
                     "name": "SwitchRightTurnLights",
                     "type": "Button",
-                    "id": "fa6d216e-9503-47ba-b328-0d81457595a2",
+                    "id": "dd61f3b7-f96b-44d8-8c24-56fdbb0d1d82",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -125,7 +134,7 @@
                 {
                     "name": "ResetCar",
                     "type": "Button",
-                    "id": "ea295667-fb5f-4de7-86fa-c621dd534be5",
+                    "id": "59337102-bf69-471d-8b3e-a4c8f82128e3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -134,7 +143,7 @@
                 {
                     "name": "ConnectTrailer",
                     "type": "Button",
-                    "id": "b4af782f-13e6-45b2-9fb5-3b0376e76d42",
+                    "id": "fc2b8a66-cdab-4775-a544-513af3d36860",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -143,7 +152,70 @@
                 {
                     "name": "SwitchAlarm",
                     "type": "Button",
-                    "id": "ab1da180-ebfd-44e6-803d-7cd8c2ab0a17",
+                    "id": "daccc926-b98f-432b-a697-66c2b4b52bbd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear1st",
+                    "type": "Button",
+                    "id": "06fce704-adcd-4f98-ab6d-1484b35ba388",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear2nd",
+                    "type": "Button",
+                    "id": "317bb459-0916-4928-ac35-15ef8fd57a1a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear3rd",
+                    "type": "Button",
+                    "id": "74114949-1a60-43e5-b379-9aef816c6f34",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear4th",
+                    "type": "Button",
+                    "id": "f4aba16a-dec8-451a-a4e6-1010bc0e5275",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear5th",
+                    "type": "Button",
+                    "id": "6538a2be-64e6-4272-bd18-dfba434ac951",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Gear6th",
+                    "type": "Button",
+                    "id": "079357ba-9ac5-4339-bd15-61e72d71fc05",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GearReverse",
+                    "type": "Button",
+                    "id": "0f5f22b6-253a-4b16-9131-61c68bee3283",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -153,63 +225,19 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "978bfe49-cc26-4a3d-ab7b-7d7a29327403",
-                    "path": "<Gamepad>/leftStick",
+                    "id": "48d7ad8b-e87c-4e4b-b830-b815ca57c97e",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/rz",
                     "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "93daea04-6b6c-403c-bab8-663f0730d9ae",
-                    "path": "<Gamepad>/dpad",
-                    "interactions": "",
-                    "processors": "",
+                    "processors": "Invert,Normalize(min=-1,max=1,zero=-1)",
                     "groups": "",
-                    "action": "Dpad",
+                    "action": "BrakeReverse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "324c63d9-cd35-4432-a7ba-daf53afa9d5c",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "945bd24f-1497-4049-b04a-544102df5e74",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Acceleration",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1f448fb7-dd1e-42b3-af56-e4071d7b3997",
-                    "path": "<Gamepad>/leftTrigger",
+                    "id": "36f60a78-8f24-4d2d-99a3-af97b9b20cf6",
+                    "path": "<XInputController>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -219,8 +247,8 @@
                 },
                 {
                     "name": "",
-                    "id": "6a049c48-3300-4fca-8c2c-d79dcc42a6fb",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "8020a103-ab4d-4fbb-88ba-399e1936b39f",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -230,8 +258,19 @@
                 },
                 {
                     "name": "",
-                    "id": "fa75bd31-045c-496e-a938-c254ec2a2002",
-                    "path": "<Gamepad>/buttonWest",
+                    "id": "ddad3101-2772-4a24-ae9a-521db7f427fb",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HandBrake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd64f93d-34d3-4019-9a97-4516b0730de4",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -241,8 +280,19 @@
                 },
                 {
                     "name": "",
-                    "id": "fe902887-509a-4161-a85e-3c67b493964f",
-                    "path": "<Gamepad>/rightShoulder",
+                    "id": "da2592b7-9b7d-4034-8c04-7dddbc0b0af1",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47428f97-c705-41b0-87a5-aafc40c222aa",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -252,8 +302,19 @@
                 },
                 {
                     "name": "",
-                    "id": "f2639f33-4c1c-419a-b9bc-428135cbc9c7",
-                    "path": "<Gamepad>/leftShoulder",
+                    "id": "2986d2ee-e91c-4a41-a001-cbaf5434e334",
+                    "path": "<XInputController>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextGear",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4343cba-986d-4d7d-9b07-33d2bf0c8ee6",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button6",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -263,8 +324,19 @@
                 },
                 {
                     "name": "",
-                    "id": "abbed4be-fbb8-44df-aa95-014d3147fac1",
-                    "path": "<Gamepad>/dpad/up",
+                    "id": "d90d285a-a91a-4c9f-85df-66c0521b07c5",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrevGear",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0213aa12-e18c-4256-863a-b8938f4eac60",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/hat/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -274,8 +346,19 @@
                 },
                 {
                     "name": "",
-                    "id": "2be2266d-a825-415e-a8b7-cbb3c0ae79a7",
-                    "path": "<Gamepad>/dpad/left",
+                    "id": "9a7aaed9-269b-4127-bba4-3b562326dddf",
+                    "path": "<XInputController>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchLights",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8449f293-4c71-4ac9-9f57-45dd00dced24",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/hat/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -285,8 +368,19 @@
                 },
                 {
                     "name": "",
-                    "id": "ec59c523-84c3-4467-afb2-3e1676eca983",
-                    "path": "<Gamepad>/dpad/right",
+                    "id": "80f52e67-be89-4e0a-87e5-7183312afb60",
+                    "path": "<XInputController>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchLeftTurnLights",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a96507dd-ac09-448e-8801-975aed0d1bf2",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/hat/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -296,8 +390,19 @@
                 },
                 {
                     "name": "",
-                    "id": "056ba78c-59ba-45ca-a2cb-8aa1e3d71578",
-                    "path": "<Gamepad>/buttonNorth",
+                    "id": "69e53fa0-ffb0-4112-babc-9007f122b458",
+                    "path": "<XInputController>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchRightTurnLights",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a9924a4-0e30-4e93-ac38-6d4d18f5073b",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -307,7 +412,18 @@
                 },
                 {
                     "name": "",
-                    "id": "9667e8ab-bb05-4a36-a34e-6fd83533c503",
+                    "id": "906661fa-7be3-4cd3-9e2d-2b194b919d70",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetCar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08bef7e3-35ef-41a4-8f0e-2d7bb28c1011",
                     "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
                     "processors": "",
@@ -318,12 +434,243 @@
                 },
                 {
                     "name": "",
-                    "id": "6a23c665-f8c4-467e-a72a-467176ac673d",
-                    "path": "<Gamepad>/dpad/down",
+                    "id": "d274ad90-432a-406b-b972-c5535c42d3c9",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/hat/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "SwitchAlarm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0306ce1-289b-4ff0-8687-ebec42262b07",
+                    "path": "<XInputController>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchAlarm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "a901ccab-58be-4696-a3c7-d1ffcf3594ba",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steer",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "8c0fbc9b-cbf7-4b91-a845-77148178ccb7",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/stick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steer",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "3368a068-fc62-4629-870f-156c961a7b72",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/stick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steer",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "c0e5a806-36cf-44b3-aafc-1c321b09453c",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steer",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "3eb11fcb-2f35-49d9-b4d7-539d20fb6754",
+                    "path": "<XInputController>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steer",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "22ec870b-2b7a-40c4-9d33-19adf9e79775",
+                    "path": "<XInputController>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steer",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "312f83e8-073f-498c-bdbd-17e8190e0095",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/z",
+                    "interactions": "",
+                    "processors": "Invert,Normalize(min=-1,max=1,zero=-1)",
+                    "groups": "",
+                    "action": "Acceleration",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b674b34-1e75-46b3-93eb-56438c2aef5b",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "",
+                    "processors": "Normalize(max=1,zero=-1)",
+                    "groups": "",
+                    "action": "Acceleration",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "e8454f40-af0b-4ce1-9eaa-744f982a50a2",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clutch",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "acd42e89-3e7c-4507-904f-924d5d5ae843",
+                    "path": "<Joystick>/stick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clutch",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "399e16ee-8088-41c6-8afb-e101564ef2c0",
+                    "path": "<Joystick>/stick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clutch",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f510843b-165c-43e5-8b48-aa0d170009b2",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clutch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da03808d-69c6-4413-90d1-ee856a7cdbb2",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button13",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear1st",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8886420-d9ab-4799-b705-7a6963a3bada",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button14",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear2nd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fee452fd-c739-42d4-915c-5b03d2400ffb",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button15",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear3rd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06a3e823-520a-4948-b869-4daf7bb2b413",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button16",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear4th",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3b50fd1-afca-4600-8fb3-0e2959b91c78",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button17",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear5th",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b775ecb-5356-447d-a76b-6cc90bbc27c0",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button18",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear6th",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbf91b62-b643-4936-933f-c85b1378f3c1",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button19",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GearReverse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e09c3ee4-3ad2-4176-9660-7f11cb8021e1",
+                    "path": "<XInputController>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -69,6 +69,7 @@ namespace PG
         public float BrakeReverse { get; private set; }
         public float Pitch { get; private set; }
         public bool HandBrake { get; private set; }
+        public float Clutch { get; private set; }
         public bool Boost { get; private set; }
         public Vector2 ViewDelta { get; private set; }
         public bool ManualCameraRotation { get; private set; }
