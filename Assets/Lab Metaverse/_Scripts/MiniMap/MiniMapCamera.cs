@@ -5,7 +5,7 @@ using UnityEngine;
 public class MiniMapCamera : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private Vector3 cameraOffset = new Vector3(0, 15, 0);
+    [SerializeField] private Vector3 cameraOffset = new Vector3(0, 30, 0);
 
     void Start()
     {
