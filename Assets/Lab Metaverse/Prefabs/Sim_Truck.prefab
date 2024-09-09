@@ -155884,7 +155884,6 @@ GameObject:
   - component: {fileID: 5749963416168927765}
   - component: {fileID: 183183069510979712}
   - component: {fileID: 7746384051374470431}
-  - component: {fileID: 9174745660769428651}
   m_Layer: 2
   m_Name: Sim_Truck
   m_TagString: Untagged
@@ -156316,17 +156315,3 @@ MonoBehaviour:
   IgnoreFindInChildsMeshesAndColliders:
   - {fileID: 890402991471576862}
   EnableLogAndGizmo: 0
---- !u!114 &9174745660769428651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9171049850502360021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76b9b3f26e8e0094a9e82dce94f78e63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AIConfigAsset: {fileID: 11400000, guid: cdda413bb3f04e1408beca2fcd710790, type: 2}
-  AIPath: {fileID: 0}
