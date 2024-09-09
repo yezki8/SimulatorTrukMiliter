@@ -120,15 +120,15 @@ namespace PG
     [System.Serializable]
     public class BaseAIConfig
     {
-        public float MaxSpeed = 80;                                 //Max speed for AI.
-        public float MinSpeed = 6;                                  //Min speed for AI. AI adhere to speed in a given range.
-        public float SetSteerAngleMultiplayer = 2f;                 //Steer angle multiplier.
+        public float MaxSpeed = 20;                                 //Max speed for AI.
+        public float MinSpeed = 0;                                  //Min speed for AI. AI adhere to speed in a given range.
+        public float SetSteerAngleMultiplayer = 1.6f;                 //Steer angle multiplier.
 
-        public float OffsetToTargetPoint = 5;                       //Offset to the target point in the direction of the path.
-        public float SpeedFactorToTargetPoint = 0.5f;               //A multiplier adding distance to OffsetToTargetPoint, depending on the speed.
+        public float OffsetToTargetPoint = 2;                       //Offset to the target point in the direction of the path.
+        public float SpeedFactorToTargetPoint = 0.8f;               //A multiplier adding distance to OffsetToTargetPoint, depending on the speed.
 
-        public float OffsetTurnPrediction = 11;                     //Offset to the turn prediction point in the direction of the path.
-        public float SpeedFactorToTurnPrediction = 0.6f;            //A multiplier adding distance to OffsetTurnPrediction, depending on the speed.
+        public float OffsetTurnPrediction = 4;                     //Offset to the turn prediction point in the direction of the path.
+        public float SpeedFactorToTurnPrediction = 0.8f;            //A multiplier adding distance to OffsetTurnPrediction, depending on the speed.
 
         public float LookAngleSppedFactor = 30f;                    //Maximum angle to the TurnPredictionPoint, if the current angle is greater than the specified value, then the car will brake.
 

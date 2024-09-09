@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: CarSimAIConfigAsset
   m_EditorClassIdentifier: 
   AIConfig:
-    MaxSpeed: 20
+    MaxSpeed: 30
     MinSpeed: 0
-    SetSteerAngleMultiplayer: 1.4
-    OffsetToTargetPoint: 4
-    SpeedFactorToTargetPoint: 0.6
-    OffsetTurnPrediction: 6
-    SpeedFactorToTurnPrediction: 0.8
-    LookAngleSppedFactor: 20
+    SetSteerAngleMultiplayer: 1.8
+    OffsetToTargetPoint: 6
+    SpeedFactorToTargetPoint: 0.1
+    OffsetTurnPrediction: 12
+    SpeedFactorToTurnPrediction: 0.6
+    LookAngleSppedFactor: 60
     ReverseWaitTime: 2
     ReverseTime: 2
     BetweenReverseTimeForReset: 6
   SimAIConfig:
     Aggressiveness: 0
-    ObstacleHitDistance: 30
+    ObstacleHitDistance: 20
     HitPointHeight: 0.5
     ChangeHorizontalOffsetSpeed: 3
-    OffsetForMainHitPoints: 0.7
+    OffsetForMainHitPoints: 0.5
     OffsetForMainHitDirections: 0.8
-    OffsetForAdditionalHitPoints: 1.2
-    OffsetForAdditionalHitDirections: 1.4
+    OffsetForAdditionalHitPoints: 0.7
+    OffsetForAdditionalHitDirections: 2
     MainHitDellayTime: 0.4
     AdditionalHitDellayTime: 0.6
