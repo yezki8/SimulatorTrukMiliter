@@ -188,12 +188,13 @@ namespace PG
             }
         }
 
+        // both function checks for automatic gearbox
         public void NextGear ()
         {
             if (!InChangeGear && CurrentGear < (AllGearsRatio.Length - 2))
             {
                 CurrentGear++;
-                ChangeGearTimer = Gearbox.ChangeUpGearTime;
+                ChangeGearTimer = Gearbox.AutomaticGearBox ? Gearbox.AutomaticGearBoxTime : Gearbox.ChangeUpGearTime;
                 PlayBackfireWithProbability ();
             }
         }
@@ -203,7 +204,7 @@ namespace PG
             if (!InChangeGear && CurrentGear >= 0)
             {
                 CurrentGear--;
-                ChangeGearTimer = Gearbox.ChangeDownGearTime;
+                ChangeGearTimer = Gearbox.AutomaticGearBox ? Gearbox.AutomaticGearBoxTime : Gearbox.ChangeDownGearTime;
             }
         }
 
@@ -232,6 +233,7 @@ namespace PG
             public float ChangeUpGearTime = 0.3f;                   // Delay after upshift.
             public float ChangeDownGearTime = 0.2f;                 // Delay after downshift.
             public float ChangeClutchedGearTime = 0.01f;            // Delay when using Clutch.
+            public float AutomaticGearBoxTime = 0.7f;               // Delay for automatic gearbox.
 
             [Header("Automatic gearbox")]
             public bool AutomaticGearBox = true;
