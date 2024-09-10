@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour
                 case "ConvoyStart":
                     ConvoySystem.Instance.StartConvoyVehicles();
                     break;
-                case "ConvoyEnd":
+                case "ConvoyFinish":
                     ConvoySystem.Instance.StopConvoyVehicles();
                     break;
             }
