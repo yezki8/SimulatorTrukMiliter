@@ -6,17 +6,72 @@ using UnityEngine;
 public class ConvoySystem : MonoBehaviour
 {
     // List of all vehicles in the convoy
-    public List<BaseAIControl> vehicleControls = new();
+    [SerializeField] private List<ConvoyAIControl> _vehicleControls = new();
 
-    // Start is called before the first frame update
-    void Start()
+    // start & end point
+    public GameObject startPoint;
+    public GameObject endPoint;
+
+    public static ConvoySystem Instance;
+
+    private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
+    public void StartConvoyVehicles()
+    {
+        if (_vehicleControls.Count > 0)
+        {
+            // await a second before enabling the convoy
+            Debug.Log("Awaiting convoy vehicles...");
+            StartCoroutine(EnableConvoyVehiclesCoroutine());
+            foreach (ConvoyAIControl vehicle in _vehicleControls)
+            {
+                vehicle.ConvoyEnabled = true;
+            }
+            Debug.Log("Convoy started");
+            DisableTrigger(startPoint);
+        } 
+        else
+        {
+            Debug.LogWarning("No vehicles in convoy");
+        }
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator EnableConvoyVehiclesCoroutine()
     {
-        
+        yield return new WaitForSeconds(5);
+    }
+
+    public void StopConvoyVehicles()
+    {
+        foreach (ConvoyAIControl vehicle in _vehicleControls)
+        {
+            vehicle.ConvoyEnabled = false;
+        }
+        DisableTrigger(endPoint);
+        Debug.Log("Convoy finished");
+    }
+
+    private void DisableTrigger(GameObject Trigger)
+    {
+        Trigger.SetActive(false);
     }
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MainLight
   - Checkpoint
+  - ConvoyStart
+  - ConvoyFinish
   layers:
   - Default
   - TransparentFX

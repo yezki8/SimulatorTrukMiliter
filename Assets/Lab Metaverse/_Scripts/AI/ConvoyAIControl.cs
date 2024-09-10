@@ -1,4 +1,3 @@
-using TMPro.Examples;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,6 +36,9 @@ namespace PG
         Rigidbody AheadRB;                                                      //Nearest ahead car.
         float DistanceToAheadCollider;                                          //Distance to the nearest car.
 
+        // Convoy specific
+        public bool ConvoyEnabled = false;
+
         public override void Start ()
         {
             base.Start ();
@@ -71,11 +73,15 @@ namespace PG
             {
                 ReverseMove ();
             }
-            else
+            else if (ConvoyEnabled)
             {
                 ForwardMove ();
                 UpdateMainHits ();
                 UpdateAdditionalHits ();
+            }
+            else
+            {
+                BrakeToStop();
             }
         }
 
@@ -316,6 +322,18 @@ namespace PG
                 LastReverseTime = Time.time;
                 ReverseTimer = 0;
                 Reverse = false;
+            }
+        }
+
+        private void BrakeToStop()
+        {
+            if (Car.CurrentSpeed > 0)
+            {
+                Vertical = -1;
+            }
+            else
+            {
+                Vertical = 0;
             }
         }
 
