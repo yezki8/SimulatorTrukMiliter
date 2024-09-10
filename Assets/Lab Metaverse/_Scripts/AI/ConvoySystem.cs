@@ -9,6 +9,7 @@ public class ConvoySystem : MonoBehaviour
     [SerializeField] private List<ConvoyAIControl> _vehicleControls = new();
 
     // start & end point
+    [Header("Convoy Points")]
     public GameObject startPoint;
     public GameObject endPoint;
 
@@ -34,6 +35,12 @@ public class ConvoySystem : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        EnableTrigger(startPoint);
+        DisableTrigger(endPoint);
+    }
+
     public void StartConvoyVehicles()
     {
         if (_vehicleControls.Count > 0)
@@ -47,6 +54,7 @@ public class ConvoySystem : MonoBehaviour
             }
             Debug.Log("Convoy started");
             DisableTrigger(startPoint);
+            EnableTrigger(endPoint);
         } 
         else
         {
@@ -70,6 +78,10 @@ public class ConvoySystem : MonoBehaviour
         Debug.Log("Convoy finished");
     }
 
+    private void EnableTrigger(GameObject Trigger)
+    {
+        Trigger.SetActive(true);
+    }
     private void DisableTrigger(GameObject Trigger)
     {
         Trigger.SetActive(false);
