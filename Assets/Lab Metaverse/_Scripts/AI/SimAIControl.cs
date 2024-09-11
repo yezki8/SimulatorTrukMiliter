@@ -356,6 +356,18 @@ namespace PG
                 }
             }
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            //To Ensure these trigger calls only happen during gameplay
+            if (GameStateController.Instance.GameState == StateOfGame.Match)
+            {
+                if (other.tag == "NPCFinish")
+                {
+                    SpecialNPCController.Instance.OnFinish(this.Car);
+                }
+            }
+        }
     }
 
     [System.Serializable]

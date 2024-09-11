@@ -26,7 +26,8 @@ public class NPCVehicleController : MonoBehaviour
         {
             vehicle.SetActive(true);
         }
-
+        // for special npc
+        SpecialNPCController.Instance.GetInitialPos();
     }
     public void DisableNPCVehicles()
     {
