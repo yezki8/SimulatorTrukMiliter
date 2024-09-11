@@ -20,7 +20,7 @@ MonoBehaviour:
     SpeedFactorToTargetPoint: 0.1
     OffsetTurnPrediction: 12
     SpeedFactorToTurnPrediction: 0.6
-    LookAngleSppedFactor: 40
+    LookAngleSppedFactor: 60
     ReverseWaitTime: 2
     ReverseTime: 2
     BetweenReverseTimeForReset: 6
@@ -31,7 +31,7 @@ MonoBehaviour:
     ChangeHorizontalOffsetSpeed: 3
     OffsetForMainHitPoints: 0.7
     OffsetForMainHitDirections: 0.8
-    OffsetForAdditionalHitPoints: 1.2
-    OffsetForAdditionalHitDirections: 1.2
+    OffsetForAdditionalHitPoints: 0.8
+    OffsetForAdditionalHitDirections: 4
     MainHitDellayTime: 0.4
     AdditionalHitDellayTime: 0.6

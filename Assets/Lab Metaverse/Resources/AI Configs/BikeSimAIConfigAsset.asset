@@ -26,12 +26,12 @@ MonoBehaviour:
     BetweenReverseTimeForReset: 6
   SimAIConfig:
     Aggressiveness: 0
-    ObstacleHitDistance: 22
+    ObstacleHitDistance: 25
     HitPointHeight: 0.5
     ChangeHorizontalOffsetSpeed: 3
     OffsetForMainHitPoints: 0.2
     OffsetForMainHitDirections: 0.8
     OffsetForAdditionalHitPoints: 0.5
-    OffsetForAdditionalHitDirections: 2
+    OffsetForAdditionalHitDirections: 4
     MainHitDellayTime: 0.4
     AdditionalHitDellayTime: 0.6
