@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class SpecialNPCController : MonoBehaviour
 {
-    [SerializeField] private List<CarController> _carControllers = new();
-    private List<Transform> initialPos = new();
+    [SerializeField] private List<SimAIControl> _carControllers = new();
+    private List<Vector3> initialPos = new();
+    private List<Quaternion> initialRot = new();
 
     public static SpecialNPCController Instance;
     private void Awake()
@@ -26,17 +27,18 @@ public class SpecialNPCController : MonoBehaviour
         // get every car initial position
         foreach (var car in _carControllers)
         {
-            initialPos.Add(car.transform);
-            Debug.Log("Initial position: " + car.transform.position);
+            initialPos.Add(car.transform.position);
+            initialRot.Add(car.transform.rotation);
         }
     }
 
-    public void OnFinish(CarController finishedVehicle)
+    public void OnFinish(SimAIControl finishedVehicle)
     {
-        Debug.Log("Vehicle finished: " + finishedVehicle.name);
         // reset vehicle and move it to the initial position
-        finishedVehicle.ResetVehicle();
-        finishedVehicle.transform.position = initialPos[_carControllers.IndexOf(finishedVehicle)].position;
-        finishedVehicle.transform.rotation = initialPos[_carControllers.IndexOf(finishedVehicle)].rotation;
+        finishedVehicle.Car.ResetVehicle();
+        int index = _carControllers.IndexOf(finishedVehicle);
+        finishedVehicle.transform.position = initialPos[index];
+        finishedVehicle.transform.rotation = initialRot[index];
+        finishedVehicle.ResetProgress();
     }
 }

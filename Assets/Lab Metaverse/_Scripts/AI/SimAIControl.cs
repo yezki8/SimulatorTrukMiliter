@@ -364,7 +364,7 @@ namespace PG
             {
                 if (other.tag == "NPCFinish")
                 {
-                    SpecialNPCController.Instance.OnFinish(this.Car);
+                    SpecialNPCController.Instance.OnFinish(this);
                 }
             }
         }
