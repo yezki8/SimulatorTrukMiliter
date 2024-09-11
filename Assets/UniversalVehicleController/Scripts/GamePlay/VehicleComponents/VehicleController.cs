@@ -141,7 +141,6 @@ namespace PG
 
         protected virtual void FixedUpdate ()
         {
-            DetectCurrentRoadSegment();
             DeactivateIcon(_warning);
 
             //Calculating body speed and angle
@@ -205,7 +204,7 @@ namespace PG
         }
 
         // Function to detect the road segment
-        private void DetectCurrentRoadSegment()
+        public void DetectCurrentRoadSegment()
         {
             RaycastHit hit;
             // float raycastDistance = 10f;

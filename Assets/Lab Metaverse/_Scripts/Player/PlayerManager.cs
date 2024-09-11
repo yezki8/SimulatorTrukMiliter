@@ -20,6 +20,12 @@ public class PlayerManager : MonoBehaviour
         _carControllerInput.ResetCar();
     }
 
+    private void FixedUpdate()
+    {
+        // Only player vehicle detects the road segment
+        _carController.DetectCurrentRoadSegment();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         //To Ensure these trigger calls only happen during gameplay
