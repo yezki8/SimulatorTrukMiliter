@@ -45,7 +45,7 @@ public class NPCVehicleController : MonoBehaviour
         // get initial position of the first vehicle
         foreach (GameObject vehicle in vehicles)
         {
-            vehicle.SetActive(false);
+            // vehicle.SetActive(false);
             _npcVehicles.Add(vehicle);
             // _npcVehiclesInitialPosition.Add(vehicle.transform.position);
         }
