@@ -80,15 +80,8 @@ namespace PG
 
         public bool VehicleIsGrounded { get; private set; }
         public float CurrentSpeed { get; private set; }                                     //Vehicle speed, measured in "units per second".
-        public float SpeedInHour { get { return CurrentSpeed * (B.GameSettings.EnumMeasurementSystem == MeasurementSystem.KM? C.KPHMult: C.MPHMult); } }    //Vehicle speed in selected units.
-        [SerializeField]
-        private TextMeshProUGUI _truckSpeed;                               // Truck Speedometer
-        public LayerMask roadLayerMask;
-        private RoadSegment _currentRoadSegment;                            // Road class, can be change in the future
-        private GameObject _detectedRoadObject;                             // Terdeteksi sebelumnya
-        private GameObject _currentRoadObject;                              // Baru terdeteksi
-        [SerializeField]
-        private Image _warning;
+        public float SpeedInHour { get { return CurrentSpeed * (B.GameSettings.EnumMeasurementSystem == MeasurementSystem.KM ? C.KPHMult : C.MPHMult); } }    //Vehicle speed in selected units.
+
         public int VehicleDirection { get { return CurrentSpeed < 1 ? 0 : (VelocityAngle.Abs() < 90? 1 : -1); } }
         public float VelocityAngle { get; private set; }                                    //The angle of the vehicle body relative to the Velocity vector.
         public float PrevVelocityAngle { get; private set; }
@@ -141,49 +134,9 @@ namespace PG
 
         protected virtual void FixedUpdate ()
         {
-            DeactivateIcon(_warning);
-
             //Calculating body speed and angle
             CurrentSpeed = RB.velocity.magnitude;
-            string truckSpeed = $"{(int)Math.Truncate(SpeedInHour)} Km/h";
-            if (_truckSpeed != null)
-            {
-                _truckSpeed.text = truckSpeed;
-                if (_currentRoadSegment != null)
-                {
-                    float maxSpeed = _currentRoadSegment.getMaxSpeedLimit();
-                    float minSpeed = _currentRoadSegment.getMinSpeedLimit();
-                    if (maxSpeed == -1)
-                    {
-                        _truckSpeed.color = Color.white;
-                        DeactivateIcon(_warning);
-                    }
-                    else
-                    {
-                        if (SpeedInHour < minSpeed)
-                        {
-                            _truckSpeed.color = Color.blue;
-                            DeactivateIcon(_warning);
-
-                        }
-                        else if (SpeedInHour > maxSpeed)
-                        {
-                            _truckSpeed.color = Color.red;
-                            ActivateIcon(_warning);
-                        }
-                        else
-                        {
-                            _truckSpeed.color = Color.white;
-                            DeactivateIcon(_warning);
-                        }
-                    }
-                }
-                else
-                {
-                    _truckSpeed.color = Color.white;
-                    DeactivateIcon(_warning);
-                }
-            }
+            
             PrevVelocityAngle = VelocityAngle;
             Vector3 horizontalLocalVelocity = transform.InverseTransformDirection(RB.velocity).ZeroHeight ();
             if (horizontalLocalVelocity.sqrMagnitude > 0.01f)
@@ -201,42 +154,6 @@ namespace PG
             {
                 VehicleIsGrounded |= Wheels[i].IsGrounded;
             }
-        }
-
-        // Function to detect the road segment
-        public void DetectCurrentRoadSegment()
-        {
-            RaycastHit hit;
-            // float raycastDistance = 10f;
-            Vector3 raycastStartPosition = transform.position + Vector3.up * 1.0f; // Offset the starting position
-            // Debug.DrawRay(raycastStartPosition, Vector3.down * raycastDistance, Color.red);
-
-            if (Physics.Raycast(raycastStartPosition, Vector3.down, out hit, Mathf.Infinity, roadLayerMask))
-            {
-                _currentRoadObject = hit.collider.gameObject;
-                _currentRoadSegment = hit.collider.GetComponent<RoadSegment>();
-                if (_currentRoadObject != _detectedRoadObject)
-                {
-                    if (_currentRoadSegment != null)
-                    {
-                        Debug.Log("Detected road segment: " + _currentRoadSegment.roadSegmentID + "\nMax speed: " + _currentRoadSegment.getMaxSpeedLimit() + ", Min speed: " + _currentRoadSegment.getMinSpeedLimit());
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Hit object does not have a RoadSegment component.");
-                    }
-                }
-            }
-            else
-            {
-                _currentRoadObject = null;
-                _currentRoadSegment = null;                                                     // No road segment detected
-                if (_currentRoadObject != _detectedRoadObject)
-                {
-                    Debug.LogWarning("Raycast did not hit any object on the road layer.");
-                }
-            }
-            _detectedRoadObject = _currentRoadObject;
         }
 
         protected virtual void Update () { }
@@ -343,22 +260,6 @@ namespace PG
 
             }
 
-        }
-
-        void ActivateIcon(Image icon)
-        {
-            if (icon != null)
-            {
-                icon.gameObject.SetActive(true);
-            }
-        }
-
-        void DeactivateIcon(Image icon)
-        {
-            if (icon != null)
-            {
-                icon.gameObject.SetActive(false);
-            }
         }
     }
 
