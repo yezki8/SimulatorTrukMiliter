@@ -35,6 +35,7 @@ namespace PG
         Vector3 HorizontalOffset;                                               //Offset target point for overtaking as Vector3, depends on the direction of the path.
         Rigidbody AheadRB;                                                      //Nearest ahead car.
         float DistanceToAheadCollider;                                          //Distance to the nearest car.
+        float AheadRotationCheck;                                                    // Ahead vehicle rotation
 
         // vehicle hard reset mechanism
         private int _resetInPlaceCount = 0;
@@ -114,9 +115,9 @@ namespace PG
                 var adjustedSpeed = 0f;
 
                 // compare the velocity direction of the current car and the ahead car
-                var dot = Vector3.Dot(AheadRB.velocity.normalized, vehicleDirection);
+                AheadRotationCheck = Vector3.Dot(AheadRB.velocity.normalized, vehicleDirection);
 
-                if (dot > 0.3f)
+                if (AheadRotationCheck > 0.3f)
                 {
                     adjustedSpeed = AheadRB.velocity.magnitude;
                 }
@@ -140,9 +141,25 @@ namespace PG
             //Left and Right rays have a hit.
             if (MainHits[0].collider && MainHits[1].collider)
             {
-                if (OffsetToTargetPoint == 0)
+                // check if AheadRotation is less than 0.3f
+                if (AheadRotationCheck < 0.3f)
                 {
-                    if (Random.Range (0, 1) > 0.5f)
+                    targetOffset = 0;
+                }
+                else
+                {
+                    if (OffsetToTargetPoint == 0)
+                    {
+                        if (Random.Range(0, 1) > 0.5f)
+                        {
+                            targetOffset = TargetPoint.OvertakeZoneRight;
+                        }
+                        else
+                        {
+                            targetOffset = -TargetPoint.OvertakeZoneLeft;
+                        }
+                    }
+                    else if (MainHits[0].distance < MainHits[1].distance)
                     {
                         targetOffset = TargetPoint.OvertakeZoneRight;
                     }
@@ -151,27 +168,19 @@ namespace PG
                         targetOffset = -TargetPoint.OvertakeZoneLeft;
                     }
                 }
-                else if (MainHits[0].distance < MainHits[1].distance)
-                {
-                    targetOffset = TargetPoint.OvertakeZoneRight;
-                }
-                else
-                {
-                    targetOffset = -TargetPoint.OvertakeZoneLeft;
-                }
             }
             //Left ray have a hit.
-            else if (MainHits[0].collider)
+            else if (MainHits[0].collider && AheadRotationCheck > 0.3f)
             {
                 targetOffset = TargetPoint.OvertakeZoneRight;
             }
             //Right ray have a hit.
-            else if (MainHits[1].collider)
+            else if (MainHits[1].collider && AheadRotationCheck > 0.3f)
             {
                 targetOffset = -TargetPoint.OvertakeZoneLeft;
             }
             //Center ray have a hit.
-            else if (MainHits[2].collider)
+            else if (MainHits[2].collider && AheadRotationCheck > 0.3f)
             {
                 if (CurrentHorizontalOffset > 0)
                 {
