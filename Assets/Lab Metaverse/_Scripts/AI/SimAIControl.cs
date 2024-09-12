@@ -36,6 +36,13 @@ namespace PG
         Rigidbody AheadRB;                                                      //Nearest ahead car.
         float DistanceToAheadCollider;                                          //Distance to the nearest car.
 
+        // vehicle hard reset mechanism
+        private int _resetInPlaceCount = 0;
+        private Vector3 _previousPosition = Vector3.zero;
+        private float _previousRotation = 0;
+
+        [SerializeField] private int MaxResetInPlaceCount = 3;
+
         public override void Start ()
         {
             base.Start ();
@@ -50,6 +57,10 @@ namespace PG
             {
                 SimAIConfig = new SimAIConfig ();
             }
+
+            // Set the initial position and rotation
+            _previousPosition = transform.position;
+            _previousRotation = transform.rotation.eulerAngles.y;
 
             StartHits ();
         }
@@ -204,6 +215,15 @@ namespace PG
                     Horizontal = 0;
                     Vertical = 0;
                     Car.ResetVehicle ();
+                    _resetInPlaceCount++;
+                    if (_resetInPlaceCount >= MaxResetInPlaceCount)
+                    {
+                        _resetInPlaceCount = 0;
+                        transform.position = _previousPosition;
+                        transform.rotation = Quaternion.Euler(0, _previousRotation, 0);
+                        // reset the progress
+                        ResetProgress();
+                    }
                     ReverseTimer = 0;
                 }
                 else
