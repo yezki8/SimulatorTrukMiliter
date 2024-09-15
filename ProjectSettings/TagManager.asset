@@ -6,6 +6,9 @@ TagManager:
   tags:
   - MainLight
   - Checkpoint
+  - NPCVehicle
+  - NPCFinish
+  - NPCStart
   layers:
   - Default
   - TransparentFX

@@ -67,7 +67,7 @@ namespace PG
 
             var steerMultiplier = Steer.EnableSteerLimit && VehicleDirection != 0? Steer.SteerLimitCurve.Evaluate (CurrentSpeed): 1;
 
-            ApplyForceFeedback(steerMultiplier);
+            if (ForceFeedback != null) ApplyForceFeedback(steerMultiplier);
 
             float targetSteerAngle = HorizontalControl * Steer.MaxSteerAngle;
 
@@ -108,7 +108,8 @@ namespace PG
             // check height difference between left and right wheels
             // steer the wheels to the side of the wheel with greater height
 
-            float heightDifference = SteeringWheels[1].transform.position.y - SteeringWheels[0].transform.position.y;
+            // wheel count check
+            float heightDifference = SteeringWheels.Length > 2 ? SteeringWheels[1].transform.position.y - SteeringWheels[0].transform.position.y : 0;
             ForceFeedback.SetSpringPosOffset(heightDifference);
             
             // Simulate dirt road effect, based on stiffness

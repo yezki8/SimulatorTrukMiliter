@@ -262,6 +262,13 @@ namespace PG
                 hubAngle *= Quaternion.AngleAxis (WheelCollider.steerAngle, Vector3.up);
 
                 WheelView.localRotation = hubAngle;
+                // NaN check
+                if (float.IsNaN (CurrentRotateAngle))
+                {
+                    Debug.LogError ("CurrentRotateAngle is NaN");
+                    CurrentRotateAngle = 0;
+                }
+
                 WheelView.localRotation *= Quaternion.AngleAxis (CurrentRotateAngle, Vector3.right);
                 if (WheelHub)
                 {
