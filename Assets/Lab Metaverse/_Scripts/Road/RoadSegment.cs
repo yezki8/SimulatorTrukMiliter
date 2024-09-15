@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoadSegment : MonoBehaviour
 {
     public int roadSegmentID;
-    private int roadSegmentClass;
+    private int roadSegmentClass;       //convert to SO
     [SerializeField]
     private float MaxSpeedLimit = -1; //SerializeField can be deleted in the future
     [SerializeField]

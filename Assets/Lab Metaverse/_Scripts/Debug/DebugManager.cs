@@ -1,3 +1,4 @@
+using PG;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,8 @@ public class DebugManager : MonoBehaviour
     // add header for performance stats
     [Header("Stats")]
     public Transform playerTransform;
+    public ControllerInput controllerInput;
+    public CarController carController;
 
     private StringBuilder stringBuilder = new StringBuilder();
 
@@ -67,12 +70,20 @@ public class DebugManager : MonoBehaviour
     {
         stringBuilder.Clear();
 
-        stringBuilder.AppendLine($"FPS: {fps:F1} \t\t\t\tTotal Allocated: {Profiler.GetTotalAllocatedMemoryLong() / (1024 * 1024):F2} MB");
-        stringBuilder.AppendLine($"Frame Time: {frameTime:F2} ms \t\tTotal Reserved: {Profiler.GetTotalReservedMemoryLong() / (1024 * 1024):F2} MB");
         stringBuilder.AppendLine($"Memory Usage: {System.GC.GetTotalMemory(false) / (1024 * 1024):F2} MB " +
-            $"\tTotal Unused: {Profiler.GetTotalUnusedReservedMemoryLong() / (1024 * 1024):F2} MB");
+            $"\tTotal Allocated Memory: {Profiler.GetTotalAllocatedMemoryLong() / (1024 * 1024):F2} MB");
+        stringBuilder.AppendLine($"Total Unused: {Profiler.GetTotalUnusedReservedMemoryLong() / (1024 * 1024):F2} MB " + 
+            $"\tTotal Reserved: {Profiler.GetTotalReservedMemoryLong() / (1024 * 1024):F2} MB\n");
         stringBuilder.AppendLine($"Player Position: {playerTransform.position}");
 
+        // inputs
+        stringBuilder.AppendLine($"Acceleration: {controllerInput.Acceleration:F3} \t\tBrake Reverse: {controllerInput.BrakeReverse:F3}");
+        stringBuilder.AppendLine($"Horizontal: {controllerInput.Horizontal:F3} \t\t\tHandbrake: {controllerInput.HandBrake:F3}");
+        stringBuilder.AppendLine($"Clutch: {controllerInput.Clutch:F3} \t\t\tCurrent Gear: {carController.CurrentGear}");
+
+        // truck
+        stringBuilder.AppendLine($"Engine RPM: {carController.EngineRPM:F3} \t\tDrivetrain RPM: {carController.DrivetrainRPM:F3}");
+        stringBuilder.AppendLine($"Motor Torque: {carController.CurrentMotorTorque:F3} \tWheel Torque: {carController.WheelTorque:F3}");
 
         // Add more debug info as needed
 

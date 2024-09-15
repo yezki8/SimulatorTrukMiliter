@@ -21,6 +21,7 @@ namespace PG
         public Transform SteerWheel;
 
         float SteerWheelStartXAngle;
+        public ForceFeedbackProvider ForceFeedback;
 
         public event System.Action OnConnectTrailer;                                    //Actions to be taken when TrailerController is connected to a vehicle.
         public bool CanConnectTrailer { get; private set; }
@@ -141,6 +142,7 @@ namespace PG
         float Acceleration { get; }
         float BrakeReverse { get; }
         float Horizontal { get; }
+        float Clutch { get; }
         float Pitch { get; }
         bool HandBrake { get; }
         bool Boost { get; }

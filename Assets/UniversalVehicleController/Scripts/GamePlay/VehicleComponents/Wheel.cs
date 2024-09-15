@@ -196,7 +196,7 @@ namespace PG
             WheelCollider.forwardFriction = friction;
 
             friction = WheelCollider.sidewaysFriction;
-            friction.stiffness = stiffness * Mathf.Lerp(0.3f, 1, Mathf.InverseLerp (2, 1, ForwardSlipNormalized));
+            friction.stiffness = stiffness * Mathf.Lerp(0.3f, 1, Mathf.InverseLerp(2, 1, ForwardSlipNormalized));
             WheelCollider.sidewaysFriction = friction;
         }
 

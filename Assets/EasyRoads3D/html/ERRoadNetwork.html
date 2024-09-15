@@ -100,21 +100,14 @@
 <p class="styleAPI">public ERRoad <span class="styleAPIBold">GetRoadByName</span>(string name)</p>
 <p class="styleAPIText">Finds a road object by <span class="styleAPIValue">name</span> and returns it</p>
 <p>&nbsp;</p>
-<p class="styleAPI">public ERRoadNetworkStatus <span class="styleAPIBold">GetRoadNetworkStatus</span>()</p>
-<p class="styleAPIText">returns <span class="styleAPIValue">EditMode</span> when the road network is in Edit Mode and <span class="styleAPIValue">BuildMode</span> when the terrain is updated to the road network</p>
-<p>&nbsp;</p>
 <p class="styleAPI">public ERRoadType <span class="styleAPIBold">GetRoadTypeByName</span>(string name)</p>
 <p class="styleAPIText">Returns a road type by <span class="styleAPIValue">name</span> and returns it</p>
 <p>&nbsp;</p>
 <p class="styleAPI">public ERRoadType[] <span class="styleAPIBold">GetRoadTypes</span>()</p>
 <p class="styleAPIText">Returns all available road types</p>
 <p>&nbsp;</p>
-<p class="styleAPI">public SideObject[] <span class="styleAPIBold">GetSideObjects</span>()</p>
-<p class="styleAPIText">Returns all available side objects</p>
-<p>&nbsp;</p>
 <p class="styleAPI">public SideObject <span class="styleAPIBold">GetSideObjectByName</span>(string name)</p>
 <p class="styleAPIText">Finds the side object by <span class="styleAPIValue">name</span> and returns it</p>
-
 <p>&nbsp;</p>
 <p class="styleAPI">public bool <span class="styleAPIBold">SideObjectIsDualSided</span>(SideObject obj)</p>
 <p class="styleAPIText">Returns true when  the passed side object can be used on both sides of a road object</p>
@@ -134,12 +127,6 @@
 <p class="styleAPI"><a name="restoreNetwork"></a>public void <span class="styleAPIBold">RestoreRoadNetwork</span>()</p>
 <p class="styleAPIText">Restores the road network back to edit mode</p>
 <p>&nbsp;</p>
-<p class="styleAPI">public void <span class="styleAPIBold">ReadOSMData</span>(XmlDocument osmDoc)</p>
-<p class="styleAPIText">This will parse the osm XML document and parse all road objects<span class="styleAPIValue"></span></p>
-<p class="styleAPIText">&nbsp;</p>
-<p class="styleAPI">public void <span class="styleAPIBold">SetOSMRoadType</span>(string osmRoadType, ERRoadType erRoadType)</p>
-<p class="styleAPIText">This will link an OSM road type to an EasyRoads3D road type<span class="styleAPIValue"></span></p>
-<p class="styleAPIText">&nbsp;</p>
 <p class="styleAPI">public void <span class="styleAPIBold">SetRaiseOffset</span>(float value)</p>
 <p class="styleAPIText">This will raise the road network in Build Mode above the terrain according the passed <span class="styleAPIValue">value</span></p>
 <p class="styleAPIText">&nbsp;</p>

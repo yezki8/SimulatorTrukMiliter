@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using System;
+
 
 
 
@@ -22,12 +24,12 @@ namespace PG
     {
         // target camera
         public ChaseController TargetCamera;
-
         // InputAction
         public SimulatorInputActions controls;
+        // ForceFeedbackProvider
+        public ForceFeedbackProvider ForceFeedbackProvider;
 
         public float HorizontalChangeSpeed = 10;            //To simulate the use of a keyboard trigger.
-        public bool RotateCameraWithMousePressed;
 
 
         #region String Binding
@@ -35,32 +37,39 @@ namespace PG
         public string SteerAxis = "Steer";
         public string AccelerationAxis = "Acceleration";
         public string BrakeReverseAxis = "BrakeReverse";
-        public string PitchAxis = "Pitch";
+        public string HandBrakeButton = "HandBrake";
+        // public string PitchAxis = "Pitch";
+        
         public string NextGearButton = "NextGear";
         public string PrevGearButton = "PrevGear";
+
+        public string ClutchButton = "Clutch";
+        public string Gear1stButton = "Gear1st";
+        public string Gear2ndButton = "Gear2nd";
+        public string Gear3rdButton = "Gear3rd";
+        public string Gear4thButton = "Gear4th";
+        public string Gear5thButton = "Gear5th";
+        public string Gear6thButton = "Gear6th";
+        public string GearRevButton = "GearReverse";
+
         public string SwitchLightsButton = "SwitchLights";
         public string SwitchLeftTurnLightsButton=  "SwitchLeftTurnLights";
         public string SwitchRightTurnLightsButton = "SwitchRightTurnLights";
         public string SwitchAlarmButton = "SwitchAlarm";
-        public string ConnectTrailerButton = "ConnectTrailer";
+        // public string ConnectTrailerButton = "ConnectTrailer";
         public string ResetCarButton = "ResetCar";
         public string RestoreCarButton = "RestoreCar";
         public string ChangeViewButton = "ChangeView";
-        public string HandBrakeButton = "HandBrake";
-        public string Dpad = "Dpad";
 
-        public string MouseX = "Mouse X";
-        public string MouseY = "Mouse Y";
         #endregion
 
         public float Horizontal { get; private set; }
         public float Acceleration { get; private set; }
         public float BrakeReverse { get; private set; }
+        public float Clutch { get; private set; }
         public float Pitch { get; private set; }
         public bool HandBrake { get; private set; }
         public bool Boost { get; private set; }
-        public Vector2 ViewDelta { get; private set; }
-        public bool ManualCameraRotation { get; private set; }
 
         public UnityEvent OnChangeViewAction;
 
@@ -72,19 +81,21 @@ namespace PG
 
         public bool IsFirstPlayer { get; private set; }
 
-        public static int GamepadP1no;
-        public static int GamepadP2no;
-
-        Vector2 PrevDpadValue;
 
         // enabling and disabling control
         public void EnableControls()
         {
             controls.Enable();
+            Debug.Log("Controls enabled");
+            ForceFeedbackProvider.EnableFFB(true);
+            Debug.Log("FFB enabled");
         }
         public void DisableControls()
         {
             controls.Disable();
+            Debug.Log("Controls disabled");
+            ForceFeedbackProvider.EnableFFB(false);
+            Debug.Log("FFB disabled");
         }
 
         // create instance and hook up controls
@@ -99,7 +110,7 @@ namespace PG
             controls.Player.Look.canceled += ctx => UpdateCamera(Vector2.zero);
 
             // convert vector2 x to steer value
-            controls.Player.Steer.performed += ctx => SetSteer(controls.Player.Steer.ReadValue<Vector2>().x);
+            controls.Player.Steer.performed += ctx => SetSteer(controls.Player.Steer.ReadValue<float>());
             controls.Player.Steer.canceled += ctx => SetSteer(0);
 
             // driving
@@ -109,6 +120,24 @@ namespace PG
             controls.Player.BrakeReverse.canceled += ctx => SetBrakeReverse(0);
             controls.Player.HandBrake.performed += ctx => SetHandBrake(controls.Player.HandBrake.ReadValue<float>() > 0);
             controls.Player.HandBrake.canceled += ctx => SetHandBrake(false);
+
+            // gear and clutch
+            controls.Player.Clutch.performed += ctx => SetClutch(controls.Player.Clutch.ReadValue<float>());
+            controls.Player.Clutch.canceled += ctx => SetClutch(0);
+            controls.Player.Gear1st.performed += ctx => SetGear(1);
+            controls.Player.Gear1st.canceled += ctx => SetGear(0);
+            controls.Player.Gear2nd.performed += ctx => SetGear(2);
+            controls.Player.Gear2nd.canceled += ctx => SetGear(0);
+            controls.Player.Gear3rd.performed += ctx => SetGear(3);
+            controls.Player.Gear3rd.canceled += ctx => SetGear(0);
+            controls.Player.Gear4th.performed += ctx => SetGear(4);
+            controls.Player.Gear4th.canceled += ctx => SetGear(0);
+            controls.Player.Gear5th.performed += ctx => SetGear(5);
+            controls.Player.Gear5th.canceled += ctx => SetGear(0);
+            controls.Player.Gear6th.performed += ctx => SetGear(6);
+            controls.Player.Gear6th.canceled += ctx => SetGear(0);
+            controls.Player.GearReverse.performed += ctx => SetGear(-1);
+            controls.Player.GearReverse.canceled += ctx => SetGear(0);
             controls.Player.NextGear.performed += ctx => NextGear();
             controls.Player.PrevGear.performed += ctx => PrevGear();
 
@@ -121,11 +150,24 @@ namespace PG
             // car actions
             controls.Player.ConnectTrailer.performed += ctx => ConnectTrailer();
             controls.Player.ResetCar.performed += ctx => ResetCar();
+
+            // setup ffb provider
+            ForceFeedbackProvider.InitProvider();
         }
 
+        // Update ForceFeedbackProvider
         private void Update()
         {
             Horizontal = Mathf.MoveTowards (Horizontal, TargetHorizontal, Time.deltaTime * HorizontalChangeSpeed);
+
+            // explicit update check for ffb
+            if (LogitechGSDK.LogiUpdate() && ForceFeedbackProvider.IsFFBEnabled())
+            {
+                // apply centering spring ffb
+                ForceFeedbackProvider.ApplySpringForce();
+                // apply dirt road ffb
+                ForceFeedbackProvider.ApplyDirtRoadEffect();
+            }
         }
 
         void UpdateCamera(Vector2 value)
@@ -210,6 +252,24 @@ namespace PG
             }
         }
 
+        public void SetClutch(float value)
+        {
+            if (Car)
+            {
+                // no suitable processor from input system
+                // transform from [-1, 1] to [1, 0] -> 0 = fully pressed, 1 = fully released
+                Clutch = 1 - ((value + 1) / 2);
+            }
+        }
+
+        public void SetGear(int value)
+        {
+            if (Car)
+            {
+                Car.SetGear(value);
+            }
+        }
+
         public void SwitchLights ()
         {
             CarLighting.SwitchMainLights();
@@ -275,7 +335,11 @@ namespace PG
             Boost = value;
         }
 
-#endregion //Set input
+        #endregion //Set input
 
+        void OnApplicationQuit()
+        {
+            Debug.Log("SteeringShutdown:" + LogitechGSDK.LogiSteeringShutdown());
+        }
     }
 }

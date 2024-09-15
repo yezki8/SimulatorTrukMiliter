@@ -30,6 +30,7 @@ namespace PG
         public float BrakeReverse { get; protected set; }
         public float Horizontal { get; protected set; }
         public float Pitch { get; protected set; }
+        public float Clutch { get; private set; }
         public bool HandBrake { get; protected set; }
         public bool Boost { get; protected set; }
 
