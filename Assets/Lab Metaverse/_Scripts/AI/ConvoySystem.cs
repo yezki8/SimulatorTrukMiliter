@@ -15,6 +15,8 @@ public class ConvoySystem : MonoBehaviour
 
     public static ConvoySystem Instance;
 
+    private bool _isRunning = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -45,17 +47,15 @@ public class ConvoySystem : MonoBehaviour
     {
         if (_vehicleControls.Count > 0)
         {
-            // await a second before enabling the convoy
-            Debug.Log("Awaiting convoy vehicles...");
-            StartCoroutine(EnableConvoyVehiclesCoroutine());
-            foreach (ConvoyAIControl vehicle in _vehicleControls)
-            {
-                vehicle.ConvoyEnabled = true;
-            }
-            Debug.Log("Convoy started");
             DisableTrigger(startPoint);
-            EnableTrigger(endPoint);
-        } 
+            // await a second before enabling the convoy
+            if (!_isRunning)
+            {
+                _isRunning = true;
+                Debug.Log("Starting convoy...");
+                StartCoroutine(EnableConvoyVehiclesCoroutine());
+            }
+        }
         else
         {
             Debug.LogWarning("No vehicles in convoy");
@@ -66,6 +66,12 @@ public class ConvoySystem : MonoBehaviour
     private IEnumerator EnableConvoyVehiclesCoroutine()
     {
         yield return new WaitForSeconds(5);
+        foreach (ConvoyAIControl vehicle in _vehicleControls)
+        {
+            vehicle.ConvoyEnabled = true;
+        }
+        Debug.Log("Convoy started");
+        EnableTrigger(endPoint);
     }
 
     public void StopConvoyVehicles()
