@@ -42,6 +42,13 @@ namespace PG
                 SpeedArrow.localRotation = Quaternion.AngleAxis (arrowAngle, Vector3.forward);
 
                 arrowAngle = Mathf.Lerp (MinRPMAngle, MaxRPMAngle, Mathf.InverseLerp (0, Car.Engine.MaxRPM, Car.EngineRPM));
+                // NaN check
+                if (float.IsNaN (arrowAngle))
+                {
+                    Debug.LogError ("RPM is NaN");
+                    arrowAngle = 0;
+                }
+
                 RPMArrow.localRotation = Quaternion.AngleAxis (arrowAngle, Vector3.forward);
             }
         }

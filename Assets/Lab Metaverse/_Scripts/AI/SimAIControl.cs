@@ -1,4 +1,3 @@
-using TMPro.Examples;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -36,6 +35,14 @@ namespace PG
         Vector3 HorizontalOffset;                                               //Offset target point for overtaking as Vector3, depends on the direction of the path.
         Rigidbody AheadRB;                                                      //Nearest ahead car.
         float DistanceToAheadCollider;                                          //Distance to the nearest car.
+        float AheadRotationCheck;                                                    // Ahead vehicle rotation
+
+        // vehicle hard reset mechanism
+        private int _resetInPlaceCount = 0;
+        private Vector3 _previousPosition = Vector3.zero;
+        private float _previousRotation = 0;
+
+        [SerializeField] private int MaxResetInPlaceCount = 3;
 
         public override void Start ()
         {
@@ -51,6 +58,10 @@ namespace PG
             {
                 SimAIConfig = new SimAIConfig ();
             }
+
+            // Set the initial position and rotation
+            _previousPosition = transform.position;
+            _previousRotation = transform.rotation.eulerAngles.y;
 
             StartHits ();
         }
@@ -104,9 +115,9 @@ namespace PG
                 var adjustedSpeed = 0f;
 
                 // compare the velocity direction of the current car and the ahead car
-                var dot = Vector3.Dot(AheadRB.velocity.normalized, vehicleDirection);
+                AheadRotationCheck = Vector3.Dot(AheadRB.velocity.normalized, vehicleDirection);
 
-                if (dot > 0.3f)
+                if (AheadRotationCheck > 0.3f)
                 {
                     adjustedSpeed = AheadRB.velocity.magnitude;
                 }
@@ -114,7 +125,7 @@ namespace PG
                 //Apply aggressiveness to the desired speed.
                 float aheadRBSpeed = Mathf.Lerp(adjustedSpeed, desiredSpeed, Aggressiveness);
 
-                desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(aheadRBSpeed, desiredSpeed, ((DistanceToAheadCollider - 1) / ObstacleHitDistance).Clamp()));
+                desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(aheadRBSpeed, desiredSpeed, ((DistanceToAheadCollider - 2) / ObstacleHitDistance).Clamp()));
             }
 
             //Apply speed limit.
@@ -130,9 +141,25 @@ namespace PG
             //Left and Right rays have a hit.
             if (MainHits[0].collider && MainHits[1].collider)
             {
-                if (OffsetToTargetPoint == 0)
+                // check if AheadRotation is less than 0.3f
+                if (AheadRotationCheck < 0.3f)
                 {
-                    if (Random.Range (0, 1) > 0.5f)
+                    targetOffset = 0;
+                }
+                else
+                {
+                    if (OffsetToTargetPoint == 0)
+                    {
+                        if (Random.Range(0, 1) > 0.5f)
+                        {
+                            targetOffset = TargetPoint.OvertakeZoneRight;
+                        }
+                        else
+                        {
+                            targetOffset = -TargetPoint.OvertakeZoneLeft;
+                        }
+                    }
+                    else if (MainHits[0].distance < MainHits[1].distance)
                     {
                         targetOffset = TargetPoint.OvertakeZoneRight;
                     }
@@ -141,27 +168,19 @@ namespace PG
                         targetOffset = -TargetPoint.OvertakeZoneLeft;
                     }
                 }
-                else if (MainHits[0].distance < MainHits[1].distance)
-                {
-                    targetOffset = TargetPoint.OvertakeZoneRight;
-                }
-                else
-                {
-                    targetOffset = -TargetPoint.OvertakeZoneLeft;
-                }
             }
             //Left ray have a hit.
-            else if (MainHits[0].collider)
+            else if (MainHits[0].collider && AheadRotationCheck > 0.3f)
             {
                 targetOffset = TargetPoint.OvertakeZoneRight;
             }
             //Right ray have a hit.
-            else if (MainHits[1].collider)
+            else if (MainHits[1].collider && AheadRotationCheck > 0.3f)
             {
                 targetOffset = -TargetPoint.OvertakeZoneLeft;
             }
             //Center ray have a hit.
-            else if (MainHits[2].collider)
+            else if (MainHits[2].collider && AheadRotationCheck > 0.3f)
             {
                 if (CurrentHorizontalOffset > 0)
                 {
@@ -205,6 +224,15 @@ namespace PG
                     Horizontal = 0;
                     Vertical = 0;
                     Car.ResetVehicle ();
+                    _resetInPlaceCount++;
+                    if (_resetInPlaceCount >= MaxResetInPlaceCount)
+                    {
+                        _resetInPlaceCount = 0;
+                        transform.position = _previousPosition;
+                        transform.rotation = Quaternion.Euler(0, _previousRotation, 0);
+                        // reset the progress
+                        ResetProgress();
+                    }
                     ReverseTimer = 0;
                 }
                 else
@@ -353,6 +381,18 @@ namespace PG
                     Gizmos.color = AdditionalHits[i].collider != null ? Color.red : Color.blue;
                     firstPoint = transform.TransformPoint (AdditionalHitPoints[i]);
                     Gizmos.DrawLine (firstPoint, firstPoint + transform.TransformDirection(dir.normalized) * (ObstacleHitDistance + Car.Bounds.size.z));
+                }
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            //To Ensure these trigger calls only happen during gameplay
+            if (GameStateController.Instance.GameState == StateOfGame.Match)
+            {
+                if (other.tag == "NPCFinish")
+                {
+                    SpecialNPCController.Instance.OnFinish(this);
                 }
             }
         }
