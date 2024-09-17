@@ -78,6 +78,18 @@ public class ConvoySystem : MonoBehaviour
         Debug.Log("Convoy finished");
     }
 
+    public void ResetConvoyVehicles()
+    {
+        EnableTrigger(startPoint);
+        foreach (ConvoyAIControl vehicle in _vehicleControls)
+        {
+            vehicle.ConvoyEnabled = false;
+            vehicle.Car.ResetVehicle();
+            vehicle.ResetAIControl();
+        }
+        DisableTrigger(endPoint);
+    }
+
     private void EnableTrigger(GameObject Trigger)
     {
         Trigger.SetActive(true);

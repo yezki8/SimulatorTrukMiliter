@@ -36,6 +36,13 @@ namespace PG
         Rigidbody AheadRB;                                                      //Nearest ahead car.
         float DistanceToAheadCollider;                                          //Distance to the nearest car.
 
+        // vehicle hard reset mechanism
+        private int _resetInPlaceCount = 0;
+        private Vector3 _previousPosition = Vector3.zero;
+        private float _previousRotation = 0;
+
+        [SerializeField] private int MaxResetInPlaceCount = 3;
+
         // Convoy specific
         public bool ConvoyEnabled = false;
 
@@ -53,6 +60,10 @@ namespace PG
             {
                 ConvoyAIConfig = new ConvoyAIConfig();
             }
+
+            // Set the initial position and rotation
+            _previousPosition = transform.position;
+            _previousRotation = transform.rotation.eulerAngles.y;
 
             StartHits ();
         }
@@ -83,6 +94,16 @@ namespace PG
             {
                 BrakeToStop();
             }
+        }
+
+        public void ResetAIControl()
+        {
+            _resetInPlaceCount = 0;
+            transform.position = _previousPosition;
+            transform.rotation = Quaternion.Euler(0, _previousRotation, 0);
+
+            // reset progress
+            ResetProgress();
         }
 
         /// <summary>
