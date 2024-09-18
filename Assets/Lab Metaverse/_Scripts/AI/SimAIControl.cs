@@ -212,6 +212,7 @@ namespace PG
 
 
             //Reverse logic
+            /*
             var deltaSpeed = Mathf.Abs (Car.CurrentSpeed - PrevSpeed);
             if (Vertical > 0.1f && deltaSpeed < 1 && Car.CurrentSpeed < 10)
             {
@@ -247,6 +248,7 @@ namespace PG
             {
                 ReverseTimer = 0;
             }
+            */
         }
 
         #region Hits
