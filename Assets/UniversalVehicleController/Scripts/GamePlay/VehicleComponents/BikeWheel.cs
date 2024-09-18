@@ -18,7 +18,7 @@ namespace PG
 
         public override void LateUpdate ()
         {
-            if (Vehicle.VehicleIsVisible)
+            if (Vehicle.VehicleIsVisible && !float.IsNaN(RPM))
             {
                 WheelCollider.GetWorldPose (out Position, out Rotation);
                 CurrentRotateAngle += RPM * Time.deltaTime * 6.28f;
