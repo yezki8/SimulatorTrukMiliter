@@ -193,7 +193,7 @@ namespace PG
         {
             if (Car.EngineIsOn)
             {
-                if (EngineSources.Count == 0 && EngineSourceRef && EngineSourceRef.gameObject.activeInHierarchy)
+                if (EngineSources.Count == 0 && EngineSourceRef && EngineSourceRef.gameObject.activeInHierarchy && !float.IsNaN(Car.EngineRPM))
                 {
                     EngineSourceRef.pitch = Mathf.Lerp (MinEnginePitch, MaxEnginePitch, (Car.EngineRPM - Car.MinRPM) / (Car.MaxRPM - Car.MinRPM));
                 }
