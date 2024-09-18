@@ -224,6 +224,9 @@ namespace PG
                 {
                     Horizontal = 0;
                     Vertical = 0;
+                    // clear raycast parameters
+                    DistanceToAheadCollider = float.MaxValue;
+                    AheadRB = null;
                     Car.ResetVehicle ();
                     // reset location
                     transform.position = _previousPosition;
@@ -316,7 +319,14 @@ namespace PG
                 // offset for additional hit points
                 dir.z = ObstacleHitDistance;
                 dir.x = AdditionalHitPoints[i].x * OffsetForAdditionalHitDirections;
-                Physics.Raycast (transform.TransformPoint (AdditionalHitPoints[i]), transform.TransformDirection(dir.normalized), out AdditionalHits[i], ObstacleHitDistance + Car.Bounds.size.z, AiDetectionMask);
+                if (Physics.Raycast(transform.TransformPoint(AdditionalHitPoints[i]), 
+                    transform.TransformDirection(dir.normalized), out AdditionalHits[i], 
+                    ObstacleHitDistance + Car.Bounds.size.z, AiDetectionMask))
+                {
+                    DistanceToAheadCollider = AdditionalHits[i].distance;
+                    AheadRB = AdditionalHits[i].rigidbody;
+                }
+
             }
         }
 
