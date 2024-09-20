@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpecialAIConfigAsset
   m_EditorClassIdentifier: 
   AIConfig:
-    MaxSpeed: 50
+    MaxSpeed: 35
     MinSpeed: 0
     SetSteerAngleMultiplayer: 1.6
     OffsetToTargetPoint: 8
