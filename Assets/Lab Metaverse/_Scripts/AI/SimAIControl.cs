@@ -227,6 +227,8 @@ namespace PG
                     // clear raycast parameters
                     DistanceToAheadCollider = float.MaxValue;
                     AheadRB = null;
+                    // reset vehicle damage
+                    Car.RestoreVehicle();
                     Car.ResetVehicle ();
                     // reset location
                     transform.position = _previousPosition;
