@@ -9,12 +9,12 @@ using PG;
 public class PathFinding : MonoBehaviour
 {
     Dictionary<string, Node> nodes = new Dictionary<string, Node>();
-    // Name: (Center Point, (List Connection Point))
     Dictionary<ERConnection, (Vector3, List<(ERRoad, Vector3)>)> connectionObject = new();
     private ERRoadNetwork roadNetwork;
     private ERRoad[] allRoads;
     private ERConnection[] allconnections;
     [SerializeField] private Transform startPoint;
+    // [SerializeField] private Transform endPoint;
     private Vector3 endPoint = new Vector3(187, 35, 95);
     [SerializeField] private GameObject parentObjectName;
     [SerializeField] private GameObject groupObjectName;
@@ -98,8 +98,10 @@ public class PathFinding : MonoBehaviour
     {
         if (findPath)
         {
+            // List<Vector3> paths = StartPathFinding(startPoint.position, endPoint.position);
             List<Vector3> paths = StartPathFinding(startPoint.position, endPoint);
             DrawPath(paths);
+            // if (Vector2.Distance(new Vector2(startPoint.position.x, startPoint.position.z), new Vector2 (endPoint.position.x, endPoint.position.z)) <= 2)
             if (Vector2.Distance(new Vector2(startPoint.position.x, startPoint.position.z), new Vector2 (endPoint.x, endPoint.z)) <= 2)
             {
                 findPath = false;
@@ -611,10 +613,5 @@ public class PathFinding : MonoBehaviour
     public void DeletePath()
     {
         lineRenderer.positionCount = 0;
-    }
-
-    public void setEndPoint(Vector3 point)
-    {
-        endPoint = point;
     }
 }
