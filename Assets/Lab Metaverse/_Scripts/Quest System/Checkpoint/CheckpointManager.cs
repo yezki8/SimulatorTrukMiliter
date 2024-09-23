@@ -58,11 +58,12 @@ public class CheckpointManager : MonoBehaviour
         ResetPlayerState();
         CheckpointController targetSpawnPlace = GetActiveCheckpoint();
         Vector3 spawnPos = targetSpawnPlace.SpawnArea.transform.position;
+
         Quaternion spawnRot = targetSpawnPlace.SpawnArea.transform.rotation;
         Debug.Log("Reset vehicle position from Checkpoint manager");
 
         Player.GetComponent<CarController>().ResetVehicle();
-        Player.GetComponent<Rigidbody>().position = spawnPos;
+        Player.GetComponent<Rigidbody>().position = spawnPos + Vector3.up * 1f;
         Player.GetComponent<Rigidbody>().rotation = spawnRot;
 
         //Player.transform.SetPositionAndRotation(spawnPos, spawnRot);
