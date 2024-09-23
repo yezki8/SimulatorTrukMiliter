@@ -11,16 +11,14 @@ public class PathFinding : MonoBehaviour
     Dictionary<string, Node> nodes = new Dictionary<string, Node>();
     // Name: (Center Point, (List Connection Point))
     Dictionary<ERConnection, (Vector3, List<(ERRoad, Vector3)>)> connectionObject = new();
-    // Name: (List Control Point)
-    Dictionary<ERRoad, (List<Vector3>, float)> roadObject = new();
     private ERRoadNetwork roadNetwork;
     private ERRoad[] allRoads;
     private ERConnection[] allconnections;
     [SerializeField] private Transform startPoint;
-    private Vector3 endPoint;
+    private Vector3 endPoint = new Vector3(187, 35, 95);
     [SerializeField] private GameObject parentObjectName;
     [SerializeField] private GameObject groupObjectName;
-    private bool findPath = false;
+    private bool findPath = true;
     private LineRenderer lineRenderer;
     [SerializeField] private Material lineMaterial;
 
@@ -92,78 +90,73 @@ public class PathFinding : MonoBehaviour
 
                 startConnectionNode.Neighbors.Add((endConnectionNode, roadLength));
                 endConnectionNode.Neighbors.Add((startConnectionNode, roadLength));
-
-                Vector3[] markers = road.GetMarkerPositions();
-                List<Vector3> roadPoints = new();
-                foreach (Vector3 marker in markers)
-                {
-                    roadPoints.Add(marker);
-                }
-                roadObject[road] = (roadPoints, road.GetWidth());
             }
         }
     }
 
     void Update()
     {
-        if (!findPath)
+        if (findPath)
         {
-            List<Vector3> paths = StartPathFinding(startPoint.position, new Vector3(187, 35, 95));
-            // List<Vector3> paths = StartPathFinding(point.position, endPoint);
+            List<Vector3> paths = StartPathFinding(startPoint.position, endPoint);
             DrawPath(paths);
+            if (Vector2.Distance(new Vector2(startPoint.position.x, startPoint.position.z), new Vector2 (endPoint.x, endPoint.z)) <= 2)
+            {
+                findPath = false;
+                DeletePath();
+            }
         }
     }
 
     public List<Vector3> StartPathFinding(Vector3 startPoint, Vector3 endPoint)
     {
-        (ERRoad, Vector3) roadStart = FindRoadStartEndPath(startPoint);
-        List<(ERConnection, float)> connectionsStart = GetPointRoadDistanceToConnection(roadStart);
-        (ERRoad, Vector3) roadEnd = FindRoadStartEndPath(endPoint);
-        List<(ERConnection, float)> connectionsEnd = GetPointRoadDistanceToConnection(roadEnd);
         float distance = float.MaxValue;
         List<Node> directions = new();
         List<Vector3> paths = new();
 
-        Debug.Log($"Start Point: {roadStart.Item2}");
-        Debug.Log($"End Point: {roadEnd.Item2}");
+        (ERRoad, Vector3) roadStart = FindRoadStartEndPath(startPoint);
+        List<(ERConnection, float)> connectionsStart = GetPointRoadDistanceToConnection(roadStart);
+        (ERRoad, Vector3) roadEnd = FindRoadStartEndPath(endPoint);
+        List<(ERConnection, float)> connectionsEnd = GetPointRoadDistanceToConnection(roadEnd);
 
-        Debug.Log("Finding...");
-        foreach ((ERConnection, float) connStart in connectionsStart)
+        if (roadStart.Item1 == roadEnd.Item1)
         {
-            foreach ((ERConnection, float) connEnd in connectionsEnd)
+            paths.Add(startPoint);
+            paths.Add(roadStart.Item2);
+            paths.Add(roadEnd.Item2);
+            paths.Add(endPoint);
+        }
+        else
+        {
+            foreach ((ERConnection, float) connStart in connectionsStart)
             {
-                ResetNodes();
-                Debug.Log($"Try start connection: {connStart.Item1.GetName()}");
-                Debug.Log($"Try end connection: {connEnd.Item1.GetName()}");
-                Node startNode = nodes[connStart.Item1.GetName()];
-                Node targetNode = nodes[connEnd.Item1.GetName()];
-
-                (List<Node>, float) path = AStar(startNode, targetNode);
-
-                if (path.Item1 != null)
+                foreach ((ERConnection, float) connEnd in connectionsEnd)
                 {
-                    Debug.Log($"Path found! Distance: {path.Item2}");
-                    if (distance > connStart.Item2 + path.Item2 + connEnd.Item2)
+                    ResetNodes();
+                    Node startNode = nodes[connStart.Item1.GetName()];
+                    Node targetNode = nodes[connEnd.Item1.GetName()];
+
+                    (List<Node>, float) path = AStar(startNode, targetNode);
+
+                    if (path.Item1 != null)
                     {
-                        distance = connStart.Item2 + path.Item2 + connEnd.Item2;
-                        directions = path.Item1;
+                        if (distance > connStart.Item2 + path.Item2 + connEnd.Item2)
+                        {
+                            distance = connStart.Item2 + path.Item2 + connEnd.Item2;
+                            directions = path.Item1;
+                        }
+                    }
+                    else
+                    {
+                        return null;
                     }
                 }
-                else
-                {
-                    Debug.Log("No path found.");
-                }
             }
-        }
-        Debug.Log($"Chosen path distance: {distance}");
-        
-        paths.Add(startPoint);
-        CreatePaths(paths, roadStart, directions, roadEnd);
-        paths.Add(endPoint);
-        foreach (Vector3 point in paths)
-        {
-            Debug.Log($"{point}");
-        }
+            
+            paths.Add(startPoint);
+            CreatePaths(paths, roadStart, directions, roadEnd);
+            paths.Add(endPoint);
+        }        
         return paths;
     }
 
@@ -349,26 +342,6 @@ public class PathFinding : MonoBehaviour
         return insideX && insideZ;
     }
 
-    private ERRoad CheckPointInTheRoad(Vector3 point)
-    {
-        foreach (ERRoad road in allRoads)
-        {
-            Vector3[] markers = road.GetMarkerPositions();
-            for (int i = 0; i < markers.Length-1; i++)
-            {
-                (bool, Vector3) projection = ProjectPointOnLineSegment(point, markers[i], markers[i+1]);
-                if (projection.Item1)
-                {
-                    if (Vector3.Distance(point, projection.Item2) <= road.GetWidth())
-                    {
-                        return road;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
     private List<(ERConnection, float)> GetPointRoadDistanceToConnection((ERRoad, Vector3) roadPoint)
     {
         Vector3 point = roadPoint.Item2;
@@ -440,21 +413,59 @@ public class PathFinding : MonoBehaviour
 
     private void CreatePaths(List<Vector3> paths, (ERRoad, Vector3) roadStart, List<Node> directions, (ERRoad, Vector3) roadEnd)
     {  
+        bool passRoadPoint = false;
         paths.Add(roadStart.Item2);
+
         Vector3[] markers1 = roadStart.Item1.GetMarkerPositions();
         if (roadStart.Item1.GetConnectionAtStart() != null)
         {
             if (roadStart.Item1.GetConnectionAtStart().GetName() == directions[0].Name)
             {
+                Vector3 startMarker = markers1[markers1.Length-1];
+                for (int i = markers1.Length - 2; i >= 0; i--)
+                {
+                    if (!passRoadPoint)
+                    {
+                        if (ProjectPointOnLineSegment(roadStart.Item2, startMarker, markers1[i]).Item1)
+                        {
+                            paths.Add(markers1[i]);
+                            passRoadPoint = true;
+                        }
+                    }
+                }
                 paths.Add(markers1[0]);
             }
             else
             {
+                Vector3 startMarker = markers1[0];
+                for (int i = 1; i <= markers1.Length-1; i++)
+                {
+                    if (!passRoadPoint)
+                    {
+                        if (ProjectPointOnLineSegment(roadStart.Item2, startMarker, markers1[i]).Item1)
+                        {
+                            paths.Add(markers1[i]);
+                            passRoadPoint = true;
+                        }
+                    }
+                }
                 paths.Add(markers1[markers1.Length-1]);
             }
         }
         else
         {
+            Vector3 startMarker = markers1[0];
+            for (int i = 1; i <= markers1.Length-1; i++)
+            {
+                if (!passRoadPoint)
+                {
+                    if (ProjectPointOnLineSegment(roadStart.Item2, startMarker, markers1[i]).Item1)
+                    {
+                        paths.Add(markers1[i]);
+                        passRoadPoint = true;
+                    }
+                }
+            }
             paths.Add(markers1[markers1.Length-1]);
         }
 
@@ -491,17 +502,54 @@ public class PathFinding : MonoBehaviour
         {
             if (roadEnd.Item1.GetConnectionAtStart().GetName() == directions[0].Name)
             {
+                Vector3 startMarker = markers2[markers2.Length-1];
+                for (int i = markers2.Length - 2; i >= 0; i--)
+                {
+                    if (!passRoadPoint)
+                    {
+                        if (ProjectPointOnLineSegment(roadEnd.Item2, startMarker, markers2[i]).Item1)
+                        {
+                            paths.Add(markers2[i]);
+                            passRoadPoint = true;
+                        }
+                    }
+                }
                 paths.Add(markers2[0]);
             }
             else
             {
-                paths.Add(markers2[markers1.Length-1]);
+                Vector3 startMarker = markers2[0];
+                for (int i = 1; i <= markers2.Length-1; i++)
+                {
+                    if (!passRoadPoint)
+                    {
+                        if (ProjectPointOnLineSegment(roadEnd.Item2, startMarker, markers2[i]).Item1)
+                        {
+                            paths.Add(markers2[i]);
+                            passRoadPoint = true;
+                        }
+                    }
+                }
+                paths.Add(markers2[markers2.Length-1]);
             }
         }
         else
         {
-            paths.Add(markers2[markers1.Length-1]);
+            Vector3 startMarker = markers2[0];
+            for (int i = 1; i <= markers2.Length-1; i++)
+            {
+                if (!passRoadPoint)
+                {
+                    if (ProjectPointOnLineSegment(roadEnd.Item2, startMarker, markers2[i]).Item1)
+                    {
+                        paths.Add(markers2[i]);
+                        passRoadPoint = true;
+                    }
+                }
+            }
+            paths.Add(markers2[markers2.Length-1]);
         }
+
         paths.Add(roadEnd.Item2);
     }
 
@@ -558,6 +606,11 @@ public class PathFinding : MonoBehaviour
         lineRenderer.material = lineMaterial;
         lineRenderer.startWidth = 5f;
         lineRenderer.endWidth = 5f;
+    }
+
+    public void DeletePath()
+    {
+        lineRenderer.positionCount = 0;
     }
 
     public void setEndPoint(Vector3 point)
