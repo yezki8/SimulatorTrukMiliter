@@ -36,6 +36,8 @@ public class SpecialNPCController : MonoBehaviour
     {
         // reset vehicle and move it to the initial position
         finishedVehicle.Car.ResetVehicle();
+        // restore if damaged
+        finishedVehicle.Car.RestoreVehicle();
         int index = _carControllers.IndexOf(finishedVehicle);
         finishedVehicle.transform.position = initialPos[index];
         finishedVehicle.transform.rotation = initialRot[index];
