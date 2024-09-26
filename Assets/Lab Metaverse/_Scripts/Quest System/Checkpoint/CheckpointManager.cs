@@ -62,11 +62,14 @@ public class CheckpointManager : MonoBehaviour
         Quaternion spawnRot = targetSpawnPlace.SpawnArea.transform.rotation;
         Debug.Log("Reset vehicle position from Checkpoint manager");
 
+
         Player.GetComponent<CarController>().ResetVehicle();
         Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         Player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        Player.GetComponent<Rigidbody>().isKinematic = true;
         Player.GetComponent<Rigidbody>().position = spawnPos + Vector3.up * 1f;
         Player.GetComponent<Rigidbody>().rotation = spawnRot;
+        Player.GetComponent<Rigidbody>().isKinematic = false;
 
         //Player.transform.SetPositionAndRotation(spawnPos, spawnRot);
     }
