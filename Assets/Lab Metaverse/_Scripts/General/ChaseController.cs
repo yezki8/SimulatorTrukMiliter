@@ -10,7 +10,8 @@ using UnityEngine.InputSystem;
 public enum CameraMode
 {
     FirstPerson,
-    Chase
+    Chase,
+    Simulation
 }
 
 public class ChaseController : MonoBehaviour
@@ -53,8 +54,20 @@ public class ChaseController : MonoBehaviour
     // invoked by controller
     public void ChangeCameraState()
     {
-        _cameraState = _cameraState == CameraMode.Chase ? CameraMode.FirstPerson : CameraMode.Chase;
-        SetAnchorAndOffsetAfterChange();
+        switch (_cameraState)
+        {
+            case CameraMode.FirstPerson:
+                SetCameraState(CameraMode.Chase);
+                break;
+            case CameraMode.Chase:
+                SetCameraState(CameraMode.Simulation);
+                break;
+            case CameraMode.Simulation:
+                SetCameraState(CameraMode.FirstPerson);
+                break;
+            default:
+                break;
+        }
     }
 
     public void SetCameraState(CameraMode state)
