@@ -686,6 +686,17 @@ namespace UnityEngine.InputSystem
                     ""action"": ""GearReverse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e09c3ee4-3ad2-4176-9660-7f11cb8021e1"",
+                    ""path"": ""<XInputController>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -944,6 +955,244 @@ namespace UnityEngine.InputSystem
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Maps"",
+            ""id"": ""2c8f042e-b104-4999-8d9e-92486718f6e3"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""027d5e86-be88-421f-8e30-e8621e6edbb0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""99a7ce24-4093-4681-a2e2-99ff7096ffb4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Drag"",
+                    ""type"": ""Value"",
+                    ""id"": ""5d526e99-8d6e-4d35-b175-6789e7e74906"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""6fd3c791-b3f7-47f1-9c74-43cf87337d3d"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""EdgePan"",
+                    ""type"": ""Value"",
+                    ""id"": ""e0bbca3a-2f64-47e0-b126-1fd92273f42f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""GoToPlayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""6fe5a6e8-d4d4-4ee4-a1ba-86bb1cfd4c4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""25639d7e-1b32-455a-a160-2fadbe16f72c"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""96f31f00-54bd-4a4a-8add-b4156eaeea54"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""5ab984cd-2670-43af-8336-508428f61d75"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""3b75b5fe-c7ed-47d4-bb6d-e1fcdadf9d63"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""b3731a3f-94f0-4267-8fb2-47d3618ffca6"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""bcc51dd7-ce5e-45c5-9f6a-8a074c77ccfe"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8b46f431-08ea-4f4e-88d1-cc0cc9e9e0ff"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""df20c256-52a5-484d-be47-b573b80ab866"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""0f489db7-ef68-4c99-80ea-f7fdb69f3b29"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""83a884d2-5b14-4ab3-901f-bc739a20e9ef"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1933d85-d7a9-4561-a6de-06baaa459254"",
+                    ""path"": ""<Pointer>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Drag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""347ee806-da21-44d5-9b04-d4d689974687"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c6f613d1-0076-4e73-878e-444c2aa7410d"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""49a1e90b-b23a-440c-8cdf-13ff262e9e05"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f22280b5-06e7-4a7a-a38c-adb2fba78aaa"",
+                    ""path"": ""<Pointer>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""EdgePan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9406cca-e256-46b2-89f6-f5876e06b5de"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoToPlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1045,6 +1294,14 @@ namespace UnityEngine.InputSystem
             m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
             m_UI_MiddleClick = m_UI.FindAction("MiddleClick", throwIfNotFound: true);
             m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
+            // Maps
+            m_Maps = asset.FindActionMap("Maps", throwIfNotFound: true);
+            m_Maps_Move = m_Maps.FindAction("Move", throwIfNotFound: true);
+            m_Maps_Click = m_Maps.FindAction("Click", throwIfNotFound: true);
+            m_Maps_Drag = m_Maps.FindAction("Drag", throwIfNotFound: true);
+            m_Maps_Zoom = m_Maps.FindAction("Zoom", throwIfNotFound: true);
+            m_Maps_EdgePan = m_Maps.FindAction("EdgePan", throwIfNotFound: true);
+            m_Maps_GoToPlayer = m_Maps.FindAction("GoToPlayer", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1434,6 +1691,92 @@ namespace UnityEngine.InputSystem
             }
         }
         public UIActions @UI => new UIActions(this);
+
+        // Maps
+        private readonly InputActionMap m_Maps;
+        private List<IMapsActions> m_MapsActionsCallbackInterfaces = new List<IMapsActions>();
+        private readonly InputAction m_Maps_Move;
+        private readonly InputAction m_Maps_Click;
+        private readonly InputAction m_Maps_Drag;
+        private readonly InputAction m_Maps_Zoom;
+        private readonly InputAction m_Maps_EdgePan;
+        private readonly InputAction m_Maps_GoToPlayer;
+        public struct MapsActions
+        {
+            private @SimulatorInputActions m_Wrapper;
+            public MapsActions(@SimulatorInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_Maps_Move;
+            public InputAction @Click => m_Wrapper.m_Maps_Click;
+            public InputAction @Drag => m_Wrapper.m_Maps_Drag;
+            public InputAction @Zoom => m_Wrapper.m_Maps_Zoom;
+            public InputAction @EdgePan => m_Wrapper.m_Maps_EdgePan;
+            public InputAction @GoToPlayer => m_Wrapper.m_Maps_GoToPlayer;
+            public InputActionMap Get() { return m_Wrapper.m_Maps; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(MapsActions set) { return set.Get(); }
+            public void AddCallbacks(IMapsActions instance)
+            {
+                if (instance == null || m_Wrapper.m_MapsActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_MapsActionsCallbackInterfaces.Add(instance);
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+                @Drag.started += instance.OnDrag;
+                @Drag.performed += instance.OnDrag;
+                @Drag.canceled += instance.OnDrag;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
+                @EdgePan.started += instance.OnEdgePan;
+                @EdgePan.performed += instance.OnEdgePan;
+                @EdgePan.canceled += instance.OnEdgePan;
+                @GoToPlayer.started += instance.OnGoToPlayer;
+                @GoToPlayer.performed += instance.OnGoToPlayer;
+                @GoToPlayer.canceled += instance.OnGoToPlayer;
+            }
+
+            private void UnregisterCallbacks(IMapsActions instance)
+            {
+                @Move.started -= instance.OnMove;
+                @Move.performed -= instance.OnMove;
+                @Move.canceled -= instance.OnMove;
+                @Click.started -= instance.OnClick;
+                @Click.performed -= instance.OnClick;
+                @Click.canceled -= instance.OnClick;
+                @Drag.started -= instance.OnDrag;
+                @Drag.performed -= instance.OnDrag;
+                @Drag.canceled -= instance.OnDrag;
+                @Zoom.started -= instance.OnZoom;
+                @Zoom.performed -= instance.OnZoom;
+                @Zoom.canceled -= instance.OnZoom;
+                @EdgePan.started -= instance.OnEdgePan;
+                @EdgePan.performed -= instance.OnEdgePan;
+                @EdgePan.canceled -= instance.OnEdgePan;
+                @GoToPlayer.started -= instance.OnGoToPlayer;
+                @GoToPlayer.performed -= instance.OnGoToPlayer;
+                @GoToPlayer.canceled -= instance.OnGoToPlayer;
+            }
+
+            public void RemoveCallbacks(IMapsActions instance)
+            {
+                if (m_Wrapper.m_MapsActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IMapsActions instance)
+            {
+                foreach (var item in m_Wrapper.m_MapsActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_MapsActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public MapsActions @Maps => new MapsActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -1516,6 +1859,15 @@ namespace UnityEngine.InputSystem
             void OnScrollWheel(InputAction.CallbackContext context);
             void OnMiddleClick(InputAction.CallbackContext context);
             void OnRightClick(InputAction.CallbackContext context);
+        }
+        public interface IMapsActions
+        {
+            void OnMove(InputAction.CallbackContext context);
+            void OnClick(InputAction.CallbackContext context);
+            void OnDrag(InputAction.CallbackContext context);
+            void OnZoom(InputAction.CallbackContext context);
+            void OnEdgePan(InputAction.CallbackContext context);
+            void OnGoToPlayer(InputAction.CallbackContext context);
         }
     }
 }

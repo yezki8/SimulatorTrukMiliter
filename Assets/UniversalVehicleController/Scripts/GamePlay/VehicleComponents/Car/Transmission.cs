@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -38,6 +39,9 @@ namespace PG
         float ChangeGearTimer = 0;
         float[] AllGearsRatio;
         Wheel[] DriveWheels;
+
+        [SerializeField] private TextMeshProUGUI _currentGearUI;                               // Current Gear UI
+
 
         void AwakeTransmition ()
         {
@@ -162,6 +166,23 @@ namespace PG
                 else if ((avgSign > 0 && CurrentGear < 0 || VehicleDirection == 0) && Mathf.Approximately(CurrentAcceleration, 0))
                 {
                     CurrentGear = 0;
+                }
+            }
+
+            // update gear text
+            if (_currentGearUI)
+            {
+                if (_CurrentGear == 0)
+                {
+                    _currentGearUI.text = "N";
+                }
+                else if (_CurrentGear == -1)
+                {
+                    _currentGearUI.text = "R";
+                }
+                else
+                {
+                    _currentGearUI.text = _CurrentGear.ToString();
                 }
             }
         }
