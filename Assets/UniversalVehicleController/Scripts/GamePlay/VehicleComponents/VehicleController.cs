@@ -186,9 +186,10 @@ namespace PG
             RB.velocity = Vector3.zero;
             RB.angularVelocity = Vector3.zero;
 
-            float y = transform.rotation.eulerAngles.y;
-            transform.position += Vector3.up * 0.2f;
-            transform.rotation = Quaternion.AngleAxis (y, Vector3.up);
+            //float y = transform.rotation.eulerAngles.y;
+            //this.GetComponent<Rigidbody>().position += Vector3.up * 2f;
+            //this.GetComponent<Rigidbody>().rotation = Quaternion.AngleAxis (y, Vector3.up);
+            //Debug.Log("Reset vehicle position from Vehicle controller");
 
             AfterResetVehicleAction.SafeInvoke ();
         }
