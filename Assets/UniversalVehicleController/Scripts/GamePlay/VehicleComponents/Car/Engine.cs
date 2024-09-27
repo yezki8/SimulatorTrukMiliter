@@ -97,7 +97,7 @@ namespace PG
             // If the automatic transmission is turned on, the gear is in reverse and the brake/reverse button is pressed, the car will drive in reverse and vice versa. 
             // If the automatic transmission is turned off, then to drive back you need to select the reverse gear and press the acceleration button.
 
-            float adjustedAcceleration = Engine.ThrottleCurve.Evaluate(CarControl.Acceleration);
+            float adjustedAcceleration = Engine.ThrottleCurve != null ? Engine.ThrottleCurve.Evaluate(CarControl.Acceleration) : CarControl.Acceleration;
 
             if (CarControl == null || BlockControl)
             {

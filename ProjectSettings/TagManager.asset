@@ -6,6 +6,12 @@ TagManager:
   tags:
   - MainLight
   - Checkpoint
+  - NPCVehicle
+  - NPCFinish
+  - NPCStart
+  - ConvoyStart
+  - ConvoyFinish
+  - ConvoyFinLocation
   layers:
   - Default
   - TransparentFX
@@ -18,7 +24,7 @@ TagManager:
   - Building
   - BigMap
   - Terrain
-  - 
+  - ConvoyVehicle
   - 
   - 
   - 
