@@ -11,6 +11,7 @@ TagManager:
   - NPCStart
   - ConvoyStart
   - ConvoyFinish
+  - ConvoyFinLocation
   layers:
   - Default
   - TransparentFX

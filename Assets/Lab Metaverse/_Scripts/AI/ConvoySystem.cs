@@ -5,17 +5,22 @@ using UnityEngine;
 
 public class ConvoySystem : MonoBehaviour
 {
+
     // List of all vehicles in the convoy
     [SerializeField] private List<ConvoyAIControl> _vehicleControls = new();
+    private int _vehicleFinishedCount = 0;
 
     // start & end point
     [Header("Convoy Points")]
     public GameObject startPoint;
     public GameObject endPoint;
+    public GameObject FinishLocation;
 
     public static ConvoySystem Instance;
 
     private bool _isRunning = false;
+    private bool _isPlayerFinished = false;
+    private bool _isOtherVehiclesFinished = false;
 
     private void Awake()
     {
@@ -52,6 +57,8 @@ public class ConvoySystem : MonoBehaviour
             if (!_isRunning)
             {
                 _isRunning = true;
+                _isPlayerFinished = false;
+                _isOtherVehiclesFinished = false;
                 Debug.Log("Starting convoy...");
                 StartCoroutine(EnableConvoyVehiclesCoroutine());
             }
@@ -59,8 +66,7 @@ public class ConvoySystem : MonoBehaviour
         else
         {
             Debug.LogWarning("No vehicles in convoy");
-        }
-        
+        }   
     }
 
     private IEnumerator EnableConvoyVehiclesCoroutine()
@@ -87,6 +93,7 @@ public class ConvoySystem : MonoBehaviour
     public void ResetConvoyVehicles()
     {
         EnableTrigger(startPoint);
+        EnableTrigger(FinishLocation);
         foreach (ConvoyAIControl vehicle in _vehicleControls)
         {
             vehicle.ConvoyEnabled = false;
@@ -94,6 +101,33 @@ public class ConvoySystem : MonoBehaviour
             vehicle.ResetAIControl();
         }
         DisableTrigger(endPoint);
+    }
+
+    public void FinishConvoy()
+    {
+        _isPlayerFinished = true;
+    }
+
+    public void VehicleFinished()
+    {
+        _vehicleFinishedCount++;
+        if (_vehicleFinishedCount == _vehicleControls.Count)
+        {
+            Debug.Log("All convoy vehicles finished");
+            _vehicleFinishedCount = 0;
+            _isOtherVehiclesFinished = true;
+            DisableTrigger(FinishLocation);
+        }
+    }
+
+    private void Update()
+    {
+        if (_isPlayerFinished && _isOtherVehiclesFinished)
+        {
+            StopConvoyVehicles();
+            _isPlayerFinished = false;
+            _isOtherVehiclesFinished = false;
+        }
     }
 
     private void EnableTrigger(GameObject Trigger)

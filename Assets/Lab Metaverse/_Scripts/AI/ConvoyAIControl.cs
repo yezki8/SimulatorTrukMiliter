@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace PG
@@ -45,6 +46,8 @@ namespace PG
 
         // Convoy specific
         public bool ConvoyEnabled = false;
+        public UnityEvent OnVehicleFinish;
+        public bool hasEnteredFinishLocation = false;
 
         public override void Start ()
         {
@@ -101,6 +104,7 @@ namespace PG
             _resetInPlaceCount = 0;
             transform.position = _previousPosition;
             transform.rotation = Quaternion.Euler(0, _previousRotation, 0);
+            hasEnteredFinishLocation = false;
 
             // reset progress
             ResetProgress();
@@ -355,6 +359,19 @@ namespace PG
             else
             {
                 Vertical = 0;
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            //To Ensure these trigger calls only happen during gameplay
+            if (GameStateController.Instance.GameState == StateOfGame.Match)
+            {
+                if (other.CompareTag("ConvoyFinLocation") && !hasEnteredFinishLocation)
+                {
+                    hasEnteredFinishLocation = true;
+                    OnVehicleFinish?.Invoke();
+                }
             }
         }
 
