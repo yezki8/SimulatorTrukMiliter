@@ -42,7 +42,8 @@ namespace PG
         private Vector3 _previousPosition = Vector3.zero;
         private float _previousRotation = 0;
 
-        [SerializeField] private int MaxResetInPlaceCount = 3;
+        float ResetTimer = 0;
+        [SerializeField] private float ResetTimeInSeconds = 10;
 
         public override void Start ()
         {
@@ -112,20 +113,20 @@ namespace PG
             if (AheadRB) {
 
                 var vehicleDirection = transform.forward;
-                var adjustedSpeed = 0f;
+                var aheadRBSpeed = 0f;
 
                 // compare the velocity direction of the current car and the ahead car
                 AheadRotationCheck = Vector3.Dot(AheadRB.velocity.normalized, vehicleDirection);
 
                 if (AheadRotationCheck > 0.3f)
                 {
-                    adjustedSpeed = AheadRB.velocity.magnitude;
+                    aheadRBSpeed = AheadRB.velocity.magnitude;
                 }
 
                 //Apply aggressiveness to the desired speed.
-                float aheadRBSpeed = Mathf.Lerp(adjustedSpeed, desiredSpeed, Aggressiveness);
+                float adjustedSpeed = Mathf.Lerp(aheadRBSpeed, desiredSpeed, Aggressiveness);
 
-                desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(aheadRBSpeed, desiredSpeed, ((DistanceToAheadCollider - 2) / ObstacleHitDistance).Clamp()));
+                desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(adjustedSpeed, desiredSpeed, ((DistanceToAheadCollider - 2) / ObstacleHitDistance).Clamp()));
             }
 
             //Apply speed limit.
@@ -211,41 +212,34 @@ namespace PG
             Horizontal = (angleToTargetPoint / Car.Steer.MaxSteerAngle * SetSteerAngleMultiplayer).Clamp (-1, 1);
 
 
-            //Reverse logic
+            // Reset Car logic
             var deltaSpeed = Mathf.Abs (Car.CurrentSpeed - PrevSpeed);
             if (Vertical > 0.1f && deltaSpeed < 1 && Car.CurrentSpeed < 10)
             {
-                if (ReverseTimer < ReverseWaitTime)
+                if (ResetTimer < ResetTimeInSeconds)
                 {
-                    ReverseTimer += Time.fixedDeltaTime;
-                }
-                else if (Time.time - LastReverseTime <= BetweenReverseTimeForReset)
-                {
-                    Horizontal = 0;
-                    Vertical = 0;
-                    Car.ResetVehicle ();
-                    _resetInPlaceCount++;
-                    if (_resetInPlaceCount >= MaxResetInPlaceCount)
-                    {
-                        _resetInPlaceCount = 0;
-                        transform.position = _previousPosition;
-                        transform.rotation = Quaternion.Euler(0, _previousRotation, 0);
-                        // reset the progress
-                        ResetProgress();
-                    }
-                    ReverseTimer = 0;
+                    ResetTimer += Time.fixedDeltaTime;
                 }
                 else
                 {
-                    Horizontal = -Horizontal;
-                    Vertical = -Vertical;
-                    ReverseTimer = 0;
-                    Reverse = true;
+                    Horizontal = 0;
+                    Vertical = 0;
+                    // clear raycast parameters
+                    DistanceToAheadCollider = float.MaxValue;
+                    AheadRB = null;
+                    // reset vehicle damage
+                    Car.RestoreVehicle();
+                    Car.ResetVehicle ();
+                    // reset location
+                    transform.position = _previousPosition;
+                    transform.rotation = Quaternion.Euler(0, _previousRotation, 0);
+                    ResetProgress();
+                    ResetTimer = 0;
                 }
             }
             else
             {
-                ReverseTimer = 0;
+                ResetTimer = 0;
             }
         }
 
@@ -266,7 +260,7 @@ namespace PG
             var point = Car.Bounds.center;
             point.y = HitPointHeight;
 
-            point.z = Car.Bounds.size.z * 0.5f + 1f;
+            point.z = Car.Bounds.size.z * 0.5f;
             MainHitPoints[2] = point;
 
             point.z = Car.Bounds.size.z * 0.5f;
@@ -303,7 +297,7 @@ namespace PG
                 dir.x = -MainHitPoints[i].x * OffsetForMainHitDirections;
                 if (Physics.Raycast (transform.TransformPoint(MainHitPoints[i]), 
                                      transform.TransformDirection(dir.normalized), 
-                                    out MainHits[i], i < 2? ObstacleHitDistance: ObstacleHitDistance * 0.5f,
+                                    out MainHits[i], i < 2? ObstacleHitDistance: ObstacleHitDistance * 0.8f,
                                     AiDetectionMask
                                     ) && 
                     MainHits[i].distance < DistanceToAheadCollider)
@@ -327,7 +321,14 @@ namespace PG
                 // offset for additional hit points
                 dir.z = ObstacleHitDistance;
                 dir.x = AdditionalHitPoints[i].x * OffsetForAdditionalHitDirections;
-                Physics.Raycast (transform.TransformPoint (AdditionalHitPoints[i]), transform.TransformDirection(dir.normalized), out AdditionalHits[i], ObstacleHitDistance + Car.Bounds.size.z, AiDetectionMask);
+                if (Physics.Raycast(transform.TransformPoint(AdditionalHitPoints[i]), 
+                    transform.TransformDirection(dir.normalized), out AdditionalHits[i], 
+                    ObstacleHitDistance + Car.Bounds.size.z, AiDetectionMask))
+                {
+                    DistanceToAheadCollider = AdditionalHits[i].distance;
+                    AheadRB = AdditionalHits[i].rigidbody;
+                }
+
             }
         }
 
@@ -370,7 +371,7 @@ namespace PG
 
                     Gizmos.color = MainHits[i].collider != null ? Color.red : Color.blue;
                     firstPoint = transform.TransformPoint (MainHitPoints[i]);
-                    Gizmos.DrawLine (firstPoint, firstPoint + transform.TransformDirection(dir.normalized) * (i < 2? ObstacleHitDistance: ObstacleHitDistance * 0.5f));
+                    Gizmos.DrawLine (firstPoint, firstPoint + transform.TransformDirection(dir.normalized) * (i < 2? ObstacleHitDistance: ObstacleHitDistance * 0.8f));
                 }
 
                 for (int i = 0; i < AdditionalHits.Length; i++)

@@ -230,7 +230,7 @@ namespace PG
         /// </summary>
         public virtual void LateUpdate ()
         {
-            if (Vehicle.VehicleIsVisible)
+            if (Vehicle.VehicleIsVisible && !float.IsNaN(RPM))
             {
                 WheelCollider.GetWorldPose (out Position, out Rotation);
                 Vector3 hubLocalPosition = Vector3.Lerp (WheelView.localPosition, LocalPosition, 0.3f);
@@ -262,12 +262,6 @@ namespace PG
                 hubAngle *= Quaternion.AngleAxis (WheelCollider.steerAngle, Vector3.up);
 
                 WheelView.localRotation = hubAngle;
-                // NaN check
-                if (float.IsNaN (CurrentRotateAngle))
-                {
-                    Debug.LogError ("CurrentRotateAngle is NaN");
-                    CurrentRotateAngle = 0;
-                }
 
                 WheelView.localRotation *= Quaternion.AngleAxis (CurrentRotateAngle, Vector3.right);
                 if (WheelHub)

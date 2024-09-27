@@ -38,18 +38,15 @@ namespace PG
         {
             if (!IsDead)
             {
-                float arrowAngle = Mathf.Lerp (MinSpeedAngle, MaxSpeedAngle, Mathf.InverseLerp (0, MaxSpeed, Car.CurrentSpeed));
-                SpeedArrow.localRotation = Quaternion.AngleAxis (arrowAngle, Vector3.forward);
+                float arrowAngle = Mathf.Lerp(MinSpeedAngle, MaxSpeedAngle, Mathf.InverseLerp(0, MaxSpeed, Car.CurrentSpeed));
+                SpeedArrow.localRotation = Quaternion.AngleAxis(arrowAngle, Vector3.forward);
 
-                arrowAngle = Mathf.Lerp (MinRPMAngle, MaxRPMAngle, Mathf.InverseLerp (0, Car.Engine.MaxRPM, Car.EngineRPM));
-                // NaN check
-                if (float.IsNaN (arrowAngle))
+                // EngineRPM NaN check
+                if (!float.IsNaN(Car.EngineRPM))
                 {
-                    Debug.LogError ("RPM is NaN");
-                    arrowAngle = 0;
+                    arrowAngle = Mathf.Lerp(MinRPMAngle, MaxRPMAngle, Mathf.InverseLerp(0, Car.Engine.MaxRPM, Car.EngineRPM));
+                    RPMArrow.localRotation = Quaternion.AngleAxis(arrowAngle, Vector3.forward);
                 }
-
-                RPMArrow.localRotation = Quaternion.AngleAxis (arrowAngle, Vector3.forward);
             }
         }
 
