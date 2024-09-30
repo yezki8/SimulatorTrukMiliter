@@ -71,7 +71,8 @@ namespace PG
             if ((Gearbox.HasRGear || CurrentGear >= 0) && !float.IsNaN(EngineRPM))
             {
                 // Calculate power transfer from motor to wheel, quadratic
-                var powerTransfer = Mathf.Pow(CarControl.Clutch, 2);
+                // add checks for automatic gearbox
+                var powerTransfer = Gearbox.AutomaticGearBox ? 1 : Mathf.Pow(CarControl.Clutch, 2);
 
                 // var motorTorque = CurrentAcceleration * (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
                 float rotorForce = 0.15f;
@@ -96,8 +97,7 @@ namespace PG
                     var wheel = DriveWheels[i];
 
                     // implement powerTransfer to wheel
-                    // add checks for automatic gearbox
-                    WheelTorque = Gearbox.AutomaticGearBox ? CurrentMotorTorque : CurrentMotorTorque * powerTransfer;
+                    WheelTorque = CurrentMotorTorque * powerTransfer;
 
                     //The torque transmitted to the wheels depends on the difference between the target RPM and the current RPM. 
                     //If the current RPM is greater than the target RPM, the wheel will brake. 
