@@ -6,8 +6,13 @@ using UnityEngine.UI;
 
 public class GameStateUIHandler : MonoBehaviour
 {
+    [System.Serializable]
+    public class PanelGroup
+    {
+        public CanvasGroup[] GameStatePanels;
+    }
     [Header("Game State Panels")]
-    [SerializeField] private CanvasGroup [] _gameStatePanels;
+    [SerializeField] private List<PanelGroup> _panelGroupList;
 
     // reconsider how to handle this
     [Header("Button Text to Change")]
@@ -43,23 +48,28 @@ public class GameStateUIHandler : MonoBehaviour
         
     public void ActivatePanel(int targetPanel)      //Called directly by GameStateController
     {
-        for (int i = 0; i < _gameStatePanels.Length; i++)
+        for (int i = 0; i < _panelGroupList.Count; i++)
         {
+            CanvasGroup[] targetGroup = _panelGroupList[i].GameStatePanels;
             if (i == targetPanel)
             {
-                //TO DO: replace this with animation
-                _gameStatePanels[i].alpha = 1;
-                _gameStatePanels[i].blocksRaycasts = true;
-                _gameStatePanels[i].interactable = true;
-                _gameStatePanels[i].GetComponentInChildren<Button>().Select();
+                for (int j = 0; j < targetGroup.Length; j++)
+                {
+                    targetGroup[j].alpha = 1;
+                    targetGroup[j].blocksRaycasts = true;
+                    targetGroup[j].interactable = true;
+                    targetGroup[j].GetComponentInChildren<Button>().Select();
+                }
             }
             else
             {
-                //TO DO: replace this with animation
-                _gameStatePanels[i].alpha = 0;
-                _gameStatePanels[i].blocksRaycasts = false;
-                _gameStatePanels[i].interactable = false;
-                _gameStatePanels[i].GetComponentInChildren<Button>().Select();
+                for (int j = 0; j < targetGroup.Length; j++)
+                {
+                    targetGroup[j].alpha = 0;
+                    targetGroup[j].blocksRaycasts = false;
+                    targetGroup[j].interactable = false;
+                    targetGroup[j].GetComponentInChildren<Button>().Select();
+                }
             }
         }
     }
