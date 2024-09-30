@@ -30,6 +30,10 @@ namespace PG
         public ICarControl CarControl { get; set; }                                     //ICarControll controls the car.
         public bool BlockControl { get; protected set; }                                //Blocks input.
 
+        //Added by Metaverse lab
+        [Header("Custom parameters for trainer")]
+        public bool CanBrake = true;
+
         protected override void Awake ()
         {
             base.Awake ();
@@ -57,7 +61,11 @@ namespace PG
             //Calling FixedUpdate in other parts of the component.
             FixedUpdateEngine ();
             FixedUpdateTransmition ();
-            FixedUpdateBrakeLogic ();
+
+            if (CanBrake)
+            {
+                FixedUpdateBrakeLogic();
+            }
             FixedUpdateSteering ();
 
             //Steering wheel rotation.
