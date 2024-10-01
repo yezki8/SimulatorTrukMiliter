@@ -32,6 +32,14 @@ public class CheckpointPathfindHandler : MonoBehaviour
 
     public void AssignArrowTarget(Transform targetToLook)
     {
-        ArrowChaseController.ObjectToFollow = targetToLook;
+        if (targetToLook != null)
+        {
+            ArrowChaseController.gameObject.SetActive(true);
+            ArrowChaseController.ObjectToFollow = targetToLook;
+        }
+        else
+        {
+            ArrowChaseController.gameObject.SetActive(false);
+        }
     }
 }

@@ -50,30 +50,40 @@ public class ChaseController : MonoBehaviour
     private float _lookCacheY;
     private float _lookCacheZ;
 
+    [SerializeField] private bool _isCamera = true;
     // invoked by controller
     public void ChangeCameraState()
     {
-        _cameraState = _cameraState == CameraMode.Chase ? CameraMode.FirstPerson : CameraMode.Chase;
-        SetAnchorAndOffsetAfterChange();
+        if (_isCamera)
+        {
+            _cameraState = _cameraState == CameraMode.Chase ? CameraMode.FirstPerson : CameraMode.Chase;
+            SetAnchorAndOffsetAfterChange();
+        }
     }
 
     public void SetCameraState(CameraMode state)
     {
-        _cameraState = state;
-        SetAnchorAndOffsetAfterChange();
+        if (_isCamera)
+        {
+            _cameraState = state;
+            SetAnchorAndOffsetAfterChange();
+        }
     }
 
     public void SetAnchorAndOffsetAfterChange()
     {
-        if (_cameraState == CameraMode.FirstPerson)
+        if (_isCamera)
         {
-            _offset = FirstPersonCameraPosition;
-            ObjectToFollow.localPosition = FirstPersonCameraAnchor;
-        }
-        else if (_cameraState == CameraMode.Chase)
-        {
-            _offset = ChaseOffset;
-            ObjectToFollow.localPosition = ChaseCameraAnchor;
+            if (_cameraState == CameraMode.FirstPerson)
+            {
+                _offset = FirstPersonCameraPosition;
+                ObjectToFollow.localPosition = FirstPersonCameraAnchor;
+            }
+            else if (_cameraState == CameraMode.Chase)
+            {
+                _offset = ChaseOffset;
+                ObjectToFollow.localPosition = ChaseCameraAnchor;
+            }
         }
     }
 
@@ -149,6 +159,9 @@ public class ChaseController : MonoBehaviour
     public void Start()
     {
         SetCameraState(_cameraState);
+        _movementCacheX = transform.position.x;
+        _movementCacheY = transform.position.y;
+        _movementCacheZ = transform.position.z;
     }
 
     public void Update()
@@ -162,24 +175,28 @@ public class ChaseController : MonoBehaviour
     // note to dev: refactor to using interfaces if this feature ever needed later
     public void UpdateOffset(float value)
     {
-        if (_cameraState == CameraMode.Chase)
+        if (_isCamera)
         {
-            // _offset.y = value.y > 0 ? _offset.z + value.y : InitialOffset.y;
-            // circle camera around player, max 90 degree
-            // use _offset.z as radius
-            _offset.x = Mathf.Sin(value) * ChaseOffset.z; // left right
-            _offset.z = Mathf.Cos(value) * ChaseOffset.z;
-            Debug.Log("Offset: " + _offset);
-        } else if (_cameraState == CameraMode.FirstPerson)
-        {
-            if (value != 0)
+            if (_cameraState == CameraMode.Chase)
             {
-                _isLooking = true;
-                _turnDegree = value * MaxAngle;
+                // _offset.y = value.y > 0 ? _offset.z + value.y : InitialOffset.y;
+                // circle camera around player, max 90 degree
+                // use _offset.z as radius
+                _offset.x = Mathf.Sin(value) * ChaseOffset.z; // left right
+                _offset.z = Mathf.Cos(value) * ChaseOffset.z;
+                Debug.Log("Offset: " + _offset);
             }
-            else
+            else if (_cameraState == CameraMode.FirstPerson)
             {
-                _isLooking = false;
+                if (value != 0)
+                {
+                    _isLooking = true;
+                    _turnDegree = value * MaxAngle;
+                }
+                else
+                {
+                    _isLooking = false;
+                }
             }
         }
     }
