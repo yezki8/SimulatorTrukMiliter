@@ -29,4 +29,20 @@ public class InstructorObstacleController : MonoBehaviour
         bool canBrakeNow = !_carController.CanBrake;
         _carController.CanBrake = !canBrakeNow;
     }
+
+    public void ChangeTireStatus(int wheelIndex)
+    {
+        Wheel targetWheel = _carController.Wheels[wheelIndex];
+        targetWheel.IsBlownOut = !targetWheel.IsBlownOut;
+
+        //add function for sound and UI here
+    }
+
+    public void ChangeWheelockStatus(int wheelIndex)
+    {
+        Wheel targetWheel = _carController.Wheels[wheelIndex];
+        targetWheel.IsLocked = !targetWheel.IsLocked;
+
+        //add function for sound and UI here
+    }
 }

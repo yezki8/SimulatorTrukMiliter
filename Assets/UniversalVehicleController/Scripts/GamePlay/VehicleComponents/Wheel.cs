@@ -92,6 +92,10 @@ namespace PG
             }
         }
 
+        //Added by Metaverse Lab
+        public bool IsBlownOut = false;
+        public bool IsLocked = false;
+
         public override void Awake ()
         {
             Vehicle = GetComponentInParent<VehicleController> ();
@@ -191,6 +195,14 @@ namespace PG
         void ApplyStiffness ()
         {
             float stiffness = GroundStiffness;
+            if (IsBlownOut)
+            {
+                stiffness -= 0.5f;
+                if (stiffness < 0)
+                {
+                    stiffness = 0;
+                }
+            }
             var friction = WheelCollider.forwardFriction;
             friction.stiffness = stiffness;
             WheelCollider.forwardFriction = friction;
@@ -205,13 +217,20 @@ namespace PG
         /// </summary>
         void ApplyBrake ()
         {
-            if (CurrentBrakeTorque > WheelCollider.brakeTorque)
+            if (!IsLocked)
             {
-                WheelCollider.brakeTorque = Mathf.Lerp (WheelCollider.brakeTorque, CurrentBrakeTorque, BrakeSpeed * Time.fixedDeltaTime);
+                if (CurrentBrakeTorque > WheelCollider.brakeTorque)
+                {
+                    WheelCollider.brakeTorque = Mathf.Lerp(WheelCollider.brakeTorque, CurrentBrakeTorque, BrakeSpeed * Time.fixedDeltaTime);
+                }
+                else
+                {
+                    WheelCollider.brakeTorque = CurrentBrakeTorque;
+                }
             }
             else
             {
-                WheelCollider.brakeTorque = CurrentBrakeTorque;
+                WheelCollider.brakeTorque = 8000;
             }
         }
 
