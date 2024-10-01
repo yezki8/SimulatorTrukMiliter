@@ -48,7 +48,7 @@ namespace PG
         }
 
         bool InBrake;
-        bool MainLightsIsOn;
+        public bool MainLightsIsOn;
         Coroutine TurnsCotoutine;
         List<LightObject> ActiveTurns = new List<LightObject>();
         TurnsStates CurrentTurnsState = TurnsStates.Off;

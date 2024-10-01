@@ -191,7 +191,6 @@ namespace PG
 
             RB.velocity = Vector3.zero;
             RB.angularVelocity = Vector3.zero;
-            RB.isKinematic = true;
 
             //float y = transform.rotation.eulerAngles.y;
             //this.GetComponent<Rigidbody>().position += Vector3.up * 2f;
