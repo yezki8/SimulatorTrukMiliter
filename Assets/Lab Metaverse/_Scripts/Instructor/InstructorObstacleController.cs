@@ -30,7 +30,7 @@ public class InstructorObstacleController : MonoBehaviour
         _carController.CanBrake = !canBrakeNow;
     }
 
-    public void ChangeTireStatus(int wheelIndex)
+    public void ChangeBlowTireStatus(int wheelIndex)
     {
         Wheel targetWheel = _carController.Wheels[wheelIndex];
         targetWheel.IsBlownOut = !targetWheel.IsBlownOut;
