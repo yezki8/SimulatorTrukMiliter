@@ -31,7 +31,7 @@ MonoBehaviour:
     ChangeHorizontalOffsetSpeed: 3
     OffsetForMainHitPoints: 0.5
     OffsetForMainHitDirections: 0.8
-    OffsetForAdditionalHitPoints: 0.7
+    OffsetForAdditionalHitPoints: 1.4
     OffsetForAdditionalHitDirections: 2
     MainHitDellayTime: 0.4
     AdditionalHitDellayTime: 0.6
