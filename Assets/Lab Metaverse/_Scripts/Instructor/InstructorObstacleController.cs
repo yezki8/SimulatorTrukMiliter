@@ -45,4 +45,9 @@ public class InstructorObstacleController : MonoBehaviour
 
         //add function for sound and UI here
     }
+
+    public void ChangeHeadlampStatus(bool isRightLamp)
+    {
+
+    }
 }
