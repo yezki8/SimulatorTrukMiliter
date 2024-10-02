@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BikeSimAIConfigAsset
   m_EditorClassIdentifier: 
   AIConfig:
-    MaxSpeed: 30
+    MaxSpeed: 15
     MinSpeed: 0
     SetSteerAngleMultiplayer: 1.8
     OffsetToTargetPoint: 4
@@ -32,6 +32,6 @@ MonoBehaviour:
     OffsetForMainHitPoints: 0.2
     OffsetForMainHitDirections: 0.8
     OffsetForAdditionalHitPoints: 0.5
-    OffsetForAdditionalHitDirections: 4
+    OffsetForAdditionalHitDirections: 8
     MainHitDellayTime: 0.4
     AdditionalHitDellayTime: 0.6

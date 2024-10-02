@@ -139,14 +139,21 @@ public class PlayerManager : MonoBehaviour
         //To Ensure these trigger calls only happen during gameplay
         if (GameStateController.Instance.GameState == StateOfGame.Match)
         {
-            if (other.tag == "Checkpoint")
+            switch (other.tag)
             {
-                CheckpointManager.Instance.ActivateCheckpoint(other.gameObject);
-            }
-            else if (other.tag == "Finish")
-            {
-                GameStateController.Instance.ChangeGameState((int)StateOfGame.End);
-                other.GetComponent<CheckpointController>().SetCheckpointVisual(false);
+                case "Checkpoint":
+                    CheckpointManager.Instance.ActivateCheckpoint(other.gameObject);
+                    break;
+                case "Finish":
+                    GameStateController.Instance.ChangeGameState((int)StateOfGame.End);
+                    other.GetComponent<CheckpointController>().SetCheckpointVisual(false);
+                    break;
+                case "ConvoyStart":
+                    ConvoySystem.Instance.StartConvoyVehicles();
+                    break;
+                case "ConvoyFinish":
+                    ConvoySystem.Instance.FinishConvoy();
+                    break;
             }
         }
     }

@@ -58,10 +58,20 @@ public class CheckpointManager : MonoBehaviour
         ResetPlayerState();
         CheckpointController targetSpawnPlace = GetActiveCheckpoint();
         Vector3 spawnPos = targetSpawnPlace.SpawnArea.transform.position;
+
         Quaternion spawnRot = targetSpawnPlace.SpawnArea.transform.rotation;
+        Debug.Log("Reset vehicle position from Checkpoint manager");
+
 
         Player.GetComponent<CarController>().ResetVehicle();
-        Player.transform.SetPositionAndRotation(spawnPos, spawnRot);
+        Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        Player.GetComponent<Rigidbody>().isKinematic = true;
+        Player.GetComponent<Rigidbody>().position = spawnPos + Vector3.up * 1f;
+        Player.GetComponent<Rigidbody>().rotation = spawnRot;
+        Player.GetComponent<Rigidbody>().isKinematic = false;
+
+        //Player.transform.SetPositionAndRotation(spawnPos, spawnRot);
     }
 
     public void ActivateCheckpoint(GameObject targetCheckpoint)

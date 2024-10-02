@@ -68,7 +68,7 @@ namespace PG
 
         void FixedUpdateTransmition ()
         {
-            if (Gearbox.HasRGear || CurrentGear >= 0)
+            if ((Gearbox.HasRGear || CurrentGear >= 0) && !float.IsNaN(EngineRPM))
             {
                 // Calculate power transfer from motor to wheel, quadratic
                 var powerTransfer = Mathf.Pow(CarControl.Clutch, 2);
