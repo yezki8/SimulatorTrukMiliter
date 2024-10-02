@@ -95,6 +95,7 @@ namespace PG
         //Added by Metaverse Lab
         public bool IsBlownOut = false;
         public bool IsLocked = false;
+        public float WheelLockDivider = 2;
 
         public override void Awake ()
         {
@@ -230,7 +231,7 @@ namespace PG
             }
             else
             {
-                WheelCollider.brakeTorque = 8000;
+                WheelCollider.brakeTorque = MaxBrakeTorque / WheelLockDivider;
             }
         }
 
