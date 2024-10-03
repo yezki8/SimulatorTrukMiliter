@@ -39,6 +39,10 @@ namespace PG
 
         [SerializeField] bool EnableLogAndGizmo;                     //Ñollision log and gizmo for debug.
 
+        [SerializeField] private float _damageToCrack;
+        [SerializeField] private List<CanvasGroup> _frontCrackWindows;
+        [SerializeField] private List<CanvasGroup> _sideCrackMirror;
+
 #pragma warning restore 0649
         public Transform TR => transform;
 
@@ -338,6 +342,8 @@ namespace PG
 
             //Ñalculate all the necessary values.
             Vector3 clampForce = Vector3.ClampMagnitude(damageForce, MaxCollisionMagnitude);                                //Limiting force if force exceeds maximum.
+            CrackWindows(clampForce);
+
             Vector3 normalizedForce = clampForce.normalized;
             float forceMagFactor = clampForce.magnitude * DamageFactor * data.MassFactor;                                   //Accept all existing factors.
             float maxDamageRadius = MaxDeformRadiusInMaxMag * (forceMagFactor / MaxCollisionMagnitude);
@@ -494,6 +500,44 @@ namespace PG
         int CurrentGizmoIndex;
         GizmoData[] GizmosData = new GizmoData[20];
 
+        //Added bt Metaverse Lab
+        void CrackWindows(Vector3 damageVector)
+        {
+            Debug.Log($"damageVector z = {damageVector.z} && Max collision magnitude = {MaxCollisionMagnitude}");
+            if (damageVector.z >= MaxCollisionMagnitude)
+            {
+                for (int i = 0; i < _frontCrackWindows.Count; i++)
+                {
+                    CanvasGroup targetImage = _frontCrackWindows[i];
+                    targetImage.alpha = 1;
+                }
+            }
+
+            Debug.Log($"damageVector x = {damageVector.x} && Max collision magnitude = {MaxCollisionMagnitude}");
+            if (damageVector.z >= (-1 * MaxCollisionMagnitude))
+            {
+                _sideCrackMirror[0].alpha = 1;
+            }
+            else if (damageVector.z <= MaxCollisionMagnitude)
+            {
+                _sideCrackMirror[1].alpha = 1;
+            }
+            
+        }
+
+        public void RestoreWindows()
+        {
+            foreach (var crackImage in _frontCrackWindows)
+            {
+                crackImage.alpha = 0;
+            }
+            foreach (var crackImage in _sideCrackMirror)
+            {
+                crackImage.alpha = 0;
+            }
+
+        }
+
         public void RestoreCar ()
         {
             StopAllCoroutines ();
@@ -506,7 +550,7 @@ namespace PG
             {
                 ForceRestoreCar ();
             }
-
+            RestoreWindows();
             OnRestoreAction.SafeInvoke ();
         }
 

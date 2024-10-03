@@ -125,6 +125,7 @@ namespace PG
 
             EngineRPM = Engine.MinRPM;
             CurrentGear = 0;
+            GetComponent<VehicleDamageController>().RestoreCar();
         }
 
         public void EnterInCar ()
