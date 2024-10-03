@@ -27,6 +27,25 @@ public class DayTimeManager : MonoBehaviour
 
     public DayNightCycle dayNightCycle;
 
+    // singleton instance
+    public static DayTimeManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
     private void Start()
     {
         InitializeDayTime();

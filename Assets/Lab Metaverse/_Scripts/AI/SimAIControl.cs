@@ -37,6 +37,9 @@ namespace PG
         float DistanceToAheadCollider;                                          //Distance to the nearest car.
         float AheadRotationCheck;                                                    // Ahead vehicle rotation
 
+        // lighting
+        CarLighting CarLighting;
+
         // vehicle hard reset mechanism
         private int _resetInPlaceCount = 0;
         private Vector3 _previousPosition = Vector3.zero;
@@ -48,6 +51,8 @@ namespace PG
         public override void Start ()
         {
             base.Start ();
+
+            CarLighting = GetComponent<CarLighting> ();
 
             var selectedRaceAsset =  AIConfigAsset as SimAIConfigAsset;
 
@@ -88,6 +93,17 @@ namespace PG
                 ForwardMove ();
                 UpdateMainHits ();
                 UpdateAdditionalHits ();
+            }
+
+            // update car lighting when night
+            float timeOfDay = DayTimeManager.Instance.getTimeOfDay();
+            if (timeOfDay > 18 || timeOfDay < 6)
+            {
+                if (!CarLighting.MainLightsIsOn) CarLighting.SwitchMainLights();
+            }
+            else
+            {
+                if (CarLighting.MainLightsIsOn) CarLighting.SwitchMainLights();
             }
         }
 
