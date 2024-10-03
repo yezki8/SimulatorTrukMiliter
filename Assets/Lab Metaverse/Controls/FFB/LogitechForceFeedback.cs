@@ -41,7 +41,7 @@ public class LogitechForceFeedback : ForceFeedbackProvider
     {
         if (_dirtRoadFFBMagnitude > 2)
         {
-            Debug.Log($"Applying Dirt Road Effect with magnitude: {_dirtRoadFFBMagnitude}");
+            // Debug.Log($"Applying Dirt Road Effect with magnitude: {_dirtRoadFFBMagnitude}");
             LogitechGSDK.LogiPlayDirtRoadEffect(deviceIdx, _dirtRoadFFBMagnitude);
         } 
         else

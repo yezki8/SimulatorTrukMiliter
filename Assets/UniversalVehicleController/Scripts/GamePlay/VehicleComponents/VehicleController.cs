@@ -183,6 +183,12 @@ namespace PG
         {
             BeforeResetVehicleAction.SafeInvoke ();
 
+            // check if isKinematic
+            if (RB.isKinematic)
+            {
+                RB.isKinematic = false;
+            }
+
             RB.velocity = Vector3.zero;
             RB.angularVelocity = Vector3.zero;
 
