@@ -42,4 +42,8 @@ public class CheckpointPathfindHandler : MonoBehaviour
             ArrowChaseController.gameObject.SetActive(false);
         }
     }
+
+    public GameObject GetNextCheckpoint() {
+        return NextCheckpoint.gameObject;
+    }
 }
