@@ -113,12 +113,9 @@ public class PathFinding : MonoBehaviour
         List<Node> directions = new();
         List<Vector3> paths = new();
 
-        (ERRoad, Vector3) roadStart = FindRoadStartEndPath(startPoint);
-        List<(ERConnection, float)> connectionsStart = GetPointRoadDistanceToConnection(roadStart);
-
+        (ERRoad, Vector3) roadStart = FindClosestRoad(startPoint);
         Vector3 endPoint = checkpoints[^1].transform.position;
-        (ERRoad, Vector3) roadEnd = FindRoadStartEndPath(endPoint);
-        List<(ERConnection, float)> connectionsEnd = GetPointRoadDistanceToConnection(roadEnd);
+        (ERRoad, Vector3) roadEnd = FindClosestRoad(endPoint);
 
         float startToEndDistance = Vector2.Distance(new Vector2(startPoint.x, startPoint.z), new Vector2(endPoint.x, endPoint.y));
         float endPointToRoadDistance = Vector2.Distance(new Vector2(endPoint.x, endPoint.z), new Vector2(roadEnd.Item2.x, roadEnd.Item2.y));
@@ -138,6 +135,9 @@ public class PathFinding : MonoBehaviour
             }
             else
             {
+                List<Node> paths = new();
+                List<(ERConnection, float)> connectionsStart = GetPointRoadDistanceToConnection(roadStart);
+                List<(ERConnection, float)> connectionsEnd = GetPointRoadDistanceToConnection(roadEnd);
                 foreach ((ERConnection, float) connStart in connectionsStart)
                 {
                     foreach ((ERConnection, float) connEnd in connectionsEnd)
@@ -273,7 +273,7 @@ public class PathFinding : MonoBehaviour
             return FindClosestRoad(point);
         }
     }
-    
+
     (ERRoad, Vector3) FindClosestRoad(Vector3 point)
     {
         ERRoad closestRoad = null;
@@ -588,6 +588,16 @@ public class PathFinding : MonoBehaviour
         }
         return null;
     }
+
+    private (Vector3, Vector3) ShiftLeft(Vector3 pointA, Vector3 pointB)
+    { 
+        Vector3 direction = (pointB - pointA).normalized;
+
+        Vector3 perpendicular = Vector3.Cross(direction, Vector3.up).normalized;
+
+        Vector3 shiftedPointA = pointA + perpendicular * 5.0f;
+        Vector3 shiftedPointB = pointB + perpendicular * 5.0f;
+        return (shiftedPointA, shiftedPointB);
 
     private void DrawPath(List<Vector3> paths)
     {
