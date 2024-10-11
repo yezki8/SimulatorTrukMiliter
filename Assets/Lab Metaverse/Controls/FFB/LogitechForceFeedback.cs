@@ -7,6 +7,7 @@ public class LogitechForceFeedback : ForceFeedbackProvider
 {
     private StringBuilder steeringWheelName = new StringBuilder(256);
     private int deviceIdx;
+    private bool isDeviceFound = false;
 
     public override void InitProvider()
     {
@@ -19,12 +20,15 @@ public class LogitechForceFeedback : ForceFeedbackProvider
             {
                 if (LogitechGSDK.LogiIsDeviceConnected(i, LogitechGSDK.LOGI_DEVICE_TYPE_WHEEL))
                 {
+                    isDeviceFound = true;
                     deviceIdx = i;
                     LogitechGSDK.LogiGetFriendlyProductName(deviceIdx, steeringWheelName, 256);
                     Debug.Log($"Steering Wheel: {steeringWheelName}");
                     break;
                 }
-                // not found
+            }
+            if (!isDeviceFound)
+            {
                 Debug.Log("No Logitech Steering Wheel found");
             }
         }
