@@ -35,14 +35,25 @@ public class MonitorSelection : MonoBehaviour
 
     void PopulateMonitorDropdowns()
     {
+        int availableDisplays = Mathf.Min(Display.displays.Length, 6);
+
         for (int i = 0; i < displayDropdowns.Length; i++)
         {
             TMP_Dropdown dropdown = displayDropdowns[i];
             dropdown.ClearOptions();
 
-            for (int j = 0; j < Display.displays.Length; j++)
+            for (int j = 0; j < availableDisplays; j++)
             {
                 dropdown.options.Add(new TMP_Dropdown.OptionData("Monitor " + (j + 1)));
+            }
+
+            if (availableDisplays > 0)
+            {
+                dropdown.value = Mathf.Min(i, availableDisplays - 1);
+            }
+            else
+            {
+                dropdown.value = 0;
             }
 
             dropdown.RefreshShownValue();
