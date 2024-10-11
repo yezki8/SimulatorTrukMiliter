@@ -11,18 +11,14 @@ public class MonitorSelection : MonoBehaviour
 
     void Start()
     {
-        Debug.Log($"Unity detected {Display.displays.Length} displays.");
-        for (int i = 1; i < Display.displays.Length; i++)
-        {
-            Display.displays[i].Activate();
-            Debug.Log($"Display {i + 1} activated.");
-        }
         CloseDisplaySettingPanel();
         PopulateMonitorDropdowns();
 
-        for (int i = 1; i < Mathf.Min(Display.displays.Length, 6); i++)
+        Debug.Log($"Unity detected {Display.displays.Length} displays.");
+        for (int i = 0; i < Mathf.Min(Display.displays.Length, 6); i++)
         {
             Display.displays[i].Activate();
+            Debug.Log($"Display {i + 1} activated.");
         }
     }
 
@@ -34,7 +30,6 @@ public class MonitorSelection : MonoBehaviour
             TMP_Dropdown dropdown = displayDropdowns[i];
             dropdown.ClearOptions();
 
-            // Add "Monitor X" to the dropdown options (no actual monitor name)
             for (int j = 0; j < Display.displays.Length; j++)
             {
                 dropdown.options.Add(new TMP_Dropdown.OptionData("Monitor " + (j + 1)));
