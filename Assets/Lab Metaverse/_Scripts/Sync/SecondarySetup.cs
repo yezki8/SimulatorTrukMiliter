@@ -34,4 +34,15 @@ public class SecondarySetup : MonoBehaviour
             });
         }
     }
+
+    public void StartReceiving()
+    {
+        var receiver = GetComponent<CameraReceiver>();
+        // Start receiving for this display
+        Debug.Log("Starting receiving...");
+        for (int i = 0; i < receiver.displays.Count; i++)
+        {
+            StartCoroutine(receiver.ReceiveFrames(i));
+        }
+    }
 }

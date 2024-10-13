@@ -31,6 +31,7 @@ public class CameraReceiver : MonoBehaviour
 
     void InitializeReceivers()
     {
+        Debug.Log("Initializing receivers...");
         for (int i = 0; i < displays.Count; i++)
         {
             var display = displays[i];
@@ -42,13 +43,10 @@ public class CameraReceiver : MonoBehaviour
             // Create texture for receiving
             var tex = new Texture2D(1, 1);
             receiveTextures.Add(tex);
-
-            // Start receiving for this display
-            StartCoroutine(ReceiveFrames(i));
         }
     }
 
-    IEnumerator ReceiveFrames(int displayIndex)
+    public IEnumerator ReceiveFrames(int displayIndex)
     {
         var display = displays[displayIndex];
         var udpClient = udpClients[displayIndex];

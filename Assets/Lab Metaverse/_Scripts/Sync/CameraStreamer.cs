@@ -30,7 +30,7 @@ public class CameraStreamer : MonoBehaviour
 
     [Header("Streaming Setup")]
     public List<StreamingCamera> streamingCameras = new List<StreamingCamera>();
-    public string secondaryPCIP = "192.168.100.1";
+    public string secondaryPCIP = "192.168.100.44";
     public int basePort = 8900;
 
     [Header("Streaming Quality")]
@@ -50,6 +50,7 @@ public class CameraStreamer : MonoBehaviour
 
     void InitializeStreaming()
     {
+        Debug.Log("Initializing streaming...");
         for (int i = 0; i < streamingCameras.Count; i++)
         {
             var streamCam = streamingCameras[i];
@@ -71,9 +72,6 @@ public class CameraStreamer : MonoBehaviour
             // Send initial camera info
             SendCameraInfo(i);
         }
-
-        // Start streaming coroutine
-        StartCoroutine(StreamCameras());
     }
 
     void SendCameraInfo(int cameraIndex)
@@ -92,7 +90,7 @@ public class CameraStreamer : MonoBehaviour
         udpClients[cameraIndex].Send(infoBytes, infoBytes.Length, secondaryPCIP, basePort + cameraIndex);
     }
 
-    IEnumerator StreamCameras()
+    public IEnumerator StreamCameras()
     {
         var wait = new WaitForSeconds(1f / streamFPS);
 
@@ -100,6 +98,7 @@ public class CameraStreamer : MonoBehaviour
         {
             for (int i = 0; i < streamingCameras.Count; i++)
             {
+                Debug.Log("Streaming camera " + i);
                 if (streamingCameras[i].camera == null) continue;
 
                 // Render camera to texture
