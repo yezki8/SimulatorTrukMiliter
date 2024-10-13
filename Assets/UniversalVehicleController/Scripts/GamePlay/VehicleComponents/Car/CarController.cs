@@ -116,6 +116,7 @@ namespace PG
             base.ResetVehicle ();
 
             EngineRPM = Engine.MinRPM;
+            // StopEngine();
             CurrentGear = 0;
         }
 

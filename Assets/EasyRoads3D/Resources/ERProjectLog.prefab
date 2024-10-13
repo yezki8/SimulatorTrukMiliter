@@ -51,12 +51,6 @@ MonoBehaviour:
     id: 1
     timestamp: 1481875527.1197023
     roadWidth: 5
-    totalLanes: 0
-    laneWidth: 0
-    medianWidth: 0
-    shoulderWidthLeft: 0
-    shoulderWidthRight: 0
-    advancedWidthSettings: 0
     faceDistance: 2
     angleTreshold: 45
     uvTiling: 1
@@ -91,7 +85,6 @@ MonoBehaviour:
     minSpeed: 0
     maxSpeed: 0
     speedLimit: 0
-    speedLimitConnections: 0
     roadShape:
     - {x: -3, y: 0}
     - {x: 3, y: 0}
@@ -188,10 +181,6 @@ MonoBehaviour:
     terrainDeformation: 1
     defaultIndent: 0
     defaultSurrounding: 0
-    maxRoadheight: 0
-    maxTerrainHeightOffset: 0
-    minTerrainHeightDistance: 0
-    maxTerrainHeightDistance: 0
     castShadow: 0
     randomnessFlag: 0
     randomYPosition: 0
@@ -241,4 +230,4 @@ MonoBehaviour:
   logIndex: 0
   updateInt: 2
   resourcesFolder: Resources
-  projectid: 1722222291473
+  projectid: 142426433

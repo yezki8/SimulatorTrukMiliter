@@ -173,7 +173,6 @@ namespace PG
         void UpdateCamera(Vector2 value)
         {
             TargetCamera.UpdateOffset(value.x);
-            Debug.Log("Camera: " + value);
         }
 
         private void OnDestroy ()

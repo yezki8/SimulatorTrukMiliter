@@ -26,6 +26,29 @@ public class DayTimeManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _timeText;  // Time Text UI
 
+    // singleton
+    public static DayTimeManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
     private void Start()
     {
         InitializeDayTime();
