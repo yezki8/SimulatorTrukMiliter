@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4038616491267998}
   - component: {fileID: 205290597674863490}
+  - component: {fileID: 8918431917271032494}
   m_Layer: 17
   m_Name: Pine_002_S2_baked_hierarchy
   m_TagString: Untagged
@@ -62,6 +63,29 @@ LODGroup:
     renderers:
     - renderer: {fileID: 23623943895059882}
   m_Enabled: 1
+--- !u!136 &8918431917271032494
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145341626869510}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.16122437
+  m_Height: 6.8563538
+  m_Direction: 1
+  m_Center: {x: 0, y: 3.3539429, z: 0}
 --- !u!1 &1331729000730478
 GameObject:
   m_ObjectHideFlags: 0
