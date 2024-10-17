@@ -36,7 +36,7 @@ public class BigMapCamera : MonoBehaviour
     }
     void Start()
     {
-        GetComponent<Camera>().enabled = false;
+        // GetComponent<Camera>().enabled = false;
         SwitchFollowingTrue();
         UpdateEdgePanSwitchColor();
         UpdateFollowingSwitchColor();
