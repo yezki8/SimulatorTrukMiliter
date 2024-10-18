@@ -15,14 +15,9 @@ public class PathFinding : MonoBehaviour
     private ERRoad[] allRoads;
     private ERConnection[] allconnections;
     [SerializeField] private Transform startPoint;
-    // [SerializeField] private Transform endPoint;
-    private Vector3 endPoint = new Vector3(187, 35, 95);
-    [SerializeField] private GameObject parentObjectName;
-    [SerializeField] private GameObject groupObjectName;
-    private bool findPath = true;
+    [SerializeField] private GameObject endPoint;
     private LineRenderer lineRenderer;
     [SerializeField] private Material lineMaterial;
-    private List<GameObject> checkpoints;
 
     public class Node
     {
@@ -48,8 +43,6 @@ public class PathFinding : MonoBehaviour
 
     void Start()
     {
-        GetCheckpoints();
-
         roadNetwork = new ERRoadNetwork();
         if (roadNetwork == null)
         {
@@ -100,21 +93,27 @@ public class PathFinding : MonoBehaviour
 
     void Update()
     {
-        if (findPath)
+        GameObject activeCheckpoint = FindActiveCheckpoint();
+        if (activeCheckpoint != null)
         {
-            List<Vector3> paths = StartPathFinding(startPoint.position, checkpoints);
+            List<Vector3> paths = StartPathFinding(startPoint.position, activeCheckpoint);
+            DrawPath(paths);
+        }
+        else
+        {
+            List<Vector3> paths = StartPathFinding(startPoint.position, endPoint);
             DrawPath(paths);
         }
     }
 
-    public List<Vector3> StartPathFinding(Vector3 startPoint, List<GameObject> checkpoints)
+    public List<Vector3> StartPathFinding(Vector3 startPoint, GameObject checkpoint)
     {
         float distance = float.MaxValue;
         List<Node> directions = new();
         List<Vector3> paths = new();
 
         (ERRoad, Vector3) roadStart = FindClosestRoad(startPoint);
-        Vector3 endPoint = checkpoints[^1].transform.position;
+        Vector3 endPoint = checkpoint.transform.position;
         (ERRoad, Vector3) roadEnd = FindClosestRoad(endPoint);
 
         float startToEndDistance = Vector2.Distance(new Vector2(startPoint.x, startPoint.z), new Vector2(endPoint.x, endPoint.y));
@@ -135,7 +134,6 @@ public class PathFinding : MonoBehaviour
             }
             else
             {
-                List<Node> paths = new();
                 List<(ERConnection, float)> connectionsStart = GetPointRoadDistanceToConnection(roadStart);
                 List<(ERConnection, float)> connectionsEnd = GetPointRoadDistanceToConnection(roadEnd);
                 foreach ((ERConnection, float) connStart in connectionsStart)
@@ -250,30 +248,6 @@ public class PathFinding : MonoBehaviour
         return (path, distance);
     }
 
-    private (ERRoad, Vector3) FindRoadStartEndPath(Vector3 point)
-    {
-        string findBuilding = GetBuildingNameContainingPoint(point);
-        if (findBuilding != null)
-        {
-            ERRoad road = FindRoadInBuilding(findBuilding);
-            if (road != null)
-            {
-                Vector3[] markers = road.GetMarkerPositions();
-                Vector3 closestPoint = ProjectPointOnLineSegment(point, markers[0], markers[markers.Length-1]).Item2;
-                return (road, closestPoint);
-            }
-            else
-            {
-                return FindClosestRoad(point);
-            }
-            
-        }
-        else
-        {
-            return FindClosestRoad(point);
-        }
-    }
-
     (ERRoad, Vector3) FindClosestRoad(Vector3 point)
     {
         ERRoad closestRoad = null;
@@ -324,60 +298,6 @@ public class PathFinding : MonoBehaviour
         }
     }
 
-    public string GetBuildingNameContainingPoint(Vector3 point)
-    {
-        GameObject parentObject = GameObject.Find(parentObjectName.name);
-        if (parentObject == null)
-        {
-            Debug.LogError($"Parent GameObject '{parentObjectName}' not found.");
-            return null;
-        }
-
-        Transform groupTransform = parentObject.transform.Find(groupObjectName.name);
-        if (groupTransform == null)
-        {
-            Debug.LogError($"Group GameObject '{groupObjectName}' not found under '{parentObjectName}'.");
-            return null;
-        }
-
-        foreach (Transform building in groupTransform)
-        {
-            if (IsPointInsideBuildingUsingChildren(building, point))
-            {
-                return building.gameObject.name;
-            }
-        }
-        return null;
-    }
-
-    private bool IsPointInsideBuildingUsingChildren(Transform buildingTransform, Vector3 point)
-    {
-        foreach (Transform child in buildingTransform)
-        {
-            if (IsPointInsideChildBounds(child, point))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private bool IsPointInsideChildBounds(Transform child, Vector3 point)
-    {
-        Quaternion rotation = Quaternion.Euler(0, child.rotation.eulerAngles.y, 0);
-        Vector3 rotatedPoint = rotation * (point - child.position) + child.position;
-
-        Vector3 halfScale = child.localScale / 2;
-        float minX = child.position.x - halfScale.x;
-        float maxX = child.position.x + halfScale.x;
-        float minZ = child.position.z - halfScale.z;
-        float maxZ = child.position.z + halfScale.z;
-        
-        bool insideX = rotatedPoint.x >= minX && rotatedPoint.x <= maxX;
-        bool insideZ = rotatedPoint.z >= minZ && rotatedPoint.z <= maxZ;
-        return insideX && insideZ;
-    }
-
     private List<(ERConnection, float)> GetPointRoadDistanceToConnection((ERRoad, Vector3) roadPoint)
     {
         Vector3 point = roadPoint.Item2;
@@ -406,21 +326,6 @@ public class PathFinding : MonoBehaviour
             connectionDistances.Add((roadPoint.Item1.GetConnectionAtEnd(), distance));
         }
         return connectionDistances;
-    }
-
-    private ERRoad FindRoadInBuilding(string buildingName)
-    {
-        foreach (ERRoad road in allRoads)
-        {
-            foreach (Vector3 marker in road.GetMarkerPositions())
-            {
-                if (GetBuildingNameContainingPoint(marker) == buildingName)
-                {
-                    return road;
-                }
-            }
-        }
-        return null;
     }
 
     private void CreatePaths(List<Vector3> paths, (ERRoad, Vector3) roadStart, List<Node> directions, (ERRoad, Vector3) roadEnd)
@@ -598,6 +503,7 @@ public class PathFinding : MonoBehaviour
         Vector3 shiftedPointA = pointA + perpendicular * 5.0f;
         Vector3 shiftedPointB = pointB + perpendicular * 5.0f;
         return (shiftedPointA, shiftedPointB);
+    }
 
     private void DrawPath(List<Vector3> paths)
     {
@@ -630,27 +536,21 @@ public class PathFinding : MonoBehaviour
         lineRenderer.endWidth = 5f;
     }
 
-    public void DeletePath()
+    private void DeletePath()
     {
         lineRenderer.positionCount = 0;
     }
 
-    public void GetCheckpoints()
+    private GameObject FindActiveCheckpoint()
     {
         GameObject parentObject = GameObject.Find("CP");
         foreach (Transform child in parentObject.transform)
         {
             if (child.gameObject.activeSelf)
             {
-                checkpoints.Add(child.gameObject);
-                break;
+                return child.gameObject;
             }
         }
-
-        while (checkpoints[^1].name != "Finish")
-        {
-            CheckpointPathfindHandler handler = checkpoints[^1].GetComponent<CheckpointPathfindHandler>();
-            checkpoints.Add(handler.GetNextCheckpoint());
-        }
+        return null;
     }
 }
