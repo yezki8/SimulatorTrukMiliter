@@ -6,9 +6,10 @@ using PG;
 public class DashboardController : MonoBehaviour
 {
     [SerializeField] private CarController _carController;
-    private float CarSpeed;
-    private float CarRPM;
-    private float CarGear;
+    [SerializeField] private DashboardUIHandler _dashboardUIHandler;
+    private float carSpeed;
+    private float carRPM;
+    private int carGear;
     
     [Header("Parameters for speedometer")]
     [SerializeField] private float _zeroSpeedDegree;
@@ -29,8 +30,31 @@ public class DashboardController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CarSpeed = _carController.SpeedInHour;
-        CarRPM = _carController.EngineRPM;
-        CarGear = _carController.CurrentGear;
+        if (GameStateController.Instance.GameState == StateOfGame.Match)
+        {
+            carSpeed = _carController.SpeedInHour;
+            carRPM = _carController.EngineRPM;
+            carGear = _carController.CurrentGear;
+        }
+        else
+        {
+            carSpeed = _zeroSpeedDegree;
+            carRPM = _zeroRPMDegree;
+            carGear = -2;
+        }
+        CalculateSpeedPin();
+    }
+
+    void CalculateSpeedPin()
+    {
+        Debug.Log("CurrentSpeed = " + carSpeed);
+        float speedDegreeRange = (_maxSpeedDegree - _zeroSpeedDegree);
+        float currentSpeedDegree = _zeroSpeedDegree + ((speedDegreeRange / _maxDashboardSpeed) * carSpeed);
+
+        Debug.Log("CurrentRPM = " + carRPM);
+        float speedRPMRange = (_maxRPMDegree - _zeroRPMDegree);
+        float currentRPMDegree = _zeroRPMDegree + ((speedRPMRange / _maxDashboardRPM) * carRPM);
+
+        _dashboardUIHandler.DisplayDashboard(currentSpeedDegree, currentRPMDegree, carGear);
     }
 }
