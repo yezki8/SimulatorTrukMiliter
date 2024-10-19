@@ -1169,6 +1169,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "DisplaySetting",
+            "id": "4efeb80a-3449-474d-85a4-9aa18ec961e1",
+            "actions": [
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "23e63919-04b5-4fb9-9c5a-05e402624f42",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9ec9b86f-2bdd-415e-90fb-c8ee5ed05bb7",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

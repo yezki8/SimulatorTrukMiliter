@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class MonitorSelection : MonoBehaviour
 {
@@ -18,7 +19,12 @@ public class MonitorSelection : MonoBehaviour
     [SerializeField] private Canvas RearMirrorDisplay;
     [SerializeField] private Canvas DashboardDisplay;
     public TMP_Dropdown[] displayDropdowns = new TMP_Dropdown[6];
+    private SimulatorInputActions _controls;
 
+    void Awake()
+    {
+        _controls = new();
+    }
     void Start()
     {
         _setDisplayPanel.SetActive(false);
@@ -37,6 +43,24 @@ public class MonitorSelection : MonoBehaviour
         displayDropdowns[5].onValueChanged.AddListener((value) => SetTruckDashboardDisplay(value));
 
         LoadMonitorSetup();
+    }
+
+    void Update()
+    {
+        if (_setDisplayPanel.activeSelf)
+        {
+            _controls.DisplaySetting.Cancel.performed += ctx => CancelDisplaySetting();
+        }
+    }
+
+    void OnEnable()
+    {
+        _controls.DisplaySetting.Enable();
+    }
+
+    void OnDisable()
+    {
+        _controls.DisplaySetting.Disable();
     }
 
     void PopulateMonitorDropdowns()
@@ -133,5 +157,11 @@ public class MonitorSelection : MonoBehaviour
     {
         _setDisplayPanel.SetActive(false);
         SaveMonitorSetup();
+    }
+
+    public void CancelDisplaySetting()
+    {
+        _setDisplayPanel.SetActive(false);
+        LoadMonitorSetup();
     }
 }

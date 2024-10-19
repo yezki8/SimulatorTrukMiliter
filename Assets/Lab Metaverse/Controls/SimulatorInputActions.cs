@@ -1193,6 +1193,34 @@ namespace UnityEngine.InputSystem
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""DisplaySetting"",
+            ""id"": ""4efeb80a-3449-474d-85a4-9aa18ec961e1"",
+            ""actions"": [
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""23e63919-04b5-4fb9-9c5a-05e402624f42"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9ec9b86f-2bdd-415e-90fb-c8ee5ed05bb7"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1302,6 +1330,9 @@ namespace UnityEngine.InputSystem
             m_Maps_Zoom = m_Maps.FindAction("Zoom", throwIfNotFound: true);
             m_Maps_EdgePan = m_Maps.FindAction("EdgePan", throwIfNotFound: true);
             m_Maps_GoToPlayer = m_Maps.FindAction("GoToPlayer", throwIfNotFound: true);
+            // DisplaySetting
+            m_DisplaySetting = asset.FindActionMap("DisplaySetting", throwIfNotFound: true);
+            m_DisplaySetting_Cancel = m_DisplaySetting.FindAction("Cancel", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1777,6 +1808,52 @@ namespace UnityEngine.InputSystem
             }
         }
         public MapsActions @Maps => new MapsActions(this);
+
+        // DisplaySetting
+        private readonly InputActionMap m_DisplaySetting;
+        private List<IDisplaySettingActions> m_DisplaySettingActionsCallbackInterfaces = new List<IDisplaySettingActions>();
+        private readonly InputAction m_DisplaySetting_Cancel;
+        public struct DisplaySettingActions
+        {
+            private @SimulatorInputActions m_Wrapper;
+            public DisplaySettingActions(@SimulatorInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Cancel => m_Wrapper.m_DisplaySetting_Cancel;
+            public InputActionMap Get() { return m_Wrapper.m_DisplaySetting; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(DisplaySettingActions set) { return set.Get(); }
+            public void AddCallbacks(IDisplaySettingActions instance)
+            {
+                if (instance == null || m_Wrapper.m_DisplaySettingActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_DisplaySettingActionsCallbackInterfaces.Add(instance);
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
+            }
+
+            private void UnregisterCallbacks(IDisplaySettingActions instance)
+            {
+                @Cancel.started -= instance.OnCancel;
+                @Cancel.performed -= instance.OnCancel;
+                @Cancel.canceled -= instance.OnCancel;
+            }
+
+            public void RemoveCallbacks(IDisplaySettingActions instance)
+            {
+                if (m_Wrapper.m_DisplaySettingActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IDisplaySettingActions instance)
+            {
+                foreach (var item in m_Wrapper.m_DisplaySettingActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_DisplaySettingActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public DisplaySettingActions @DisplaySetting => new DisplaySettingActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -1868,6 +1945,10 @@ namespace UnityEngine.InputSystem
             void OnZoom(InputAction.CallbackContext context);
             void OnEdgePan(InputAction.CallbackContext context);
             void OnGoToPlayer(InputAction.CallbackContext context);
+        }
+        public interface IDisplaySettingActions
+        {
+            void OnCancel(InputAction.CallbackContext context);
         }
     }
 }
