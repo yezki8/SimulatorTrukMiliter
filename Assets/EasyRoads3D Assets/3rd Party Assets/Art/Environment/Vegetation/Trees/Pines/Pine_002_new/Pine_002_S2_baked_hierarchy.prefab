@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4038616491267998}
   - component: {fileID: 205290597674863490}
   - component: {fileID: 8918431917271032494}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Pine_002_S2_baked_hierarchy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4293487279520900}
   - component: {fileID: 33853378506076062}
   - component: {fileID: 23342738212990410}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: S2_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 4653493521584714}
   - component: {fileID: 33205574427037582}
   - component: {fileID: 23161624407195942}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: S2_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 4487985467506442}
   - component: {fileID: 33036720600751686}
   - component: {fileID: 23623943895059882}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: S2_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
