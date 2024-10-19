@@ -193,11 +193,13 @@ namespace PG
         {
             if (Car.EngineIsOn)
             {
-                if (EngineSources.Count == 0 && EngineSourceRef && EngineSourceRef.gameObject.activeInHierarchy)
+                if (EngineSources.Count == 0 && EngineSourceRef && EngineSourceRef.gameObject.activeInHierarchy && !float.IsNaN(Car.EngineRPM))
                 {
                     EngineSourceRef.pitch = Mathf.Lerp (MinEnginePitch, MaxEnginePitch, (Car.EngineRPM - Car.MinRPM) / (Car.MaxRPM - Car.MinRPM));
                 }
-                else if (EngineSources.Count > 1)
+
+                // NaN Checks
+                else if (EngineSources.Count > 1 && !float.IsNaN(Car.EngineRPM))
                 {
                     float rpmNorm = ((Car.EngineRPM - Car.MinRPM) / (Car.MaxRPM - Car.MinRPM)).Clamp();
                     float pith = Mathf.Lerp (MinEnginePitch, MaxEnginePitch, rpmNorm);

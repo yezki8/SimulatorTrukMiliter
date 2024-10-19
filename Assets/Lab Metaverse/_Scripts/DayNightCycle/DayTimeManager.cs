@@ -13,9 +13,8 @@ public class DayTimeManager : MonoBehaviour
     public float CheckpointTimeOfDay; //The hour of the game started
 
     [Range(0, 24)]
-    private float _timeOfDay;  // Current time of day (0-24)
-    [SerializeField]
-    private float _dayDuration = 120f;  // Duration of a full day in seconds
+    [SerializeField] private float _timeOfDay = 4;  // Current time of day (0-24)
+    [SerializeField] private float _dayDuration = 120f;  // Duration of a full day in seconds
     private int _currentDay = 1;
     
     [SerializeField]
@@ -26,9 +25,35 @@ public class DayTimeManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _timeText;  // Time Text UI
 
+    public DayNightCycle dayNightCycle;
+
+    // singleton instance
+    public static DayTimeManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
     private void Start()
     {
         InitializeDayTime();
+    }
+
+    private void OnValidate()
+    {
+        dayNightCycle.UpdateSunMoonPosition(_timeOfDay);
     }
 
     void Update()
@@ -37,6 +62,7 @@ public class DayTimeManager : MonoBehaviour
         if (GameStateController.Instance.GameState == StateOfGame.Match)
         {
             CalculateDayTime();
+            dayNightCycle.UpdateSunMoonPosition(_timeOfDay);
         }
     }
 

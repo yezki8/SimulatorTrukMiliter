@@ -48,5 +48,6 @@ public abstract class ForceFeedbackProvider : MonoBehaviour
     public abstract void ApplySpringForce();
     public abstract void ApplyDirtRoadEffect();
     public abstract void SetSpringMultiplier(float saturation);
+    public abstract void OnShutdown();
     
 }

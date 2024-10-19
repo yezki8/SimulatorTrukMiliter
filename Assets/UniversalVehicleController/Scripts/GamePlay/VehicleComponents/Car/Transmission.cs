@@ -68,10 +68,11 @@ namespace PG
 
         void FixedUpdateTransmition ()
         {
-            if (Gearbox.HasRGear || CurrentGear >= 0)
+            if ((Gearbox.HasRGear || CurrentGear >= 0) && !float.IsNaN(EngineRPM))
             {
                 // Calculate power transfer from motor to wheel, quadratic
-                var powerTransfer = Mathf.Pow(CarControl.Clutch, 2);
+                // add checks for automatic gearbox
+                var powerTransfer = Gearbox.AutomaticGearBox ? 1 : Mathf.Pow(CarControl.Clutch, 2);
 
                 // var motorTorque = CurrentAcceleration * (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
                 float rotorForce = 0.15f;
@@ -187,12 +188,13 @@ namespace PG
             }
         }
 
+        // both function checks for automatic gearbox
         public void NextGear ()
         {
             if (!InChangeGear && CurrentGear < (AllGearsRatio.Length - 2))
             {
                 CurrentGear++;
-                ChangeGearTimer = Gearbox.ChangeUpGearTime;
+                ChangeGearTimer = Gearbox.AutomaticGearBox ? Gearbox.AutomaticGearBoxTime : Gearbox.ChangeUpGearTime;
                 PlayBackfireWithProbability ();
             }
         }
@@ -202,7 +204,7 @@ namespace PG
             if (!InChangeGear && CurrentGear >= 0)
             {
                 CurrentGear--;
-                ChangeGearTimer = Gearbox.ChangeDownGearTime;
+                ChangeGearTimer = Gearbox.AutomaticGearBox ? Gearbox.AutomaticGearBoxTime : Gearbox.ChangeDownGearTime;
             }
         }
 
@@ -231,6 +233,7 @@ namespace PG
             public float ChangeUpGearTime = 0.3f;                   // Delay after upshift.
             public float ChangeDownGearTime = 0.2f;                 // Delay after downshift.
             public float ChangeClutchedGearTime = 0.01f;            // Delay when using Clutch.
+            public float AutomaticGearBoxTime = 0.7f;               // Delay for automatic gearbox.
 
             [Header("Automatic gearbox")]
             public bool AutomaticGearBox = true;

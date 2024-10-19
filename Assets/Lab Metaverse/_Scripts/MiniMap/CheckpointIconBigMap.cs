@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 [InitializeOnLoad]
+#endif
 public class CheckpointIconBigMap
 {
     static CheckpointIconBigMap()
     {
+    #if UNITY_EDITOR
         EditorApplication.hierarchyChanged += OnHierarchyChanged;
+    #endif
+
     }
 
     private static void OnHierarchyChanged()
@@ -30,10 +35,19 @@ public class CheckpointIconBigMap
             {
                 if (!HasCheckpoint(child.gameObject))
                 {
-                    GameObject childPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Lab Metaverse/Prefabs/Checkpoint Icon - bigmap.prefab");
+                    GameObject childPrefab;
+#if UNITY_EDITOR
+                    childPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Lab Metaverse/Prefabs/Checkpoint Icon - bigmap.prefab");
+#else
+                    childPrefab = Resources.Load<GameObject>("Checkpoint Icon - bigmap");
+#endif
                     if (childPrefab != null)
                     {
+#if UNITY_EDITOR
                         PrefabUtility.InstantiatePrefab(childPrefab, child);
+#else
+                        GameObject checkpointIcon = GameObject.Instantiate(childPrefab, child);
+#endif
                     }
                 }
                 foreach (Transform go in child)
@@ -48,10 +62,19 @@ public class CheckpointIconBigMap
         GameObject finishObject = GameObject.Find("Finish");
         if (!HasCheckpointFinish(finishObject))
         {
-            GameObject childPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Lab Metaverse/Prefabs/Finish Icon - bigmap.prefab");
+            GameObject childPrefab;
+#if UNITY_EDITOR
+            childPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Lab Metaverse/Prefabs/Finish Icon - bigmap.prefab");
+#else
+            childPrefab = Resources.Load<GameObject>("Checkpoint Icon - bigmap");
+#endif
             if (childPrefab != null)
             {
+#if UNITY_EDITOR
                 PrefabUtility.InstantiatePrefab(childPrefab, finishObject.transform);
+#else
+                GameObject finishIcon = GameObject.Instantiate(childPrefab, finishObject.transform);
+#endif
             }
         }
         foreach (Transform go in finishObject.transform)

@@ -2,16 +2,18 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 7
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: surfaceMaterial
-  m_Shader: {fileID: 4800000, guid: c64d59d8c0a593b488900eb2eec7504d, type: 3}
+  m_Shader: {fileID: 4800000, guid: 201d8d786b78b414ca3fd94ecdb2b426, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ShaderKeywords: _HIDE_ON
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _HIDE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -29,8 +31,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Hide: 1
-    - _OffsetFactor: -0.1
-    - _OffsetUnit: -0.1
+    - _OffsetFactor: -1
+    - _OffsetUnit: -1
     - _Show: 0
     - __dirty: 1
     m_Colors:

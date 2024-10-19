@@ -36,7 +36,7 @@ namespace PG
 #pragma warning restore 0649
 
         CarLighting CarLighting;
-        CarController ConnectedToCar;
+        [SerializeField] CarController ConnectedToCar;
         ConfigurableJoint ConfigurableJoint;
         Vector3 SupportTargetPos;
         bool AfterJointCreate;

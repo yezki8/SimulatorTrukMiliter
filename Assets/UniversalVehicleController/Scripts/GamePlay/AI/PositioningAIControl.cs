@@ -28,6 +28,12 @@ namespace PG
             } 
         }
 
+        public void ResetProgress()
+        {
+            ProgressDistance = 0;
+            ProgressPoint = AIPath.GetRoutePoint(0);
+        }
+
         public override void Start ()
         {
             //If path is null, then the first path of the scene is taken.
