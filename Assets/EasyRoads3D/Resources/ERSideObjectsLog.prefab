@@ -6520,8 +6520,8 @@ MonoBehaviour:
   roadPresets:
   - roadTypeName: Default Road
     id: 1
-    timestamp: 1713876589.9287603
-    roadWidth: 6
+    timestamp: 1727968811.23686
+    roadWidth: 11.5
     faceDistance: 2
     angleTreshold: 45
     uvTiling: 1
@@ -6535,7 +6535,7 @@ MonoBehaviour:
       nodes:
       - {x: -3, y: 0}
       - {x: 3, y: 0}
-      hardEdge: 0000
+      hardEdge: 
       priorityNodeIndexLeft: 0
       priorityNodeIndexRight: 1
       nodesV3: []
@@ -6559,8 +6559,8 @@ MonoBehaviour:
     maxSpeed: 0
     speedLimit: 0
     roadShape:
-    - {x: -3, y: 0}
-    - {x: 3, y: 0}
+    - {x: 5.75, y: 0}
+    - {x: -5.75, y: 0}
     roadShapeExt: []
     roadShapeExt2: []
     doConnectionTri: 
@@ -6596,7 +6596,59 @@ MonoBehaviour:
     subSegments: 1
     soData: []
     soDataExt: []
-    soDataLog: []
+    soDataLog:
+    - id: 1575640414.1523824
+      active: 0
+    - id: 1492864192.677831
+      active: 0
+    - id: 1587136571.1902595
+      active: 0
+    - id: 1
+      active: 0
+    - id: 1461163327.9873817
+      active: 0
+    - id: 1627383619.8935523
+      active: 0
+    - id: 2
+      active: 0
+    - id: 1575579583.384351
+      active: 0
+    - id: 1492633790.5171874
+      active: 0
+    - id: 1615567565.3400443
+      active: 0
+    - id: 1604836083.8996148
+      active: 0
+    - id: 1603743985.9864626
+      active: 0
+    - id: 1462981249.4311268
+      active: 0
+    - id: 1466451290.7593656
+      active: 0
+    - id: 1603904449.5714228
+      active: 0
+    - id: 1604522831.4235895
+      active: 0
+    - id: 1575646819.2434592
+      active: 0
+    - id: 1496500505.889294
+      active: 0
+    - id: 1575580284.127595
+      active: 0
+    - id: 1589389456.2844396
+      active: 0
+    - id: 1615554789.3625984
+      active: 0
+    - id: 1591210872.58933
+      active: 0
+    - id: 1591211277.2413483
+      active: 0
+    - id: 1438703293.2729063
+      active: 0
+    - id: 1499500677.1240554
+      active: 0
+    - id: 1595964581.6688309
+      active: 0
     layer: 0
     isStatic: 0
     tag: Untagged
@@ -6640,11 +6692,11 @@ MonoBehaviour:
     connectionAngle: 0
     connectionRadius: 0
     oneWay: 0
-    cornerRadiusMainRoad: 0
-    cornerSementsMainRoad: 0
-    cornerRadiusSecondaryRoad: 0
-    cornerRadiusSecondaryCurvature: 0
-    cornerSementsSecondaryRoad: 0
+    cornerRadiusMainRoad: 1
+    cornerSementsMainRoad: 4
+    cornerRadiusSecondaryRoad: 1
+    cornerRadiusSecondaryCurvature: 0.1
+    cornerSementsSecondaryRoad: 4
     mainRoadsOnly: 0
     isRoadShape: 1
     controlType: 0
@@ -6792,8 +6844,8 @@ MonoBehaviour:
     showTrafficPosts: 0
   - roadTypeName: Primary Road
     id: 1601050179.045599
-    timestamp: 1687877945.2223036
-    roadWidth: 7.5
+    timestamp: 1727966590.103895
+    roadWidth: 10
     faceDistance: 2
     angleTreshold: 45
     uvTiling: 1
@@ -6805,10 +6857,10 @@ MonoBehaviour:
     roadShapeDataActive: 1
     roadShapeData:
       nodes:
-      - {x: -3.75, y: 0}
-      - {x: -3.1007197, y: 0}
-      - {x: 3.1007197, y: 0}
-      - {x: 3.75, y: 0}
+      - {x: -5, y: 0}
+      - {x: -4.134293, y: 0}
+      - {x: 4.134293, y: 0}
+      - {x: 5, y: 0}
       hardEdge: 00000000
       priorityNodeIndexLeft: -1
       priorityNodeIndexRight: -1
@@ -6837,14 +6889,14 @@ MonoBehaviour:
     maxSpeed: 55
     speedLimit: 50
     roadShape:
-    - {x: -3.75, y: 0}
-    - {x: 3.75, y: 0}
+    - {x: -5, y: 0}
+    - {x: 5, y: 0}
     roadShapeExt: []
     roadShapeExt2:
-    - {x: -3.75, y: 0}
-    - {x: -3.1007197, y: 0}
-    - {x: 3.1007197, y: 0}
-    - {x: 3.75, y: 0}
+    - {x: -5, y: 0}
+    - {x: -4.134293, y: 0}
+    - {x: 4.134293, y: 0}
+    - {x: 5, y: 0}
     doConnectionTri: 0101
     doConnectionTriExt: 
     roadShapeUVs:
@@ -6882,7 +6934,59 @@ MonoBehaviour:
     subSegments: 1
     soData: []
     soDataExt: []
-    soDataLog: []
+    soDataLog:
+    - id: 1575640414.1523824
+      active: 0
+    - id: 1492864192.677831
+      active: 0
+    - id: 1587136571.1902595
+      active: 0
+    - id: 1
+      active: 0
+    - id: 1461163327.9873817
+      active: 0
+    - id: 1627383619.8935523
+      active: 0
+    - id: 2
+      active: 0
+    - id: 1575579583.384351
+      active: 0
+    - id: 1492633790.5171874
+      active: 0
+    - id: 1615567565.3400443
+      active: 0
+    - id: 1604836083.8996148
+      active: 0
+    - id: 1603743985.9864626
+      active: 0
+    - id: 1462981249.4311268
+      active: 0
+    - id: 1466451290.7593656
+      active: 0
+    - id: 1603904449.5714228
+      active: 0
+    - id: 1604522831.4235895
+      active: 0
+    - id: 1575646819.2434592
+      active: 0
+    - id: 1496500505.889294
+      active: 0
+    - id: 1575580284.127595
+      active: 0
+    - id: 1589389456.2844396
+      active: 0
+    - id: 1615554789.3625984
+      active: 0
+    - id: 1591210872.58933
+      active: 0
+    - id: 1591211277.2413483
+      active: 0
+    - id: 1438703293.2729063
+      active: 0
+    - id: 1499500677.1240554
+      active: 0
+    - id: 1595964581.6688309
+      active: 0
     layer: 0
     isStatic: 1
     tag: Untagged
@@ -6940,8 +7044,8 @@ MonoBehaviour:
     showTrafficPosts: 0
   - roadTypeName: Secondary Road
     id: 1601050360.435914
-    timestamp: 1683746879.917481
-    roadWidth: 8
+    timestamp: 1727966196.458404
+    roadWidth: 10
     faceDistance: 5
     angleTreshold: 5
     uvTiling: 1
@@ -6953,10 +7057,10 @@ MonoBehaviour:
     roadShapeDataActive: 1
     roadShapeData:
       nodes:
-      - {x: -4, y: 0}
-      - {x: -2.4099057, y: 0}
-      - {x: 2.4099057, y: 0}
-      - {x: 4, y: 0}
+      - {x: -5, y: 0}
+      - {x: -3.012382, y: 0}
+      - {x: 3.012382, y: 0}
+      - {x: 5, y: 0}
       hardEdge: 00000000
       priorityNodeIndexLeft: -1
       priorityNodeIndexRight: -1
@@ -6965,9 +7069,19 @@ MonoBehaviour:
       - {x: -2.4098582, y: 0, z: -0.015130519}
       - {x: 2.4098582, y: 0, z: 0.015130519}
       - {x: 3.9999213, y: 0, z: 0.025113877}
-      lanes: []
-      leftLanes: -1
-      rightLanes: -1
+      lanes:
+      - position: -0.30123824
+        direction: 0
+        turnDirection: 0
+        TurnOptions: 6
+        laneIndex: 0
+      - position: 0.30123812
+        direction: 1
+        turnDirection: 0
+        TurnOptions: 6
+        laneIndex: 0
+      leftLanes: 1
+      rightLanes: 1
       symmetrical: 1
       leftSidewalkOffset: 0
       rightSidewalkOffset: 0
@@ -6985,14 +7099,14 @@ MonoBehaviour:
     maxSpeed: 55
     speedLimit: 50
     roadShape:
-    - {x: -4, y: 0}
-    - {x: 4, y: 0}
+    - {x: -5, y: 0}
+    - {x: 5, y: 0}
     roadShapeExt: []
     roadShapeExt2:
-    - {x: -4, y: 0}
-    - {x: -2.4099057, y: 0}
-    - {x: 2.4099057, y: 0}
-    - {x: 4, y: 0}
+    - {x: -5, y: 0}
+    - {x: -3.012382, y: 0}
+    - {x: 3.012382, y: 0}
+    - {x: 5, y: 0}
     doConnectionTri: 0101
     doConnectionTriExt: 
     roadShapeUVs:

@@ -169,7 +169,6 @@ public class ChaseController : MonoBehaviour
             // use _offset.z as radius
             _offset.x = Mathf.Sin(value) * ChaseOffset.z; // left right
             _offset.z = Mathf.Cos(value) * ChaseOffset.z;
-            Debug.Log("Offset: " + _offset);
         } else if (_cameraState == CameraMode.FirstPerson)
         {
             if (value != 0)

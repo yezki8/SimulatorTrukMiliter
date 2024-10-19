@@ -7,21 +7,34 @@ public class LogitechForceFeedback : ForceFeedbackProvider
 {
     private StringBuilder steeringWheelName = new StringBuilder(256);
     private int deviceIdx;
+    private bool isDeviceFound = false;
 
     public override void InitProvider()
     {
         if (LogitechGSDK.LogiSteeringInitialize(false))
         {
-            deviceIdx = 0;
-        }
-        if (LogitechGSDK.LogiIsDeviceConnected(deviceIdx, LogitechGSDK.LOGI_DEVICE_TYPE_WHEEL))
-        {
-            LogitechGSDK.LogiGetFriendlyProductName(deviceIdx, steeringWheelName, 256);
-            Debug.Log($"Steering Wheel: {steeringWheelName}");
+            Debug.Log("Searching for steering wheel...");
+            // check which device is a steering wheel
+            // arbitrary number picked = 10 (max number of devices)
+            for (int i = 0; i < 10; i++)
+            {
+                if (LogitechGSDK.LogiIsDeviceConnected(i, LogitechGSDK.LOGI_DEVICE_TYPE_WHEEL))
+                {
+                    isDeviceFound = true;
+                    deviceIdx = i;
+                    LogitechGSDK.LogiGetFriendlyProductName(deviceIdx, steeringWheelName, 256);
+                    Debug.Log($"Steering Wheel: {steeringWheelName}");
+                    break;
+                }
+            }
+            if (!isDeviceFound)
+            {
+                Debug.Log("No Logitech Steering Wheel found");
+            }
         }
         else
         {
-            Debug.Log("No Logitech device found");
+            Debug.Log("Logitech Steering Wheel not initialized");
         }
     }
     public override int GetPosOffset()
@@ -54,5 +67,10 @@ public class LogitechForceFeedback : ForceFeedbackProvider
     {
         _springSaturation = (int)(multipler * SpringMultiplier);
         _springCoefficient = (int)Mathf.Ceil(multipler * SpringMultiplier / 2f);
+    }
+
+    public override void OnShutdown()
+    {
+        LogitechGSDK.LogiSteeringShutdown();
     }
 }

@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Profiling;
 
-#if UNITY_EDITOR
+// #if UNITY_EDITOR
 public class DebugManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text debugText;
@@ -91,4 +91,4 @@ public class DebugManager : MonoBehaviour
     }
 }
 
-#endif
+// #endif

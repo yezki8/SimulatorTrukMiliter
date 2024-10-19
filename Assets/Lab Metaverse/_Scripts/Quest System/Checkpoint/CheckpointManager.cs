@@ -13,6 +13,8 @@ public class CheckpointManager : MonoBehaviour
     public static CheckpointManager Instance;
 
     public UnityEvent OnActivateCheckpoint;
+    [SerializeField] private GameObject Level1Parent;
+    [SerializeField] private GameObject Level2Parent;
 
     private void Awake()
     {
@@ -51,6 +53,8 @@ public class CheckpointManager : MonoBehaviour
             Checkpoints[0].RecordedTimer = TimerCountdown.Instance.GetStartTime();
         }
         Checkpoints[0].SetActiveCheckpoint(true);
+
+        Level2Parent.SetActive(false);
     }
 
     public void RespawnAtCheckpoint()

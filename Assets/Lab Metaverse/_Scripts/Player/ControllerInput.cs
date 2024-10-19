@@ -177,6 +177,8 @@ namespace PG
 
         private void OnDestroy ()
         {
+            // deactivate FFB
+            ForceFeedbackProvider.OnShutdown();
             OnDestroyAction.SafeInvoke ();
         }
 
