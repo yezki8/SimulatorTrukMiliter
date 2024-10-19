@@ -43,6 +43,10 @@ public class CheckpointPathfindHandler : MonoBehaviour
         }
     }
 
+    public GameObject GetRoadObject() {
+        return TargetCrossingRoad;
+    }
+
     public GameObject GetNextCheckpoint() {
         return NextCheckpoint.gameObject;
     }
