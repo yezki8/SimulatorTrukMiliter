@@ -5,7 +5,6 @@ using EasyRoads3Dv3;
 using System;
 using Unity.VisualScripting;
 using PG;
-using Unity.PlasticSCM.Editor.WebApi;
 using Unity.Mathematics;
 
 public class PathFinding : MonoBehaviour
