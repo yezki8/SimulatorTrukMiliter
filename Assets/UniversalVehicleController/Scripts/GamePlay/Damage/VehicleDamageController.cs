@@ -39,6 +39,9 @@ namespace PG
 
         [SerializeField] bool EnableLogAndGizmo;                     //Ñollision log and gizmo for debug.
 
+        [Header("Added by Metaverse")]
+        [SerializeField] private InstructorObstacleController _instructorObstacleController;
+
 #pragma warning restore 0649
         public Transform TR => transform;
 
@@ -339,6 +342,9 @@ namespace PG
             //Ñalculate all the necessary values.
             Vector3 clampForce = Vector3.ClampMagnitude(damageForce, MaxCollisionMagnitude);                                //Limiting force if force exceeds maximum.
             Vector3 normalizedForce = clampForce.normalized;
+
+            _instructorObstacleController.CheckWindowCrack(damageForce.x);
+
             float forceMagFactor = clampForce.magnitude * DamageFactor * data.MassFactor;                                   //Accept all existing factors.
             float maxDamageRadius = MaxDeformRadiusInMaxMag * (forceMagFactor / MaxCollisionMagnitude);
             float sqrMaxDamageRadius = Mathf.Pow(maxDamageRadius, 2);
@@ -346,6 +352,7 @@ namespace PG
             float sqrMaxDeformDist = Mathf.Pow (maxDeformDist, 2);                                                          //Calculation of the square of the maximum damage distance.
             float surfaceDot = Mathf.Clamp01 (Vector3.Dot (surfaceNormal, normalizedForce)) *
                 (Vector3.Dot ((CenterPoint - damagePoint).normalized, normalizedForce) + 1) * 0.3f;                         //Calculation of surfaceDot to reduce the tangential damage force.
+            
             float deformSurfaceDot = surfaceDot * 0.01f * DamageFactor              ;                                       //Applying all multipliers and decreasing by 100 surfaceDot for an adequate result.
 
             if (surfaceDot <= 0.02f)

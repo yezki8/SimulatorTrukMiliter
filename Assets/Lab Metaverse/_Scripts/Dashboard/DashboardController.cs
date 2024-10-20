@@ -47,11 +47,9 @@ public class DashboardController : MonoBehaviour
 
     void CalculateSpeedPin()
     {
-        Debug.Log("CurrentSpeed = " + carSpeed);
         float speedDegreeRange = (_maxSpeedDegree - _zeroSpeedDegree);
         float currentSpeedDegree = _zeroSpeedDegree + ((speedDegreeRange / _maxDashboardSpeed) * carSpeed);
 
-        Debug.Log("CurrentRPM = " + carRPM);
         float speedRPMRange = (_maxRPMDegree - _zeroRPMDegree);
         float currentRPMDegree = _zeroRPMDegree + ((speedRPMRange / _maxDashboardRPM) * carRPM);
 

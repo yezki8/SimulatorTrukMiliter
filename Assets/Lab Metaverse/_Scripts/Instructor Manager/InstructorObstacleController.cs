@@ -7,6 +7,8 @@ public class InstructorObstacleController : MonoBehaviour
 {
     [SerializeField] private CarController _carController;
     [SerializeField] private InstructorObstacleUIHandler _instructorObstacleUIHandler;
+    [SerializeField] private float windowCrackTreshold = 4;
+
     public void TurnOffTruck()
     {
         //TO DO: if there's time, need to add more "mogok" feel to it
@@ -33,6 +35,33 @@ public class InstructorObstacleController : MonoBehaviour
         targetWheel.IsLocked = !targetWheel.IsLocked;
 
         _instructorObstacleUIHandler.ChangeLockText(wheelIndex, targetWheel.IsLocked);
+    }
+
+    public void CheckWindowCrack(float damageForceX)
+    {
+        damageForceX = Mathf.Abs(damageForceX);
+        Debug.Log("Damage = " + damageForceX);
+        if (damageForceX > windowCrackTreshold)
+        {
+            _instructorObstacleUIHandler.DisplayCrackPanel();
+        }
+    }
+
+    public void FixAll()
+    {
+        for (int i = 0; i < _carController.Wheels.Length; i++)
+        {
+            Wheel targetWheel = _carController.Wheels[i];
+            if (targetWheel.IsBlownOut)
+            {
+                ChangeBlowTireStatus(i);
+            }
+            if (targetWheel.IsLocked)
+            {
+                ChangeWheelockStatus(i);
+            }
+        }
+        _instructorObstacleUIHandler.HideCrackPanel();
     }
 
 }
