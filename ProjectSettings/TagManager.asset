@@ -12,6 +12,8 @@ TagManager:
   - ConvoyStart
   - ConvoyFinish
   - ConvoyFinLocation
+  - WalkingTarget
+  - WalkingNPC
   layers:
   - Default
   - TransparentFX
