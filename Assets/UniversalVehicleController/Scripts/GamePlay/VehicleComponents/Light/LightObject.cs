@@ -25,6 +25,7 @@ namespace PG
         MaterialPropertyBlock MaterialBlock;
         Material MaterialForSoftSwitch;
         Animator LightsAnimator;
+        Color BaseColor;
 
         //IDs for accessing properties, so as not to use the string (Optimization).
         int EmissionColorPropertyID;
@@ -53,6 +54,9 @@ namespace PG
                 MaterialForSoftSwitch = OnLightMaterial;
                 Materials[GlassMaterialIndex] = OnLightMaterial;
                 Renderer.materials = Materials;
+                // get base color
+                BaseColor = OnLightMaterial.GetColor(EmissionColorPropertyID);
+                Debug.Log("BaseColor: " + BaseColor);
             }
         }
 
@@ -125,8 +129,8 @@ namespace PG
         IEnumerator SoftSwitch (bool value, bool forceSwitch = false)
         {
             //Calculation of the start and target Intensity glow.
-            Color targetColor = (value? Color.white * Intensity: Color.black);
-            Color startColor = (value? Color.black * Intensity: Color.white);
+            Color targetColor = (value? BaseColor * Intensity: BaseColor);
+            Color startColor = (value? BaseColor : BaseColor * Intensity);
             var speed = value? OnSwitchSpeed: OffSwitchSpeed;
             float timer = 0;
 

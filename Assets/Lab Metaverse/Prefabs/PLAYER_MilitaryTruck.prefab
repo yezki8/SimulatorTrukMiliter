@@ -26314,7 +26314,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 2
+  Intensity: 300
   EnableOnStart: 0
 --- !u!1 &2232914427567728758
 GameObject:
@@ -52814,7 +52814,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 2
+  Intensity: 100
   EnableOnStart: 0
 --- !u!1 &5348353607393241410
 GameObject:
@@ -53238,7 +53238,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 2
+  Intensity: 300
   EnableOnStart: 0
 --- !u!1 &5881850927616045950
 GameObject:
@@ -64223,7 +64223,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 2
+  Intensity: 300
   EnableOnStart: 0
 --- !u!1 &6925502708703640283
 GameObject:
@@ -64333,7 +64333,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 2
+  Intensity: 300
   EnableOnStart: 0
 --- !u!1 &7122475501493742141
 GameObject:
@@ -69851,7 +69851,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 2
+  Intensity: 100
   EnableOnStart: 0
 --- !u!1 &7725961125775253037
 GameObject:
@@ -70448,7 +70448,7 @@ MonoBehaviour:
   SoundShardsType: 1
   CarLightType: 0
   LightGO: {fileID: 7859603761330823447}
-  OnLightMaterial: {fileID: 0}
+  OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -76373,7 +76373,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 2
+  Intensity: 300
   EnableOnStart: 0
 --- !u!1 &9186069403026538055
 GameObject:

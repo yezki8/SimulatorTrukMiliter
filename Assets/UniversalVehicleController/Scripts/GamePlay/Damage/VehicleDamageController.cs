@@ -343,7 +343,7 @@ namespace PG
             Vector3 clampForce = Vector3.ClampMagnitude(damageForce, MaxCollisionMagnitude);                                //Limiting force if force exceeds maximum.
             Vector3 normalizedForce = clampForce.normalized;
 
-            _instructorObstacleController.CheckWindowCrack(damageForce.x);
+            if (_instructorObstacleController) _instructorObstacleController.CheckWindowCrack(damageForce.x);
 
             float forceMagFactor = clampForce.magnitude * DamageFactor * data.MassFactor;                                   //Accept all existing factors.
             float maxDamageRadius = MaxDeformRadiusInMaxMag * (forceMagFactor / MaxCollisionMagnitude);
