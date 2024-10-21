@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using PG;
+using System.Linq;
+using Unity.VisualScripting;
 
 public class MonitorSelection : MonoBehaviour
 {
     [SerializeField] private GameObject _setDisplayPanel;
-    [SerializeField] private Camera FrontViewCamera;
-    [SerializeField] private Camera LeftMirrorCamera;
-    [SerializeField] private Camera RightMirrorCamera;
-    [SerializeField] private Camera RearMirrorCamera;
-    [SerializeField] private Camera MainCamera;
+    [SerializeField] private Camera BigMapCamera;
     [SerializeField] private Canvas InstructorDisplay;
+    [SerializeField] private Canvas FrontViewDisplay;
     [SerializeField] private Canvas LeftMirrorDisplay;
-    [SerializeField] private Canvas RightMirrorDisplay;
-    [SerializeField] private Canvas RearMirrorDisplay;
     [SerializeField] private Canvas DashboardDisplay;
+    [SerializeField] private Canvas RearMirrorDisplay;
+    [SerializeField] private Canvas RightMirrorDisplay;
+    private Dictionary<int, List<Canvas>> monitorStack = new();
     public TMP_Dropdown[] displayDropdowns = new TMP_Dropdown[6];
 
     void Start()
@@ -37,6 +38,21 @@ public class MonitorSelection : MonoBehaviour
         displayDropdowns[5].onValueChanged.AddListener((value) => SetTruckDashboardDisplay(value));
 
         LoadMonitorSetup();
+        
+        for (int i = 0; i < 6; i++)
+        {
+            monitorStack[i] = new();
+        }
+
+        monitorStack[FrontViewDisplay.targetDisplay].Add(FrontViewDisplay);
+        monitorStack[LeftMirrorDisplay.targetDisplay].Add(LeftMirrorDisplay);
+        monitorStack[DashboardDisplay.targetDisplay].Add(DashboardDisplay);
+        monitorStack[RearMirrorDisplay.targetDisplay].Add(RearMirrorDisplay);
+        monitorStack[RightMirrorDisplay.targetDisplay].Add(RightMirrorDisplay);
+
+        InstructorDisplay.sortingOrder = 10;
+
+        UpdateCanvasOrder();
     }
 
     void PopulateMonitorDropdowns()
@@ -75,44 +91,75 @@ public class MonitorSelection : MonoBehaviour
         }
     }
 
-    public void SetFrontViewCamera(int monitorIndex)
+    public void SetInstructorDisplay(int monitorIndex)
     {
-        FrontViewCamera.targetDisplay = monitorIndex;
+        InstructorDisplay.targetDisplay = monitorIndex;
+        BigMapCamera.targetDisplay = monitorIndex;
         Display.displays[monitorIndex].Activate();
     }
 
-    public void SetInstructorDisplay(int monitorIndex)
+    public void SetFrontViewCamera(int monitorIndex)
     {
-        MainCamera.targetDisplay = monitorIndex;
-        InstructorDisplay.targetDisplay = monitorIndex;
+        RemoveDisplayFromList(FrontViewDisplay);
+        monitorStack[monitorIndex].Add(FrontViewDisplay);
+        UpdateCanvasOrder();
+        FrontViewDisplay.targetDisplay = monitorIndex;
         Display.displays[monitorIndex].Activate();
     }
 
     public void SetLeftMirrorDisplay(int monitorIndex)
     {
-        LeftMirrorCamera.targetDisplay = monitorIndex;
+        RemoveDisplayFromList(LeftMirrorDisplay);
+        monitorStack[monitorIndex].Add(LeftMirrorDisplay);
+        UpdateCanvasOrder();
         LeftMirrorDisplay.targetDisplay = monitorIndex;
         Display.displays[monitorIndex].Activate();
     }
-
+    public void SetTruckDashboardDisplay(int monitorIndex)
+    {
+        RemoveDisplayFromList(DashboardDisplay);
+        monitorStack[monitorIndex].Add(DashboardDisplay);
+        UpdateCanvasOrder();
+        DashboardDisplay.targetDisplay = monitorIndex;
+        Display.displays[monitorIndex].Activate();
+    }
+    public void SetRearMirrorDisplay(int monitorIndex)
+    {
+        RemoveDisplayFromList(RearMirrorDisplay);
+        monitorStack[monitorIndex].Add(RearMirrorDisplay);
+        UpdateCanvasOrder();
+        RearMirrorDisplay.targetDisplay = monitorIndex;
+        Display.displays[monitorIndex].Activate();
+    }
     public void SetRightMirrorDisplay(int monitorIndex)
     {
-        RightMirrorCamera.targetDisplay = monitorIndex;
+        RemoveDisplayFromList(RightMirrorDisplay);
+        monitorStack[monitorIndex].Add(RightMirrorDisplay);
+        UpdateCanvasOrder();
         RightMirrorDisplay.targetDisplay = monitorIndex;
         Display.displays[monitorIndex].Activate();
     }
 
-    public void SetRearMirrorDisplay(int monitorIndex)
+    void UpdateCanvasOrder()
     {
-        RearMirrorCamera.targetDisplay = monitorIndex;
-        RearMirrorDisplay.targetDisplay = monitorIndex;
-        Display.displays[monitorIndex].Activate();
+        for (int i = 0; i < 6; i++)
+        {
+            if (monitorStack[i].Count > 1)
+            {
+                for (int j = 1; j < monitorStack[i].Count; j++)
+                {
+                    monitorStack[i][j].sortingOrder = monitorStack[i][j-1].sortingOrder + 1;
+                }
+            }
+        }
     }
 
-    public void SetTruckDashboardDisplay(int monitorIndex)
+    void RemoveDisplayFromList(Canvas display)
     {
-        DashboardDisplay.targetDisplay = monitorIndex;
-        Display.displays[monitorIndex].Activate();
+        for (int i = 0; i < 6; i++)
+        {
+            monitorStack[i].Remove(display);
+        }
     }
 
     public void OpenDisplaySettingPanel()
@@ -124,5 +171,11 @@ public class MonitorSelection : MonoBehaviour
     {
         _setDisplayPanel.SetActive(false);
         SaveMonitorSetup();
+    }
+
+    public void CancelDisplaySettingPanel()
+    {
+        _setDisplayPanel.SetActive(false);
+        LoadMonitorSetup();
     }
 }
