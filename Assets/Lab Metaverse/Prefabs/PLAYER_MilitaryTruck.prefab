@@ -570,31 +570,31 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0.2230016
       - serializedVersion: 3
-        time: 0.14149405
-        value: 0.33667085
-        inSlope: 1.0095516
-        outSlope: 0.83240765
-        tangentMode: 1
+        time: 0.15
+        value: 0.6
+        inSlope: 0.5234097
+        outSlope: 0.5234097
+        tangentMode: 0
         weightedMode: 3
-        inWeight: 0.63976663
-        outWeight: 0.3720943
+        inWeight: 1
+        outWeight: 0.43137252
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0.77265525
-        outSlope: 0.77265525
-        tangentMode: 34
+        inSlope: 0.5375063
+        outSlope: 0.5375063
+        tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.19449908
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxRPM: 2800
     MinRPM: 400
-    RPMEngineToRPMWheelsFast: 2
+    RPMEngineToRPMWheelsFast: 1.6
     RPMEngineToRPMWheelsSlow: 1
-    StallRPM: 420
+    StallRPM: 440
     SpeedLimit: 0
     CutOffRPM: 2750
     TargetCutOffRPM: 2650
@@ -608,7 +608,7 @@ MonoBehaviour:
     BoostAdditionalPower: 1
     ProbabilityBackfire: 0.2
     RPMToNextGear: 2500
-    RPMToPrevGearDiff: 450
+    RPMToPrevGearDiff: 550
   EngineDamageableObject: {fileID: 8188809129965838007}
   Steer:
     MaxSteerAngle: 45
@@ -742,7 +742,7 @@ MonoBehaviour:
     ChangeDownGearTime: 0.01
     ChangeClutchedGearTime: 0.01
     AutomaticGearBoxTime: 1
-    AutomaticGearBox: 1
+    AutomaticGearBox: 0
     GearsRatio:
     - 7.814
     - 4.506
