@@ -252,7 +252,7 @@ namespace UnityEngine.InputSystem
                     ""id"": ""48d7ad8b-e87c-4e4b-b830-b815ca57c97e"",
                     ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/rz"",
                     ""interactions"": """",
-                    ""processors"": ""Invert,Normalize(min=-1,max=1,zero=-1)"",
+                    ""processors"": ""Invert,Normalize(min=-1,max=1,zero=-1),AxisDeadzone(min=0.125,max=0.875)"",
                     ""groups"": """",
                     ""action"": ""BrakeReverse"",
                     ""isComposite"": false,
