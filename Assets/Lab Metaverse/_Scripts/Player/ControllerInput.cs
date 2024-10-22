@@ -54,9 +54,15 @@ namespace PG
 
         public string SwitchLightsButton = "SwitchLights";
         public string SwitchFarLightsButton = "SwitchFarLights";
+        public string SwitchDimLightsButton = "SwitchDimLights";
         public string SwitchLeftTurnLightsButton=  "SwitchLeftTurnLights";
         public string SwitchRightTurnLightsButton = "SwitchRightTurnLights";
         public string SwitchAlarmButton = "SwitchAlarm";
+
+        public string WiperSlowButton = "WiperSlow";
+        public string WiperFastButton = "WiperFast";
+        public string WiperOnceButton = "WiperOff";
+
         // public string ConnectTrailerButton = "ConnectTrailer";
         public string ResetCarButton = "ResetCar";
         public string RestoreCarButton = "RestoreCar";
@@ -145,9 +151,15 @@ namespace PG
             // car lights
             controls.Player.SwitchLights.performed += ctx => SwitchLights();
             controls.Player.SwitchFarLights.performed += ctx => SwitchFarLights();
+            controls.Player.SwitchDimLights.performed += ctx => SwitchDimLights();
             controls.Player.SwitchLeftTurnLights.performed += ctx => SwitchLeftTurnSignal();
             controls.Player.SwitchRightTurnLights.performed += ctx => SwitchRightTurnSignal();
             controls.Player.SwitchAlarm.performed += ctx => SwitchAlarm();
+
+            // wipers
+            // controls.Player.WiperSlow.performed += ctx => CarLighting.WipersEnable(WipersStates.Slow);
+            // controls.Player.WiperFast.performed += ctx => CarLighting.WipersEnable(WipersStates.Fast);
+            // controls.Player.WiperOnce.performed += ctx => CarLighting.WipersEnable(WipersStates.Once);
 
             // car actions
             controls.Player.ConnectTrailer.performed += ctx => ConnectTrailer();
@@ -280,6 +292,10 @@ namespace PG
         public void SwitchFarLights ()
         {
             CarLighting.SwitchFarLights();
+        }
+        public void SwitchDimLights()
+        {
+            CarLighting.SwitchDimLights();
         }
 
         public void SwitchLeftTurnSignal ()

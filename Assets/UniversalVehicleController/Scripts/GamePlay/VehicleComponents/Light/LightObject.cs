@@ -13,6 +13,12 @@ namespace PG
         public Light LightGO;
         public Material OnLightMaterial;                //Material with glow, used for soft and hard switching.
 
+        [Header("Headlight settings")]
+        [SerializeField] private bool EnableLight = true;
+        // light direction
+        [SerializeField] private Vector3 MainLightDirection = Vector3.zero;
+        [SerializeField] private Vector3 FarLightDirection = Vector3.zero;
+
         [Header("Soft Switch settings")]
         public bool IsSoftSwitch;
         public float OnSwitchSpeed = 10f;
@@ -47,6 +53,16 @@ namespace PG
             if (!IsInited)
             {
                 InitDamageObject ();
+                // set lightGO to current direction if its zero
+                if (MainLightDirection == Vector3.zero)
+                {
+                    MainLightDirection = transform.localEulerAngles;
+                }
+                // assume same direction as main light if far light direction is zero
+                if (FarLightDirection == Vector3.zero)
+                {
+                    FarLightDirection = transform.localEulerAngles;
+                }
             }
 
             if (Renderer)
@@ -56,7 +72,6 @@ namespace PG
                 Renderer.materials = Materials;
                 // get base color
                 BaseColor = OnLightMaterial.GetColor(EmissionColorPropertyID);
-                Debug.Log("BaseColor: " + BaseColor);
             }
         }
 
@@ -88,7 +103,7 @@ namespace PG
         /// <summary>
         /// Switch with parameters.
         /// </summary>
-        public void Switch (bool value, bool forceSwitch = false)
+        public void Switch (bool value, bool forceSwitch = false, HeadlightsType type = HeadlightsType.Main)
         {
             value &= !IsDead;
 
@@ -110,12 +125,12 @@ namespace PG
 
                     if (MaterialForSoftSwitch != null)
                     {
-                        SoftSwitchCoroutine = StartCoroutine (SoftSwitch (LightIsOn, forceSwitch));
+                        SoftSwitchCoroutine = StartCoroutine (SoftSwitch (LightIsOn, forceSwitch, type));
                     }
                 }
                 else if (!IsDead)
                 {
-                    HardSwitch ();
+                    HardSwitch (type);
                 }
             }
 
@@ -126,7 +141,7 @@ namespace PG
             }
         }
 
-        IEnumerator SoftSwitch (bool value, bool forceSwitch = false)
+        IEnumerator SoftSwitch (bool value, bool forceSwitch = false, HeadlightsType type = HeadlightsType.Main)
         {
             //Calculation of the start and target Intensity glow.
             Color targetColor = (value? BaseColor * Intensity: BaseColor);
@@ -151,8 +166,17 @@ namespace PG
                 }
             }
 
-            if (value && LightGO)
+            if (value && LightGO && type != HeadlightsType.Dim)
             {
+                // set direction
+                if (type == HeadlightsType.Main)
+                {
+                    LightGO.transform.localEulerAngles = MainLightDirection;
+                }
+                else
+                {
+                    LightGO.transform.localEulerAngles = FarLightDirection;
+                }
                 LightGO.SetActive (value);
             }
 
@@ -166,7 +190,7 @@ namespace PG
         /// <summary>
         /// Just material change, switching on/off occurs in one frame.
         /// </summary>
-        void HardSwitch ()
+        void HardSwitch (HeadlightsType type = HeadlightsType.Main)
         {
             if (LightIsOn)
             {
@@ -177,8 +201,17 @@ namespace PG
                 Materials[GlassMaterialIndex] = DefaultGlassMaterial;
             }
 
-            if (LightGO)
+            if (LightGO && type != HeadlightsType.Dim)
             {
+                // set direction
+                if (type == HeadlightsType.Main)
+                {
+                    LightGO.transform.eulerAngles = MainLightDirection;
+                }
+                else
+                {
+                    LightGO.transform.eulerAngles = FarLightDirection;
+                }
                 LightGO.SetActive (LightIsOn);
             }
 

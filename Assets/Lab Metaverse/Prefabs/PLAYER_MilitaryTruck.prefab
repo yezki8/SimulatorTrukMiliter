@@ -771,6 +771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TurnsSwitchHalfRepeatTime: 0.5
   MainLightsIsOn: 0
+  FarLightsIsOn: 0
 --- !u!114 &6426317477010373061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26311,6 +26312,9 @@ MonoBehaviour:
   CarLightType: 3
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  FarLightDirection: {x: 0, y: 0, z: 0}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -52811,6 +52815,9 @@ MonoBehaviour:
   CarLightType: 1
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 9ea9d7da4172ac247ab479cd6b56863c, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  FarLightDirection: {x: 0, y: 0, z: 0}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -53235,6 +53242,9 @@ MonoBehaviour:
   CarLightType: 2
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  FarLightDirection: {x: 0, y: 0, z: 0}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -63840,7 +63850,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6725687785822881544}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.8183724, y: 0.035730943, z: 0.025019094, w: 0.5730304}
+  m_LocalRotation: {x: 0.8388845, y: 0.042104904, z: 0.031465847, w: 0.54176563}
   m_LocalPosition: {x: 0.00759, y: -0.02012, z: 0.00971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -63861,7 +63871,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2794.8787
   m_Range: 100
-  m_SpotAngle: 78.89282
+  m_SpotAngle: 50
   m_InnerSpotAngle: 49.941277
   m_CookieSize: 10
   m_Shadows:
@@ -64220,6 +64230,9 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 2678787956209623856}
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 65, y: 193.466, z: 194.349}
+  FarLightDirection: {x: 80, y: 193.466, z: 194.349}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -64330,6 +64343,9 @@ MonoBehaviour:
   CarLightType: 3
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  FarLightDirection: {x: 0, y: 0, z: 0}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -69848,6 +69864,9 @@ MonoBehaviour:
   CarLightType: 4
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  FarLightDirection: {x: 0, y: 0, z: 0}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -70449,6 +70468,9 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 7859603761330823447}
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 65, y: 166.534, z: 165.651}
+  FarLightDirection: {x: 80, y: 166.534, z: 165.651}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -75928,7 +75950,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8854011496489930718}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.8183724, y: -0.035730943, z: -0.025019094, w: 0.5730304}
+  m_LocalRotation: {x: 0.8388845, y: -0.042104904, z: -0.031465847, w: 0.54176563}
   m_LocalPosition: {x: -0.0077399686, y: -0.019639976, z: 0.009580008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -75949,7 +75971,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2794.8787
   m_Range: 100
-  m_SpotAngle: 78.89282
+  m_SpotAngle: 50
   m_InnerSpotAngle: 49.941277
   m_CookieSize: 10
   m_Shadows:
@@ -76224,6 +76246,9 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: cfd59c905e163124fb2def0c35d28cd8, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  FarLightDirection: {x: 0, y: 0, z: 0}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -76370,6 +76395,9 @@ MonoBehaviour:
   CarLightType: 2
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  FarLightDirection: {x: 0, y: 0, z: 0}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
