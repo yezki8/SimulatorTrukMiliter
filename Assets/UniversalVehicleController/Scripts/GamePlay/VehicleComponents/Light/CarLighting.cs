@@ -18,6 +18,7 @@ namespace PG
         //All light is searched for in child elements, 
         //depending on the set tag, the light gets into the desired list.
         List<LightObject> MainLights = new List<LightObject>();
+        List<LightObject> FarLights = new List<LightObject>();
         List<LightObject> LeftTurnLights = new List<LightObject>();
         List<LightObject> RightTurnLights = new List<LightObject>();
         List<LightObject> BrakeLights = new List<LightObject>();
@@ -49,6 +50,7 @@ namespace PG
 
         bool InBrake;
         public bool MainLightsIsOn;
+        public bool FarLightsIsOn;
         Coroutine TurnsCotoutine;
         List<LightObject> ActiveTurns = new List<LightObject>();
         TurnsStates CurrentTurnsState = TurnsStates.Off;
@@ -66,19 +68,23 @@ namespace PG
                 switch (l.CarLightType)
                 {
                     case CarLightType.Main:
-                    MainLights.Add (l); break;
+                        MainLights.Add (l); 
+                        break;
+                    case CarLightType.Far:
+                        FarLights.Add(l);
+                        break;
                     case CarLightType.TurnLeft:
-                    LeftTurnLights.Add (l);
-                    break;
+                        LeftTurnLights.Add (l);
+                        break;
                     case CarLightType.TurnRight:
-                    RightTurnLights.Add (l);
-                    break;
+                        RightTurnLights.Add (l);
+                        break;
                     case CarLightType.Brake:
-                    BrakeLights.Add (l);
-                    break;
+                        BrakeLights.Add (l);
+                        break;
                     case CarLightType.Reverse:
-                    ReverseLights.Add (l);
-                    break;
+                        ReverseLights.Add (l);
+                        break;
 
                 }
             }
@@ -87,6 +93,7 @@ namespace PG
 
             //Initializing soft light switching.
             InitSoftSwitches (MainLights);
+            InitSoftSwitches (FarLights);
             InitSoftSwitches (ReverseLights);
             InitSoftSwitches (BrakeLights);
             InitSoftSwitches (LeftTurnLights);
@@ -125,6 +132,7 @@ namespace PG
         public void SwithOffAllLights ()
         {
             SetActiveMainLights (false);
+            SetActiveFarLights(false);
             SetActiveBrake (false);
             SetActiveReverse (false);
             TurnsEnable (TurnsStates.Off);
@@ -174,6 +182,18 @@ namespace PG
             }
         }
 
+        /// <summary>
+        /// Far light switch.
+        /// </summary>
+        public void SwitchFarLights()
+        {
+            if (MainLights.Count > 0)
+            {
+                FarLightsIsOn = !FarLightsIsOn;
+                SetActiveFarLights(FarLightsIsOn);
+            }
+        }
+
         public void SetActiveMainLights (bool value)
         {
             MainLights.ForEach (l => l.Switch (value));
@@ -184,6 +204,12 @@ namespace PG
             {
                 AdditionalLighting.SetActiveMainLights (value);
             }
+        }
+        public void SetActiveFarLights(bool value)
+        {
+            FarLights.ForEach(l => l.Switch(value));
+
+            OnSetActiveLight.SafeInvoke(CarLightType.Far, value);
         }
 
         public void SetActiveBrake (bool value)
@@ -300,6 +326,7 @@ namespace PG
     public enum CarLightType
     {
         Main,
+        Far,
         Brake,
         TurnLeft,
         TurnRight,

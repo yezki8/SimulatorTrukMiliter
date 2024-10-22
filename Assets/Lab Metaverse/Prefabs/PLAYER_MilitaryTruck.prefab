@@ -607,7 +607,7 @@ MonoBehaviour:
     BoostAmount: 2
     BoostAdditionalPower: 1
     ProbabilityBackfire: 0.2
-    RPMToNextGear: 2500
+    RPMToNextGear: 2600
     RPMToPrevGearDiff: 550
   EngineDamageableObject: {fileID: 8188809129965838007}
   Steer:

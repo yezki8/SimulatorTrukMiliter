@@ -53,6 +53,7 @@ namespace PG
         public string GearRevButton = "GearReverse";
 
         public string SwitchLightsButton = "SwitchLights";
+        public string SwitchFarLightsButton = "SwitchFarLights";
         public string SwitchLeftTurnLightsButton=  "SwitchLeftTurnLights";
         public string SwitchRightTurnLightsButton = "SwitchRightTurnLights";
         public string SwitchAlarmButton = "SwitchAlarm";
@@ -143,6 +144,7 @@ namespace PG
 
             // car lights
             controls.Player.SwitchLights.performed += ctx => SwitchLights();
+            controls.Player.SwitchFarLights.performed += ctx => SwitchFarLights();
             controls.Player.SwitchLeftTurnLights.performed += ctx => SwitchLeftTurnSignal();
             controls.Player.SwitchRightTurnLights.performed += ctx => SwitchRightTurnSignal();
             controls.Player.SwitchAlarm.performed += ctx => SwitchAlarm();
@@ -274,6 +276,10 @@ namespace PG
         public void SwitchLights ()
         {
             CarLighting.SwitchMainLights();
+        }
+        public void SwitchFarLights ()
+        {
+            CarLighting.SwitchFarLights();
         }
 
         public void SwitchLeftTurnSignal ()
