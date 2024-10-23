@@ -320,7 +320,6 @@ namespace PG
     public enum CarLightType
     {
         Main,
-        Far,
         Brake,
         TurnLeft,
         TurnRight,
