@@ -90,7 +90,7 @@ public class MonitorSelection : MonoBehaviour
 
     public void SetLeftMirrorDisplay(int monitorIndex)
     {
-        LeftMirrorCamera.targetDisplay = monitorIndex;
+        // LeftMirrorCamera.targetDisplay = monitorIndex;
         if (LeftMirrorDisplay != null)
         {
             LeftMirrorDisplay.targetDisplay = monitorIndex;
@@ -100,7 +100,7 @@ public class MonitorSelection : MonoBehaviour
 
     public void SetRightMirrorDisplay(int monitorIndex)
     {
-        RightMirrorCamera.targetDisplay = monitorIndex;
+        // RightMirrorCamera.targetDisplay = monitorIndex;
         if (RightMirrorDisplay != null)
         {
             RightMirrorDisplay.targetDisplay = monitorIndex;
@@ -110,7 +110,7 @@ public class MonitorSelection : MonoBehaviour
 
     public void SetRearMirrorDisplay(int monitorIndex)
     {
-        RearMirrorCamera.targetDisplay = monitorIndex;
+        // RearMirrorCamera.targetDisplay = monitorIndex;
         if (RearMirrorDisplay != null)
         {
             RearMirrorDisplay.targetDisplay = monitorIndex;
