@@ -91,21 +91,30 @@ public class MonitorSelection : MonoBehaviour
     public void SetLeftMirrorDisplay(int monitorIndex)
     {
         LeftMirrorCamera.targetDisplay = monitorIndex;
-        LeftMirrorDisplay.targetDisplay = monitorIndex;
+        if (LeftMirrorDisplay != null)
+        {
+            LeftMirrorDisplay.targetDisplay = monitorIndex;
+        }
         Display.displays[monitorIndex].Activate();
     }
 
     public void SetRightMirrorDisplay(int monitorIndex)
     {
         RightMirrorCamera.targetDisplay = monitorIndex;
-        RightMirrorDisplay.targetDisplay = monitorIndex;
+        if (RightMirrorDisplay != null)
+        {
+            RightMirrorDisplay.targetDisplay = monitorIndex;
+        }
         Display.displays[monitorIndex].Activate();
     }
 
     public void SetRearMirrorDisplay(int monitorIndex)
     {
         RearMirrorCamera.targetDisplay = monitorIndex;
-        RearMirrorDisplay.targetDisplay = monitorIndex;
+        if (RearMirrorDisplay != null)
+        {
+            RearMirrorDisplay.targetDisplay = monitorIndex;
+        }
         Display.displays[monitorIndex].Activate();
     }
 

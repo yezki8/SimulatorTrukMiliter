@@ -62,7 +62,7 @@ namespace PG
 
             LightsAnimator = GetComponent<Animator> ();
 
-            EmissionColorPropertyID = Shader.PropertyToID ("_EmissionColor");
+            EmissionColorPropertyID = Shader.PropertyToID ("_EmissiveColor");
             AnimatorLightIsOnID = Animator.StringToHash ("LightIsOn");
             MaterialBlock = new MaterialPropertyBlock ();
         }

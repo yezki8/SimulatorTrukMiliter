@@ -1,24 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 
+// heavy refactor needed
 public class WeatherSystem : MonoBehaviour
 {
     public enum WeatherType
     {
-        Sunny,
-        Cloudy,
+        Clear,
+        LightCloud,
+        Overcast,
         Rainy,
-        // Snowy,
+        ThunderStorm
     }
     public WeatherType CurrentWeather { get; private set; }
     // player to get the player's position
     [SerializeField] private GameObject _player;
 
+    private VolumeProfile _volumeProfile;
+    private Fog _fog;
+    private ParticleSystem _rain;
+
     [Header("Weather Related Object")]
+    [SerializeField] private Volume _globalVolume;
     [SerializeField] private GameObject _rainSpawner;
-    [SerializeField] private GameObject _sunLight;
+    [SerializeField] private Light _sunLight;
+    [SerializeField] private Light _moonLight;
 
     public UnityEvent OnWeatherChange;
 
@@ -47,9 +58,20 @@ public class WeatherSystem : MonoBehaviour
     // manage rain spawner activation
     private void HandleRainSpawner()
     {
-        if (CurrentWeather == WeatherType.Rainy)
+        if (CurrentWeather == WeatherType.Rainy || CurrentWeather == WeatherType.ThunderStorm)
         {
             _rainSpawner.SetActive(true);
+            var newEmmision = _rain.emission;
+            // set emmision rate
+            switch (CurrentWeather)
+            {
+                case WeatherType.Rainy:
+                    newEmmision.rateOverTime = 600;
+                    break;
+                case WeatherType.ThunderStorm:
+                    newEmmision.rateOverTime = 1200;
+                    break;
+            }
         }
         else
         {
@@ -58,30 +80,65 @@ public class WeatherSystem : MonoBehaviour
     }
 
     // manage lighting based on weather
-    private void HandleSkyLighting()
+    private void HandleSky()
     {
+        // tryget fog
+        _volumeProfile = _globalVolume.sharedProfile;
+
+        if (!_volumeProfile.TryGet<Fog>(out var fog))
+        {
+            fog = _volumeProfile.Add<Fog>(false);
+        }
+
+        // tryget cloud
+        if (!_volumeProfile.TryGet<VolumetricClouds>(out var cloud))
+        {
+            cloud = _volumeProfile.Add<VolumetricClouds>();
+        }
+
+        fog.enabled.overrideState = true;
+        fog.meanFreePath.overrideState = true;
+
         // change directional light color and intensity
         switch (CurrentWeather)
         {
-            case WeatherType.Sunny:
-                _sunLight.GetComponent<Light>().intensity = 1.0f;
-                _sunLight.GetComponent<Light>().color = new Color(1.0f, 0.9f, 0.8f);
+            case WeatherType.Clear:
+                _sunLight.bounceIntensity = 1;
+                // disable fog
+                fog.enabled.value = false;
+                fog.meanFreePath.value = 1000;
+                cloud.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
                 break;
-            case WeatherType.Cloudy:
-                _sunLight.GetComponent<Light>().intensity = 0.8f;
-                _sunLight.GetComponent<Light>().color = new Color(0.9f, 0.9f, 0.8f);
+            case WeatherType.LightCloud:
+                _sunLight.bounceIntensity = 0.95f;
+                fog.enabled.value = false;
+                fog.meanFreePath.value = 1000;
+                cloud.cloudPreset = VolumetricClouds.CloudPresets.Cloudy;
+                break;
+            case WeatherType.Overcast:
+                _sunLight.bounceIntensity = 0.95f;
+                fog.enabled.value = false;
+                fog.meanFreePath.value = 1000;
+                cloud.cloudPreset = VolumetricClouds.CloudPresets.Overcast;
                 break;
             case WeatherType.Rainy:
-                _sunLight.GetComponent<Light>().intensity = 0.8f;
-                _sunLight.GetComponent<Light>().color = new Color(0.8f, 0.8f, 0.8f);
+                _sunLight.bounceIntensity = 0.9f;
+                fog.enabled.value = true;
+                fog.meanFreePath.value = 600;
+                cloud.cloudPreset = VolumetricClouds.CloudPresets.Overcast;
                 break;
-            // case WeatherType.Snowy:
-            //     _sunLight.SetActive(false);
-            //     break;
+            case WeatherType.ThunderStorm:
+                _sunLight.bounceIntensity = 0.9f;
+                fog.enabled.value = true;
+                fog.meanFreePath.value = 80;
+                cloud.cloudPreset = VolumetricClouds.CloudPresets.Stormy;
+                break;
             default:
-                // default to sunny
-                _sunLight.GetComponent<Light>().intensity = 1.0f;
-                _sunLight.GetComponent<Light>().color = new Color(1.0f, 0.9f, 0.8f);
+                // default to clear
+                _sunLight.bounceIntensity = 1;
+                fog.enabled.value = false;
+                fog.meanFreePath.value = 1000;
+                cloud.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
                 break;
         }
     }
@@ -96,23 +153,26 @@ public class WeatherSystem : MonoBehaviour
         switch (weatherState)
         {
             case 0:
-                CurrentWeather = WeatherType.Sunny;
+                CurrentWeather = WeatherType.Clear;
                 break;
             case 1:
-                CurrentWeather = WeatherType.Cloudy;
+                CurrentWeather = WeatherType.LightCloud;
                 break;
             case 2:
+                CurrentWeather = WeatherType.Overcast;
+                break;
+            case 3:
                 CurrentWeather = WeatherType.Rainy;
                 break;
-            // case 3:
-            //     _currentWeather = WeatherType.Snowy;
-            //     break;
+            case 4:
+                CurrentWeather = WeatherType.ThunderStorm;
+                break;
             default:
-                CurrentWeather = WeatherType.Sunny;
+                CurrentWeather = WeatherType.Clear;
                 break;
         }
         HandleRainSpawner();
-        HandleSkyLighting();
+        HandleSky();
         Debug.Log("Weather set to " + CurrentWeather);
 
         OnWeatherChange?.Invoke();
@@ -123,18 +183,21 @@ public class WeatherSystem : MonoBehaviour
     {
         switch (CurrentWeather)
         {
-            case WeatherType.Sunny:
+            case WeatherType.Clear:
                 setWeather(1);
                 break;
-            case WeatherType.Cloudy:
+            case WeatherType.LightCloud:
                 setWeather(2);
                 break;
+            case WeatherType.Overcast:
+                setWeather(3);
+                break;
             case WeatherType.Rainy:
+                setWeather(4);
+                break;
+            case WeatherType.ThunderStorm:
                 setWeather(0);
                 break;
-            // case WeatherType.Snowy:
-            //     setWeather(0);
-            //     break;
             default:
                 setWeather(0);
                 break;
@@ -146,6 +209,7 @@ public class WeatherSystem : MonoBehaviour
     {
         // instantiate rain spawner prefab
         _rainSpawner = Instantiate(_rainSpawner);
+        _rain = _rainSpawner.GetComponent<ParticleSystem>();
         setWeather(0);
     }
 
