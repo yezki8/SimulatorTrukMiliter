@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CheckpointController : MonoBehaviour
 {
@@ -44,6 +45,8 @@ public class CheckpointController : MonoBehaviour
     [SerializeField] private List<CheckpointController> _checkpointQuestList;
     private IconHandler iconHandler;
 
+    public UnityEvent OnActivateCheckpoint;
+
     void Awake()
     {
         iconHandler = FindObjectOfType<IconHandler>();
@@ -57,9 +60,10 @@ public class CheckpointController : MonoBehaviour
     {
         IsActive = status;
         
-        if (status == true)
+        if (status == true && !HasActivatedOnce)
         {
             HasActivatedOnce = true;        //once it's true, it will never be false
+            OnActivateCheckpoint?.Invoke();
         }
         SetCheckpointVisual(!status);
     }
