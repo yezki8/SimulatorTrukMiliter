@@ -9,6 +9,7 @@ using System;
 
 
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -62,6 +63,7 @@ namespace PG
         public string WiperSlowButton = "WiperSlow";
         public string WiperFastButton = "WiperFast";
         public string WiperOnceButton = "WiperOff";
+        public string EngineOnButton = "EngineOn";
 
         // public string ConnectTrailerButton = "ConnectTrailer";
         public string ResetCarButton = "ResetCar";
@@ -155,6 +157,9 @@ namespace PG
             controls.Player.SwitchLeftTurnLights.performed += ctx => SwitchLeftTurnSignal();
             controls.Player.SwitchRightTurnLights.performed += ctx => SwitchRightTurnSignal();
             controls.Player.SwitchAlarm.performed += ctx => SwitchAlarm();
+
+            controls.Player.EngineOn.performed += ctx => EngineOn();
+            controls.Player.EngineOn.canceled += ctx => EngineOff();
 
             // wipers
             // controls.Player.WiperSlow.performed += ctx => CarLighting.WipersEnable(WipersStates.Slow);
@@ -311,6 +316,22 @@ namespace PG
         public void SwitchAlarm ()
         {
             CarLighting.TurnsEnable(TurnsStates.Alarm);
+        }
+
+        public void EngineOn()
+        {
+            if (Car)
+            {
+                Car.StartEngine();
+            }
+        }
+        public void EngineOff()   
+        {
+            // only used when abruptly stopping engine start
+            if (Car)
+            {
+                Car.IsStartingEngine = false;
+            }
         }
 
         public void ConnectTrailer ()

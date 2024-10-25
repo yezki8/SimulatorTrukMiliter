@@ -690,8 +690,8 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0213aa12-e18c-4256-863a-b8938f4eac60"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/up"",
+                    ""id"": ""58f46324-f043-4333-8788-f0f3a6e3da3a"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button7"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -795,17 +795,6 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""58f46324-f043-4333-8788-f0f3a6e3da3a"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button7"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchDimLights"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
