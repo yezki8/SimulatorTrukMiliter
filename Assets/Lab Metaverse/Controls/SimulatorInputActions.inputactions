@@ -256,6 +256,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Horn",
+                    "type": "Button",
+                    "id": "d109056f-d7c4-49ee-b56a-a7043ab79188",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -614,7 +623,7 @@
                 {
                     "name": "",
                     "id": "5deef7a9-198a-46df-8788-ec5c57c193bc",
-                    "path": "",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -680,7 +689,7 @@
                 {
                     "name": "",
                     "id": "ee4ac876-c6d7-4524-b36c-49de8fad838a",
-                    "path": "",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button11",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -768,11 +777,22 @@
                 {
                     "name": "",
                     "id": "58f46324-f043-4333-8788-f0f3a6e3da3a",
-                    "path": "",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button7",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "SwitchDimLights",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6e0a6e8-6e25-4df4-bb50-ac586a502c96",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
