@@ -17,6 +17,10 @@ public class GeneralNPCManager : MonoBehaviour
             {
                 pedestrian.ResetPedestrian();
             }
+            foreach (var vehicle in ListOfVehicles)
+            {
+                vehicle.ResetNPCVehicle();
+            }
         }
 
         public void ActivateGroup()
@@ -24,6 +28,10 @@ public class GeneralNPCManager : MonoBehaviour
             foreach (var pedestrian in ListOfPedestrian)
             {
                 pedestrian.ActivatePedestrian();
+            }
+            foreach (var vehicle in ListOfVehicles)
+            {
+                vehicle.EnableNPCVehicles();
             }
         }
     }
