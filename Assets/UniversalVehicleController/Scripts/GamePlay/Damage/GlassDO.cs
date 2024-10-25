@@ -27,7 +27,11 @@ namespace PG
             if (!IsInited)
             {
                 base.InitDamageObject ();
-                ShardsParticles.SetActive (false);
+                // activate if only SharedsParticles is not null
+                if (ShardsParticles)
+                {
+                    ShardsParticles.SetActive(false);
+                }
                 Renderer = GetComponent<Renderer> ();
                 var car = GetComponentInParent<CarController>();
                 if (car)

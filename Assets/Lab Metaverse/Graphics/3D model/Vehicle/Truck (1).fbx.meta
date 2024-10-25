@@ -3,7 +3,27 @@ guid: 0e10c57793646ec4d81d953a2592d6f3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OrangeLight
+    second: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedLight
+    second: {fileID: 2100000, guid: 9ea9d7da4172ac247ab479cd6b56863c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WhiteLight
+    second: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: YellowLight
+    second: {fileID: 2100000, guid: cfd59c905e163124fb2def0c35d28cd8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
