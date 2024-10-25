@@ -12,6 +12,8 @@ TagManager:
   - ConvoyStart
   - ConvoyFinish
   - ConvoyFinLocation
+  - WalkingTarget
+  - WalkingNPC
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - BigMap
   - Terrain
   - ConvoyVehicle
-  - 
+  - NavMeshSurvace
   - 
   - 
   - 
