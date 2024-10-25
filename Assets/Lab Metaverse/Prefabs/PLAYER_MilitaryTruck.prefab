@@ -26425,7 +26425,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2464353924061129950}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.008147124, y: 0.9717776, z: -0.03393522, w: -0.23330316}
+  m_LocalRotation: {x: -0.0030416925, y: 0.9955878, z: -0.03476669, w: -0.08710269}
   m_LocalPosition: {x: -1.34, y: 1.946, z: 1.752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -26465,7 +26465,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 100
-  field of view: 70.1545
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -64231,7 +64231,7 @@ MonoBehaviour:
   LightGO: {fileID: 2678787956209623856}
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
   EnableLight: 1
-  MainLightDirection: {x: 65, y: 193.466, z: 194.349}
+  MainLightDirection: {x: 70, y: 193.466, z: 194.349}
   FarLightDirection: {x: 80, y: 193.466, z: 194.349}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
@@ -70469,7 +70469,7 @@ MonoBehaviour:
   LightGO: {fileID: 7859603761330823447}
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
   EnableLight: 1
-  MainLightDirection: {x: 65, y: 166.534, z: 165.651}
+  MainLightDirection: {x: 70, y: 166.534, z: 165.651}
   FarLightDirection: {x: 80, y: 166.534, z: 165.651}
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
@@ -70543,7 +70543,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 100
-  field of view: 70.1545
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
