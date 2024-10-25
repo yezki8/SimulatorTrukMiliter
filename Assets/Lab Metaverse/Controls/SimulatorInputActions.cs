@@ -724,7 +724,7 @@ namespace UnityEngine.InputSystem
                 {
                     ""name"": """",
                     ""id"": ""8449f293-4c71-4ac9-9f57-45dd00dced24"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/left"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button12"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -746,7 +746,7 @@ namespace UnityEngine.InputSystem
                 {
                     ""name"": """",
                     ""id"": ""a96507dd-ac09-448e-8801-975aed0d1bf2"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/right"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button6"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
