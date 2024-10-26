@@ -37,19 +37,35 @@ public class GeneralNPCManager : MonoBehaviour
     }
     public List<NPCGroup> GroupOfNPCs;
 
-    public void ResetGroups()
+    public void ResetAllGroups()
     {
-        foreach(var npcGroup in GroupOfNPCs)
+        foreach (var npcGroup in GroupOfNPCs)
         {
             npcGroup.ResetGroup();
         }
     }
 
-    public void ActivateGroup()
+    public void ResetGroups(string groupName)
+    {
+        foreach(var npcGroup in GroupOfNPCs)
+        {
+            if (npcGroup.GroupName.Contains(groupName))
+            {
+                npcGroup.ResetGroup();
+                break;
+            }
+        }
+    }
+
+    public void ActivateGroup(string groupName)
     {
         foreach (var npcGroup in GroupOfNPCs)
         {
-            npcGroup.ActivateGroup();
+            if (npcGroup.GroupName.Contains(groupName))
+            {
+                npcGroup.ActivateGroup();
+                break;
+            }
         }
     }
 }
