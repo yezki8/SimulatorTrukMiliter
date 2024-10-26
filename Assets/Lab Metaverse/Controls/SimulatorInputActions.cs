@@ -30,33 +30,6 @@ namespace UnityEngine.InputSystem
             ""id"": ""50d5c611-19f8-4549-8edd-fbeb337f64ea"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""49c94694-90be-4011-930d-9aa5ebdb2d30"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Look"",
-                    ""type"": ""Value"",
-                    ""id"": ""13eae6a6-98bc-438d-8dce-af7c625455c3"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Dpad"",
-                    ""type"": ""Value"",
-                    ""id"": ""9bea3da7-a8e9-4346-9173-66486e86211f"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Steer"",
                     ""type"": ""Value"",
                     ""id"": ""cd3060cb-504c-4e88-a0b5-5bd91e79e70e"",
@@ -102,15 +75,6 @@ namespace UnityEngine.InputSystem
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ChangeView"",
-                    ""type"": ""Button"",
-                    ""id"": ""5e0c2d91-82bf-4aee-ad25-69acb4ae964b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""NextGear"",
                     ""type"": ""Button"",
                     ""id"": ""8f669272-9b1e-4bc2-85f7-6ac49e5ac76f"",
@@ -123,33 +87,6 @@ namespace UnityEngine.InputSystem
                     ""name"": ""PrevGear"",
                     ""type"": ""Button"",
                     ""id"": ""d632b41a-ca7d-4a32-8445-4ccd030323e2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchLights"",
-                    ""type"": ""Button"",
-                    ""id"": ""968ed024-8be5-46ce-8f0c-993401d2008a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchLeftTurnLights"",
-                    ""type"": ""Button"",
-                    ""id"": ""dd0cfe58-0180-4733-9c73-a9dcca320810"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchRightTurnLights"",
-                    ""type"": ""Button"",
-                    ""id"": ""dd61f3b7-f96b-44d8-8c24-56fdbb0d1d82"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -244,6 +181,105 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""968ed024-8be5-46ce-8f0c-993401d2008a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchFarLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4f02d42-17e6-4e3e-b565-65e35fbeab7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchDimLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""559bbc43-63ee-47a4-a47f-1405f4087644"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchLeftTurnLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd0cfe58-0180-4733-9c73-a9dcca320810"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchRightTurnLights"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd61f3b7-f96b-44d8-8c24-56fdbb0d1d82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EngineOn"",
+                    ""type"": ""Button"",
+                    ""id"": ""b6c76fbf-e185-4252-9043-970e39409a24"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WiperSlow"",
+                    ""type"": ""Button"",
+                    ""id"": ""92c6143e-3656-4464-bdbf-22f858e53270"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WiperFast"",
+                    ""type"": ""Button"",
+                    ""id"": ""76f9b240-91be-4aef-8682-d98c1789e43a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WiperOnce"",
+                    ""type"": ""Button"",
+                    ""id"": ""cffe8019-f4a5-430d-ba87-f8da3e05d61a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""13eae6a6-98bc-438d-8dce-af7c625455c3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ChangeView"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e0c2d91-82bf-4aee-ad25-69acb4ae964b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,7 +288,7 @@ namespace UnityEngine.InputSystem
                     ""id"": ""48d7ad8b-e87c-4e4b-b830-b815ca57c97e"",
                     ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/rz"",
                     ""interactions"": """",
-                    ""processors"": ""Invert,Normalize(min=-1,max=1,zero=-1)"",
+                    ""processors"": ""Invert,Normalize(min=-1,max=1,zero=-1),AxisDeadzone(min=0.125,max=0.875)"",
                     ""groups"": """",
                     ""action"": ""BrakeReverse"",
                     ""isComposite"": false,
@@ -288,28 +324,6 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""HandBrake"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bd64f93d-34d3-4019-9a97-4516b0730de4"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeView"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""da2592b7-9b7d-4034-8c04-7dddbc0b0af1"",
-                    ""path"": ""<XInputController>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeView"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -354,72 +368,6 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PrevGear"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0213aa12-e18c-4256-863a-b8938f4eac60"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchLights"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9a7aaed9-269b-4127-bba4-3b562326dddf"",
-                    ""path"": ""<XInputController>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchLights"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8449f293-4c71-4ac9-9f57-45dd00dced24"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchLeftTurnLights"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""80f52e67-be89-4e0a-87e5-7183312afb60"",
-                    ""path"": ""<XInputController>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchLeftTurnLights"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a96507dd-ac09-448e-8801-975aed0d1bf2"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchRightTurnLights"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""69e53fa0-ffb0-4112-babc-9007f122b458"",
-                    ""path"": ""<XInputController>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchRightTurnLights"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -612,67 +560,12 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": """",
-                    ""id"": ""da03808d-69c6-4413-90d1-ee856a7cdbb2"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button13"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Gear1st"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a8886420-d9ab-4799-b705-7a6963a3bada"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button14"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Gear2nd"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fee452fd-c739-42d4-915c-5b03d2400ffb"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button15"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Gear3rd"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""06a3e823-520a-4948-b869-4daf7bb2b413"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button16"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Gear4th"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d3b50fd1-afca-4600-8fb3-0e2959b91c78"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button17"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Gear5th"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""6b775ecb-5356-447d-a76b-6cc90bbc27c0"",
                     ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button18"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Gear6th"",
+                    ""action"": ""Gear1st"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -689,12 +582,221 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": """",
+                    ""id"": ""da03808d-69c6-4413-90d1-ee856a7cdbb2"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button13"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear6th"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8886420-d9ab-4799-b705-7a6963a3bada"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button14"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear5th"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3b50fd1-afca-4600-8fb3-0e2959b91c78"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button17"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear2nd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06a3e823-520a-4948-b869-4daf7bb2b413"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button16"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear3rd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fee452fd-c739-42d4-915c-5b03d2400ffb"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button15"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gear4th"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5deef7a9-198a-46df-8788-ec5c57c193bc"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EngineOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ce6a685-ffb6-46b2-a0d4-4d7a35b071f4"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WiperSlow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ead46fb-a4d5-4254-af05-57fc3aa3edcc"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WiperFast"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad99b411-77d5-486a-a5a9-7d15d8d924ba"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WiperOnce"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0213aa12-e18c-4256-863a-b8938f4eac60"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a7aaed9-269b-4127-bba4-3b562326dddf"",
+                    ""path"": ""<XInputController>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee4ac876-c6d7-4524-b36c-49de8fad838a"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchFarLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8449f293-4c71-4ac9-9f57-45dd00dced24"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLeftTurnLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80f52e67-be89-4e0a-87e5-7183312afb60"",
+                    ""path"": ""<XInputController>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLeftTurnLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a96507dd-ac09-448e-8801-975aed0d1bf2"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchRightTurnLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69e53fa0-ffb0-4112-babc-9007f122b458"",
+                    ""path"": ""<XInputController>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchRightTurnLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd64f93d-34d3-4019-9a97-4516b0730de4"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeView"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da2592b7-9b7d-4034-8c04-7dddbc0b0af1"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeView"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""e09c3ee4-3ad2-4176-9660-7f11cb8021e1"",
                     ""path"": ""<XInputController>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""58f46324-f043-4333-8788-f0f3a6e3da3a"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchDimLights"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1260,20 +1362,13 @@ namespace UnityEngine.InputSystem
 }");
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-            m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-            m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
-            m_Player_Dpad = m_Player.FindAction("Dpad", throwIfNotFound: true);
             m_Player_Steer = m_Player.FindAction("Steer", throwIfNotFound: true);
             m_Player_Acceleration = m_Player.FindAction("Acceleration", throwIfNotFound: true);
             m_Player_BrakeReverse = m_Player.FindAction("BrakeReverse", throwIfNotFound: true);
             m_Player_HandBrake = m_Player.FindAction("HandBrake", throwIfNotFound: true);
             m_Player_Clutch = m_Player.FindAction("Clutch", throwIfNotFound: true);
-            m_Player_ChangeView = m_Player.FindAction("ChangeView", throwIfNotFound: true);
             m_Player_NextGear = m_Player.FindAction("NextGear", throwIfNotFound: true);
             m_Player_PrevGear = m_Player.FindAction("PrevGear", throwIfNotFound: true);
-            m_Player_SwitchLights = m_Player.FindAction("SwitchLights", throwIfNotFound: true);
-            m_Player_SwitchLeftTurnLights = m_Player.FindAction("SwitchLeftTurnLights", throwIfNotFound: true);
-            m_Player_SwitchRightTurnLights = m_Player.FindAction("SwitchRightTurnLights", throwIfNotFound: true);
             m_Player_ResetCar = m_Player.FindAction("ResetCar", throwIfNotFound: true);
             m_Player_ConnectTrailer = m_Player.FindAction("ConnectTrailer", throwIfNotFound: true);
             m_Player_SwitchAlarm = m_Player.FindAction("SwitchAlarm", throwIfNotFound: true);
@@ -1284,6 +1379,17 @@ namespace UnityEngine.InputSystem
             m_Player_Gear5th = m_Player.FindAction("Gear5th", throwIfNotFound: true);
             m_Player_Gear6th = m_Player.FindAction("Gear6th", throwIfNotFound: true);
             m_Player_GearReverse = m_Player.FindAction("GearReverse", throwIfNotFound: true);
+            m_Player_SwitchLights = m_Player.FindAction("SwitchLights", throwIfNotFound: true);
+            m_Player_SwitchFarLights = m_Player.FindAction("SwitchFarLights", throwIfNotFound: true);
+            m_Player_SwitchDimLights = m_Player.FindAction("SwitchDimLights", throwIfNotFound: true);
+            m_Player_SwitchLeftTurnLights = m_Player.FindAction("SwitchLeftTurnLights", throwIfNotFound: true);
+            m_Player_SwitchRightTurnLights = m_Player.FindAction("SwitchRightTurnLights", throwIfNotFound: true);
+            m_Player_EngineOn = m_Player.FindAction("EngineOn", throwIfNotFound: true);
+            m_Player_WiperSlow = m_Player.FindAction("WiperSlow", throwIfNotFound: true);
+            m_Player_WiperFast = m_Player.FindAction("WiperFast", throwIfNotFound: true);
+            m_Player_WiperOnce = m_Player.FindAction("WiperOnce", throwIfNotFound: true);
+            m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+            m_Player_ChangeView = m_Player.FindAction("ChangeView", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1363,20 +1469,13 @@ namespace UnityEngine.InputSystem
         // Player
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-        private readonly InputAction m_Player_Move;
-        private readonly InputAction m_Player_Look;
-        private readonly InputAction m_Player_Dpad;
         private readonly InputAction m_Player_Steer;
         private readonly InputAction m_Player_Acceleration;
         private readonly InputAction m_Player_BrakeReverse;
         private readonly InputAction m_Player_HandBrake;
         private readonly InputAction m_Player_Clutch;
-        private readonly InputAction m_Player_ChangeView;
         private readonly InputAction m_Player_NextGear;
         private readonly InputAction m_Player_PrevGear;
-        private readonly InputAction m_Player_SwitchLights;
-        private readonly InputAction m_Player_SwitchLeftTurnLights;
-        private readonly InputAction m_Player_SwitchRightTurnLights;
         private readonly InputAction m_Player_ResetCar;
         private readonly InputAction m_Player_ConnectTrailer;
         private readonly InputAction m_Player_SwitchAlarm;
@@ -1387,24 +1486,28 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_Gear5th;
         private readonly InputAction m_Player_Gear6th;
         private readonly InputAction m_Player_GearReverse;
+        private readonly InputAction m_Player_SwitchLights;
+        private readonly InputAction m_Player_SwitchFarLights;
+        private readonly InputAction m_Player_SwitchDimLights;
+        private readonly InputAction m_Player_SwitchLeftTurnLights;
+        private readonly InputAction m_Player_SwitchRightTurnLights;
+        private readonly InputAction m_Player_EngineOn;
+        private readonly InputAction m_Player_WiperSlow;
+        private readonly InputAction m_Player_WiperFast;
+        private readonly InputAction m_Player_WiperOnce;
+        private readonly InputAction m_Player_Look;
+        private readonly InputAction m_Player_ChangeView;
         public struct PlayerActions
         {
             private @SimulatorInputActions m_Wrapper;
             public PlayerActions(@SimulatorInputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Move => m_Wrapper.m_Player_Move;
-            public InputAction @Look => m_Wrapper.m_Player_Look;
-            public InputAction @Dpad => m_Wrapper.m_Player_Dpad;
             public InputAction @Steer => m_Wrapper.m_Player_Steer;
             public InputAction @Acceleration => m_Wrapper.m_Player_Acceleration;
             public InputAction @BrakeReverse => m_Wrapper.m_Player_BrakeReverse;
             public InputAction @HandBrake => m_Wrapper.m_Player_HandBrake;
             public InputAction @Clutch => m_Wrapper.m_Player_Clutch;
-            public InputAction @ChangeView => m_Wrapper.m_Player_ChangeView;
             public InputAction @NextGear => m_Wrapper.m_Player_NextGear;
             public InputAction @PrevGear => m_Wrapper.m_Player_PrevGear;
-            public InputAction @SwitchLights => m_Wrapper.m_Player_SwitchLights;
-            public InputAction @SwitchLeftTurnLights => m_Wrapper.m_Player_SwitchLeftTurnLights;
-            public InputAction @SwitchRightTurnLights => m_Wrapper.m_Player_SwitchRightTurnLights;
             public InputAction @ResetCar => m_Wrapper.m_Player_ResetCar;
             public InputAction @ConnectTrailer => m_Wrapper.m_Player_ConnectTrailer;
             public InputAction @SwitchAlarm => m_Wrapper.m_Player_SwitchAlarm;
@@ -1415,6 +1518,17 @@ namespace UnityEngine.InputSystem
             public InputAction @Gear5th => m_Wrapper.m_Player_Gear5th;
             public InputAction @Gear6th => m_Wrapper.m_Player_Gear6th;
             public InputAction @GearReverse => m_Wrapper.m_Player_GearReverse;
+            public InputAction @SwitchLights => m_Wrapper.m_Player_SwitchLights;
+            public InputAction @SwitchFarLights => m_Wrapper.m_Player_SwitchFarLights;
+            public InputAction @SwitchDimLights => m_Wrapper.m_Player_SwitchDimLights;
+            public InputAction @SwitchLeftTurnLights => m_Wrapper.m_Player_SwitchLeftTurnLights;
+            public InputAction @SwitchRightTurnLights => m_Wrapper.m_Player_SwitchRightTurnLights;
+            public InputAction @EngineOn => m_Wrapper.m_Player_EngineOn;
+            public InputAction @WiperSlow => m_Wrapper.m_Player_WiperSlow;
+            public InputAction @WiperFast => m_Wrapper.m_Player_WiperFast;
+            public InputAction @WiperOnce => m_Wrapper.m_Player_WiperOnce;
+            public InputAction @Look => m_Wrapper.m_Player_Look;
+            public InputAction @ChangeView => m_Wrapper.m_Player_ChangeView;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1424,15 +1538,6 @@ namespace UnityEngine.InputSystem
             {
                 if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Look.started += instance.OnLook;
-                @Look.performed += instance.OnLook;
-                @Look.canceled += instance.OnLook;
-                @Dpad.started += instance.OnDpad;
-                @Dpad.performed += instance.OnDpad;
-                @Dpad.canceled += instance.OnDpad;
                 @Steer.started += instance.OnSteer;
                 @Steer.performed += instance.OnSteer;
                 @Steer.canceled += instance.OnSteer;
@@ -1448,24 +1553,12 @@ namespace UnityEngine.InputSystem
                 @Clutch.started += instance.OnClutch;
                 @Clutch.performed += instance.OnClutch;
                 @Clutch.canceled += instance.OnClutch;
-                @ChangeView.started += instance.OnChangeView;
-                @ChangeView.performed += instance.OnChangeView;
-                @ChangeView.canceled += instance.OnChangeView;
                 @NextGear.started += instance.OnNextGear;
                 @NextGear.performed += instance.OnNextGear;
                 @NextGear.canceled += instance.OnNextGear;
                 @PrevGear.started += instance.OnPrevGear;
                 @PrevGear.performed += instance.OnPrevGear;
                 @PrevGear.canceled += instance.OnPrevGear;
-                @SwitchLights.started += instance.OnSwitchLights;
-                @SwitchLights.performed += instance.OnSwitchLights;
-                @SwitchLights.canceled += instance.OnSwitchLights;
-                @SwitchLeftTurnLights.started += instance.OnSwitchLeftTurnLights;
-                @SwitchLeftTurnLights.performed += instance.OnSwitchLeftTurnLights;
-                @SwitchLeftTurnLights.canceled += instance.OnSwitchLeftTurnLights;
-                @SwitchRightTurnLights.started += instance.OnSwitchRightTurnLights;
-                @SwitchRightTurnLights.performed += instance.OnSwitchRightTurnLights;
-                @SwitchRightTurnLights.canceled += instance.OnSwitchRightTurnLights;
                 @ResetCar.started += instance.OnResetCar;
                 @ResetCar.performed += instance.OnResetCar;
                 @ResetCar.canceled += instance.OnResetCar;
@@ -1496,19 +1589,43 @@ namespace UnityEngine.InputSystem
                 @GearReverse.started += instance.OnGearReverse;
                 @GearReverse.performed += instance.OnGearReverse;
                 @GearReverse.canceled += instance.OnGearReverse;
+                @SwitchLights.started += instance.OnSwitchLights;
+                @SwitchLights.performed += instance.OnSwitchLights;
+                @SwitchLights.canceled += instance.OnSwitchLights;
+                @SwitchFarLights.started += instance.OnSwitchFarLights;
+                @SwitchFarLights.performed += instance.OnSwitchFarLights;
+                @SwitchFarLights.canceled += instance.OnSwitchFarLights;
+                @SwitchDimLights.started += instance.OnSwitchDimLights;
+                @SwitchDimLights.performed += instance.OnSwitchDimLights;
+                @SwitchDimLights.canceled += instance.OnSwitchDimLights;
+                @SwitchLeftTurnLights.started += instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.performed += instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.canceled += instance.OnSwitchLeftTurnLights;
+                @SwitchRightTurnLights.started += instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.performed += instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.canceled += instance.OnSwitchRightTurnLights;
+                @EngineOn.started += instance.OnEngineOn;
+                @EngineOn.performed += instance.OnEngineOn;
+                @EngineOn.canceled += instance.OnEngineOn;
+                @WiperSlow.started += instance.OnWiperSlow;
+                @WiperSlow.performed += instance.OnWiperSlow;
+                @WiperSlow.canceled += instance.OnWiperSlow;
+                @WiperFast.started += instance.OnWiperFast;
+                @WiperFast.performed += instance.OnWiperFast;
+                @WiperFast.canceled += instance.OnWiperFast;
+                @WiperOnce.started += instance.OnWiperOnce;
+                @WiperOnce.performed += instance.OnWiperOnce;
+                @WiperOnce.canceled += instance.OnWiperOnce;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
+                @ChangeView.started += instance.OnChangeView;
+                @ChangeView.performed += instance.OnChangeView;
+                @ChangeView.canceled += instance.OnChangeView;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
             {
-                @Move.started -= instance.OnMove;
-                @Move.performed -= instance.OnMove;
-                @Move.canceled -= instance.OnMove;
-                @Look.started -= instance.OnLook;
-                @Look.performed -= instance.OnLook;
-                @Look.canceled -= instance.OnLook;
-                @Dpad.started -= instance.OnDpad;
-                @Dpad.performed -= instance.OnDpad;
-                @Dpad.canceled -= instance.OnDpad;
                 @Steer.started -= instance.OnSteer;
                 @Steer.performed -= instance.OnSteer;
                 @Steer.canceled -= instance.OnSteer;
@@ -1524,24 +1641,12 @@ namespace UnityEngine.InputSystem
                 @Clutch.started -= instance.OnClutch;
                 @Clutch.performed -= instance.OnClutch;
                 @Clutch.canceled -= instance.OnClutch;
-                @ChangeView.started -= instance.OnChangeView;
-                @ChangeView.performed -= instance.OnChangeView;
-                @ChangeView.canceled -= instance.OnChangeView;
                 @NextGear.started -= instance.OnNextGear;
                 @NextGear.performed -= instance.OnNextGear;
                 @NextGear.canceled -= instance.OnNextGear;
                 @PrevGear.started -= instance.OnPrevGear;
                 @PrevGear.performed -= instance.OnPrevGear;
                 @PrevGear.canceled -= instance.OnPrevGear;
-                @SwitchLights.started -= instance.OnSwitchLights;
-                @SwitchLights.performed -= instance.OnSwitchLights;
-                @SwitchLights.canceled -= instance.OnSwitchLights;
-                @SwitchLeftTurnLights.started -= instance.OnSwitchLeftTurnLights;
-                @SwitchLeftTurnLights.performed -= instance.OnSwitchLeftTurnLights;
-                @SwitchLeftTurnLights.canceled -= instance.OnSwitchLeftTurnLights;
-                @SwitchRightTurnLights.started -= instance.OnSwitchRightTurnLights;
-                @SwitchRightTurnLights.performed -= instance.OnSwitchRightTurnLights;
-                @SwitchRightTurnLights.canceled -= instance.OnSwitchRightTurnLights;
                 @ResetCar.started -= instance.OnResetCar;
                 @ResetCar.performed -= instance.OnResetCar;
                 @ResetCar.canceled -= instance.OnResetCar;
@@ -1572,6 +1677,39 @@ namespace UnityEngine.InputSystem
                 @GearReverse.started -= instance.OnGearReverse;
                 @GearReverse.performed -= instance.OnGearReverse;
                 @GearReverse.canceled -= instance.OnGearReverse;
+                @SwitchLights.started -= instance.OnSwitchLights;
+                @SwitchLights.performed -= instance.OnSwitchLights;
+                @SwitchLights.canceled -= instance.OnSwitchLights;
+                @SwitchFarLights.started -= instance.OnSwitchFarLights;
+                @SwitchFarLights.performed -= instance.OnSwitchFarLights;
+                @SwitchFarLights.canceled -= instance.OnSwitchFarLights;
+                @SwitchDimLights.started -= instance.OnSwitchDimLights;
+                @SwitchDimLights.performed -= instance.OnSwitchDimLights;
+                @SwitchDimLights.canceled -= instance.OnSwitchDimLights;
+                @SwitchLeftTurnLights.started -= instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.performed -= instance.OnSwitchLeftTurnLights;
+                @SwitchLeftTurnLights.canceled -= instance.OnSwitchLeftTurnLights;
+                @SwitchRightTurnLights.started -= instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.performed -= instance.OnSwitchRightTurnLights;
+                @SwitchRightTurnLights.canceled -= instance.OnSwitchRightTurnLights;
+                @EngineOn.started -= instance.OnEngineOn;
+                @EngineOn.performed -= instance.OnEngineOn;
+                @EngineOn.canceled -= instance.OnEngineOn;
+                @WiperSlow.started -= instance.OnWiperSlow;
+                @WiperSlow.performed -= instance.OnWiperSlow;
+                @WiperSlow.canceled -= instance.OnWiperSlow;
+                @WiperFast.started -= instance.OnWiperFast;
+                @WiperFast.performed -= instance.OnWiperFast;
+                @WiperFast.canceled -= instance.OnWiperFast;
+                @WiperOnce.started -= instance.OnWiperOnce;
+                @WiperOnce.performed -= instance.OnWiperOnce;
+                @WiperOnce.canceled -= instance.OnWiperOnce;
+                @Look.started -= instance.OnLook;
+                @Look.performed -= instance.OnLook;
+                @Look.canceled -= instance.OnLook;
+                @ChangeView.started -= instance.OnChangeView;
+                @ChangeView.performed -= instance.OnChangeView;
+                @ChangeView.canceled -= instance.OnChangeView;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1824,20 +1962,13 @@ namespace UnityEngine.InputSystem
         }
         public interface IPlayerActions
         {
-            void OnMove(InputAction.CallbackContext context);
-            void OnLook(InputAction.CallbackContext context);
-            void OnDpad(InputAction.CallbackContext context);
             void OnSteer(InputAction.CallbackContext context);
             void OnAcceleration(InputAction.CallbackContext context);
             void OnBrakeReverse(InputAction.CallbackContext context);
             void OnHandBrake(InputAction.CallbackContext context);
             void OnClutch(InputAction.CallbackContext context);
-            void OnChangeView(InputAction.CallbackContext context);
             void OnNextGear(InputAction.CallbackContext context);
             void OnPrevGear(InputAction.CallbackContext context);
-            void OnSwitchLights(InputAction.CallbackContext context);
-            void OnSwitchLeftTurnLights(InputAction.CallbackContext context);
-            void OnSwitchRightTurnLights(InputAction.CallbackContext context);
             void OnResetCar(InputAction.CallbackContext context);
             void OnConnectTrailer(InputAction.CallbackContext context);
             void OnSwitchAlarm(InputAction.CallbackContext context);
@@ -1848,6 +1979,17 @@ namespace UnityEngine.InputSystem
             void OnGear5th(InputAction.CallbackContext context);
             void OnGear6th(InputAction.CallbackContext context);
             void OnGearReverse(InputAction.CallbackContext context);
+            void OnSwitchLights(InputAction.CallbackContext context);
+            void OnSwitchFarLights(InputAction.CallbackContext context);
+            void OnSwitchDimLights(InputAction.CallbackContext context);
+            void OnSwitchLeftTurnLights(InputAction.CallbackContext context);
+            void OnSwitchRightTurnLights(InputAction.CallbackContext context);
+            void OnEngineOn(InputAction.CallbackContext context);
+            void OnWiperSlow(InputAction.CallbackContext context);
+            void OnWiperFast(InputAction.CallbackContext context);
+            void OnWiperOnce(InputAction.CallbackContext context);
+            void OnLook(InputAction.CallbackContext context);
+            void OnChangeView(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

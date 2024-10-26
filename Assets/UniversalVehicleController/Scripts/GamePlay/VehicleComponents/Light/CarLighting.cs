@@ -49,6 +49,7 @@ namespace PG
 
         bool InBrake;
         public bool MainLightsIsOn;
+        public bool FarLightsIsOn;
         Coroutine TurnsCotoutine;
         List<LightObject> ActiveTurns = new List<LightObject>();
         TurnsStates CurrentTurnsState = TurnsStates.Off;
@@ -66,19 +67,20 @@ namespace PG
                 switch (l.CarLightType)
                 {
                     case CarLightType.Main:
-                    MainLights.Add (l); break;
+                        MainLights.Add (l); 
+                        break;
                     case CarLightType.TurnLeft:
-                    LeftTurnLights.Add (l);
-                    break;
+                        LeftTurnLights.Add (l);
+                        break;
                     case CarLightType.TurnRight:
-                    RightTurnLights.Add (l);
-                    break;
+                        RightTurnLights.Add (l);
+                        break;
                     case CarLightType.Brake:
-                    BrakeLights.Add (l);
-                    break;
+                        BrakeLights.Add (l);
+                        break;
                     case CarLightType.Reverse:
-                    ReverseLights.Add (l);
-                    break;
+                        ReverseLights.Add (l);
+                        break;
 
                 }
             }
@@ -124,7 +126,7 @@ namespace PG
 
         public void SwithOffAllLights ()
         {
-            SetActiveMainLights (false);
+            SetActiveMainLights (false, HeadlightsType.Main);
             SetActiveBrake (false);
             SetActiveReverse (false);
             TurnsEnable (TurnsStates.Off);
@@ -150,7 +152,7 @@ namespace PG
             }
             else if (type == CarLightType.Main)
             {
-                SetActiveMainLights (value);
+                SetActiveMainLights (value, HeadlightsType.Main);
             }
             else if (type == CarLightType.Brake)
             {
@@ -170,11 +172,29 @@ namespace PG
             if (MainLights.Count > 0)
             {
                 MainLightsIsOn = !MainLightsIsOn;
-                SetActiveMainLights (MainLightsIsOn);
+                SetActiveMainLights (MainLightsIsOn, HeadlightsType.Main);
             }
         }
 
-        public void SetActiveMainLights (bool value)
+        public void SwitchFarLights()
+        {
+            if (MainLights.Count > 0)
+            {
+                MainLightsIsOn = !MainLightsIsOn;
+                SetActiveMainLights(MainLightsIsOn, HeadlightsType.Far);
+            }
+        }
+
+        public void SwitchDimLights()
+        {
+            if (MainLights.Count > 0)
+            {
+                MainLightsIsOn = !MainLightsIsOn;
+                SetActiveMainLights(MainLightsIsOn, HeadlightsType.Dim);
+            }
+        }
+
+        public void SetActiveMainLights (bool value, HeadlightsType type)
         {
             MainLights.ForEach (l => l.Switch (value));
 
@@ -182,7 +202,7 @@ namespace PG
 
             if (AdditionalLighting)
             {
-                AdditionalLighting.SetActiveMainLights (value);
+                AdditionalLighting.SetActiveMainLights (value, HeadlightsType.Main);
             }
         }
 
@@ -305,5 +325,12 @@ namespace PG
         TurnRight,
         Reverse,
         Alarm
+    }
+
+    public enum HeadlightsType
+    {
+        Main,
+        Far,
+        Dim
     }
 }
