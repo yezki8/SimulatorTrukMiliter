@@ -7,10 +7,14 @@ using TMPro;
 public class TimerCountdown : MonoBehaviour
 {
     public TextMeshProUGUI timerText; // UI text object
-    [SerializeField] private float startTime; // start time in seconds
     public float CurrentTime;  // current time in seconds
     public bool IsTimerRunning { get; private set; }
     public bool IsTimerPaused { get; private set; }
+
+    [Header("Time Limit for Score 100 (in minutes)")] //in minutes
+    [SerializeField] private float _level1TimeThreshold = 5;
+    [SerializeField] private float _level2TimeThreshold = 10;
+    public float StartTime = 0; // start time in seconds
 
     //for references in other scripts
     public static TimerCountdown Instance;
@@ -40,6 +44,7 @@ public class TimerCountdown : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
+
         // milliseconds below 30 seconds
         if (time < 30)
         {
@@ -52,7 +57,6 @@ public class TimerCountdown : MonoBehaviour
     public void StopTimer()
     {
         IsTimerRunning = false;
-        Debug.Log("Timer stopped");
     }
 
     public void HandlePauseTimer()
@@ -60,11 +64,9 @@ public class TimerCountdown : MonoBehaviour
         if (IsTimerPaused)
         {
             IsTimerPaused = false;
-            Debug.Log("Timer unpaused");
         } else
         {
             IsTimerPaused = true;
-            Debug.Log("Timer paused");
         }
     }
 
@@ -85,10 +87,22 @@ public class TimerCountdown : MonoBehaviour
         {
             StopTimer();
         }
-        CurrentTime = startTime;
         IsTimerPaused = false;
-        timerText.text = (FloatToTimeString(startTime));
-        Debug.Log("Timer reset");
+    }
+
+    public void ResetCurretTime()
+    {
+        if (CheckpointManager.Instance.ActiveLevel == 1)
+        {
+            StartTime = _level1TimeThreshold * 60;
+        }
+        else if (CheckpointManager.Instance.ActiveLevel == 2)
+        {
+            StartTime = _level2TimeThreshold * 60;
+        }
+
+        CurrentTime = StartTime;
+        timerText.text = (FloatToTimeString(StartTime));
     }
 
     public void StartTimer()
@@ -97,14 +111,15 @@ public class TimerCountdown : MonoBehaviour
         {
             IsTimerRunning = true;
         }
+
+        ResetCurretTime();
         CurrentTime = CheckpointManager.Instance.GetRecordedTimer();            //changed to Get Recorded Time
-        Debug.Log("Timer started");
     }
 
     //Get and Set Data ===============================================================
     public float GetStartTime()
     {
-        return startTime;
+        return StartTime;
     }
 
     // Start is called before the first frame update
@@ -124,9 +139,8 @@ public class TimerCountdown : MonoBehaviour
             {
                 StopTimer();
                 CurrentTime = 0;
-                OnCountdownEnd?.Invoke();           // reconsider alternative to sync timer and stopwatch
-                timerText.text = (FloatToTimeString(CurrentTime));
-                Debug.Log("Timer ended");
+                //OnCountdownEnd?.Invoke();           // reconsider alternative to sync timer and stopwatch
+                timerText.text = ("Target waktu lewat");
             }
         }
     }
