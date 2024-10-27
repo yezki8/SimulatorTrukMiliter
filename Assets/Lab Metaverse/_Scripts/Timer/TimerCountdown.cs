@@ -87,7 +87,9 @@ public class TimerCountdown : MonoBehaviour
         {
             StopTimer();
         }
+        ResetCurretTime();
         IsTimerPaused = false;
+        Debug.Log("Time resetted to level " + CheckpointManager.Instance.ActiveLevel);
     }
 
     public void ResetCurretTime()
@@ -111,9 +113,9 @@ public class TimerCountdown : MonoBehaviour
         {
             IsTimerRunning = true;
         }
-
-        ResetCurretTime();
-        CurrentTime = CheckpointManager.Instance.GetRecordedTimer();            //changed to Get Recorded Time
+        
+        //Feature removed due to player cannot replay at checkpoint anymore
+        //CurrentTime = CheckpointManager.Instance.GetRecordedTimer();            //changed to Get Recorded Time
     }
 
     //Get and Set Data ===============================================================
@@ -139,7 +141,7 @@ public class TimerCountdown : MonoBehaviour
             {
                 StopTimer();
                 CurrentTime = 0;
-                //OnCountdownEnd?.Invoke();           // reconsider alternative to sync timer and stopwatch
+                OnCountdownEnd?.Invoke();           // reconsider alternative to sync timer and stopwatch
                 timerText.text = ("Target waktu lewat");
             }
         }
