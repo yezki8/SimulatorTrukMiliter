@@ -159,7 +159,6 @@ namespace PG
             controls.Player.SwitchAlarm.performed += ctx => SwitchAlarm();
 
             controls.Player.EngineOn.performed += ctx => EngineOn();
-            controls.Player.EngineOn.canceled += ctx => EngineOff();
 
             // wipers
             // controls.Player.WiperSlow.performed += ctx => CarLighting.WipersEnable(WipersStates.Slow);
@@ -323,14 +322,6 @@ namespace PG
             if (Car)
             {
                 Car.StartEngine();
-            }
-        }
-        public void EngineOff()   
-        {
-            // only used when abruptly stopping engine start
-            if (Car)
-            {
-                Car.IsStartingEngine = false;
             }
         }
 
