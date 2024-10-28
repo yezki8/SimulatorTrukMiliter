@@ -56,6 +56,8 @@ namespace PG
 
         public event System.Action<CarLightType, bool> OnSetActiveLight;
 
+        HeadlightsType currentType = HeadlightsType.Main;
+
         public CarLighting AdditionalLighting { get; set; }
 
         void Start ()
@@ -167,6 +169,24 @@ namespace PG
         /// <summary>
         /// Main light switch.
         /// </summary>
+        public void MainLightsOff ()
+        {
+            if (MainLights.Count > 0)
+            {
+                MainLightsIsOn = false;
+                SetActiveMainLights(false, HeadlightsType.Main);
+            }
+        }
+
+        public void MainLightsOn ()
+        {
+            if (MainLights.Count > 0)
+            {
+                MainLightsIsOn = true;
+                SetActiveMainLights(true, HeadlightsType.Main);
+            }
+        }
+
         public void SwitchMainLights ()
         {
             if (MainLights.Count > 0)
@@ -176,12 +196,20 @@ namespace PG
             }
         }
 
-        public void SwitchFarLights()
+        public void FarLightsOn()
         {
             if (MainLights.Count > 0)
             {
-                MainLightsIsOn = !MainLightsIsOn;
-                SetActiveMainLights(MainLightsIsOn, HeadlightsType.Far);
+                SetActiveMainLights(false, HeadlightsType.Main);
+                SetActiveMainLights(true, HeadlightsType.Far);
+            }
+        }
+
+        public void FarLightsOff()
+        {
+            if (MainLights.Count > 0)
+            {
+                SetActiveMainLights(false, HeadlightsType.Far);
             }
         }
 
@@ -189,14 +217,13 @@ namespace PG
         {
             if (MainLights.Count > 0)
             {
-                MainLightsIsOn = !MainLightsIsOn;
                 SetActiveMainLights(MainLightsIsOn, HeadlightsType.Dim);
             }
         }
 
         public void SetActiveMainLights (bool value, HeadlightsType type)
         {
-            MainLights.ForEach (l => l.Switch (value));
+            MainLights.ForEach (l => l.Switch (value, false, type));
 
             OnSetActiveLight.SafeInvoke (CarLightType.Main, value);
 

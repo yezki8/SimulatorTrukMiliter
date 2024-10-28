@@ -511,6 +511,7 @@ MonoBehaviour:
   SteerWheel: {fileID: 5630019734588253188}
   ForceFeedback: {fileID: 0}
   CanBrake: 1
+  IsPlayerCar: 0
   StartEngineInAwake: 0
   StartEngineDellay: 1.5
   Engine:
@@ -26318,7 +26319,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 300
+  Intensity: 500
   EnableOnStart: 0
 --- !u!1 &2232914427567728758
 GameObject:
@@ -52821,7 +52822,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 100
+  Intensity: 300
   EnableOnStart: 0
 --- !u!1 &5348353607393241410
 GameObject:
@@ -53248,7 +53249,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 300
+  Intensity: 500
   EnableOnStart: 0
 --- !u!1 &5881850927616045950
 GameObject:
@@ -63869,7 +63870,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2794.8787
+  m_Intensity: 13589.594
   m_Range: 100
   m_SpotAngle: 50
   m_InnerSpotAngle: 49.941277
@@ -63931,7 +63932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 4000
+  m_Intensity: 8000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -64236,7 +64237,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 300
+  Intensity: 500
   EnableOnStart: 0
 --- !u!1 &6925502708703640283
 GameObject:
@@ -64349,7 +64350,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 300
+  Intensity: 500
   EnableOnStart: 0
 --- !u!1 &7122475501493742141
 GameObject:
@@ -69870,7 +69871,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 100
+  Intensity: 300
   EnableOnStart: 0
 --- !u!1 &7725961125775253037
 GameObject:
@@ -75969,7 +75970,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2794.8787
+  m_Intensity: 13589.594
   m_Range: 100
   m_SpotAngle: 50
   m_InnerSpotAngle: 49.941277
@@ -76031,7 +76032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 4000
+  m_Intensity: 8000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -76401,7 +76402,7 @@ MonoBehaviour:
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
-  Intensity: 300
+  Intensity: 500
   EnableOnStart: 0
 --- !u!1 &9186069403026538055
 GameObject:

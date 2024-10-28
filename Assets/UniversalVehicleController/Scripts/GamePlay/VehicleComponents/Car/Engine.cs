@@ -51,9 +51,6 @@ namespace PG
         float CutOffTimer;
         bool InCutOff;
 
-        // added
-        public bool IsStartingEngine = false;
-
         public float CurrentAcceleration { get; private set; }
         public float CurrentTurbo { get; private set; }
         public bool InHandBrake { get { return CarControl != null && CarControl.HandBrake && !BlockControl; } }
@@ -241,7 +238,6 @@ namespace PG
         {
             if (StartEngineCoroutine == null)
             {
-                IsStartingEngine = true;
                 StartEngineCoroutine = StartCoroutine (DoStartEngine ());
             }
         }
@@ -259,14 +255,9 @@ namespace PG
 
             float timer = 0;
             EngineRPM = 0;
-            while (timer < StartEngineDellay && IsStartingEngine)
+            while (timer < StartEngineDellay)
             {
                 yield return null;
-                // if IsStartingEngine abruptly changes to false, the engine will not start.
-                if (!IsStartingEngine)
-                {
-                    yield break;
-                }
                 timer += Time.deltaTime;
                 EngineRPM = Mathf.Lerp (0, MinRPM, Mathf.Pow(Mathf.InverseLerp (0, StartEngineDellay, timer), 2));
             }
@@ -281,7 +272,6 @@ namespace PG
             {
                 EngineIsOn = true;
             }
-            IsStartingEngine = false;
             StartEngineCoroutine = null;
         }
 
