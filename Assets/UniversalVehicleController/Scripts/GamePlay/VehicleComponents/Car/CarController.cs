@@ -32,6 +32,7 @@ namespace PG
 
         [Header("Added By Metaverse Lab")]
         public bool CanBrake = true;
+        [SerializeField] protected bool IsPlayerCar = false;
 
         protected override void Awake ()
         {

@@ -280,6 +280,15 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Horn"",
+                    ""type"": ""Button"",
+                    ""id"": ""d109056f-d7c4-49ee-b56a-a7043ab79188"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -638,7 +647,7 @@ namespace UnityEngine.InputSystem
                 {
                     ""name"": """",
                     ""id"": ""5deef7a9-198a-46df-8788-ec5c57c193bc"",
-                    ""path"": """",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/trigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -681,8 +690,8 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0213aa12-e18c-4256-863a-b8938f4eac60"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/up"",
+                    ""id"": ""58f46324-f043-4333-8788-f0f3a6e3da3a"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button7"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -704,7 +713,7 @@ namespace UnityEngine.InputSystem
                 {
                     ""name"": """",
                     ""id"": ""ee4ac876-c6d7-4524-b36c-49de8fad838a"",
-                    ""path"": """",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button11"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -715,7 +724,7 @@ namespace UnityEngine.InputSystem
                 {
                     ""name"": """",
                     ""id"": ""8449f293-4c71-4ac9-9f57-45dd00dced24"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/left"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button12"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -737,7 +746,7 @@ namespace UnityEngine.InputSystem
                 {
                     ""name"": """",
                     ""id"": ""a96507dd-ac09-448e-8801-975aed0d1bf2"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/hat/right"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button6"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -791,12 +800,12 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": """",
-                    ""id"": ""58f46324-f043-4333-8788-f0f3a6e3da3a"",
-                    ""path"": """",
+                    ""id"": ""d6e0a6e8-6e25-4df4-bb50-ac586a502c96"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SwitchDimLights"",
+                    ""action"": ""Horn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1390,6 +1399,7 @@ namespace UnityEngine.InputSystem
             m_Player_WiperOnce = m_Player.FindAction("WiperOnce", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_ChangeView = m_Player.FindAction("ChangeView", throwIfNotFound: true);
+            m_Player_Horn = m_Player.FindAction("Horn", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1497,6 +1507,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_WiperOnce;
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_ChangeView;
+        private readonly InputAction m_Player_Horn;
         public struct PlayerActions
         {
             private @SimulatorInputActions m_Wrapper;
@@ -1529,6 +1540,7 @@ namespace UnityEngine.InputSystem
             public InputAction @WiperOnce => m_Wrapper.m_Player_WiperOnce;
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @ChangeView => m_Wrapper.m_Player_ChangeView;
+            public InputAction @Horn => m_Wrapper.m_Player_Horn;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1622,6 +1634,9 @@ namespace UnityEngine.InputSystem
                 @ChangeView.started += instance.OnChangeView;
                 @ChangeView.performed += instance.OnChangeView;
                 @ChangeView.canceled += instance.OnChangeView;
+                @Horn.started += instance.OnHorn;
+                @Horn.performed += instance.OnHorn;
+                @Horn.canceled += instance.OnHorn;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1710,6 +1725,9 @@ namespace UnityEngine.InputSystem
                 @ChangeView.started -= instance.OnChangeView;
                 @ChangeView.performed -= instance.OnChangeView;
                 @ChangeView.canceled -= instance.OnChangeView;
+                @Horn.started -= instance.OnHorn;
+                @Horn.performed -= instance.OnHorn;
+                @Horn.canceled -= instance.OnHorn;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1990,6 +2008,7 @@ namespace UnityEngine.InputSystem
             void OnWiperOnce(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnChangeView(InputAction.CallbackContext context);
+            void OnHorn(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {
