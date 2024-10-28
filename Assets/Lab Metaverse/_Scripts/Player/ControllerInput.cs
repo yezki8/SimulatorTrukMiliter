@@ -85,6 +85,7 @@ namespace PG
         float TargetHorizontal;
 
         CarLighting CarLighting;
+        private bool _isFromMain = false;
 
         event System.Action OnDestroyAction;
 
@@ -151,11 +152,15 @@ namespace PG
             controls.Player.PrevGear.performed += ctx => PrevGear();
 
             // car lights
-            controls.Player.SwitchLights.performed += ctx => SwitchLights();
-            controls.Player.SwitchFarLights.performed += ctx => SwitchFarLights();
+            controls.Player.SwitchLights.performed += ctx => OnMainLightsOn();
+            controls.Player.SwitchLights.canceled += ctx => OnMainLightsOff();
+            controls.Player.SwitchFarLights.performed += ctx => OnFarLightsOn();
+            controls.Player.SwitchFarLights.canceled += ctx => OnFarLightsOff();
             controls.Player.SwitchDimLights.performed += ctx => SwitchDimLights();
             controls.Player.SwitchLeftTurnLights.performed += ctx => SwitchLeftTurnSignal();
+            controls.Player.SwitchLeftTurnLights.canceled += ctx => CarLighting.TurnsEnable(TurnsStates.Off);
             controls.Player.SwitchRightTurnLights.performed += ctx => SwitchRightTurnSignal();
+            controls.Player.SwitchRightTurnLights.canceled += ctx => CarLighting.TurnsEnable(TurnsStates.Off);
             controls.Player.SwitchAlarm.performed += ctx => SwitchAlarm();
 
             controls.Player.EngineOn.performed += ctx => EngineOn();
@@ -289,17 +294,39 @@ namespace PG
             }
         }
 
-        public void SwitchLights ()
+        public void OnMainLightsOn ()
         {
-            CarLighting.SwitchMainLights();
+            _isFromMain = true;
+            CarLighting.MainLightsOn();
         }
-        public void SwitchFarLights ()
+
+        public void OnMainLightsOff()
         {
-            CarLighting.SwitchFarLights();
+            _isFromMain = false;
+            CarLighting.MainLightsOff();
         }
+
         public void SwitchDimLights()
         {
             CarLighting.SwitchDimLights();
+        }
+
+        public void OnFarLightsOn()
+        {
+            CarLighting.FarLightsOn();
+        }
+
+        public void OnFarLightsOff()
+        {
+            CarLighting.FarLightsOff();
+            if (_isFromMain)
+            {
+                CarLighting.MainLightsOn();
+            }
+            else
+            {
+                CarLighting.MainLightsOff();
+            }
         }
 
         public void SwitchLeftTurnSignal ()
