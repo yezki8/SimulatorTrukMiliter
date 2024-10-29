@@ -41,7 +41,7 @@ public class ScoreBoardManager : MonoBehaviour
     {
         _scoreBoard.Add(score);
         // sort based on stopwatch value
-        _scoreBoard.Sort((a, b) => a.StopwatchValue.CompareTo(b.StopwatchValue));
+        _scoreBoard.Sort((a, b) => a.ScoreValue.CompareTo(b.ScoreValue));
     }
 
     public void DeleteScore(Score score)
@@ -63,8 +63,6 @@ public class ScoreBoardManager : MonoBehaviour
     {
         // disable when adding entries
         ScoreTable.SetActive(false);
-        Debug.Log("Showing Score Board with count:");
-        Debug.Log(_scoreBoard.Count);
         for (int i = 0; i < _scoreBoard.Count; i++)
         {
             GameObject entry = Instantiate(ScoreEntryPrefab, ScoreTable.transform);
@@ -73,8 +71,8 @@ public class ScoreBoardManager : MonoBehaviour
             entry.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
             entry.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _scoreBoard[i].PlayerName;
             entry.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = _scoreBoard[i].DateTime.ToString("dd-MM-yyyy HH:mm:ss");
-            entry.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = FloatToTimeString(_scoreBoard[i].StopwatchValue);
-            entry.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = FloatToTimeString(_scoreBoard[i].TimerValue);
+            entry.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = FloatToTimeString(_scoreBoard[i].TimerValue);
+            entry.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = (_scoreBoard[i].ScoreValue.ToString());
             ScoreBoardEntries.Add(entry);
         }
         ScoreTable.SetActive(true);
@@ -98,11 +96,5 @@ public class ScoreBoardManager : MonoBehaviour
     {
         _scoreBoard = new List<Score>();
         ScoreBoardEntries = new List<GameObject>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

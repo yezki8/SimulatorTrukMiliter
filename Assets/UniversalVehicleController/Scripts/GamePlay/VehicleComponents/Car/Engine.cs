@@ -84,7 +84,7 @@ namespace PG
                     CurrentAcceleration = 0;
                     CurrentBrake = 0;
                     CurrentTurbo = 0;
-                    if (CarControl != null && CarControl.Acceleration > 0.5f)
+                    if (CarControl != null && CarControl.Acceleration > 0.5f && !IsPlayerCar)
                     {
                         StartEngine ();
                     }
