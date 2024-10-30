@@ -21,7 +21,6 @@ public class IconHandler : MonoBehaviour
         for (int i = 0; i < icons.Count; i++)
         {
             (GameObject gameObject, RectTransform iconRectTransform) = icons[i];
-            Debug.Log($"Checkpoint Name: {gameObject.name}/{gameObject.transform.parent.gameObject.name} - Status: {gameObject.transform.parent.gameObject.activeSelf}");
             if (gameObject.transform.parent.gameObject.activeSelf)
             {
                 Vector3 offset = gameObject.transform.position - playerObject.transform.position;
