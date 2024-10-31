@@ -64,6 +64,7 @@ namespace PG
         public string WiperFastButton = "WiperFast";
         public string WiperOnceButton = "WiperOff";
         public string EngineOnButton = "EngineOn";
+        public string HornButton = "Horn";
 
         // public string ConnectTrailerButton = "ConnectTrailer";
         public string ResetCarButton = "ResetCar";
@@ -85,6 +86,7 @@ namespace PG
         float TargetHorizontal;
 
         CarLighting CarLighting;
+        CarSFX CarSFX;
         private bool _isFromMain = false;
 
         event System.Action OnDestroyAction;
@@ -164,6 +166,8 @@ namespace PG
             controls.Player.SwitchAlarm.performed += ctx => SwitchAlarm();
 
             controls.Player.EngineOn.performed += ctx => EngineOn();
+            controls.Player.Horn.performed += ctx => OnHornPressed();
+            controls.Player.Horn.canceled += ctx => OnHornReleased();
 
             // wipers
             // controls.Player.WiperSlow.performed += ctx => CarLighting.WipersEnable(WipersStates.Slow);
@@ -214,6 +218,8 @@ namespace PG
             if (Car)
             {
                 CarLighting = Car.GetComponent<CarLighting> ();
+                // get carsfx component in children gameobjects
+                CarSFX = Car.GetComponentInChildren<CarSFX>();
                 var aiControl = Car.GetComponent<ICarControl>();
                 if (aiControl == null || !(aiControl is PositioningAIControl))
                 {
@@ -349,6 +355,22 @@ namespace PG
             if (Car)
             {
                 Car.StartEngine();
+            }
+        }
+
+        public void OnHornPressed()
+        {
+            if (CarSFX)
+            {
+                CarSFX.HornOn();
+            }
+        }
+
+        public void OnHornReleased()
+        {
+            if (CarSFX)
+            {
+                CarSFX.HornOff();
             }
         }
 
