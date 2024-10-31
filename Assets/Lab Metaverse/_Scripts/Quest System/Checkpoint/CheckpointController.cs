@@ -130,7 +130,6 @@ public class CheckpointController : MonoBehaviour
 
     private void UpdateCheckpointIcon(bool status)
     {
-        Debug.Log("Checking checkpoint:" + gameObject.name);
         Transform checkpointIcon = transform.Find("Checkpoint Icon - bigmap");
         Transform finishIcon = transform.Find("Finish Icon - bigmap");
         if (status == true)
