@@ -12,13 +12,30 @@ public class InstructorObstacleController : MonoBehaviour
     public void TurnOffTruck()
     {
         //TO DO: if there's time, need to add more "mogok" feel to it
-        _carController.StopEngine();
+        if (_carController.EngineIsOn)
+        {
+            _carController.StopEngine();
+        }
+        else
+        {
+            Debug.Log("Engine is already off, but you're trying to turn it off regardless");
+        }
     }
 
     public void ChangeBrakeStatus()
     {
-        bool canBrakeNow = !_carController.CanBrake;
-        _carController.CanBrake = !canBrakeNow;
+        _carController.CanBrake  = !_carController.CanBrake;
+
+        _instructorObstacleUIHandler.ChangeBrakeButtonStatus(_carController.CanBrake);
+        Debug.Log("Sneed");
+    }
+
+    public void ChangeHandBrakeStatus()
+    {
+        _carController.CanHandBrake = !_carController.CanHandBrake;
+
+        _instructorObstacleUIHandler.ChangeHandBrakeButtonStatus(_carController.CanHandBrake);
+        Debug.Log("Feed");
     }
 
     public void ChangeBlowTireStatus(int wheelIndex)

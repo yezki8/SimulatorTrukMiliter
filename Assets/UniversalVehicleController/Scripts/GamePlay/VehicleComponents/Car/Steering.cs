@@ -178,53 +178,62 @@ namespace PG
         /// <summary>
         /// Braking logic.
         /// </summary>
-        void FixedUpdateBrakeLogic ()
+        void FixedUpdateBrakeLogic (bool canBrake, bool canHandBrake)
         {
             ABSIsActive = false;
             //HandBrake
             if (InHandBrake)
             {
-                for (int i = 0; i < Wheels.Length; i++)
+                if (canHandBrake)
                 {
-                    Wheels[i].SetHandBrake (true);
+                    for (int i = 0; i < Wheels.Length; i++)
+                    {
+                        Wheels[i].SetHandBrake(true);
+                    }
                 }
             }
             //Brake and acceleration pressed at the same time for burnout.
             else if (CurrentAcceleration > 0 && CurrentBrake > 0 && CurrentSpeed < 5)
             {
-                for (int i = 0; i < Wheels.Length; i++)
+                if (canBrake)
                 {
-                    Wheels[i].SetBrakeTorque (Wheels[i].DriveWheel ? 0 : CurrentBrake);
+                    for (int i = 0; i < Wheels.Length; i++)
+                    {
+                        Wheels[i].SetBrakeTorque(Wheels[i].DriveWheel ? 0 : CurrentBrake);
+                    }
                 }
             }
             //Just braking.
             else
             {
-                if (Steer.ABS > 0 && CurrentBrake > 0)
+                if (CanBrake)
                 {
-                    //ABS Logic.
-                    float maxSlipForEnableAbs = 2.8f - Steer.ABS * 1.2f;
-                    for (int i = 0; i < Wheels.Length; i++)
+                    if (Steer.ABS > 0 && CurrentBrake > 0)
                     {
-                        if (Wheels[i].ForwardSlipNormalized > maxSlipForEnableAbs)
+                        //ABS Logic.
+                        float maxSlipForEnableAbs = 2.8f - Steer.ABS * 1.2f;
+                        for (int i = 0; i < Wheels.Length; i++)
                         {
-                            Wheels[i].SetBrakeTorque (0);
-                            ABSIsActive |= true;
-                        }
-                        else
-                        {
-                            Wheels[i].SetBrakeTorque (CurrentBrake);
+                            if (Wheels[i].ForwardSlipNormalized > maxSlipForEnableAbs)
+                            {
+                                Wheels[i].SetBrakeTorque(0);
+                                ABSIsActive |= true;
+                            }
+                            else
+                            {
+                                Wheels[i].SetBrakeTorque(CurrentBrake);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    //Without ABS Logic.
-                    for (int i = 0; i < Wheels.Length; i++)
+                    else
                     {
-                        Wheels[i].SetBrakeTorque (CurrentBrake);
+                        //Without ABS Logic.
+                        for (int i = 0; i < Wheels.Length; i++)
+                        {
+                            Wheels[i].SetBrakeTorque(CurrentBrake);
+                        }
                     }
-                }
+                }                
             }
         }
 

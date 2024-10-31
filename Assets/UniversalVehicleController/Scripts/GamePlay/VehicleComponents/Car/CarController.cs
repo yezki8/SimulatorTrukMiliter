@@ -32,6 +32,7 @@ namespace PG
 
         [Header("Added By Metaverse Lab")]
         public bool CanBrake = true;
+        public bool CanHandBrake = true;
         [SerializeField] protected bool IsPlayerCar = false;
 
         protected override void Awake ()
@@ -61,10 +62,7 @@ namespace PG
             //Calling FixedUpdate in other parts of the component.
             FixedUpdateEngine ();
             FixedUpdateTransmition ();
-            if (CanBrake)
-            {
-                FixedUpdateBrakeLogic();
-            }
+            FixedUpdateBrakeLogic(CanBrake, CanHandBrake);
             FixedUpdateSteering ();
 
             //Steering wheel rotation.

@@ -52,8 +52,11 @@ public class FogOfWar : MonoBehaviour
     private void LateUpdate()
     {
         // move view mesh to player position
-        transform.position = new Vector3(player.position.x, player.position.y + castYOffset, player.position.z);
-        DrawFieldOfView();
+        if (player!= null)
+        {
+            transform.position = new Vector3(player.position.x, player.position.y + castYOffset, player.position.z);
+            DrawFieldOfView();
+        }
     }
 
     void DrawFieldOfView()
