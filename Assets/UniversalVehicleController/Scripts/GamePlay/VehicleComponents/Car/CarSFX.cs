@@ -7,7 +7,7 @@ namespace PG
     /// <summary>
     /// Sound effects, using FMOD.
     /// </summary>
-    public class CarSFX :VehicleSFX
+    public class CarSFX : VehicleSFX
     {
         [Header("CarSFX")]
 
@@ -36,12 +36,20 @@ namespace PG
 
         [SerializeField] List<AudioClip> BackFireClips;
 
-        [Header ("Wind Sound")]
+        [Header("Wind Sound")]
         [SerializeField] AudioSource SpeedWindSource;
         [SerializeField] float WindSoundStartSpeed = 20;
         [SerializeField] float WindSoundMaxSpeed = 100;
         [SerializeField] float WindSoundStartPitch = 0.4f;
         [SerializeField] float WindSoundMaxPitch = 1.5f;
+
+        [Header("Horn")]
+        [SerializeField] AudioSource HornSource;
+        [SerializeField] AudioSource HornTrailSource;
+        [SerializeField] AudioClip HornClip;
+        [SerializeField] AudioClip HornTrailClip;
+        [SerializeField] float LoopStart = 0.2f;
+        [SerializeField] float LoopEnd = 0.8f;
 
 #pragma warning restore 0649
 
@@ -51,15 +59,17 @@ namespace PG
         float[] EngineSourcesRanges = new float[1] { 1f };
         List<AudioSource> EngineSources = new List<AudioSource>();
 
-        protected override void Start ()
+        Coroutine HornCoroutine;
+
+        protected override void Start()
         {
-            base.Start ();
+            base.Start();
 
             Car = Vehicle as CarController;
 
             if (Car == null)
             {
-                Debug.LogErrorFormat ("[{0}] CarSFX without CarController in parent", name);
+                Debug.LogErrorFormat("[{0}] CarSFX without CarController in parent", name);
                 enabled = false;
                 return;
             }
@@ -72,7 +82,7 @@ namespace PG
                 }
                 else
                 {
-                    BoostSource.Stop ();
+                    BoostSource.Stop();
                 }
             }
 
@@ -84,7 +94,7 @@ namespace PG
                 }
                 else
                 {
-                    TurboSource.Stop ();
+                    TurboSource.Stop();
                 }
             }
 
@@ -99,15 +109,15 @@ namespace PG
                 List<AudioClip> engineClips = new List<AudioClip>();
                 if (LowEngineClip != null)
                 {
-                    engineClips.Add (LowEngineClip);
+                    engineClips.Add(LowEngineClip);
                 }
                 if (MediumEngineClip != null)
                 {
-                    engineClips.Add (MediumEngineClip);
+                    engineClips.Add(MediumEngineClip);
                 }
                 if (HighEngineClip != null)
                 {
-                    engineClips.Add (HighEngineClip);
+                    engineClips.Add(HighEngineClip);
                 }
 
                 if (engineClips.Count == 2)
@@ -131,22 +141,22 @@ namespace PG
                         if (EngineSourceRef.clip == engineClips[i])
                         {
                             engineSource = EngineSourceRef;
-                            EngineSourceRef.transform.SetSiblingIndex (EngineSourceRef.transform.parent.childCount);
+                            EngineSourceRef.transform.SetSiblingIndex(EngineSourceRef.transform.parent.childCount);
                         }
                         else
                         {
-                            engineSource = Instantiate (EngineSourceRef, EngineSourceRef.transform.parent);
+                            engineSource = Instantiate(EngineSourceRef, EngineSourceRef.transform.parent);
                             engineSource.clip = engineClips[i];
-                            engineSource.Play ();
+                            engineSource.Play();
                         }
 
-                        engineSource.name = string.Format ("Engine source ({0})", i);
-                        EngineSources.Add (engineSource);
+                        engineSource.name = string.Format("Engine source ({0})", i);
+                        EngineSources.Add(engineSource);
                     }
 
-                    if (!EngineSources.Contains (EngineSourceRef))
+                    if (!EngineSources.Contains(EngineSourceRef))
                     {
-                        Destroy (EngineSourceRef);
+                        Destroy(EngineSourceRef);
                     }
                 }
 
@@ -154,7 +164,7 @@ namespace PG
                 {
                     if (EngineSources != null && EngineSources.Count > 0)
                     {
-                        EngineSources.ForEach (s => s.pitch = 0);
+                        EngineSources.ForEach(s => s.pitch = 0);
                     }
                     else
                     {
@@ -170,39 +180,49 @@ namespace PG
                 UpdateAction += UpdateWindEffect;
             }
 
+            if (HornSource && HornClip)
+            {
+                HornSource.clip = HornClip;
+            }
+
+            if (HornTrailSource && HornTrailClip)
+            {
+                HornTrailSource.clip = HornTrailClip;
+            }
+
         }
 
-        void StartEngine (float startDellay)
+        void StartEngine(float startDellay)
         {
             if (StartEngineClip != null)
             {
-                OtherEffectsSource.PlayOneShot (StartEngineClip);
+                OtherEffectsSource.PlayOneShot(StartEngineClip);
             }
         }
 
-        void StopEngine ()
+        void StopEngine()
         {
             if (StopEngineClip != null)
             {
-                OtherEffectsSource.PlayOneShot (StartEngineClip);
+                OtherEffectsSource.PlayOneShot(StartEngineClip);
             }
         }
 
         //Base engine sounds
-        void UpdateEngine ()
+        void UpdateEngine()
         {
             if (Car.EngineIsOn)
             {
                 if (EngineSources.Count == 0 && EngineSourceRef && EngineSourceRef.gameObject.activeInHierarchy && !float.IsNaN(Car.EngineRPM))
                 {
-                    EngineSourceRef.pitch = Mathf.Lerp (MinEnginePitch, MaxEnginePitch, (Car.EngineRPM - Car.MinRPM) / (Car.MaxRPM - Car.MinRPM));
+                    EngineSourceRef.pitch = Mathf.Lerp(MinEnginePitch, MaxEnginePitch, (Car.EngineRPM - Car.MinRPM) / (Car.MaxRPM - Car.MinRPM));
                 }
 
                 // NaN Checks
                 else if (EngineSources.Count > 1 && !float.IsNaN(Car.EngineRPM))
                 {
                     float rpmNorm = ((Car.EngineRPM - Car.MinRPM) / (Car.MaxRPM - Car.MinRPM)).Clamp();
-                    float pith = Mathf.Lerp (MinEnginePitch, MaxEnginePitch, rpmNorm);
+                    float pith = Mathf.Lerp(MinEnginePitch, MaxEnginePitch, rpmNorm);
 
                     for (int i = 0; i < EngineSources.Count; i++)
                     {
@@ -210,45 +230,45 @@ namespace PG
 
                         if (i > 0 && rpmNorm < EngineSourcesRanges[i - 1])
                         {
-                            EngineSources[i].volume = Mathf.InverseLerp (0.2f, 0, EngineSourcesRanges[i - 1] - rpmNorm);
+                            EngineSources[i].volume = Mathf.InverseLerp(0.2f, 0, EngineSourcesRanges[i - 1] - rpmNorm);
                         }
                         else if (rpmNorm > EngineSourcesRanges[i])
                         {
-                            EngineSources[i].volume = Mathf.InverseLerp (0.3f, 0, rpmNorm - EngineSourcesRanges[i]);
+                            EngineSources[i].volume = Mathf.InverseLerp(0.3f, 0, rpmNorm - EngineSourcesRanges[i]);
                         }
                         else
                         {
                             EngineSources[i].volume = 1;
                         }
 
-                        if (Mathf.Approximately (EngineSources[i].volume, 0) && EngineSources[i].isPlaying)
+                        if (Mathf.Approximately(EngineSources[i].volume, 0) && EngineSources[i].isPlaying)
                         {
-                            EngineSources[i].Stop ();
+                            EngineSources[i].Stop();
                         }
 
                         if (EngineSources[i].volume > 0 && !EngineSources[i].isPlaying)
                         {
-                            EngineSources[i].Play ();
+                            EngineSources[i].Play();
                         }
                     }
                 }
             }
             else //if (!EngineIsON)
             {
-                float pith = Mathf.Lerp (0, MinEnginePitch, (Car.EngineRPM / Car.MinRPM).Clamp());
+                float pith = Mathf.Lerp(0, MinEnginePitch, (Car.EngineRPM / Car.MinRPM).Clamp());
                 if (EngineSources.Count == 0 && EngineSourceRef && EngineSourceRef.gameObject.activeInHierarchy)
                 {
                     EngineSourceRef.pitch = Mathf.MoveTowards(EngineSourceRef.pitch, pith, Time.deltaTime);
                 }
                 else if (EngineSources.Count > 1)
                 {
-                    EngineSources[0].pitch = Mathf.MoveTowards (EngineSources[0].pitch, pith, Time.deltaTime);
+                    EngineSources[0].pitch = Mathf.MoveTowards(EngineSources[0].pitch, pith, Time.deltaTime);
                     for (int i = 1; i < EngineSources.Count; i++)
                     {
                         EngineSources[i].pitch = pith;
                         if (EngineSources[i].isPlaying)
                         {
-                            EngineSources[i].Stop ();
+                            EngineSources[i].Stop();
                         }
                     }
                 }
@@ -256,60 +276,101 @@ namespace PG
         }
 
         //Additional turbo sound
-        void UpdateTurbo ()
+        void UpdateTurbo()
         {
             if (Car.Engine.EnableTurbo && TurboSource && TurboSource.gameObject.activeInHierarchy)
             {
-                TurboSource.volume = Mathf.Lerp (0, MaxTurboVolume, Car.CurrentTurbo);
-                TurboSource.pitch = Mathf.Lerp (MinTurboPith, MaxTurboPith, Car.CurrentTurbo);
+                TurboSource.volume = Mathf.Lerp(0, MaxTurboVolume, Car.CurrentTurbo);
+                TurboSource.pitch = Mathf.Lerp(MinTurboPith, MaxTurboPith, Car.CurrentTurbo);
                 if (Car.CurrentTurbo > 0.2f && (Car.CurrentAcceleration < 0.2f || Car.InChangeGear) && ((Time.realtimeSinceStartup - LastBlowOffTime) > MinTimeBetweenBlowOffSounds))
                 {
-                    OtherEffectsSource.PlayOneShot (TurboBlowOffClip, Car.CurrentTurbo * MaxBlowOffVolume);
+                    OtherEffectsSource.PlayOneShot(TurboBlowOffClip, Car.CurrentTurbo * MaxBlowOffVolume);
                     LastBlowOffTime = Time.realtimeSinceStartup;
                 }
             }
         }
 
         //Additional boost sound
-        void UpdateBoost ()
+        void UpdateBoost()
         {
             if (Car.Engine.EnableBoost && BoostSource && BoostSource.gameObject.activeInHierarchy)
             {
                 if (Car.InBoost && !BoostSource.isPlaying)
                 {
-                    BoostSource.Play ();
+                    BoostSource.Play();
                 }
                 if (!Car.InBoost && BoostSource.isPlaying)
                 {
-                    BoostSource.Stop ();
+                    BoostSource.Stop();
                 }
             }
         }
 
-        void UpdateWindEffect ()
+        void UpdateWindEffect()
         {
             if (Car.IsPlayerVehicle)
             {
-                var curentSpeedNorm = Mathf.InverseLerp (WindSoundStartSpeed, WindSoundMaxSpeed, Car.CurrentSpeed);
+                var curentSpeedNorm = Mathf.InverseLerp(WindSoundStartSpeed, WindSoundMaxSpeed, Car.CurrentSpeed);
                 if (curentSpeedNorm > 0 && !SpeedWindSource.isPlaying)
                 {
-                    SpeedWindSource.Play ();
+                    SpeedWindSource.Play();
                 }
                 SpeedWindSource.volume = curentSpeedNorm;
-                SpeedWindSource.pitch = Mathf.Lerp (WindSoundStartPitch, WindSoundMaxPitch, curentSpeedNorm);
+                SpeedWindSource.pitch = Mathf.Lerp(WindSoundStartPitch, WindSoundMaxPitch, curentSpeedNorm);
             }
             else if (SpeedWindSource.isPlaying)
             {
-                SpeedWindSource.Stop ();
+                SpeedWindSource.Stop();
             }
         }
 
-        void OnBackFire ()
+        void OnBackFire()
         {
             if (BackFireClips != null && BackFireClips.Count > 0)
             {
-                OtherEffectsSource.PlayOneShot (BackFireClips[Random.Range (0, BackFireClips.Count - 1)]);
+                OtherEffectsSource.PlayOneShot(BackFireClips[Random.Range(0, BackFireClips.Count - 1)]);
             }
+        }
+
+        // create a horn loop mechanism
+        // start the horn sound
+        // after reaching loop end, loop back to loop start
+        // after horn button is released, play sound after the loop end
+
+        public void HornOn()
+        {
+            if (HornSource && HornClip)
+            {
+                HornSource.loop = true;
+                HornSource.Play();
+
+                // if the horn is not released, loop the horn sound
+                HornCoroutine = StartCoroutine(LoopHorn());
+            }
+        }
+
+        IEnumerator LoopHorn()
+        {
+            while (HornSource.isPlaying)
+            {
+                if (HornSource.time >= LoopEnd * HornSource.clip.length)
+                {
+                    HornSource.time = LoopStart * HornSource.clip.length;
+                }
+                yield return null;
+            }
+        }
+
+        public void HornOff()
+        {
+            // check if coroutine is running and stop it
+            StopCoroutine(HornCoroutine);
+            HornSource.loop = false;
+            if (HornTrailSource && HornTrailClip)
+            {
+                HornTrailSource.Play();
+            }
+            HornSource.Stop();
         }
     }
 }
