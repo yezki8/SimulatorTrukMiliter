@@ -39,7 +39,6 @@ public class IconHandler : MonoBehaviour
         for (int i = 0; i < icons.Count; i++)
         {
             (GameObject gameObject, _) = icons[i];
-            Debug.Log($"{gameObject.name} in {gameObject.transform.parent.gameObject.name} is {gameObject.transform.parent.gameObject.activeSelf}");
             if (!gameObject.transform.parent.gameObject.activeSelf)
             {
                 RemoveIcon(gameObject);
