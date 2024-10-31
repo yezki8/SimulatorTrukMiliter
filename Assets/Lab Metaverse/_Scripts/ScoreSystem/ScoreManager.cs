@@ -32,19 +32,6 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // temporary control handling
-        //ControlTimerDirectly();
-    }
-
     void ControlTimerDirectly()
     {
         // space to start/pause/unpause, r to reset
@@ -84,7 +71,21 @@ public class ScoreManager : MonoBehaviour
 
     public void RecordScore()
     {
-        _scoreBoardManager.AddScore(new Score("Player", System.DateTime.Now, _timerCountdown.CurrentTime, _timerStopwatch.CurrentTime));
+        int score = CalculateScore(_timerStopwatch.CurrentTime);
+        _scoreBoardManager.AddScore(new Score("Player", System.DateTime.Now, _timerStopwatch.CurrentTime, score));
+    }
+
+    int CalculateScore(float currTime)
+    {
+        float thresholdSecond = TimerCountdown.Instance.StartTime;
+        float score = 100;
+
+        float timePlusage = currTime - thresholdSecond;
+        if (timePlusage > 0)
+        {
+            score = ((thresholdSecond - timePlusage) / thresholdSecond) * 100;
+        }
+        return (int)score;
     }
 
     public void PrintScore()

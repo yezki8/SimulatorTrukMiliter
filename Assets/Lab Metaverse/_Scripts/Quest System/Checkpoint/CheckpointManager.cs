@@ -6,6 +6,7 @@ using PG;
 
 public class CheckpointManager : MonoBehaviour
 {
+    public int ActiveLevel = 1;
     public CheckpointController[] Checkpoints;        //0 is the initial spawn place
 
     public GameObject Player;
@@ -54,7 +55,17 @@ public class CheckpointManager : MonoBehaviour
         }
         Checkpoints[0].SetActiveCheckpoint(true);
 
-        Level2Parent.SetActive(false);
+        switch (ActiveLevel)
+        {
+            case 1:
+                Level1Parent.SetActive(true);
+                Level2Parent.SetActive(false);
+                break;
+            case 2:
+                Level1Parent.SetActive(false);
+                Level2Parent.SetActive(true);
+                break;
+        }
     }
 
     public void RespawnAtCheckpoint()
@@ -173,5 +184,10 @@ public class CheckpointManager : MonoBehaviour
         }
 
         return targetPoint;
+    }
+
+    public void ChangeLevel(int levelIndex)
+    {
+        ActiveLevel = levelIndex;
     }
 }

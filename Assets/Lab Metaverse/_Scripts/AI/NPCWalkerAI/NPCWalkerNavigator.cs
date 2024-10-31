@@ -5,36 +5,42 @@ using UnityEngine.AI;
 
 public class NPCWalkerNavigator : MonoBehaviour
 {
-    private Transform initTransform;
+    private Vector3 initPos;
+    private Quaternion initRot;
     [SerializeField] private Transform _navTarget;
+    private Transform currentNavTarget;
     [SerializeField] private NavMeshAgent _agent;
 
     // Start is called before the first frame update
     void Start()
     {
-        initTransform = this.transform;
+        initPos = this.transform.position;
+        initRot = this.transform.rotation;
+        ResetPedestrian();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (_navTarget != null )
-            _agent.destination = _navTarget.position;
+        if (currentNavTarget != null)
+        {
+            _agent.destination = currentNavTarget.position;
+        }
+    }
+
+    public void ResetPedestrian()
+    {
+        currentNavTarget = _navTarget;
+        this.transform.SetPositionAndRotation(initPos, initRot);
+        this.gameObject.SetActive(false);
+    }
+
+    public void ActivatePedestrian()
+    {
+        this.gameObject.SetActive(true);
     }
 
     public void AssignDestination(Transform target)
     {
-        _navTarget = target;
+        currentNavTarget = target; 
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-
-    //    Debug.Log("Feed");
-    //    if (other.tag.Contains("WalkingTarget"))
-    //    {
-    //        AssignDestination(other.GetComponent<NPCWalkerDestinationPoint>().NextWalkingTarget);
-    //        Debug.Log("Sneed");
-    //    }
-    //}
 }
