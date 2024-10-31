@@ -21,15 +21,20 @@ public class IconHandler : MonoBehaviour
         for (int i = 0; i < icons.Count; i++)
         {
             (GameObject gameObject, RectTransform iconRectTransform) = icons[i];
-            if (gameObject.transform.parent.gameObject.activeSelf)
-            {
-                Vector3 offset = gameObject.transform.position - playerObject.transform.position;
-                offset = Quaternion.Inverse(playerObject.transform.rotation) * offset;
-                offset = Vector3.ClampMagnitude(offset, miniMapCamera.orthographicSize);
-                offset = offset / miniMapCamera.orthographicSize * (miniMapRectTransform.rect.width / 2f);
-                iconRectTransform.anchoredPosition = new Vector2(offset.x, offset.z);
-            }
-            else
+            
+            Vector3 offset = gameObject.transform.position - playerObject.transform.position;
+            offset = Quaternion.Inverse(playerObject.transform.rotation) * offset;
+            offset = Vector3.ClampMagnitude(offset, miniMapCamera.orthographicSize);
+            offset = offset / miniMapCamera.orthographicSize * (miniMapRectTransform.rect.width / 2f);
+            iconRectTransform.anchoredPosition = new Vector2(offset.x, offset.z);
+        }
+    }
+
+    public void RemoveUnusedCheckpoint(){
+        for (int i = 0; i < icons.Count; i++)
+        {
+            (GameObject gameObject, _) = icons[i];
+            if (!gameObject.transform.parent.gameObject.activeSelf)
             {
                 RemoveIcon(gameObject);
             }
