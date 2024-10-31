@@ -10,6 +10,7 @@ public class IconHandler : MonoBehaviour
     [SerializeField] private RectTransform miniMapRectTransform;
     [SerializeField] private Camera miniMapCamera;
     private List<(GameObject gameObject, RectTransform iconRectTransform)> icons;
+    [SerializeField] private GameObject gameState;
 
     void Awake()
     {
@@ -27,6 +28,10 @@ public class IconHandler : MonoBehaviour
             offset = Vector3.ClampMagnitude(offset, miniMapCamera.orthographicSize);
             offset = offset / miniMapCamera.orthographicSize * (miniMapRectTransform.rect.width / 2f);
             iconRectTransform.anchoredPosition = new Vector2(offset.x, offset.z);
+        }
+        if (gameState.GetComponent<GameStateController>().GameState == StateOfGame.Match)
+        {
+            RemoveUnusedCheckpoint();
         }
     }
 
