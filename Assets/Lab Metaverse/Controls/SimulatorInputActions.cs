@@ -317,7 +317,7 @@ namespace UnityEngine.InputSystem
                 {
                     ""name"": """",
                     ""id"": ""8020a103-ab4d-4fbb-88ba-399e1936b39f"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/trigger"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button5"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -338,34 +338,12 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": """",
-                    ""id"": ""47428f97-c705-41b0-87a5-aafc40c222aa"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextGear"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""2986d2ee-e91c-4a41-a001-cbaf5434e334"",
                     ""path"": ""<XInputController>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""NextGear"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d4343cba-986d-4d7d-9b07-33d2bf0c8ee6"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button6"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PrevGear"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
