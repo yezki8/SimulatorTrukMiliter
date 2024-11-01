@@ -130,8 +130,8 @@ namespace PG
             controls.Player.Acceleration.canceled += ctx => SetAcceleration(0);
             controls.Player.BrakeReverse.performed += ctx => SetBrakeReverse(controls.Player.BrakeReverse.ReadValue<float>());
             controls.Player.BrakeReverse.canceled += ctx => SetBrakeReverse(0);
-            controls.Player.HandBrake.performed += ctx => SetHandBrake(controls.Player.HandBrake.ReadValue<float>() > 0);
-            controls.Player.HandBrake.canceled += ctx => SetHandBrake(false);
+            controls.Player.HandBrake.performed += ctx => SetHandBrake(false);
+            controls.Player.HandBrake.canceled += ctx => SetHandBrake(true);
 
             // gear and clutch
             controls.Player.Clutch.performed += ctx => SetClutch(controls.Player.Clutch.ReadValue<float>());
