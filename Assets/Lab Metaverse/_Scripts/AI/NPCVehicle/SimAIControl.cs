@@ -40,11 +40,6 @@ namespace PG
         // lighting
         CarLighting CarLighting;
 
-        // vehicle hard reset mechanism
-        private int _resetInPlaceCount = 0;
-        private Vector3 _previousPosition = Vector3.zero;
-        private float _previousRotation = 0;
-
         float ResetTimer = 0;
         [SerializeField] private float ResetTimeInSeconds = 10;
 
@@ -64,10 +59,6 @@ namespace PG
             {
                 SimAIConfig = new SimAIConfig ();
             }
-
-            // Set the initial position and rotation
-            _previousPosition = transform.position;
-            _previousRotation = transform.rotation.eulerAngles.y;
 
             StartHits ();
         }
@@ -245,11 +236,8 @@ namespace PG
                     AheadRB = null;
                     // reset vehicle damage
                     Car.RestoreVehicle();
-                    Car.ResetVehicle ();
                     // reset location
-                    transform.position = _previousPosition;
-                    transform.rotation = Quaternion.Euler(0, _previousRotation, 0);
-                    ResetProgress();
+                    ResetAIControl();
                     ResetTimer = 0;
                 }
             }
