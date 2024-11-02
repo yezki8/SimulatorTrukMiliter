@@ -37,9 +37,6 @@ namespace PG
         Rigidbody AheadRB;                                                      //Nearest ahead car.
         float DistanceToAheadCollider;                                          //Distance to the nearest car.
 
-        private Vector3 _previousPosition = Vector3.zero;
-        private float _previousRotation = 0;
-
         // Convoy specific
         public bool ConvoyEnabled = false;
         public UnityEvent OnVehicleFinish;
@@ -59,12 +56,6 @@ namespace PG
             {
                 ConvoyAIConfig = new ConvoyAIConfig();
             }
-
-            // Set the initial position and rotation
-            _previousPosition = this.transform.position;
-            _previousRotation = this.transform.rotation.eulerAngles.y;
-
-            Debug.Log("Pos + Rot: " + _previousPosition + " " + _previousRotation);
 
             StartHits ();
         }
@@ -95,21 +86,6 @@ namespace PG
             {
                 BrakeToStop();
             }
-        }
-
-        public void ResetAIControl()
-        {
-            Debug.Log("Current Pos + Rot: " + transform.position + " " + transform.rotation);
-
-            transform.position = _previousPosition;
-            transform.rotation = Quaternion.Euler(0, _previousRotation, 0);
-            hasEnteredFinishLocation = false;
-            Debug.Log("Back to Pos + Rot: " + _previousPosition + " " + _previousRotation);
-            Debug.Log("Applied Pos + Rot: " + transform.position + " " + transform.rotation);
-
-
-            // reset progress
-            ResetProgress();
         }
 
         /// <summary>

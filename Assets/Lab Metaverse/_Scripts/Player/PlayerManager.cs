@@ -47,13 +47,14 @@ public class PlayerManager : MonoBehaviour
             _currentRoadSegment = hit.collider.GetComponent<RoadSegment>();
             if (_currentRoadObject != _detectedRoadObject)
             {
+                // temporarily commented out
                 if (_currentRoadSegment != null)
                 {
-                    Debug.Log("Detected road segment: " + _currentRoadSegment.roadSegmentID + "\nMax speed: " + _currentRoadSegment.getMaxSpeedLimit() + ", Min speed: " + _currentRoadSegment.getMinSpeedLimit());
+                    // Debug.Log("Detected road segment: " + _currentRoadSegment.roadSegmentID + "\nMax speed: " + _currentRoadSegment.getMaxSpeedLimit() + ", Min speed: " + _currentRoadSegment.getMinSpeedLimit());
                 }
                 else
                 {
-                    Debug.LogWarning("Hit object does not have a RoadSegment component.");
+                    // Debug.LogWarning("Hit object does not have a RoadSegment component.");
                 }
             }
         }
