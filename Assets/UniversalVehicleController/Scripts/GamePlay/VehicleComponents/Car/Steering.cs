@@ -206,7 +206,7 @@ namespace PG
             //Just braking.
             else
             {
-                if (CanBrake)
+                if (canBrake)
                 {
                     if (Steer.ABS > 0 && CurrentBrake > 0)
                     {

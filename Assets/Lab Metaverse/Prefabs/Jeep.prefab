@@ -30774,6 +30774,8 @@ MonoBehaviour:
   SteerWheel: {fileID: 0}
   ForceFeedback: {fileID: 0}
   CanBrake: 1
+  CanHandBrake: 1
+  IsPlayerCar: 0
   StartEngineInAwake: 0
   StartEngineDellay: 1.5
   Engine:
@@ -61529,6 +61531,12 @@ MonoBehaviour:
   WindSoundMaxSpeed: 100
   WindSoundStartPitch: 0.4
   WindSoundMaxPitch: 1.5
+  HornSource: {fileID: 0}
+  HornTrailSource: {fileID: 0}
+  HornClip: {fileID: 0}
+  HornTrailClip: {fileID: 0}
+  LoopStart: 0.2
+  LoopEnd: 0.8
 --- !u!1 &7885102967145084357
 GameObject:
   m_ObjectHideFlags: 0

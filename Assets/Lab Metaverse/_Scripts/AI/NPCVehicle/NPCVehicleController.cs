@@ -18,9 +18,9 @@ public class NPCVehicleController : MonoBehaviour
 
     public void ResetNPCVehicle()
     {
-        Debug.Log($"NPC Resetted\n" +
+        /* Debug.Log($"NPC Resetted\n" +
             $"Init pos = {initPos}, init rot = {initRot}\n" +
-            $"Curr pos = {this.transform.position}, curr rot = {this.transform.rotation}");
+            $"Curr pos = {this.transform.position}, curr rot = {this.transform.rotation}"); */
         this.GetComponent<CarController>().ResetVehicle();
         this.GetComponent<Rigidbody>().velocity = Vector3.zero;
         this.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
@@ -29,9 +29,9 @@ public class NPCVehicleController : MonoBehaviour
         this.GetComponent<Rigidbody>().MoveRotation(initRot);
         this.GetComponent<Rigidbody>().isKinematic = false;
 
-        Debug.Log($"After Reset\n" +
+        /* Debug.Log($"After Reset\n" +
             $"Init pos = {initPos}, init rot = {initRot}\n" +
-            $"Curr pos = {this.transform.position}, curr rot = {this.transform.rotation}");
+            $"Curr pos = {this.transform.position}, curr rot = {this.transform.rotation}"); */
         this.gameObject.SetActive(false);
     }
 

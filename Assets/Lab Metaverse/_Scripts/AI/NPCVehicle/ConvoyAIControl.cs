@@ -61,8 +61,10 @@ namespace PG
             }
 
             // Set the initial position and rotation
-            _previousPosition = transform.position;
-            _previousRotation = transform.rotation.eulerAngles.y;
+            _previousPosition = this.transform.position;
+            _previousRotation = this.transform.rotation.eulerAngles.y;
+
+            Debug.Log("Pos + Rot: " + _previousPosition + " " + _previousRotation);
 
             StartHits ();
         }
@@ -97,9 +99,14 @@ namespace PG
 
         public void ResetAIControl()
         {
+            Debug.Log("Current Pos + Rot: " + transform.position + " " + transform.rotation);
+
             transform.position = _previousPosition;
             transform.rotation = Quaternion.Euler(0, _previousRotation, 0);
             hasEnteredFinishLocation = false;
+            Debug.Log("Back to Pos + Rot: " + _previousPosition + " " + _previousRotation);
+            Debug.Log("Applied Pos + Rot: " + transform.position + " " + transform.rotation);
+
 
             // reset progress
             ResetProgress();
