@@ -229,15 +229,9 @@ namespace PG
                 }
                 else
                 {
-                    Horizontal = 0;
-                    Vertical = 0;
-                    // clear raycast parameters
-                    DistanceToAheadCollider = float.MaxValue;
-                    AheadRB = null;
-                    // reset vehicle damage
-                    Car.RestoreVehicle();
+                    ResetAIVehicleControlState();
                     // reset location
-                    ResetAIControl();
+                    ResetPosRotProgress();
                     ResetTimer = 0;
                 }
             }
@@ -245,6 +239,17 @@ namespace PG
             {
                 ResetTimer = 0;
             }
+        }
+
+        public void ResetAIVehicleControlState()
+        {
+            Vertical = 0;
+            Horizontal = 0;
+            // clear raycast parameters
+            DistanceToAheadCollider = float.MaxValue;
+            AheadRB = null;
+            // reset vehicle damage
+            Car.RestoreVehicle();
         }
 
         #region Hits

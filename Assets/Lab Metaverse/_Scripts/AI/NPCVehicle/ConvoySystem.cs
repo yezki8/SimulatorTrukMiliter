@@ -109,7 +109,7 @@ public class ConvoySystem : MonoBehaviour
         {
             vehicle.ConvoyEnabled = false;
             vehicle.Car.ResetVehicle();
-            vehicle.ResetAIControl();
+            vehicle.ResetPosRotProgress();
         }
         DisableTrigger(endPoint);
         EnableTrigger(startPoint);

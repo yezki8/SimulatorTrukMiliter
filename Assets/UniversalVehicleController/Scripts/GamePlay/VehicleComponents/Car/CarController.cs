@@ -119,8 +119,14 @@ namespace PG
         public override void ResetVehicle ()
         {
             base.ResetVehicle ();
+            StopEngine();
+            CurrentGear = 0;
+        }
+
+        public void ResetVehicleToIdle()
+        {
+            base.ResetVehicle();
             EngineRPM = Engine.MinRPM;
-            // StopEngine();
             CurrentGear = 0;
         }
 

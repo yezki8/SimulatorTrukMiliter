@@ -17,8 +17,8 @@ namespace PG
         public float ProgressDistance { get; set; }                     //Distance of progress along the AIPath
         public AIPath.RoutePoint ProgressPoint { get; private set; }
 
-        protected Vector3 _initPosition = Vector3.zero;                   // initial position of the vehicle
-        protected float _initRotation = 0;                                // initial rotation of the vehicle
+        protected Vector3 _initPosition;                                // initial position of the vehicle
+        protected Vector3 _initRotation;                                // initial rotation of the vehicle
 
         /// <summary>
         /// If the path is not looped, then the property returns true when the end of the path is reached.
@@ -31,21 +31,26 @@ namespace PG
             } 
         }
 
-        public void ResetAIControl()
+        public void ResetPosRotProgress()
         {
-            this.GetComponent<CarController>().ResetVehicle();
-            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            this.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            this.GetComponent<Rigidbody>().isKinematic = true;
-            this.GetComponent<Rigidbody>().position = _initPosition;
-            this.GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, _initRotation, 0);
-            this.GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<CarController>().ResetVehicleToIdle();
+            transform.position = _initPosition;
+            transform.eulerAngles = _initRotation;
+            if (TryGetComponent<Rigidbody>(out var rb))
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                rb.isKinematic = true;
+                rb.position = _initPosition;
+                rb.rotation = Quaternion.Euler(_initRotation);
+                rb.isKinematic = false;
+            }
 
             // reset progress
-            ResetProgress();
+            ResetPathProgress();
         }
 
-        public void ResetProgress()
+        public void ResetPathProgress()
         {
             ProgressDistance = 0;
             ProgressPoint = AIPath.GetRoutePoint(0);
@@ -81,8 +86,8 @@ namespace PG
             base.Start ();
 
             // Set the initial position and rotation of the vehicle
-            _initPosition = this.GetComponent<Rigidbody>().position;
-            _initRotation = this.GetComponent<Rigidbody>().rotation.eulerAngles.y;
+            _initPosition = GetComponent<Rigidbody>().position;
+            _initRotation = transform.eulerAngles;
 
             BaseAIConfig = AIConfigAsset.AIConfig;
 
