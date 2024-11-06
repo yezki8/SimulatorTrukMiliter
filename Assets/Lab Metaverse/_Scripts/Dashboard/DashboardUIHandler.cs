@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using PG;
 
 public class DashboardUIHandler : MonoBehaviour
 {
+    [SerializeField] private CarController _carController;
     [SerializeField] private TextMeshProUGUI _gearText;
     [Header("Parameters for speedometer")]
     [SerializeField] private RectTransform _speedPin;
@@ -18,6 +20,7 @@ public class DashboardUIHandler : MonoBehaviour
     [SerializeField] private Image _farLampIndicator;
     [SerializeField] private Image _rightTurnIndicator;
     [SerializeField] private Image _leftTurnIndicator;
+    [SerializeField] private Image _handBreakIndicator;
 
 
     public void Start()
@@ -26,6 +29,11 @@ public class DashboardUIHandler : MonoBehaviour
 
         ChangeMainLampStatus(false);
         ChangeFarLampStatus(false);
+    }
+
+    private void Update()
+    {
+        UpdateHandBreakStatus();
     }
 
     public void DisplayDashboard(float speedZ, float rpmZ, int gear)
@@ -83,5 +91,21 @@ public class DashboardUIHandler : MonoBehaviour
     public void ChangeFarLampStatus(bool status)
     {
         _farLampIndicator.enabled = status;
+    }
+
+    public void UpdateHandBreakStatus()
+    {
+        Color color;
+        color = _handBreakIndicator.color;
+        float offSpeed = 10 * Time.deltaTime;
+        if (_carController.InHandBrake)
+        {
+            color.a = 1;
+        }
+        else
+        {
+            color.a = Mathf.MoveTowards(color.a, 0, offSpeed);
+        }
+        _handBreakIndicator.color = color;
     }
 }

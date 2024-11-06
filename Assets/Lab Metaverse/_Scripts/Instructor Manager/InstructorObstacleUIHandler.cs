@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using PG;
 
 public class InstructorObstacleUIHandler : MonoBehaviour
 {
+    [SerializeField] private CarController _carController;
     [SerializeField] private List<Button> _blowTireButtons;
     [SerializeField] private List<Button> _lockButtons;
     [SerializeField] private CanvasGroup CrackWindowPanels;
