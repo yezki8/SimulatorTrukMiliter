@@ -284,6 +284,7 @@ namespace PG
                 }
 
                 CurrentTurnsState = TurnsStates.Off;
+                _dashboardUIHandler.CallTurnSignal((int)CurrentTurnsState, false);
             }
 
             if (AdditionalLighting)
@@ -310,7 +311,7 @@ namespace PG
         IEnumerator DoTurnsEnable (TurnsStates state)
         {
             ActiveTurns = new List<LightObject> ();
-
+            
             switch (state)
             {
                 case TurnsStates.Left:
@@ -334,8 +335,10 @@ namespace PG
             while (true)
             {
                 ActiveTurns.ForEach (l => l.Switch (true));
+                _dashboardUIHandler.CallTurnSignal((int)CurrentTurnsState, true);
                 yield return new WaitForSeconds (TurnsSwitchHalfRepeatTime);
                 ActiveTurns.ForEach (l => l.Switch (false));
+                _dashboardUIHandler.CallTurnSignal((int)CurrentTurnsState, false);
                 yield return new WaitForSeconds (TurnsSwitchHalfRepeatTime);
             }
         }

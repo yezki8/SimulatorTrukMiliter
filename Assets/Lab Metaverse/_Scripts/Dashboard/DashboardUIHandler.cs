@@ -18,16 +18,14 @@ public class DashboardUIHandler : MonoBehaviour
     [SerializeField] private Image _farLampIndicator;
     [SerializeField] private Image _rightTurnIndicator;
     [SerializeField] private Image _leftTurnIndicator;
-    private int turnIndicatorValue = 0;     //0 = off, 1 = left, 2 = right;
-    private IEnumerator turnSignalLeft;
-    private IEnumerator turnSignalRight;
 
 
     public void Start()
     {
-        turnIndicatorValue = 0;
-        turnSignalLeft = TurnOnTurnSignal(1);
-        turnSignalRight = TurnOnTurnSignal(2);
+        CallTurnSignal(0, false);
+
+        ChangeMainLampStatus(false);
+        ChangeFarLampStatus(false);
     }
 
     public void DisplayDashboard(float speedZ, float rpmZ, int gear)
@@ -58,43 +56,23 @@ public class DashboardUIHandler : MonoBehaviour
         _gearText.SetText(gearText);
     }
 
-    public void CallTurnSignal(int index)
+    public void CallTurnSignal(int index, bool status)
     {
         if (index == 0)
         {
-            StopCoroutine(turnSignalLeft); 
-            StopCoroutine(turnSignalRight);
+            _leftTurnIndicator.enabled = false;
+            _rightTurnIndicator.enabled = false;
         }
-        else if (index == 1)
-        {
-            StartCoroutine(turnSignalLeft);
-            StopCoroutine(turnSignalRight);
-        }
-        else if (index == 2)
-        {
-            StopCoroutine(turnSignalLeft);
-            StartCoroutine(turnSignalRight);
-        }
-    }
-
-    IEnumerator TurnOnTurnSignal(int index)
-    {
-        Image targetInd = null;
         if (index == 1)
         {
-            targetInd = _leftTurnIndicator;
+            _leftTurnIndicator.enabled = status;
+            _rightTurnIndicator.enabled = false;
         }
         else if (index == 2)
         {
-            targetInd = _rightTurnIndicator;
+            _leftTurnIndicator.enabled = false;
+            _rightTurnIndicator.enabled = status;
         }
-
-        targetInd.enabled = true;
-        yield return new WaitForSeconds(0.5f);
-        targetInd.enabled = false;
-        yield return new WaitForSeconds(0.5f);
-
-        StartCoroutine(TurnOnTurnSignal(index));
     }
 
     public void ChangeMainLampStatus(bool status)
