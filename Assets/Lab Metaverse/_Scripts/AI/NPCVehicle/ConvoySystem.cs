@@ -107,9 +107,13 @@ public class ConvoySystem : MonoBehaviour
         }
         foreach (ConvoyAIControl vehicle in _vehicleControls)
         {
-            vehicle.ConvoyEnabled = false;
-            vehicle.Car.ResetVehicle();
-            vehicle.ResetPosRotProgress();
+            // check if the vehicle actually exist
+            if (vehicle.Car)
+            {
+                vehicle.ConvoyEnabled = false;
+                vehicle.Car.ResetVehicle();
+                vehicle.ResetPosRotProgress();
+            }
         }
         DisableTrigger(endPoint);
         EnableTrigger(startPoint);

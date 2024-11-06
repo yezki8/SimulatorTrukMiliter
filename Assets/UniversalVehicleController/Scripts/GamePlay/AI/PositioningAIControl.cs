@@ -47,13 +47,28 @@ namespace PG
             }
 
             // reset progress
-            ResetPathProgress();
+            GetClosestPointStart();
         }
 
-        public void ResetPathProgress()
+        public void GetClosestPointStart()
         {
-            ProgressDistance = 0;
-            ProgressPoint = AIPath.GetRoutePoint(0);
+            //Finding the closest waypoint at the start.
+            float minProgress = 0;
+            float curProgress = 0;
+            float minDist = (AIPath.GetRoutePoint(0).Position - transform.position).sqrMagnitude;
+            float curDist;
+            while (curProgress < AIPath.Length)
+            {
+                curProgress += 0.5f;
+                curDist = (AIPath.GetRoutePoint(curProgress).Position - transform.position).sqrMagnitude;
+                if (curDist < minDist)
+                {
+                    minDist = curDist;
+                    minProgress = curProgress;
+                }
+            }
+            ProgressDistance = minProgress;
+            ProgressPoint = AIPath.GetRoutePoint(ProgressDistance);
         }
 
         public override void Start ()
@@ -93,23 +108,7 @@ namespace PG
 
             ProgressPoint = AIPath.GetRoutePoint (0);
 
-            //Finding the closest waypoint at the start.
-            float minProgress = 0;
-            float curProgress = 0;
-            float minDist = (AIPath.GetRoutePoint (0).Position - transform.position).sqrMagnitude;
-            float curDist;
-            while (curProgress < AIPath.Length)
-            {
-                curProgress += 0.5f;
-                curDist = (AIPath.GetRoutePoint (curProgress).Position - transform.position).sqrMagnitude;
-                if (curDist < minDist)
-                {
-                    minDist = curDist;
-                    minProgress = curProgress;
-                }
-            }
-            ProgressDistance = minProgress;
-            ProgressPoint = AIPath.GetRoutePoint (ProgressDistance);
+            GetClosestPointStart();
         }
 
         protected override void FixedUpdate ()
