@@ -12,6 +12,7 @@ namespace PG
 #pragma warning disable 0649
 
         [SerializeField] float TurnsSwitchHalfRepeatTime = 0.5f;   //Half time light on/off.
+        [SerializeField] private DashboardUIHandler _dashboardUIHandler;
 
 #pragma warning restore 0649
 
@@ -175,6 +176,7 @@ namespace PG
             {
                 MainLightsIsOn = false;
                 SetActiveMainLights(false, HeadlightsType.Main);
+                _dashboardUIHandler.ChangeMainLampStatus(false);
             }
         }
 
@@ -184,6 +186,7 @@ namespace PG
             {
                 MainLightsIsOn = true;
                 SetActiveMainLights(true, HeadlightsType.Main);
+                _dashboardUIHandler.ChangeMainLampStatus(true);
             }
         }
 
@@ -202,6 +205,7 @@ namespace PG
             {
                 SetActiveMainLights(false, HeadlightsType.Main);
                 SetActiveMainLights(true, HeadlightsType.Far);
+                _dashboardUIHandler.ChangeFarLampStatus(true);
             }
         }
 
@@ -210,6 +214,7 @@ namespace PG
             if (MainLights.Count > 0)
             {
                 SetActiveMainLights(false, HeadlightsType.Far);
+                _dashboardUIHandler.ChangeFarLampStatus(false);
             }
         }
 
