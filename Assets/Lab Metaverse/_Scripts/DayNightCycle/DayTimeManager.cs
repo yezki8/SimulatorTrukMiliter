@@ -100,7 +100,7 @@ public class DayTimeManager : MonoBehaviour
         {
             foreach (Transform sphere in streetLamp.transform)
             {
-                if (sphere.name == "sphere")
+                if (sphere.name == "Sphere")
                 {
                     sphere.GetComponent<Renderer>().material.SetColor("_EmissiveColor", emissiveColor * emissiveIntensity);
                 }
