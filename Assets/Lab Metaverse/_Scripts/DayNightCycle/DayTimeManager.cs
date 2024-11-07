@@ -14,7 +14,7 @@ public class DayTimeManager : MonoBehaviour
 
     [Range(0, 24)]
     [SerializeField] private float _timeOfDay = 4;  // Current time of day (0-24)
-    [SerializeField] private GameObject streetLampParent;
+    [SerializeField] private Material streetLampMaterial;
     [SerializeField] private float _dayDuration = 120f;  // Duration of a full day in seconds
     private int _currentDay = 1;
     
@@ -86,23 +86,24 @@ public class DayTimeManager : MonoBehaviour
     {
         float emissiveIntensity;
         Color emissiveColor = Color.white;
+        Renderer[] renderers = FindObjectsOfType<Renderer>();
         
         if (status)
         {
-            emissiveIntensity = 10000;
+            emissiveIntensity = 100;
         }
         else
         {
             emissiveIntensity = 0;
         }
-        
-        foreach (Transform streetLamp in streetLampParent.transform)
+
+        foreach (Renderer renderer in renderers)
         {
-            foreach (Transform sphere in streetLamp.transform)
+            foreach (Material material in renderer.sharedMaterials)
             {
-                if (sphere.name == "Sphere")
+                if (material == streetLampMaterial)
                 {
-                    sphere.GetComponent<Renderer>().material.SetColor("_EmissiveColor", emissiveColor * emissiveIntensity);
+                    material.SetColor("_EmissiveColor", emissiveColor * emissiveIntensity);
                 }
             }
         }
