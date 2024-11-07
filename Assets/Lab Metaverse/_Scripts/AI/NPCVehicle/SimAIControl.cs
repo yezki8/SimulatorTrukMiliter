@@ -243,6 +243,7 @@ namespace PG
 
         public void ResetAIVehicleControlState()
         {
+            Debug.LogWarning("ResetAIVehicleControlState: Resetting AI Vehicle Control State");
             Vertical = 0;
             Horizontal = 0;
             // clear raycast parameters

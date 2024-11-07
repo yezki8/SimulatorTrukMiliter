@@ -33,6 +33,7 @@ namespace PG
 
         public void ResetPosRotProgress()
         {
+            Debug.Log("ResetPosRotProgress: About to reset to idle");
             GetComponent<CarController>().ResetVehicleToIdle();
             transform.position = _initPosition;
             transform.eulerAngles = _initRotation;
