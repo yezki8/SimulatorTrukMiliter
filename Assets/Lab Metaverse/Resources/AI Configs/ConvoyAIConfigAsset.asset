@@ -21,9 +21,9 @@ MonoBehaviour:
     OffsetTurnPrediction: 10
     SpeedFactorToTurnPrediction: 0.5
     LookAngleSppedFactor: 50
-    ReverseWaitTime: 2
-    ReverseTime: 2
-    BetweenReverseTimeForReset: 6
+    ReverseWaitTime: 30
+    ReverseTime: 0.5
+    BetweenReverseTimeForReset: 10
   ConvoyAIConfig:
     Aggressiveness: 0
     ObstacleHitDistance: 20

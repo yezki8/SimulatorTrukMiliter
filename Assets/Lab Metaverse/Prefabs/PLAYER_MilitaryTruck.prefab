@@ -594,8 +594,8 @@ MonoBehaviour:
       m_RotationOrder: 4
     MaxRPM: 2800
     MinRPM: 400
-    RPMEngineToRPMWheelsFast: 1.6
-    RPMEngineToRPMWheelsSlow: 1
+    RPMEngineToRPMWheelsFast: 2.2
+    RPMEngineToRPMWheelsSlow: 3
     StallRPM: 440
     SpeedLimit: 0
     CutOffRPM: 2750
@@ -746,6 +746,7 @@ MonoBehaviour:
     AutomaticGearBoxTime: 1
     AutomaticGearBox: 0
     GearsRatio:
+    - 10
     - 7.814
     - 4.506
     - 2.69
