@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f959105e63ce31c49941f5540530ab79, type: 3}
+  m_Name: HighwaySimAIConfigAsset
+  m_EditorClassIdentifier: 
+  AIConfig:
+    MaxSpeed: 30
+    MinSpeed: 0
+    SetSteerAngleMultiplayer: 1.8
+    OffsetToTargetPoint: 6
+    SpeedFactorToTargetPoint: 0.1
+    OffsetTurnPrediction: 12
+    SpeedFactorToTurnPrediction: 0.6
+    LookAngleSppedFactor: 60
+    ReverseWaitTime: 2
+    ReverseTime: 2
+    BetweenReverseTimeForReset: 6
+  SimAIConfig:
+    Aggressiveness: 0
+    ObstacleHitDistance: 25
+    HitPointHeight: 0.5
+    ChangeHorizontalOffsetSpeed: 3
+    OffsetForMainHitPoints: 0.5
+    OffsetForMainHitDirections: 0.8
+    OffsetForAdditionalHitPoints: 1.4
+    OffsetForAdditionalHitDirections: 2
+    MainHitDellayTime: 0.4
+    AdditionalHitDellayTime: 0.6
