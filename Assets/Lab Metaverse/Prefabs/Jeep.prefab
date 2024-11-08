@@ -172,7 +172,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 0
   DriveWheel: 1
-  MaxBrakeTorque: 8000
+  MaxBrakeTorque: 6000
   HandBrakeWheel: 1
   WheelView: {fileID: 1754170484337994235}
   WheelHub: {fileID: 0}
@@ -25441,7 +25441,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 1
   DriveWheel: 0
-  MaxBrakeTorque: 5000
+  MaxBrakeTorque: 4000
   HandBrakeWheel: 0
   WheelView: {fileID: 491080404871033364}
   WheelHub: {fileID: 0}
@@ -31035,6 +31035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TurnsSwitchHalfRepeatTime: 0.5
+  _dashboardUIHandler: {fileID: 0}
   MainLightsIsOn: 0
   FarLightsIsOn: 0
 --- !u!114 &3202177892550848410
@@ -55982,7 +55983,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 0
   DriveWheel: 1
-  MaxBrakeTorque: 8000
+  MaxBrakeTorque: 6000
   HandBrakeWheel: 1
   WheelView: {fileID: 3266391630540792651}
   WheelHub: {fileID: 0}
@@ -62028,7 +62029,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 1
   DriveWheel: 0
-  MaxBrakeTorque: 5000
+  MaxBrakeTorque: 4000
   HandBrakeWheel: 0
   WheelView: {fileID: 4969378878563815795}
   WheelHub: {fileID: 0}
