@@ -41,6 +41,6 @@ public class SpecialNPCController : MonoBehaviour
         int index = _carControllers.IndexOf(finishedVehicle);
         finishedVehicle.transform.position = initialPos[index];
         finishedVehicle.transform.rotation = initialRot[index];
-        finishedVehicle.ResetProgress();
+        finishedVehicle.GetClosestPointStart();
     }
 }

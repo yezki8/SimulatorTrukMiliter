@@ -779,7 +779,7 @@ namespace UnityEngine.InputSystem
                 {
                     ""name"": """",
                     ""id"": ""d6e0a6e8-6e25-4df4-bb50-ac586a502c96"",
-                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button4"",
+                    ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button21"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -22,6 +22,8 @@ public class ConvoySystem : MonoBehaviour
     private bool _isPlayerFinished = false;
     private bool _isOtherVehiclesFinished = false;
 
+    private Coroutine _convoyCoroutine;
+
     private void Awake()
     {
         if (Instance == null)
@@ -60,7 +62,7 @@ public class ConvoySystem : MonoBehaviour
                 _isPlayerFinished = false;
                 _isOtherVehiclesFinished = false;
                 Debug.Log("Starting convoy...");
-                StartCoroutine(EnableConvoyVehiclesCoroutine());
+                _convoyCoroutine = StartCoroutine(EnableConvoyVehiclesCoroutine());
             }
         }
         else
@@ -82,25 +84,40 @@ public class ConvoySystem : MonoBehaviour
 
     public void StopConvoyVehicles()
     {
+        // check if coroutine is running
+        if (_convoyCoroutine != null)
+        {
+            StopCoroutine(_convoyCoroutine);
+        }
         foreach (ConvoyAIControl vehicle in _vehicleControls)
         {
             vehicle.ConvoyEnabled = false;
         }
         DisableTrigger(endPoint);
+        _isRunning = false;
         Debug.Log("Convoy finished");
     }
 
     public void ResetConvoyVehicles()
     {
-        EnableTrigger(startPoint);
-        EnableTrigger(FinishLocation);
+        // safeguard
+        if (_isRunning)
+        {
+            StopConvoyVehicles();
+        }
         foreach (ConvoyAIControl vehicle in _vehicleControls)
         {
-            vehicle.ConvoyEnabled = false;
-            vehicle.Car.ResetVehicle();
-            vehicle.ResetAIControl();
+            // check if the vehicle actually exist
+            if (vehicle.Car)
+            {
+                vehicle.ConvoyEnabled = false;
+                vehicle.Car.ResetVehicle();
+                vehicle.ResetPosRotProgress();
+            }
         }
         DisableTrigger(endPoint);
+        EnableTrigger(startPoint);
+        EnableTrigger(FinishLocation);
     }
 
     public void FinishConvoy()

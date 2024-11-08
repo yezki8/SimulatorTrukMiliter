@@ -14,6 +14,7 @@ public class DayTimeManager : MonoBehaviour
 
     [Range(0, 24)]
     [SerializeField] private float _timeOfDay = 4;  // Current time of day (0-24)
+    [SerializeField] private Material streetLampMaterial;
     [SerializeField] private float _dayDuration = 120f;  // Duration of a full day in seconds
     private int _currentDay = 1;
     
@@ -63,6 +64,48 @@ public class DayTimeManager : MonoBehaviour
         {
             CalculateDayTime();
             dayNightCycle.UpdateSunMoonPosition(_timeOfDay);
+        }
+
+        UpdateStreetLampLights();
+    }
+
+    private void UpdateStreetLampLights()
+    {
+        
+        if ((_timeOfDay >= 6) && (_timeOfDay <17))
+        {
+            TurnStreetLampLights(false);
+        } 
+        else
+        {
+            TurnStreetLampLights(true);
+        }
+    }
+
+    private void TurnStreetLampLights(bool status)
+    {
+        float emissiveIntensity;
+        Color emissiveColor = Color.white;
+        Renderer[] renderers = FindObjectsOfType<Renderer>();
+        
+        if (status)
+        {
+            emissiveIntensity = 100;
+        }
+        else
+        {
+            emissiveIntensity = 0;
+        }
+
+        foreach (Renderer renderer in renderers)
+        {
+            foreach (Material material in renderer.sharedMaterials)
+            {
+                if (material == streetLampMaterial)
+                {
+                    material.SetColor("_EmissiveColor", emissiveColor * emissiveIntensity);
+                }
+            }
         }
     }
 

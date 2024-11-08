@@ -442,7 +442,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279293672294920118}
   serializedVersion: 4
-  m_Mass: 6000
+  m_Mass: 4000
   m_Drag: 0.04
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -511,6 +511,7 @@ MonoBehaviour:
   SteerWheel: {fileID: 5630019734588253188}
   ForceFeedback: {fileID: 0}
   CanBrake: 1
+  CanHandBrake: 1
   IsPlayerCar: 0
   StartEngineInAwake: 0
   StartEngineDellay: 1.5
@@ -599,7 +600,7 @@ MonoBehaviour:
     SpeedLimit: 0
     CutOffRPM: 2750
     TargetCutOffRPM: 2650
-    CutOffTime: 0.2
+    CutOffTime: 0.01
     EnableTurbo: 0
     TurboIncreaseSpeed: 3
     TurboDecreaseSpeed: 10

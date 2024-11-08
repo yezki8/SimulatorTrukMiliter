@@ -17,6 +17,9 @@ namespace PG
         public float ProgressDistance { get; set; }                     //Distance of progress along the AIPath
         public AIPath.RoutePoint ProgressPoint { get; private set; }
 
+        protected Vector3 _initPosition;                                // initial position of the vehicle
+        protected Vector3 _initRotation;                                // initial rotation of the vehicle
+
         /// <summary>
         /// If the path is not looped, then the property returns true when the end of the path is reached.
         /// </summary>
@@ -28,10 +31,45 @@ namespace PG
             } 
         }
 
-        public void ResetProgress()
+        public void ResetPosRotProgress()
         {
-            ProgressDistance = 0;
-            ProgressPoint = AIPath.GetRoutePoint(0);
+            Debug.Log("ResetPosRotProgress: About to reset to idle");
+            GetComponent<CarController>().ResetVehicleToIdle();
+            transform.position = _initPosition;
+            transform.eulerAngles = _initRotation;
+            if (TryGetComponent<Rigidbody>(out var rb))
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                rb.isKinematic = true;
+                rb.position = _initPosition;
+                rb.rotation = Quaternion.Euler(_initRotation);
+                rb.isKinematic = false;
+            }
+
+            // reset progress
+            GetClosestPointStart();
+        }
+
+        public void GetClosestPointStart()
+        {
+            //Finding the closest waypoint at the start.
+            float minProgress = 0;
+            float curProgress = 0;
+            float minDist = (AIPath.GetRoutePoint(0).Position - transform.position).sqrMagnitude;
+            float curDist;
+            while (curProgress < AIPath.Length)
+            {
+                curProgress += 0.5f;
+                curDist = (AIPath.GetRoutePoint(curProgress).Position - transform.position).sqrMagnitude;
+                if (curDist < minDist)
+                {
+                    minDist = curDist;
+                    minProgress = curProgress;
+                }
+            }
+            ProgressDistance = minProgress;
+            ProgressPoint = AIPath.GetRoutePoint(ProgressDistance);
         }
 
         public override void Start ()
@@ -63,27 +101,15 @@ namespace PG
 
             base.Start ();
 
+            // Set the initial position and rotation of the vehicle
+            _initPosition = GetComponent<Rigidbody>().position;
+            _initRotation = transform.eulerAngles;
+
             BaseAIConfig = AIConfigAsset.AIConfig;
 
             ProgressPoint = AIPath.GetRoutePoint (0);
 
-            //Finding the closest waypoint at the start.
-            float minProgress = 0;
-            float curProgress = 0;
-            float minDist = (AIPath.GetRoutePoint (0).Position - transform.position).sqrMagnitude;
-            float curDist;
-            while (curProgress < AIPath.Length)
-            {
-                curProgress += 0.5f;
-                curDist = (AIPath.GetRoutePoint (curProgress).Position - transform.position).sqrMagnitude;
-                if (curDist < minDist)
-                {
-                    minDist = curDist;
-                    minProgress = curProgress;
-                }
-            }
-            ProgressDistance = minProgress;
-            ProgressPoint = AIPath.GetRoutePoint (ProgressDistance);
+            GetClosestPointStart();
         }
 
         protected override void FixedUpdate ()

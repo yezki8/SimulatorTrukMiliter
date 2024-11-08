@@ -280,11 +280,17 @@ namespace PG
         {
             if (Car.Engine.EnableTurbo && TurboSource && TurboSource.gameObject.activeInHierarchy)
             {
-                TurboSource.volume = Mathf.Lerp(0, MaxTurboVolume, Car.CurrentTurbo);
-                TurboSource.pitch = Mathf.Lerp(MinTurboPith, MaxTurboPith, Car.CurrentTurbo);
-                if (Car.CurrentTurbo > 0.2f && (Car.CurrentAcceleration < 0.2f || Car.InChangeGear) && ((Time.realtimeSinceStartup - LastBlowOffTime) > MinTimeBetweenBlowOffSounds))
+                // prevent pitch to infinite
+                float targetTurbo = Car.CurrentTurbo;
+                if (targetTurbo > 0 && float.IsNaN(targetTurbo))
                 {
-                    OtherEffectsSource.PlayOneShot(TurboBlowOffClip, Car.CurrentTurbo * MaxBlowOffVolume);
+                    targetTurbo = 0;
+                }
+                TurboSource.volume = Mathf.Lerp(0, MaxTurboVolume, targetTurbo);
+                TurboSource.pitch = Mathf.Lerp(MinTurboPith, MaxTurboPith, targetTurbo);
+                if (targetTurbo > 0.2f && (Car.CurrentAcceleration < 0.2f || Car.InChangeGear) && ((Time.realtimeSinceStartup - LastBlowOffTime) > MinTimeBetweenBlowOffSounds))
+                {
+                    OtherEffectsSource.PlayOneShot(TurboBlowOffClip, targetTurbo * MaxBlowOffVolume);
                     LastBlowOffTime = Time.realtimeSinceStartup;
                 }
             }
