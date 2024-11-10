@@ -14,6 +14,7 @@ public class TimerCountdown : MonoBehaviour
     [Header("Time Limit for Score 100 (in minutes)")] //in minutes
     [SerializeField] private float _level1TimeThreshold = 5;
     [SerializeField] private float _level2TimeThreshold = 10;
+    [SerializeField] private float _level3TimeThreshold = 5;
     public float StartTime = 0; // start time in seconds
 
     //for references in other scripts
@@ -101,6 +102,10 @@ public class TimerCountdown : MonoBehaviour
         else if (CheckpointManager.Instance.ActiveLevel == 2)
         {
             StartTime = _level2TimeThreshold * 60;
+        }
+        else if (CheckpointManager.Instance.ActiveLevel == 3)
+        {
+            StartTime = _level3TimeThreshold * 60;
         }
 
         CurrentTime = StartTime;
