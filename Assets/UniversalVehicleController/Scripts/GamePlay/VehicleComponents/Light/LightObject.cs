@@ -7,7 +7,7 @@ namespace PG
     /// <summary>
     /// Component responsible for all light signals.
     /// </summary>
-    public class LightObject :GlassDO
+    public class LightObject : GlassDO
     {
         public CarLightType CarLightType;
         public Light LightGO;
@@ -17,7 +17,11 @@ namespace PG
         [SerializeField] private bool EnableLight = true;
         // light direction
         [SerializeField] private Vector3 MainLightDirection = Vector3.zero;
+        [SerializeField][Range(0, 120)] private float MainRange = 40;
+        [SerializeField][Range(0, 179)] private float MainSpotAngle = 50;
         [SerializeField] private Vector3 FarLightDirection = Vector3.zero;
+        [SerializeField][Range(0,120)] private float FarRange = 100;
+        [SerializeField][Range(0, 179)] private float FarSpotAngle = 30;
 
         [Header("Soft Switch settings")]
         public bool IsSoftSwitch;
@@ -168,14 +172,18 @@ namespace PG
 
             if (value && LightGO && type != HeadlightsType.Dim)
             {
-                // set direction
+                // set either high or low beam
                 if (type == HeadlightsType.Main)
                 {
                     LightGO.transform.localEulerAngles = MainLightDirection;
+                    LightGO.range = MainRange;
+                    LightGO.spotAngle = MainSpotAngle;
                 }
                 else
                 {
                     LightGO.transform.localEulerAngles = FarLightDirection;
+                    LightGO.range = FarRange;
+                    LightGO.spotAngle = FarSpotAngle;
                 }
                 LightGO.SetActive (value);
             }
@@ -207,10 +215,14 @@ namespace PG
                 if (type == HeadlightsType.Main)
                 {
                     LightGO.transform.eulerAngles = MainLightDirection;
+                    LightGO.range = MainRange;
+                    LightGO.spotAngle = MainSpotAngle;
                 }
                 else
                 {
                     LightGO.transform.eulerAngles = FarLightDirection;
+                    LightGO.range = FarRange;
+                    LightGO.spotAngle = FarSpotAngle;
                 }
                 LightGO.SetActive (LightIsOn);
             }
