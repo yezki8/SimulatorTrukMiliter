@@ -9,6 +9,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TimerCountdown _timerCountdown;
     [SerializeField] private TimerStopwatch _timerStopwatch;
     [SerializeField] private ScoreBoardManager _scoreBoardManager;
+    [SerializeField] private TMP_InputField _nameInputField;
 
     public static ScoreManager Instance;
 
@@ -72,7 +73,17 @@ public class ScoreManager : MonoBehaviour
     public void RecordScore()
     {
         int score = CalculateScore(_timerStopwatch.CurrentTime);
-        _scoreBoardManager.AddScore(new Score("Player", System.DateTime.Now, _timerStopwatch.CurrentTime, score));
+        string driverName = _nameInputField.text;
+        if (driverName == string.Empty)
+        {
+            driverName = "Pengemudi";
+        }
+        _scoreBoardManager.AddScore(new Score(driverName, System.DateTime.Now, _timerStopwatch.CurrentTime, score));
+    }
+
+    public void ResetNameField()
+    {
+        _nameInputField.text = string.Empty;
     }
 
     int CalculateScore(float currTime)
