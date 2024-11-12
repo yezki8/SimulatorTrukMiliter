@@ -8,9 +8,6 @@ public class MonitorSelection : MonoBehaviour
 {
     [SerializeField] private GameObject _setDisplayPanel;
     [SerializeField] private Camera FrontViewCamera;
-    [SerializeField] private Camera LeftMirrorCamera;
-    [SerializeField] private Camera RightMirrorCamera;
-    [SerializeField] private Camera RearMirrorCamera;
     [SerializeField] private Camera MainCamera;
     [SerializeField] private Canvas InstructorDisplay;
     [SerializeField] private Canvas LeftMirrorDisplay;
@@ -22,12 +19,13 @@ public class MonitorSelection : MonoBehaviour
     void Start()
     {
         _setDisplayPanel.SetActive(false);
-        PopulateMonitorDropdowns();
 
         for (int i = 0; i < Mathf.Min(Display.displays.Length, 6); i++)
         {
             Display.displays[i].Activate();
         }
+
+        PopulateMonitorDropdowns();
 
         displayDropdowns[0].onValueChanged.AddListener((value) => SetInstructorDisplay(value));
         displayDropdowns[1].onValueChanged.AddListener((value) => SetFrontViewCamera(value));
@@ -41,18 +39,18 @@ public class MonitorSelection : MonoBehaviour
 
     void PopulateMonitorDropdowns()
     {
-        int availableDisplays = Display.displays.Length;
+        List<TMP_Dropdown.OptionData> monitorOptions = new ();
+        for (int i = 0; i < Display.displays.Length; i++)
+        {
+            monitorOptions.Add(new TMP_Dropdown.OptionData("Monitor " + (i + 1)));
+        }
 
         for (int i = 0; i < displayDropdowns.Length; i++)
         {
             TMP_Dropdown dropdown = displayDropdowns[i];
             dropdown.ClearOptions();
-
-            for (int j = 0; j < availableDisplays; j++)
-            {
-                dropdown.options.Add(new TMP_Dropdown.OptionData("Monitor " + (j + 1)));
-            }
-
+            dropdown.AddOptions(monitorOptions);
+            dropdown.value = i < monitorOptions.Count ? i : 0;
             dropdown.RefreshShownValue();
         }
     }
@@ -75,46 +73,33 @@ public class MonitorSelection : MonoBehaviour
         }
     }
 
+    public void SetInstructorDisplay(int monitorIndex)
+    {
+        InstructorDisplay.targetDisplay = monitorIndex;
+        MainCamera.targetDisplay = monitorIndex;
+        Display.displays[monitorIndex].Activate();
+    }
     public void SetFrontViewCamera(int monitorIndex)
     {
         FrontViewCamera.targetDisplay = monitorIndex;
         Display.displays[monitorIndex].Activate();
     }
 
-    public void SetInstructorDisplay(int monitorIndex)
-    {
-        MainCamera.targetDisplay = monitorIndex;
-        InstructorDisplay.targetDisplay = monitorIndex;
-        Display.displays[monitorIndex].Activate();
-    }
-
     public void SetLeftMirrorDisplay(int monitorIndex)
     {
-        // LeftMirrorCamera.targetDisplay = monitorIndex;
-        if (LeftMirrorDisplay != null)
-        {
-            LeftMirrorDisplay.targetDisplay = monitorIndex;
-        }
+        LeftMirrorDisplay.targetDisplay = monitorIndex;
         Display.displays[monitorIndex].Activate();
     }
 
     public void SetRightMirrorDisplay(int monitorIndex)
     {
-        // RightMirrorCamera.targetDisplay = monitorIndex;
-        if (RightMirrorDisplay != null)
-        {
-            RightMirrorDisplay.targetDisplay = monitorIndex;
-        }
+        RightMirrorDisplay.targetDisplay = monitorIndex;
         Display.displays[monitorIndex].Activate();
     }
 
     public void SetRearMirrorDisplay(int monitorIndex)
     {
-        // RearMirrorCamera.targetDisplay = monitorIndex;
-        if (RearMirrorDisplay != null)
-        {
-            RearMirrorDisplay.targetDisplay = monitorIndex;
-        }
+        RearMirrorDisplay.targetDisplay = monitorIndex;
         Display.displays[monitorIndex].Activate();
     }
 

@@ -594,8 +594,8 @@ MonoBehaviour:
       m_RotationOrder: 4
     MaxRPM: 2800
     MinRPM: 400
-    RPMEngineToRPMWheelsFast: 1.6
-    RPMEngineToRPMWheelsSlow: 1
+    RPMEngineToRPMWheelsFast: 2.2
+    RPMEngineToRPMWheelsSlow: 3
     StallRPM: 440
     SpeedLimit: 0
     CutOffRPM: 2750
@@ -609,8 +609,8 @@ MonoBehaviour:
     BoostAmount: 2
     BoostAdditionalPower: 1
     ProbabilityBackfire: 0.2
-    RPMToNextGear: 2600
-    RPMToPrevGearDiff: 550
+    RPMToNextGear: 2700
+    RPMToPrevGearDiff: 1500
   EngineDamageableObject: {fileID: 8188809129965838007}
   Steer:
     MaxSteerAngle: 45
@@ -746,6 +746,7 @@ MonoBehaviour:
     AutomaticGearBoxTime: 1
     AutomaticGearBox: 0
     GearsRatio:
+    - 10
     - 7.814
     - 4.506
     - 2.69
@@ -772,6 +773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TurnsSwitchHalfRepeatTime: 0.5
+  _dashboardUIHandler: {fileID: 0}
   MainLightsIsOn: 0
   FarLightsIsOn: 0
 --- !u!114 &6426317477010373061
@@ -52923,7 +52925,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 0
   DriveWheel: 1
-  MaxBrakeTorque: 8000
+  MaxBrakeTorque: 6000
   HandBrakeWheel: 1
   WheelView: {fileID: 792134115684677230}
   WheelHub: {fileID: 0}
@@ -63918,7 +63920,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 1
   DriveWheel: 0
-  MaxBrakeTorque: 5000
+  MaxBrakeTorque: 4000
   HandBrakeWheel: 0
   WheelView: {fileID: 338895138953414371}
   WheelHub: {fileID: 0}
@@ -69751,7 +69753,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 1
   DriveWheel: 0
-  MaxBrakeTorque: 5000
+  MaxBrakeTorque: 4000
   HandBrakeWheel: 0
   WheelView: {fileID: 879080834013362039}
   WheelHub: {fileID: 0}

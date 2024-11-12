@@ -272,12 +272,14 @@ namespace PG
                 if (sound.Value.Slip >= 0.9f)
                 {
                     clip = sound.Value.SlipGroundClip;
-                    targetVolume = (sound.Value.Slip - 0.5f).Clamp ();
+                    // change minus value from 0.5f to 0.8f
+                    targetVolume = (sound.Value.Slip - 0.8f).Clamp ();
                 }
                 else
                 {
                     clip = sound.Value.IdleGroundClip;
-                    targetVolume = (Vehicle.CurrentSpeed / 30).Clamp ();
+                    // change divisor from 30 to higher val
+                    targetVolume = (Vehicle.CurrentSpeed / 60).Clamp ();
                 }
 
                 if (sound.Value.Source.clip != clip && clip != null)

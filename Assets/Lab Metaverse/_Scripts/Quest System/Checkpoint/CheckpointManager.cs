@@ -16,6 +16,7 @@ public class CheckpointManager : MonoBehaviour
     public UnityEvent OnActivateCheckpoint;
     [SerializeField] private GameObject Level1Parent;
     [SerializeField] private GameObject Level2Parent;
+    [SerializeField] private GameObject Level3Parent;
 
     private void Awake()
     {
@@ -60,10 +61,17 @@ public class CheckpointManager : MonoBehaviour
             case 1:
                 Level1Parent.SetActive(true);
                 Level2Parent.SetActive(false);
+                Level3Parent.SetActive(false);
                 break;
             case 2:
                 Level1Parent.SetActive(false);
                 Level2Parent.SetActive(true);
+                Level3Parent.SetActive(false);
+                break;
+            case 3:
+                Level1Parent.SetActive(false);
+                Level2Parent.SetActive(false);
+                Level3Parent.SetActive(true);
                 break;
         }
     }
