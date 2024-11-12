@@ -41,6 +41,8 @@ namespace PG
         public bool ConvoyEnabled = false;
         public UnityEvent OnVehicleFinish;
         public bool hasEnteredFinishLocation = false;
+        public bool IsLeader = false;
+        private Vector3 _playerPosition;
 
         public override void Start ()
         {
@@ -56,6 +58,9 @@ namespace PG
             {
                 ConvoyAIConfig = new ConvoyAIConfig();
             }
+
+            // get player position
+            _playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
 
             StartHits ();
         }
@@ -106,6 +111,18 @@ namespace PG
             float desiredSpeed = (1 - (angleToPredictionPoint / LookAngleSppedFactor)).AbsClamp ();
             desiredSpeed = desiredSpeed * (SpeedLimit - MinSpeed) + MinSpeed;
             desiredSpeed = desiredSpeed.Clamp (MinSpeed, MaxSpeed);
+
+            if (_playerPosition != null)
+            {
+                // get distance between player and AI
+                TargetDist = Vector3.Distance(_playerPosition, transform.position);
+
+                // if player too far away, reduce speed
+                if (TargetDist > 260)
+                {
+                    desiredSpeed = desiredSpeed / 1.5f;
+                }
+            }
 
             if (AheadRB) {
 
