@@ -187,7 +187,7 @@ namespace PG
                 }
                 else
                 {
-                    TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 ? ((EngineRPM + 1000) * CurrentAcceleration) : (DrivetrainRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
+                    TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 ? ((EngineRPM + 200) * CurrentAcceleration) : (DrivetrainRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
                 }
 
                 TargetRPM = TargetRPM.Clamp(MinRPM, MaxRPM);

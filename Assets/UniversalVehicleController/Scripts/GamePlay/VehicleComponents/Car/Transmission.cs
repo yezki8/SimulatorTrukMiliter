@@ -90,7 +90,7 @@ namespace PG
 
                 //Calculation of target rpm for driving wheels.
                 var targetWheelsRPM = AllGearsRatio[CurrentGearIndex] == 0? 0: EngineRPM / AllGearsRatio[CurrentGearIndex];
-                var offset = (400 / AllGearsRatio[CurrentGearIndex]).Abs();
+                var offset = (100 / AllGearsRatio[CurrentGearIndex]).Abs();
 
                 for (int i = 0; i < DriveWheels.Length; i++)
                 {
