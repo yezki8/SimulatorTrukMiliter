@@ -105,6 +105,13 @@ MonoBehaviour:
   CarLightType: 3
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -215,6 +222,13 @@ MonoBehaviour:
   CarLightType: 1
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -325,6 +339,13 @@ MonoBehaviour:
   CarLightType: 3
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -551,6 +572,13 @@ MonoBehaviour:
   CarLightType: 3
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -5620,6 +5648,13 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 1675459370548730482}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -5751,6 +5786,13 @@ MonoBehaviour:
   CarLightType: 1
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -11134,6 +11176,13 @@ MonoBehaviour:
   CarLightType: 2
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -11238,6 +11287,10 @@ MonoBehaviour:
   AntiRollWheel: {fileID: 5244411350341703673}
   MaxSuspensionWheelAngle: 10
   DependentSuspension: 1
+  IsBlownOut: 0
+  IsLocked: 0
+  WheelLockDivider: 2
+  StiffnessMinusage: 0.5
 --- !u!1 &1828319535202773344
 GameObject:
   m_ObjectHideFlags: 0
@@ -11343,6 +11396,13 @@ MonoBehaviour:
   CarLightType: 4
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -21392,6 +21452,13 @@ MonoBehaviour:
   CarLightType: 2
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -31437,6 +31504,10 @@ MonoBehaviour:
   AntiRollWheel: {fileID: 43128385098266884}
   MaxSuspensionWheelAngle: 10
   DependentSuspension: 1
+  IsBlownOut: 0
+  IsLocked: 0
+  WheelLockDivider: 2
+  StiffnessMinusage: 0.5
 --- !u!1 &2706319694050747775
 GameObject:
   m_ObjectHideFlags: 0
@@ -36868,6 +36939,10 @@ MonoBehaviour:
   AntiRollWheel: {fileID: 3544118745716530079}
   MaxSuspensionWheelAngle: 10
   DependentSuspension: 0
+  IsBlownOut: 0
+  IsLocked: 0
+  WheelLockDivider: 2
+  StiffnessMinusage: 0.5
 --- !u!1 &3514327621164107396
 GameObject:
   m_ObjectHideFlags: 0
@@ -36880,7 +36955,6 @@ GameObject:
   - component: {fileID: 1628516624647270262}
   - component: {fileID: 3216702899630228816}
   - component: {fileID: 5446602575890951860}
-  - component: {fileID: 8371138832733916922}
   m_Layer: 0
   m_Name: PG86_Drift
   m_TagString: Untagged
@@ -36960,18 +37034,16 @@ MonoBehaviour:
   BaseViews:
   - {fileID: 1504409991446602968}
   FirstPersonCameraPos: {fileID: 6528532555731490757}
-  _truckSpeed: {fileID: 0}
-  roadLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  currentRoadSegment: {fileID: 0}
-  _warning: {fileID: 0}
   TrailerConnectorMask:
     serializedVersion: 2
     m_Bits: 0
   TrailerConnectorPosition: {fileID: 0}
   SteerWheelMaxAngle: 120
   SteerWheel: {fileID: 4926190158284526959}
+  ForceFeedback: {fileID: 0}
+  CanBrake: 1
+  CanHandBrake: 1
+  IsPlayerCar: 0
   StartEngineInAwake: 0
   StartEngineDellay: 1
   Engine:
@@ -37018,10 +37090,17 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    ThrottleCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     MaxRPM: 7000
     MinRPM: 700
     RPMEngineToRPMWheelsFast: 8
     RPMEngineToRPMWheelsSlow: 3
+    StallRPM: 350
     SpeedLimit: 0
     CutOffRPM: 6600
     TargetCutOffRPM: 6000
@@ -37112,6 +37191,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    SpeedToDirtRoadFFB:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     MaxVelocityAngleForHelp: 120
     MinSpeedForHelp: 1.5
     HelpDriftIntensity: 0.8
@@ -37188,6 +37273,8 @@ MonoBehaviour:
   Gearbox:
     ChangeUpGearTime: 0.2
     ChangeDownGearTime: 0.1
+    ChangeClutchedGearTime: 0.01
+    AutomaticGearBoxTime: 0.7
     AutomaticGearBox: 1
     GearsRatio:
     - 3.59
@@ -37195,9 +37282,13 @@ MonoBehaviour:
     - 1.38
     - 1
     - 0.87
+    FinalDriveRatio: 0
     MainRatio: 4.3
     HasRGear: 1
     ReversGearRatio: 3.59
+  WheelTorque: 0
+  CurrentMotorTorque: 0
+  _currentGearUI: {fileID: 0}
 --- !u!114 &5446602575890951860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37211,85 +37302,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TurnsSwitchHalfRepeatTime: 0.5
---- !u!114 &8371138832733916922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3514327621164107396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a43fd575a4f3b124a994e5c934a4b4b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamageFactor: 1
-  MaxCollisionMagnitude: 100
-  MaxImpulseMagnitude: 35
-  MaxDeformRadiusInMaxMag: 3
-  DeformMultiplier: 0.3
-  DamageDistanceCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -3.0305424
-      outSlope: -3.0305424
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.035149395
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  MaxContactPoints: 5
-  MaxDamageQueueCount: 200
-  UseNoise: 1
-  NoiseSize: 1
-  CalculateNormals: 0
-  MoveCarWhileRestoring: 1
-  SmoothMeshRestore: 1
-  SmoothRestoreCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: -0.8
-      outSlope: -0.8
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0
-      outWeight: 0.8
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -1.4
-      outSlope: -1.4
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.7
-      outWeight: -0.1
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  SmoothRestoreSpeed: 2
-  IgnoreDeformMeshes:
-  - {fileID: 2411241031546355665}
-  IgnoreDeformColliders: []
-  IgnoreFindInChildsMeshesAndColliders:
-  - {fileID: 5883277124407262778}
-  EnableLogAndGizmo: 0
+  _dashboardUIHandler: {fileID: 0}
+  MainLightsIsOn: 0
+  FarLightsIsOn: 0
 --- !u!1 &3571826333402543534
 GameObject:
   m_ObjectHideFlags: 0
@@ -42542,6 +42557,10 @@ MonoBehaviour:
   AntiRollWheel: {fileID: 700743835694786394}
   MaxSuspensionWheelAngle: 10
   DependentSuspension: 0
+  IsBlownOut: 0
+  IsLocked: 0
+  WheelLockDivider: 2
+  StiffnessMinusage: 0.5
 --- !u!1 &4164756650078402773
 GameObject:
   m_ObjectHideFlags: 0
@@ -42833,6 +42852,13 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -53162,6 +53188,13 @@ MonoBehaviour:
   CarLightType: 2
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -63157,6 +63190,13 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -68509,6 +68549,13 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -73749,6 +73796,13 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -94106,6 +94160,13 @@ MonoBehaviour:
   CarLightType: 4
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
@@ -114292,6 +114353,13 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 1088872908917919562}
   OnLightMaterial: {fileID: 2100000, guid: 6ed4f50987cfc26458fa9dc7ba9df453, type: 2}
+  EnableLight: 1
+  MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
+  FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 10
   OffSwitchSpeed: 2
