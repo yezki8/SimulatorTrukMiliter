@@ -118,7 +118,6 @@ namespace PG
         /// </summary>
         public override void ResetVehicle ()
         {
-            Debug.LogWarning("ResetVehicle: Resetting Vehicle");
             base.ResetVehicle ();
             StopEngine();
             CurrentGear = 0;
@@ -126,7 +125,6 @@ namespace PG
 
         public void ResetVehicleToIdle()
         {
-            Debug.Log("ResetVehicleToIdle: Resetting Vehicle to idle");
             base.ResetVehicle();
             EngineRPM = Engine.MinRPM;
             CurrentGear = 0;
