@@ -37,6 +37,9 @@ namespace PG
         Rigidbody AheadRB;                                                      //Nearest ahead car.
         float DistanceToAheadCollider;                                          //Distance to the nearest car.
 
+        // lighting
+        CarLighting CarLighting;
+
         // Convoy specific
         public bool ConvoyEnabled = false;
         public UnityEvent OnVehicleFinish;
@@ -47,6 +50,8 @@ namespace PG
         public override void Start ()
         {
             base.Start ();
+
+            CarLighting = GetComponent<CarLighting>();
 
             var selectedRaceAsset =  AIConfigAsset as ConvoyAIConfigAsset;
 
@@ -90,6 +95,17 @@ namespace PG
             else
             {
                 BrakeToStop();
+            }
+
+            // update car lighting when night
+            float timeOfDay = DayTimeManager.Instance.getTimeOfDay();
+            if (timeOfDay > 18 || timeOfDay < 6)
+            {
+                if (!CarLighting.MainLightsIsOn) CarLighting.SwitchMainLights();
+            }
+            else
+            {
+                if (CarLighting.MainLightsIsOn) CarLighting.SwitchMainLights();
             }
         }
 
