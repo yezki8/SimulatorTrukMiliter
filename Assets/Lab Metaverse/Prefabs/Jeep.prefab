@@ -30663,7 +30663,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1657335869218587542}
   - component: {fileID: 2028382113384335167}
-  - component: {fileID: 2216146693109719249}
   - component: {fileID: 5938002209276120705}
   - component: {fileID: 8330282673728019966}
   - component: {fileID: 3202177892550848410}
@@ -30724,25 +30723,6 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2216146693109719249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4166218400099787280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23538e76cb6ff12418870415e535e8a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _carController: {fileID: 5938002209276120705}
-  _carControllerInput: {fileID: 0}
-  _truckSpeed: {fileID: 0}
-  roadLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  _warning: {fileID: 0}
 --- !u!114 &5938002209276120705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31150,6 +31130,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   hasEnteredFinishLocation: 0
+  IsLeader: 0
 --- !u!1 &4222690496699523093
 GameObject:
   m_ObjectHideFlags: 0
