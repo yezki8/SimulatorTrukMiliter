@@ -77,6 +77,9 @@ public class GameStateController : MonoBehaviour
 
     public void QuitGame()
     {
+        // cleanup
+        StopAllCoroutines();
+
         Application.Quit();
     }
 
