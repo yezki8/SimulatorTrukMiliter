@@ -274,7 +274,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5975100976823726535}
   - component: {fileID: 1208862071875164019}
-  - component: {fileID: 4935103441482217455}
   m_Layer: 2
   m_Name: RR
   m_TagString: Untagged
@@ -337,35 +336,6 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 1
   m_ProvidesContacts: 0
---- !u!114 &4935103441482217455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385126050047772964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbfdb2e9b4ffdb49a4ad4815bc2a5a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 200
-  MaxDamage: Infinity
-  SteerPercent: 0
-  DriveWheel: 1
-  MaxBrakeTorque: 6000
-  HandBrakeWheel: 1
-  WheelView: {fileID: 8688614452379078077}
-  WheelHub: {fileID: 0}
-  MaxVisualDamageAngle: 5
-  AntiRollBar: 0
-  AntiRollWheel: {fileID: 0}
-  MaxSuspensionWheelAngle: 0
-  DependentSuspension: 0
-  IsBlownOut: 0
-  IsLocked: 0
-  WheelLockDivider: 2
-  StiffnessMinusage: 0.5
 --- !u!1 &495127470274471855
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +346,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5051352479678471811}
   - component: {fileID: 6087153035242962512}
-  - component: {fileID: 2415752840378981085}
   m_Layer: 2
   m_Name: FR
   m_TagString: Untagged
@@ -439,35 +408,6 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 1
   m_ProvidesContacts: 0
---- !u!114 &2415752840378981085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495127470274471855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbfdb2e9b4ffdb49a4ad4815bc2a5a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 200
-  MaxDamage: Infinity
-  SteerPercent: 1
-  DriveWheel: 0
-  MaxBrakeTorque: 4000
-  HandBrakeWheel: 0
-  WheelView: {fileID: 4799230960328083805}
-  WheelHub: {fileID: 0}
-  MaxVisualDamageAngle: 5
-  AntiRollBar: 0
-  AntiRollWheel: {fileID: 0}
-  MaxSuspensionWheelAngle: 0
-  DependentSuspension: 0
-  IsBlownOut: 0
-  IsLocked: 0
-  WheelLockDivider: 2
-  StiffnessMinusage: 0.5
 --- !u!1 &530076675382999230
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +550,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -807,7 +751,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 70, y: 193.466, z: 194.349}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 80, y: 193.466, z: 194.349}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -5931,7 +5879,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2115252611198478902}
   - component: {fileID: 1655186616774200821}
-  - component: {fileID: 1388928883659627889}
   m_Layer: 2
   m_Name: FL
   m_TagString: Untagged
@@ -5994,35 +5941,6 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 1
   m_ProvidesContacts: 0
---- !u!114 &1388928883659627889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206475348480877006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbfdb2e9b4ffdb49a4ad4815bc2a5a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 200
-  MaxDamage: Infinity
-  SteerPercent: 1
-  DriveWheel: 0
-  MaxBrakeTorque: 4000
-  HandBrakeWheel: 0
-  WheelView: {fileID: 2308214763817666620}
-  WheelHub: {fileID: 0}
-  MaxVisualDamageAngle: 5
-  AntiRollBar: 0
-  AntiRollWheel: {fileID: 0}
-  MaxSuspensionWheelAngle: 0
-  DependentSuspension: 0
-  IsBlownOut: 0
-  IsLocked: 0
-  WheelLockDivider: 2
-  StiffnessMinusage: 0.5
 --- !u!1 &1452938984303177545
 GameObject:
   m_ObjectHideFlags: 0
@@ -16438,7 +16356,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 9ea9d7da4172ac247ab479cd6b56863c, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -16551,7 +16473,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -21722,7 +21648,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -52544,7 +52474,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2946449099956974489}
   - component: {fileID: 5735534836378523393}
-  - component: {fileID: 1185182403532295217}
   m_Layer: 2
   m_Name: RL
   m_TagString: Untagged
@@ -52607,35 +52536,6 @@ WheelCollider:
   m_LayerOverridePriority: 0
   m_Enabled: 1
   m_ProvidesContacts: 0
---- !u!114 &1185182403532295217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5633374353229768921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbfdb2e9b4ffdb49a4ad4815bc2a5a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 200
-  MaxDamage: Infinity
-  SteerPercent: 0
-  DriveWheel: 1
-  MaxBrakeTorque: 8000
-  HandBrakeWheel: 1
-  WheelView: {fileID: 4020563608664574976}
-  WheelHub: {fileID: 0}
-  MaxVisualDamageAngle: 5
-  AntiRollBar: 0
-  AntiRollWheel: {fileID: 0}
-  MaxSuspensionWheelAngle: 0
-  DependentSuspension: 0
-  IsBlownOut: 0
-  IsLocked: 0
-  WheelLockDivider: 2
-  StiffnessMinusage: 0.5
 --- !u!1 &5701611732657603806
 GameObject:
   m_ObjectHideFlags: 0
@@ -57988,7 +57888,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -58184,7 +58088,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -69096,7 +69004,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: cfd59c905e163124fb2def0c35d28cd8, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -69535,7 +69447,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 70, y: 166.534, z: 165.651}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 80, y: 166.534, z: 165.651}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
