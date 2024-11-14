@@ -354,6 +354,8 @@ namespace PG
         {
             if (Car)
             {
+                Debug.Log("Start from key");
+                Car.StartEngineCoroutine = null;
                 Car.StartEngine();
             }
         }
