@@ -60,7 +60,7 @@ namespace PG
         public float TCSMultiplayer { get; private set; } = 1;
         public float EngineHealth { get { return EngineDamageableObject ? EngineDamageableObject.HealthPercent : 1; } }
 
-        public Coroutine StartEngineCoroutine;
+        public IEnumerator StartEngineCoroutine;
 
         private void AwakeEngine ()
         {
@@ -241,10 +241,11 @@ namespace PG
 
         public void StartEngine ()
         {
-            if (StartEngineCoroutine == null)
+            if (StartEngineCoroutine == null && !EngineIsOn)
             {
                 Debug.Log("StartEngine from Engine.cs");
-                StartEngineCoroutine = StartCoroutine (DoStartEngine ());
+                StartEngineCoroutine = DoStartEngine();
+                StartCoroutine (StartEngineCoroutine);
             }
         }
 
