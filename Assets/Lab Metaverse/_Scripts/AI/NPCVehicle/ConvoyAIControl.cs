@@ -163,7 +163,7 @@ namespace PG
             desiredSpeed = Mathf.Min (SpeedLimit, desiredSpeed);
 
             // Acceleration and brake logic
-            Vertical = ((desiredSpeed / Car.CurrentSpeed)).Clamp (-1, 1);
+            Vertical = ((desiredSpeed / Car.CurrentSpeed - 1)).Clamp (-1, 1);
 
             //Horizontal offset logic
             //Changing the offset for overtaking.
