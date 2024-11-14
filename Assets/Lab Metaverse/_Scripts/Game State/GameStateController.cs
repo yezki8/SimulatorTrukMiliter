@@ -79,6 +79,12 @@ public class GameStateController : MonoBehaviour
     {
         // cleanup
         StopAllCoroutines();
+        // find AI MANAGER object in scene and destroy it
+        GameObject aiManager = GameObject.Find("AI MANAGER");
+        if (aiManager != null)
+        {
+            Destroy(aiManager);
+        }
 
         Application.Quit();
     }
