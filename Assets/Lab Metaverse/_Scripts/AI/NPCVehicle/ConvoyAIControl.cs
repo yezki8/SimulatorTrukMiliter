@@ -134,7 +134,7 @@ namespace PG
                 TargetDist = Vector3.Distance(_playerPosition, transform.position);
 
                 // if player too far away, reduce speed
-                if (TargetDist > 220)
+                if (TargetDist > 180)
                 {
                     desiredSpeed = desiredSpeed / 1.5f;
                 }
