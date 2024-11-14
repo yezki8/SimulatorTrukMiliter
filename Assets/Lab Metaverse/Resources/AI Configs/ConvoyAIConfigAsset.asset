@@ -25,8 +25,8 @@ MonoBehaviour:
     ReverseTime: 0.5
     BetweenReverseTimeForReset: 10
   ConvoyAIConfig:
-    Aggressiveness: 0
-    ObstacleHitDistance: 20
+    Aggressiveness: 0.1
+    ObstacleHitDistance: 10
     HitPointHeight: 0.5
     ChangeHorizontalOffsetSpeed: 3
     OffsetForMainHitPoints: 0.7

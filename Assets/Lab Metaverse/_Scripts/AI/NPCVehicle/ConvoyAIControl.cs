@@ -82,7 +82,7 @@ namespace PG
 
             base.FixedUpdate ();
 
-            if (Reverse)
+            if (ConvoyEnabled && Reverse)
             {
                 ReverseMove ();
             }
@@ -163,7 +163,7 @@ namespace PG
             desiredSpeed = Mathf.Min (SpeedLimit, desiredSpeed);
 
             // Acceleration and brake logic
-            Vertical = ((desiredSpeed / Car.CurrentSpeed - 1)).Clamp (-1, 1);
+            Vertical = ((desiredSpeed / Car.CurrentSpeed)).Clamp (-1, 1);
 
             //Horizontal offset logic
             //Changing the offset for overtaking.
@@ -235,32 +235,30 @@ namespace PG
 
 
             //Reverse logic
-            var deltaSpeed = Mathf.Abs (Car.CurrentSpeed - PrevSpeed);
-            if (Vertical > 0.1f && deltaSpeed < 1 && Car.CurrentSpeed < 10)
-            {
-                if (ReverseTimer < ReverseWaitTime)
-                {
-                    ReverseTimer += Time.fixedDeltaTime;
-                }
-                else if (Time.time - LastReverseTime <= BetweenReverseTimeForReset)
-                {
-                    Horizontal = 0;
-                    Vertical = 0;
-                    Car.ResetVehicle ();
-                    ReverseTimer = 0;
-                }
-                else
-                {
-                    Horizontal = -Horizontal;
-                    Vertical = -Vertical;
-                    ReverseTimer = 0;
-                    Reverse = true;
-                }
-            }
-            else
-            {
-                ReverseTimer = 0;
-            }
+            // var deltaSpeed = Mathf.Abs (Car.CurrentSpeed - PrevSpeed);
+            // if (Vertical > 0.1f && deltaSpeed < 1 && Car.CurrentSpeed < 10)
+            // {
+            //     if (ReverseTimer < ReverseWaitTime)
+            //     {
+            //         ReverseTimer += Time.fixedDeltaTime;
+            //     }
+            //     else if (Time.time - LastReverseTime <= BetweenReverseTimeForReset)
+            //     {
+            //         ResetAIVehicleControlState();
+            //         ReverseTimer = 0;
+            //     }
+            //     else
+            //     {
+            //         Horizontal = -Horizontal;
+            //         Vertical = -Vertical;
+            //         ReverseTimer = 0;
+            //         Reverse = true;
+            //     }
+            // }
+            // else
+            // {
+            //     ReverseTimer = 0;
+            // }
         }
 
         #region Hits
@@ -359,6 +357,17 @@ namespace PG
                 ReverseTimer = 0;
                 Reverse = false;
             }
+        }
+
+        public void ResetAIVehicleControlState()
+        {
+            Vertical = 0;
+            Horizontal = 0;
+            // clear raycast parameters
+            DistanceToAheadCollider = float.MaxValue;
+            AheadRB = null;
+            // reset vehicle damage
+            Car.RestoreVehicle();
         }
 
         private void BrakeToStop()

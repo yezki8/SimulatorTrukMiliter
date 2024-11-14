@@ -726,7 +726,6 @@ MonoBehaviour:
     AutomaticGearBoxTime: 1
     AutomaticGearBox: 0
     GearsRatio:
-    - 10
     - 7.814
     - 4.506
     - 2.69
