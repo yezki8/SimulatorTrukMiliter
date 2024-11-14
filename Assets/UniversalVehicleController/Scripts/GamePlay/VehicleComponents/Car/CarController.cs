@@ -71,6 +71,19 @@ namespace PG
                 SteerWheel.transform.localRotation = Quaternion.AngleAxis (SteerWheelStartXAngle, Vector3.right);
                 SteerWheel.transform.localRotation *= Quaternion.AngleAxis ((CurrentSteerAngle / Steer.MaxSteerAngle) * SteerWheelMaxAngle, Vector3.back);
             }
+
+            if (onEngineIsDone)
+            {
+                if (countdownEngineCoroutine > 0)
+                {
+                    countdownEngineCoroutine -= 1 * Time.deltaTime;
+                }
+                else
+                {
+                    StartEngineCoroutine = null;
+                    onEngineIsDone = false;
+                }
+            }
         }
 
         protected override void OnTriggerEnter (Collider other)

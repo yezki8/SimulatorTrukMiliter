@@ -75,9 +75,9 @@ namespace PG
                 var powerTransfer = Gearbox.AutomaticGearBox ? 1 : Mathf.Pow(CarControl.Clutch, 2);
 
                 // var motorTorque = CurrentAcceleration * (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
-                float rotorForce = 0.15f;
+                float rotorForce = 0.05f;
                 CurrentMotorTorque = (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * (CurrentAcceleration + 
-                    (EngineRPM < 600 ? rotorForce : 0));
+                    (EngineRPM < 500 ? rotorForce : 0));
 
                 if (InChangeGear)
                 {

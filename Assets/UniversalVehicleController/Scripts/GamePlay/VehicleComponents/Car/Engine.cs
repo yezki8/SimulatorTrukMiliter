@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PG
@@ -9,8 +10,11 @@ namespace PG
     // Modified to include clutch Slip
     public partial class CarController :VehicleController
     {
+        bool onEngineIsDone = false;
         public bool StartEngineInAwake = false;
         public float StartEngineDellay = 0.5f;
+        float stopEngineDelay = 0.5f;
+        float countdownEngineCoroutine = 0;
 
         public EngineConfig Engine;
         public DamageableObject EngineDamageableObject;
@@ -243,6 +247,7 @@ namespace PG
         {
             if (StartEngineCoroutine == null)
             {
+                Debug.Log("StartEngine from Engine.cs");
                 StartEngineCoroutine = StartCoroutine (DoStartEngine ());
             }
         }
@@ -277,7 +282,9 @@ namespace PG
             {
                 EngineIsOn = true;
             }
-            StartEngineCoroutine = null;
+            countdownEngineCoroutine = stopEngineDelay;
+            onEngineIsDone = true;
+            StopCoroutine(StartEngineCoroutine);
         }
 
         //To BackFire vfx and sfx.
