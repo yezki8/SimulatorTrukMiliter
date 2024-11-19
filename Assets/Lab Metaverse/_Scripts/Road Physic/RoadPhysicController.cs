@@ -55,9 +55,9 @@ public class RoadPhysicController : MonoBehaviour
         {
             WheelFrictionCurve forwardFrontWfc = tires.forwardFriction;
             forwardFrontWfc.extremumValue = roadPhysicSO.ForwardExtremumParameter;
-            forwardFrontWfc.extremumSlip = roadPhysicSO.ForwardExtremumParameter / 10;
+            forwardFrontWfc.extremumSlip = roadPhysicSO.ForwardExtremumParameter;
             forwardFrontWfc.asymptoteValue = roadPhysicSO.ForwardAsymptoteParameter;
-            forwardFrontWfc.asymptoteSlip = roadPhysicSO.ForwardExtremumParameter / 2;
+            forwardFrontWfc.asymptoteSlip = roadPhysicSO.ForwardExtremumParameter;
 
             tires.forwardFriction = forwardFrontWfc;
 

@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0aa82465cd5fa845975be9694261b1d, type: 3}
   m_Name: ROADPHYSIC_Sunny
   m_EditorClassIdentifier: 
-  ForwardExtremumParameter: 4
-  ForwardAsymptoteParameter: 1.5
+  ForwardExtremumParameter: 6
+  ForwardAsymptoteParameter: 4
   FrontSidewayExtremumParameter: 3
-  FrontSidewayAsymptoteParameter: 1
+  FrontSidewayAsymptoteParameter: 1.5
   RearSidewayExtremumParameter: 5
   RearSidewayAsymptoteParameter: 2
-  RainDivider: 2
