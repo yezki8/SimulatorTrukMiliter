@@ -19,7 +19,7 @@ public abstract class ForceFeedbackProvider : MonoBehaviour
     [SerializeField] protected int _springCoefficient = 0;
     [SerializeField] protected int _springPosOffset = 0;
     [SerializeField] protected int _dirtRoadFFBMagnitude = 0;
-    public int SpringMultiplier = 50;
+    public int SpringMultiplier = 80;
 
     // Applied to all FFB providers
     public virtual void EnableFFB(bool enable) 
