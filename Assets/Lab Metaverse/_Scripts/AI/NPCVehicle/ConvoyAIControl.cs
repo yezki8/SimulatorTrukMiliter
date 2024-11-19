@@ -37,14 +37,21 @@ namespace PG
         Rigidbody AheadRB;                                                      //Nearest ahead car.
         float DistanceToAheadCollider;                                          //Distance to the nearest car.
 
+        // lighting
+        CarLighting CarLighting;
+
         // Convoy specific
         public bool ConvoyEnabled = false;
         public UnityEvent OnVehicleFinish;
         public bool hasEnteredFinishLocation = false;
+        public bool IsLeader = false;
+        private Vector3 _playerPosition;
 
         public override void Start ()
         {
             base.Start ();
+
+            CarLighting = GetComponent<CarLighting>();
 
             var selectedRaceAsset =  AIConfigAsset as ConvoyAIConfigAsset;
 
@@ -56,6 +63,9 @@ namespace PG
             {
                 ConvoyAIConfig = new ConvoyAIConfig();
             }
+
+            // get player position
+            _playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
 
             StartHits ();
         }
@@ -72,7 +82,7 @@ namespace PG
 
             base.FixedUpdate ();
 
-            if (Reverse)
+            if (ConvoyEnabled && Reverse)
             {
                 ReverseMove ();
             }
@@ -85,6 +95,17 @@ namespace PG
             else
             {
                 BrakeToStop();
+            }
+
+            // update car lighting when night
+            float timeOfDay = DayTimeManager.Instance.getTimeOfDay();
+            if (timeOfDay > 18 || timeOfDay < 6)
+            {
+                if (!CarLighting.MainLightsIsOn) CarLighting.SwitchMainLights();
+            }
+            else
+            {
+                if (CarLighting.MainLightsIsOn) CarLighting.SwitchMainLights();
             }
         }
 
@@ -106,6 +127,18 @@ namespace PG
             float desiredSpeed = (1 - (angleToPredictionPoint / LookAngleSppedFactor)).AbsClamp ();
             desiredSpeed = desiredSpeed * (SpeedLimit - MinSpeed) + MinSpeed;
             desiredSpeed = desiredSpeed.Clamp (MinSpeed, MaxSpeed);
+
+            if (_playerPosition != null)
+            {
+                // get distance between player and AI
+                TargetDist = Vector3.Distance(_playerPosition, transform.position);
+
+                // if player too far away, reduce speed
+                if (TargetDist > 180)
+                {
+                    desiredSpeed = desiredSpeed / 1.5f;
+                }
+            }
 
             if (AheadRB) {
 
@@ -202,32 +235,30 @@ namespace PG
 
 
             //Reverse logic
-            var deltaSpeed = Mathf.Abs (Car.CurrentSpeed - PrevSpeed);
-            if (Vertical > 0.1f && deltaSpeed < 1 && Car.CurrentSpeed < 10)
-            {
-                if (ReverseTimer < ReverseWaitTime)
-                {
-                    ReverseTimer += Time.fixedDeltaTime;
-                }
-                else if (Time.time - LastReverseTime <= BetweenReverseTimeForReset)
-                {
-                    Horizontal = 0;
-                    Vertical = 0;
-                    Car.ResetVehicle ();
-                    ReverseTimer = 0;
-                }
-                else
-                {
-                    Horizontal = -Horizontal;
-                    Vertical = -Vertical;
-                    ReverseTimer = 0;
-                    Reverse = true;
-                }
-            }
-            else
-            {
-                ReverseTimer = 0;
-            }
+            // var deltaSpeed = Mathf.Abs (Car.CurrentSpeed - PrevSpeed);
+            // if (Vertical > 0.1f && deltaSpeed < 1 && Car.CurrentSpeed < 10)
+            // {
+            //     if (ReverseTimer < ReverseWaitTime)
+            //     {
+            //         ReverseTimer += Time.fixedDeltaTime;
+            //     }
+            //     else if (Time.time - LastReverseTime <= BetweenReverseTimeForReset)
+            //     {
+            //         ResetAIVehicleControlState();
+            //         ReverseTimer = 0;
+            //     }
+            //     else
+            //     {
+            //         Horizontal = -Horizontal;
+            //         Vertical = -Vertical;
+            //         ReverseTimer = 0;
+            //         Reverse = true;
+            //     }
+            // }
+            // else
+            // {
+            //     ReverseTimer = 0;
+            // }
         }
 
         #region Hits
@@ -326,6 +357,17 @@ namespace PG
                 ReverseTimer = 0;
                 Reverse = false;
             }
+        }
+
+        public void ResetAIVehicleControlState()
+        {
+            Vertical = 0;
+            Horizontal = 0;
+            // clear raycast parameters
+            DistanceToAheadCollider = float.MaxValue;
+            AheadRB = null;
+            // reset vehicle damage
+            Car.RestoreVehicle();
         }
 
         private void BrakeToStop()

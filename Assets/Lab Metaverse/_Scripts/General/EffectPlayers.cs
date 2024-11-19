@@ -6,47 +6,42 @@ public class EffectPlayers : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _vfx;
     [SerializeField] private AudioSource _sfx;
-    [SerializeField] bool _isVfxLoop = true;
-    [SerializeField] float _vfxLoopDuration = 3;
-    [SerializeField] bool _isSfxLoop = true;
-    [SerializeField] float _sfxLoopDuration = 3;
-    float sfxCountdown;
+    [SerializeField] bool _isEffectLoop = true;
+    [SerializeField] float _effectLoopDuration = 3;
     float vfxCountdown;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float _startDelayDuration = 0;
+    bool hasInitiatedOnEnable = false;
+
+    private void OnEnable()
     {
-        sfxCountdown = _sfxLoopDuration;
-        vfxCountdown = _vfxLoopDuration;
+        hasInitiatedOnEnable = false;
+        StartCoroutine(InitiateEffect());
+    }
+
+    private void OnDisable()
+    {
+        hasInitiatedOnEnable = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_isSfxLoop)
+        if (_isEffectLoop && hasInitiatedOnEnable)
         {
-            LoopSFX();
-        }
-        if (_isVfxLoop)
-        {
-            LoopVFX();
+            LoopEffect();
         }
     }
 
-    void LoopSFX()
+    IEnumerator InitiateEffect()
     {
-        if (sfxCountdown > 0)
-        {
-            sfxCountdown -= 1 * Time.deltaTime;
-        }
-        else
-        {
-            _sfx.Play();
-            sfxCountdown = _sfxLoopDuration;
-        }
+        vfxCountdown = _effectLoopDuration;
+        yield return new WaitForSeconds(_startDelayDuration);
+        hasInitiatedOnEnable = true;
+        PlayEffect();
     }
 
-    void LoopVFX()
+    void LoopEffect()
     {
         if (vfxCountdown > 0)
         {
@@ -54,8 +49,14 @@ public class EffectPlayers : MonoBehaviour
         }
         else
         {
-            _vfx.Play();
-            vfxCountdown = _vfxLoopDuration;
+            PlayEffect();
         }
+    }
+
+    public void PlayEffect()
+    {
+        _vfx.Play();
+        _sfx.Play();
+        vfxCountdown = _effectLoopDuration;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using PG;
 
@@ -17,6 +18,7 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField] private GameObject Level1Parent;
     [SerializeField] private GameObject Level2Parent;
     [SerializeField] private GameObject Level3Parent;
+    [SerializeField] private List<Button> _changeLevelButtons;
 
     private void Awake()
     {
@@ -197,5 +199,11 @@ public class CheckpointManager : MonoBehaviour
     public void ChangeLevel(int levelIndex)
     {
         ActiveLevel = levelIndex;
+    }
+
+    public void ResetLevelStatus()
+    {
+        int selectedButton = ActiveLevel - 1;
+        _changeLevelButtons[selectedButton].onClick?.Invoke();
     }
 }

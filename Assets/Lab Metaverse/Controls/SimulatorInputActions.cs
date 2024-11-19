@@ -635,6 +635,17 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": """",
+                    ""id"": ""954caad9-a2fe-4052-b7fe-71c77a5d60ea"",
+                    ""path"": ""<XInputController>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EngineOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""3ce6a685-ffb6-46b2-a0d4-4d7a35b071f4"",
                     ""path"": """",
                     ""interactions"": """",
@@ -680,7 +691,7 @@ namespace UnityEngine.InputSystem
                 {
                     ""name"": """",
                     ""id"": ""9a7aaed9-269b-4127-bba4-3b562326dddf"",
-                    ""path"": ""<XInputController>/dpad/up"",
+                    ""path"": ""<XInputController>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -692,6 +703,17 @@ namespace UnityEngine.InputSystem
                     ""name"": """",
                     ""id"": ""ee4ac876-c6d7-4524-b36c-49de8fad838a"",
                     ""path"": ""<HID::Logitech G29 Driving Force Racing Wheel>/button11"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchFarLights"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1318c89f-7395-430e-9524-6b7b9ce8ec88"",
+                    ""path"": ""<XInputController>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

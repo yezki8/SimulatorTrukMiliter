@@ -60,7 +60,7 @@ namespace PG
         public float TCSMultiplayer { get; private set; } = 1;
         public float EngineHealth { get { return EngineDamageableObject ? EngineDamageableObject.HealthPercent : 1; } }
 
-        Coroutine StartEngineCoroutine;
+        public IEnumerator StartEngineCoroutine;
 
         private void AwakeEngine ()
         {
@@ -187,7 +187,7 @@ namespace PG
                 }
                 else
                 {
-                    TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 ? ((EngineRPM + 1000) * CurrentAcceleration) : (DrivetrainRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
+                    TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 ? ((EngineRPM + 200) * CurrentAcceleration) : (DrivetrainRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
                 }
 
                 TargetRPM = TargetRPM.Clamp(MinRPM, MaxRPM);
@@ -241,9 +241,11 @@ namespace PG
 
         public void StartEngine ()
         {
-            if (StartEngineCoroutine == null)
+            if (StartEngineCoroutine == null && !EngineIsOn)
             {
-                StartEngineCoroutine = StartCoroutine (DoStartEngine ());
+                Debug.Log("StartEngine from Engine.cs");
+                StartEngineCoroutine = DoStartEngine();
+                StartCoroutine (StartEngineCoroutine);
             }
         }
 
@@ -277,7 +279,7 @@ namespace PG
             {
                 EngineIsOn = true;
             }
-            StartEngineCoroutine = null;
+            StopCoroutine(StartEngineCoroutine);
         }
 
         //To BackFire vfx and sfx.

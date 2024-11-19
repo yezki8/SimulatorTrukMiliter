@@ -523,7 +523,7 @@ namespace PG
             {
                 float y = transform.eulerAngles.y;
 
-                RB.MovePosition (RB.position + Vector3.up);
+                RB.MovePosition (RB.position);
                 RB.MoveRotation (Quaternion.AngleAxis (y, Vector3.up));
             }
 
@@ -574,7 +574,7 @@ namespace PG
         IEnumerator ChangeRigidbody ()
         {
             Vector3 startPos = RB.position;
-            Vector3 targetPos = RB.position + Vector3.up;
+            Vector3 targetPos = RB.position;
 
             Quaternion startRot = transform.rotation;
             float y = transform.eulerAngles.y;

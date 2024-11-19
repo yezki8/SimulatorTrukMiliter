@@ -398,7 +398,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2216500074584113594}
   - component: {fileID: 7693816548218950510}
-  - component: {fileID: 6095281201076908116}
   - component: {fileID: 306109789346355848}
   - component: {fileID: 2313045119727846878}
   - component: {fileID: 6426317477010373061}
@@ -442,7 +441,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279293672294920118}
   serializedVersion: 4
-  m_Mass: 4000
+  m_Mass: 6000
   m_Drag: 0.04
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -461,25 +460,6 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6095281201076908116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 279293672294920118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23538e76cb6ff12418870415e535e8a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _carController: {fileID: 306109789346355848}
-  _carControllerInput: {fileID: 0}
-  _truckSpeed: {fileID: 0}
-  roadLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  _warning: {fileID: 0}
 --- !u!114 &306109789346355848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,7 +726,6 @@ MonoBehaviour:
     AutomaticGearBoxTime: 1
     AutomaticGearBox: 0
     GearsRatio:
-    - 10
     - 7.814
     - 4.506
     - 2.69
@@ -26574,7 +26553,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -53077,7 +53060,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 9ea9d7da4172ac247ab479cd6b56863c, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -53504,7 +53491,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -64469,7 +64460,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 70, y: 193.466, z: 194.349}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 80, y: 193.466, z: 194.349}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -64582,7 +64577,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -70103,7 +70102,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -70715,7 +70718,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 70, y: 166.534, z: 165.651}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 80, y: 166.534, z: 165.651}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -76493,7 +76500,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: cfd59c905e163124fb2def0c35d28cd8, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
@@ -76642,7 +76653,11 @@ MonoBehaviour:
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
   EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
+  MainRange: 40
+  MainSpotAngle: 50
   FarLightDirection: {x: 0, y: 0, z: 0}
+  FarRange: 100
+  FarSpotAngle: 30
   IsSoftSwitch: 1
   OnSwitchSpeed: 8
   OffSwitchSpeed: 8
