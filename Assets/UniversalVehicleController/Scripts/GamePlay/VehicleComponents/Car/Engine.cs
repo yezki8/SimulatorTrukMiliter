@@ -262,7 +262,6 @@ namespace PG
         {
             if (StartEngineCoroutine == null && !EngineIsOn)
             {
-                Debug.Log("StartEngine from Engine.cs");
                 StartEngineCoroutine = DoStartEngine();
                 StartCoroutine (StartEngineCoroutine);
             }
