@@ -73,11 +73,9 @@ namespace PG
                 // Calculate power transfer from motor to wheel, quadratic
                 // add checks for automatic gearbox
                 var powerTransfer = Gearbox.AutomaticGearBox ? 1 : Mathf.Pow(CarControl.Clutch, 2);
+                // var powerTransfer = Gearbox.AutomaticGearBox ? 1 : CarControl.Clutch * 2;
 
-                // var motorTorque = CurrentAcceleration * (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
-                float rotorForce = 0.05f;
-                CurrentMotorTorque = (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * (CurrentAcceleration + 
-                    (EngineRPM < 500 ? rotorForce : 0));
+                CurrentMotorTorque = (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * CurrentAcceleration;
 
                 if (InChangeGear)
                 {
@@ -114,6 +112,9 @@ namespace PG
 
                     //Apply of torque to the wheel.
                     wheel.SetMotorTorque (WheelTorque);
+                    
+                    // brake torque for weight
+                    if (WheelTorque == 0 && powerTransfer > 0f) { wheel.SetBrakeTorque(1f * powerTransfer); }
                 }
             }
             else
@@ -212,7 +213,7 @@ namespace PG
         // Also add failed clutch handling, force stopping the engine
         public void SetGear(int gear)
         {
-            if (CarControl.Clutch < 0.2)
+            if (CarControl.Clutch < 0.4)
             {
                 if (!InChangeGear && (CurrentGear >= 0 || CurrentGear < (AllGearsRatio.Length - 2)))
                 {

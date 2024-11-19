@@ -84,7 +84,7 @@ namespace PG
                     CurrentAcceleration = 0;
                     CurrentBrake = 0;
                     CurrentTurbo = 0;
-                    if (CarControl != null && CarControl.Acceleration > 0.5f && !IsPlayerCar)
+                    if (CarControl != null && CarControl.Acceleration > 0.5f && !IsPlayerVehicle)
                     {
                         StartEngine ();
                     }
@@ -187,11 +187,30 @@ namespace PG
                 }
                 else
                 {
-                    TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 ? ((EngineRPM + 200) * CurrentAcceleration) : (DrivetrainRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
+                    TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 || CarControl.Clutch == 0f ? ((EngineRPM + 400) * CurrentAcceleration) : (DrivetrainRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
                 }
-
-                TargetRPM = TargetRPM.Clamp(MinRPM, MaxRPM);
-                var changeRPMSpeed = CurrentAcceleration.Abs() > 0.1f && TargetRPM > EngineRPM? Engine.RPMEngineToRPMWheelsFast: Engine.RPMEngineToRPMWheelsSlow;
+                
+                if (IsPlayerVehicle)
+                {
+                    TargetRPM = TargetRPM.Clamp (MinRPM - (CurrentGear == 0 || CarControl.Clutch == 0f ? 0 : 100), MaxRPM);
+                }
+                else
+                {
+                    TargetRPM = TargetRPM.Clamp (MinRPM, MaxRPM);
+                }
+                TargetRPM = IsPlayerVehicle ? TargetRPM.Clamp(MinRPM - 100, MaxRPM) : TargetRPM.Clamp(MinRPM, MaxRPM);
+                
+                var changeRPMSpeed = 0f;
+                if (CurrentAcceleration.Abs() > 0.1f && TargetRPM > EngineRPM)
+                {
+                    changeRPMSpeed = Engine.RPMEngineToRPMWheelsFast;
+                }
+                else
+                {
+                    // Add clutch and drivetrainRPM vs engineRPM difference to calculation
+                    changeRPMSpeed = Engine.RPMEngineToRPMWheelsSlow 
+                                     * (1f + CarControl.Clutch);
+                }
 
                 // Calculate clutchSlipRatio
                 float clutchSlipRatio = Mathf.Abs(TargetRPM - EngineRPM) / Mathf.Max(TargetRPM, EngineRPM, 1f);
@@ -213,7 +232,7 @@ namespace PG
             // Engine stall logic here
             // CurrentAcceleration directly translates to how much acceleration is applied from the pedal.
             // CarControl.Clutch > 0.84 is arbitrary for now, fine-tune later.
-            if (CurrentGear != 0 && CarControl.Clutch > 0.95 && EngineRPM < Engine.StallRPM && CurrentAcceleration < 0.1f)
+            if (CurrentGear != 0 && CarControl.Clutch > 0.45 && EngineRPM < Engine.StallRPM && CurrentAcceleration < 0.1f)
             {
                 Debug.Log("Stalled here");
                 StopEngine();

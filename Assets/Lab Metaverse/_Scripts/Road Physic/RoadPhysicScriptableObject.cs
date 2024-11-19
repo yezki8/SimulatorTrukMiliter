@@ -6,14 +6,14 @@ using UnityEngine;
 public class RoadPhysicScriptableObject : ScriptableObject
 {
     [Header("Forward Friction")]
-    public float ForwardExtremumParameter = 4;
-    public float ForwardAsymptoteParameter = 1.5f;
+    public float ForwardExtremumValue = 6;
+    public float ForwardAsymptoteValue = 4f;
 
-    [Header("Front Sideway Friction")]
-    public float FrontSidewayExtremumParameter = 3;
-    public float FrontSidewayAsymptoteParameter = 1;
+    [Header("Front Sideways Friction")]
+    public float FrontSidewayExtremumValue = 4;
+    public float FrontSidewayAsymptoteValue = 3.2f;
 
-    [Header("Rear Sideway Friction")]
-    public float RearSidewayExtremumParameter = 5;
-    public float RearSidewayAsymptoteParameter = 2;
+    [Header("Rear Sideways Friction")]
+    public float RearSidewayExtremumValue = 5;
+    public float RearSidewayAsymptoteValue = 4;
 }
