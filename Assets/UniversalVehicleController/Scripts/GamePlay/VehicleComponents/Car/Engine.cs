@@ -62,6 +62,14 @@ namespace PG
 
         public IEnumerator StartEngineCoroutine;
 
+        private void OnEnable()
+        {
+            if (this.tag != "Player")
+            {
+                StartEngineCoroutine = null;
+            }
+        }
+
         private void AwakeEngine ()
         {
             MaxMotorTorque = Engine.MaxMotorTorque / DriveWheels.Length;    //Division of torque to all driving wheels.
