@@ -56,9 +56,7 @@ namespace PG
         TurnsStates CurrentTurnsState = TurnsStates.Off;
 
         public event System.Action<CarLightType, bool> OnSetActiveLight;
-
-        HeadlightsType currentType = HeadlightsType.Main;
-
+        
         public CarLighting AdditionalLighting { get; set; }
 
         void Start ()

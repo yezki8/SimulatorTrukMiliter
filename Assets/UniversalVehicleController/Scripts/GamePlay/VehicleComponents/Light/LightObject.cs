@@ -14,7 +14,6 @@ namespace PG
         public Material OnLightMaterial;                //Material with glow, used for soft and hard switching.
 
         [Header("Headlight settings")]
-        [SerializeField] private bool EnableLight = true;
         // light direction
         [SerializeField] private Vector3 MainLightDirection = Vector3.zero;
         [SerializeField][Range(0, 120)] private float MainRange = 40;

@@ -73,11 +73,9 @@ namespace PG
                 // Calculate power transfer from motor to wheel, quadratic
                 // add checks for automatic gearbox
                 var powerTransfer = Gearbox.AutomaticGearBox ? 1 : Mathf.Pow(CarControl.Clutch, 2);
+                // var powerTransfer = Gearbox.AutomaticGearBox ? 1 : CarControl.Clutch * 2;
 
-                // var motorTorque = CurrentAcceleration * (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex]));
-                float rotorForce = 0.05f;
-                CurrentMotorTorque = (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * (CurrentAcceleration + 
-                    (EngineRPM < 500 ? rotorForce : 0));
+                CurrentMotorTorque = (CurrentEngineTorque * (MaxMotorTorque * AllGearsRatio[CurrentGearIndex])) * CurrentAcceleration;
 
                 if (InChangeGear)
                 {
@@ -90,7 +88,7 @@ namespace PG
 
                 //Calculation of target rpm for driving wheels.
                 var targetWheelsRPM = AllGearsRatio[CurrentGearIndex] == 0? 0: EngineRPM / AllGearsRatio[CurrentGearIndex];
-                var offset = (100 / AllGearsRatio[CurrentGearIndex]).Abs();
+                var offset = (400 / AllGearsRatio[CurrentGearIndex]).Abs();
 
                 for (int i = 0; i < DriveWheels.Length; i++)
                 {
@@ -105,7 +103,7 @@ namespace PG
 
                     if (targetWheelsRPM != 0 && Mathf.Sign (targetWheelsRPM * wheel.RPM) > 0)
                     {
-                        var multiplier = wheel.RPM.Abs () / (targetWheelsRPM.Abs () + offset);
+                        var multiplier = wheel.RPM.Abs () / (targetWheelsRPM.Abs () + (IsPlayerVehicle ? ( offset / 32f ) : offset));
                         if (multiplier >= 1f)
                         {
                             WheelTorque *= (1 - multiplier);
@@ -114,6 +112,9 @@ namespace PG
 
                     //Apply of torque to the wheel.
                     wheel.SetMotorTorque (WheelTorque);
+                    
+                    // brake torque for weight
+                    if (WheelTorque == 0 && powerTransfer > 0f) { wheel.SetBrakeTorque(1f * powerTransfer); }
                 }
             }
             else
@@ -212,7 +213,7 @@ namespace PG
         // Also add failed clutch handling, force stopping the engine
         public void SetGear(int gear)
         {
-            if (CarControl.Clutch < 0.2)
+            if (CarControl.Clutch < 0.4)
             {
                 if (!InChangeGear && (CurrentGear >= 0 || CurrentGear < (AllGearsRatio.Length - 2)))
                 {

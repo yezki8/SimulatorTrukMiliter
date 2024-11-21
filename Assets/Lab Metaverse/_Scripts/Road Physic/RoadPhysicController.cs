@@ -8,11 +8,8 @@ public class RoadPhysicController : MonoBehaviour
     [SerializeField] private List<WheelCollider> _rearTires;
 
     [Header("Calculation Parameter")]
-    [SerializeField] private float _frontSidewayExtremumDivider = 3 / 0.4f;
-    [SerializeField] private float _frontSidewayAsymptoteParameter = 1 / 0.8f;
-    [SerializeField] private float _rearSidewayExtremumDivider = 5 / 0.4f;
-    [SerializeField] private float _rearSidewayAsymptoteParameter = 2 / 0.8f;
-
+    [SerializeField] float _extremumSlip = 0.6f;
+    [SerializeField] float _asymptoteSlip = 0.7f;
     [SerializeField] private List<RoadPhysicScriptableObject> _listOfPhysics;       //0 = default
 
     public static RoadPhysicController Instance;
@@ -41,7 +38,7 @@ public class RoadPhysicController : MonoBehaviour
 
     public void UpdateWheelPhysic()
     {
-        int weatherState = (int)WeatherSystem.Instance.CurrentWeather;
+        var weatherState = (int)WeatherSystem.Instance.CurrentWeather;
         RoadPhysicScriptableObject roadPhysicSO;
         if (weatherState > 0 && weatherState < _listOfPhysics.Count)
         {
@@ -51,25 +48,42 @@ public class RoadPhysicController : MonoBehaviour
         {
             roadPhysicSO = _listOfPhysics[0]; //setDefault
         }
-        foreach (WheelCollider tires in _frontTires)
+        foreach (var tires in _frontTires)
         {
-            WheelFrictionCurve forwardFrontWfc = tires.forwardFriction;
-            forwardFrontWfc.extremumValue = roadPhysicSO.ForwardExtremumParameter;
-            forwardFrontWfc.extremumSlip = roadPhysicSO.ForwardExtremumParameter / 10;
-            forwardFrontWfc.asymptoteValue = roadPhysicSO.ForwardAsymptoteParameter;
-            forwardFrontWfc.asymptoteSlip = roadPhysicSO.ForwardExtremumParameter / 2;
+            var forwardFrontWfc = tires.forwardFriction;
+            forwardFrontWfc.extremumValue = roadPhysicSO.ForwardExtremumValue;
+            forwardFrontWfc.extremumSlip = _extremumSlip;
+            forwardFrontWfc.asymptoteValue = roadPhysicSO.ForwardAsymptoteValue;
+            forwardFrontWfc.asymptoteSlip = _asymptoteSlip;
 
             tires.forwardFriction = forwardFrontWfc;
 
-            WheelFrictionCurve sideFrontWfc = tires.sidewaysFriction;
-            forwardFrontWfc.extremumValue = roadPhysicSO.ForwardExtremumParameter;
-            forwardFrontWfc.extremumSlip = 
-                roadPhysicSO.ForwardExtremumParameter / _frontSidewayExtremumDivider;
-            forwardFrontWfc.asymptoteValue = roadPhysicSO.ForwardAsymptoteParameter;
-            forwardFrontWfc.asymptoteSlip = 
-                roadPhysicSO.ForwardExtremumParameter / _frontSidewayAsymptoteParameter;
+            var sideFrontWfc = tires.sidewaysFriction;
+            sideFrontWfc.extremumValue = roadPhysicSO.FrontSidewayExtremumValue;
+            sideFrontWfc.extremumSlip = _extremumSlip;
+            sideFrontWfc.asymptoteValue = roadPhysicSO.ForwardAsymptoteValue;
+            sideFrontWfc.asymptoteSlip = _asymptoteSlip;
 
             tires.sidewaysFriction = sideFrontWfc;
+        }
+
+        foreach (var tires in _rearTires)
+        {
+            var forwardRearWfc = tires.forwardFriction;
+            forwardRearWfc.extremumValue = roadPhysicSO.ForwardExtremumValue;
+            forwardRearWfc.extremumSlip = _extremumSlip;
+            forwardRearWfc.asymptoteValue = roadPhysicSO.ForwardAsymptoteValue;
+            forwardRearWfc.asymptoteSlip = _asymptoteSlip;
+            
+            tires.forwardFriction = forwardRearWfc;
+            
+            var sideRearWfc = tires.sidewaysFriction;
+            sideRearWfc.extremumValue = roadPhysicSO.RearSidewayExtremumValue;
+            sideRearWfc.extremumSlip = _extremumSlip;
+            sideRearWfc.asymptoteValue = roadPhysicSO.RearSidewayExtremumValue;
+            sideRearWfc.asymptoteSlip = _asymptoteSlip;
+            
+            tires.sidewaysFriction = sideRearWfc;
         }
 
         Debug.Log("Road physics is set according to " + roadPhysicSO.name);

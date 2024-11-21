@@ -33,7 +33,14 @@ namespace PG
 
         public void ResetPosRotProgress()
         {
+            // sanity check if this vehicle is not player
+            if (!Car.IsPlayerVehicle)
+            {
+                return;
+            }
+            
             GetComponent<CarController>().ResetVehicleToIdle();
+                
             transform.position = _initPosition;
             transform.eulerAngles = _initRotation;
             if (TryGetComponent<Rigidbody>(out var rb))
@@ -45,7 +52,7 @@ namespace PG
                 rb.rotation = Quaternion.Euler(_initRotation);
                 rb.isKinematic = false;
             }
-
+                
             // reset progress
             GetClosestPointStart();
         }

@@ -104,40 +104,33 @@ public class WeatherSystem : MonoBehaviour
         {
             case WeatherType.Clear:
                 _sunLight.bounceIntensity = 1;
-                // disable fog
-                fog.enabled.value = false;
-                fog.meanFreePath.value = 1000;
+                fog.meanFreePath.value = 4000;
                 cloud.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
                 break;
             case WeatherType.LightCloud:
                 _sunLight.bounceIntensity = 0.95f;
-                fog.enabled.value = false;
-                fog.meanFreePath.value = 1000;
+                fog.meanFreePath.value = 4000;
                 cloud.cloudPreset = VolumetricClouds.CloudPresets.Cloudy;
                 break;
             case WeatherType.Overcast:
                 _sunLight.bounceIntensity = 0.95f;
-                fog.enabled.value = false;
                 fog.meanFreePath.value = 1000;
                 cloud.cloudPreset = VolumetricClouds.CloudPresets.Overcast;
                 break;
             case WeatherType.Rainy:
                 _sunLight.bounceIntensity = 0.9f;
-                fog.enabled.value = true;
                 fog.meanFreePath.value = 600;
                 cloud.cloudPreset = VolumetricClouds.CloudPresets.Overcast;
                 break;
             case WeatherType.ThunderStorm:
                 _sunLight.bounceIntensity = 0.9f;
-                fog.enabled.value = true;
                 fog.meanFreePath.value = 80;
                 cloud.cloudPreset = VolumetricClouds.CloudPresets.Stormy;
                 break;
             default:
                 // default to clear
                 _sunLight.bounceIntensity = 1;
-                fog.enabled.value = false;
-                fog.meanFreePath.value = 1000;
+                fog.meanFreePath.value = 4000;
                 cloud.cloudPreset = VolumetricClouds.CloudPresets.Sparse;
                 break;
         }
