@@ -88,7 +88,7 @@ namespace PG
 
                 //Calculation of target rpm for driving wheels.
                 var targetWheelsRPM = AllGearsRatio[CurrentGearIndex] == 0? 0: EngineRPM / AllGearsRatio[CurrentGearIndex];
-                var offset = (100 / AllGearsRatio[CurrentGearIndex]).Abs();
+                var offset = (400 / AllGearsRatio[CurrentGearIndex]).Abs();
 
                 for (int i = 0; i < DriveWheels.Length; i++)
                 {
@@ -103,7 +103,7 @@ namespace PG
 
                     if (targetWheelsRPM != 0 && Mathf.Sign (targetWheelsRPM * wheel.RPM) > 0)
                     {
-                        var multiplier = wheel.RPM.Abs () / (targetWheelsRPM.Abs () + offset);
+                        var multiplier = wheel.RPM.Abs () / (targetWheelsRPM.Abs () + (IsPlayerVehicle ? ( offset / 32f ) : offset));
                         if (multiplier >= 1f)
                         {
                             WheelTorque *= (1 - multiplier);

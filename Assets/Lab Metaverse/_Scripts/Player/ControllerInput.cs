@@ -289,6 +289,7 @@ namespace PG
                 // no suitable processor from input system
                 // transform from [-1, 1] to [1, 0] -> 0 = fully pressed, 1 = fully released
                 Clutch = 1 - ((value + 1) / 2);
+                // Clutch = 1 - value;
             }
         }
 

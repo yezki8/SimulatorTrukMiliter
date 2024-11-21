@@ -189,27 +189,28 @@ namespace PG
                 {
                     TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 || CarControl.Clutch == 0f ? ((EngineRPM + 400) * CurrentAcceleration) : (DrivetrainRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
                 }
-                
+
+                var changeRPMSpeed = 0f;
+
                 if (IsPlayerVehicle)
                 {
                     TargetRPM = TargetRPM.Clamp (MinRPM - (CurrentGear == 0 || CarControl.Clutch == 0f ? 0 : 100), MaxRPM);
+                    
+                    if (CurrentAcceleration.Abs() > 0.01f && TargetRPM > EngineRPM)
+                    {
+                        changeRPMSpeed = Engine.RPMEngineToRPMWheelsFast * CurrentAcceleration.Abs();
+                    }
+                    else
+                    {
+                        // Add clutch and drivetrainRPM vs engineRPM difference to calculation
+                        changeRPMSpeed = Engine.RPMEngineToRPMWheelsSlow
+                                         * (1f + CarControl.Clutch);
+                    }
                 }
                 else
                 {
                     TargetRPM = TargetRPM.Clamp (MinRPM, MaxRPM);
-                }
-                TargetRPM = IsPlayerVehicle ? TargetRPM.Clamp(MinRPM - 100, MaxRPM) : TargetRPM.Clamp(MinRPM, MaxRPM);
-                
-                var changeRPMSpeed = 0f;
-                if (CurrentAcceleration.Abs() > 0.1f && TargetRPM > EngineRPM)
-                {
-                    changeRPMSpeed = Engine.RPMEngineToRPMWheelsFast;
-                }
-                else
-                {
-                    // Add clutch and drivetrainRPM vs engineRPM difference to calculation
-                    changeRPMSpeed = Engine.RPMEngineToRPMWheelsSlow 
-                                     * (1f + CarControl.Clutch);
+                    changeRPMSpeed = CurrentAcceleration.Abs() > 0.1f && TargetRPM > EngineRPM ? Engine.RPMEngineToRPMWheelsFast : Engine.RPMEngineToRPMWheelsSlow;
                 }
 
                 // Calculate clutchSlipRatio
