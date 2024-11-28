@@ -14,18 +14,23 @@ public class DayTimeManager : MonoBehaviour
 
     [Range(0, 24)]
     [SerializeField] private float _timeOfDay = 4;  // Current time of day (0-24)
-    [SerializeField] private Material streetLampMaterial;
     [SerializeField] private float _dayDuration = 120f;  // Duration of a full day in seconds
     private int _currentDay = 1;
+    
+    [Header("Street Lamp Settings")]
+    [SerializeField] private Material streetLampMaterial;
+    [SerializeField] private int lampIntensity = 100;
+    [SerializeField] private Color lampColor = Color.white;
+    private Renderer[] _streetLampRenderers;
     
     [SerializeField]
     private Image _moon; // Moon icon
     [SerializeField]
     private Image _sun; // Sun icon
 
-    [SerializeField]
+    [SerializeField] 
     private TextMeshProUGUI _timeText;  // Time Text UI
-
+    
     public DayNightCycle dayNightCycle;
 
     // singleton instance
@@ -50,6 +55,8 @@ public class DayTimeManager : MonoBehaviour
     private void Start()
     {
         InitializeDayTime();
+        InitializeStreetLamps();
+        StartCoroutine(UpdateStreetLampLightsCoroutine());
     }
 
     private void OnValidate()
@@ -57,7 +64,7 @@ public class DayTimeManager : MonoBehaviour
         dayNightCycle.UpdateSunMoonPosition(_timeOfDay);
     }
 
-    void Update()
+    private void Update()
     {
         //Make sure that day clock only run when game is active
         if (GameStateController.Instance.GameState == StateOfGame.Match)
@@ -65,8 +72,20 @@ public class DayTimeManager : MonoBehaviour
             CalculateDayTime();
             dayNightCycle.UpdateSunMoonPosition(_timeOfDay);
         }
-
-        UpdateStreetLampLights();
+    }
+    
+    private void InitializeStreetLamps()
+    {
+        _streetLampRenderers = FindObjectsOfType<Renderer>();
+    }
+    
+    private IEnumerator UpdateStreetLampLightsCoroutine()
+    {
+        while (true)
+        {
+            UpdateStreetLampLights();
+            yield return new WaitForSeconds(10);
+        }
     }
 
     private void UpdateStreetLampLights()
@@ -84,26 +103,15 @@ public class DayTimeManager : MonoBehaviour
 
     private void TurnStreetLampLights(bool status)
     {
-        float emissiveIntensity;
-        Color emissiveColor = Color.white;
-        Renderer[] renderers = FindObjectsOfType<Renderer>();
-        
-        if (status)
-        {
-            emissiveIntensity = 100;
-        }
-        else
-        {
-            emissiveIntensity = 0;
-        }
+        float emissiveIntensity = status ? lampIntensity : 0;
 
-        foreach (Renderer renderer in renderers)
+        foreach (var lamp in _streetLampRenderers)
         {
-            foreach (Material material in renderer.sharedMaterials)
+            foreach (Material material in lamp.sharedMaterials)
             {
                 if (material == streetLampMaterial)
                 {
-                    material.SetColor("_EmissiveColor", emissiveColor * emissiveIntensity);
+                    material.SetColor("_EmissiveColor", lampColor * emissiveIntensity);
                 }
             }
         }

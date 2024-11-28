@@ -77,6 +77,18 @@ public class ConvoySystem : MonoBehaviour
         foreach (ConvoyAIControl vehicle in _vehicleControls)
         {
             vehicle.ConvoyEnabled = true;
+            // sanity check again
+            if (!vehicle.Car.EngineIsOn)
+            {
+                // duct tape
+                // check if startenginecouroutine is not null
+                if (vehicle.Car.StartEngineCoroutine != null)
+                {
+                    vehicle.Car.StartEngineCoroutine = null;
+                }
+                vehicle.Car.StartEngine();
+            }
+
         }
         Debug.Log("Convoy started");
         EnableTrigger(endPoint);

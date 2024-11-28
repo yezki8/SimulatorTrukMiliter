@@ -33,8 +33,8 @@ namespace PG
 
         public void ResetPosRotProgress()
         {
-            // sanity check if this vehicle is not player
-            if (!Car.IsPlayerVehicle)
+            // sanity check if this vehicle is player
+            if (Car.IsPlayerVehicle)
             {
                 return;
             }
