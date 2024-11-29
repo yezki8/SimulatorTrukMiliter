@@ -78,15 +78,27 @@ public class GameStateController : MonoBehaviour
     public void QuitGame()
     {
         // cleanup
-        StopAllCoroutines();
+        DayTimeManager.Instance.StopAllCoroutines();
         // find AI MANAGER object in scene and destroy it
         GameObject aiManager = GameObject.Find("AI MANAGER");
         if (aiManager != null)
         {
-            Destroy(aiManager);
+            var generalNPCManager = aiManager.GetComponent<GeneralNPCManager>();
+            if (generalNPCManager != null)
+            {
+                // reset vehicle
+                generalNPCManager.ResetAllGroups();
+                Debug.Log("All NPC Groups reset");
+                generalNPCManager.StopAllCoroutines();
+                Debug.Log("All Coroutines Stopped");
+            }
+            // Destroy(aiManager);
+            aiManager.SetActive(false);
+            Debug.Log("AI MANAGER SetActive: false");
         }
-
+        Debug.Log("Quitting...");
         Application.Quit();
+        System.Diagnostics.Process.GetCurrentProcess().Kill();
     }
 
     public void CloseStage(string SceneName)       //As in, finish the stage / back to menu

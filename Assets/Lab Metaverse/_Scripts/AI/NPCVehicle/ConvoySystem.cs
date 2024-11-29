@@ -124,6 +124,8 @@ public class ConvoySystem : MonoBehaviour
             {
                 vehicle.ConvoyEnabled = false;
                 vehicle.Car.ResetVehicle();
+                // stop all coroutines
+                vehicle.Car.StopAllCoroutines();
                 vehicle.ResetPosRotProgress();
             }
         }
