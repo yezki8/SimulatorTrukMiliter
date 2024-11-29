@@ -36,14 +36,17 @@ public class ConvoySpeedController : MonoBehaviour
 
     void CalculateDistance()
     {
-        if (_isLeader && _lastVehicle != true)
+        if (_isLeader && _lastVehicle != null)
         {
             CurrentWholeDistance = Vector3.Distance(this.transform.position, _lastVehicle.position);
             CurrentBehindDistance = Vector3.Distance(this.transform.position, _onBehindVehicle.position);
         }
         else
         {
-            CurrentOnFrontDistance = Vector3.Distance(this.transform.position, _onFrontVehicle.position);
+            if (_onFrontVehicle != null)
+            {
+                CurrentOnFrontDistance = Vector3.Distance(this.transform.position, _onFrontVehicle.position);
+            }
         }
     }
 
@@ -63,7 +66,7 @@ public class ConvoySpeedController : MonoBehaviour
         }
         else
         {
-            dynamicLimit = speedLimit * (_distanceThreshold / CurrentOnFrontDistance);
+            dynamicLimit = speedLimit * (CurrentOnFrontDistance /_distanceThreshold);
         }
 
         if (dynamicLimit > speedLimit * SpeedLimitMultiplierThreshold)

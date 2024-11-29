@@ -195,7 +195,10 @@ namespace PG
                 }
                 else
                 {
-                    TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 || CarControl.Clutch == 0f ? ((EngineRPM + 400) * CurrentAcceleration) : (DrivetrainRPM.Abs () * AllGearsRatio[CurrentGearIndex].Abs ());
+                    var RPMFromDriveTrain = DrivetrainRPM.Abs() * AllGearsRatio[CurrentGearIndex].Abs();
+                    // hack: adjust target rpm for better slowing down rpm mechanism (???)
+                    var adjustedRPMTarget = RPMFromDriveTrain > MaxRPM * 0.6f ? RPMFromDriveTrain * CurrentAcceleration : RPMFromDriveTrain;
+                    TargetRPM = (DrivetrainRPM * CurrentGear) <= 0 || CarControl.Clutch == 0f ? ((EngineRPM + 600) * CurrentAcceleration) : (adjustedRPMTarget);
                 }
 
                 var changeRPMSpeed = 0f;
