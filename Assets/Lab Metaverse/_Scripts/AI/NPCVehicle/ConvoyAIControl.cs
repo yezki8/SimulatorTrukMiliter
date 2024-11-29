@@ -131,7 +131,7 @@ namespace PG
             
             if (_speedController != null)
             {
-                calculatedSpeedLimit = _speedController.GetUsedSpeedLimit(SpeedLimit);
+                calculatedSpeedLimit = _speedController.GetDynamicSpeedLimit(SpeedLimit);
             }
             
 
