@@ -18,10 +18,7 @@ public class NPCVehicleController : MonoBehaviour
                 simAIControl.ResetAIVehicleControlState();
                 simAIControl.ResetPosRotProgress();
             }
-            var car = GetComponent<CarController>();
-            car.ResetVehicle();
-            // stop all coroutines
-            car.StopAllCoroutines();
+            GetComponent<CarController>().ResetVehicle();
 
             /* Debug.Log($"After Reset\n" +
                 $"Init pos = {initPos}, init rot = {initRot}\n" +

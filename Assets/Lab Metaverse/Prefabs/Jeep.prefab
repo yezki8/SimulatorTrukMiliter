@@ -30704,7 +30704,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4166218400099787280}
   serializedVersion: 4
-  m_Mass: 5000
+  m_Mass: 6000
   m_Drag: 0.04
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -30755,6 +30755,7 @@ MonoBehaviour:
   ForceFeedback: {fileID: 0}
   CanBrake: 1
   CanHandBrake: 1
+  IsPlayerCar: 0
   StartEngineInAwake: 0
   StartEngineDellay: 1.5
   Engine:
@@ -31128,8 +31129,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   hasEnteredFinishLocation: 0
-  _isLeader: 0
-  ConvoyVerticalRef: 0
+  IsLeader: 0
 --- !u!1 &4222690496699523093
 GameObject:
   m_ObjectHideFlags: 0
