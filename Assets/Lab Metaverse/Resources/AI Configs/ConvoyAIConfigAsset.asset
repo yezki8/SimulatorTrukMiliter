@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ConvoyAIConfigAsset
   m_EditorClassIdentifier: 
   AIConfig:
-    MaxSpeed: 20
+    MaxSpeed: 30
     MinSpeed: 0
     SetSteerAngleMultiplayer: 1.8
     OffsetToTargetPoint: 8

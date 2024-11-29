@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0aa82465cd5fa845975be9694261b1d, type: 3}
   m_Name: ROADPHYSIC_Thunderstorm
   m_EditorClassIdentifier: 
-  ForwardExtremumValue: 7
-  ForwardAsymptoteValue: 5
-  FrontSidewayExtremumValue: 3
-  FrontSidewayAsymptoteValue: 2.4
-  RearSidewayExtremumValue: 4
-  RearSidewayAsymptoteValue: 3
+  ForwardExtremumValue: 2.2
+  ForwardAsymptoteValue: 1.4
+  FrontSidewayExtremumValue: 2
+  FrontSidewayAsymptoteValue: 1.6
+  RearSidewayExtremumValue: 2
+  RearSidewayAsymptoteValue: 1.8

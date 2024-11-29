@@ -43,7 +43,7 @@ namespace PG
         /// <summary>
         /// The property that changes the Acceleration and BrakeReverse of the car: (1) Acceleration, (-1) Braking / Reverse
         /// </summary>
-        protected float Vertical
+        public float Vertical
         {
             get
             {

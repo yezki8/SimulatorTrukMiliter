@@ -44,8 +44,9 @@ namespace PG
         public bool ConvoyEnabled = false;
         public UnityEvent OnVehicleFinish;
         public bool hasEnteredFinishLocation = false;
-        public bool IsLeader = false;
-        private Vector3 _playerPosition;
+        [SerializeField] private bool _isLeader = false;
+        public float ConvoyVerticalRef = 0f;
+        private GameObject _playerPosition;
 
         public override void Start ()
         {
@@ -64,8 +65,8 @@ namespace PG
                 ConvoyAIConfig = new ConvoyAIConfig();
             }
 
-            // get player position
-            _playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+            // get player gameobject reference
+            _playerPosition = GameObject.FindGameObjectWithTag("Player");
 
             StartHits ();
         }
@@ -131,12 +132,12 @@ namespace PG
             if (_playerPosition != null)
             {
                 // get distance between player and AI
-                TargetDist = Vector3.Distance(_playerPosition, transform.position);
-
+                TargetDist = Vector3.Distance(_playerPosition.transform.position, transform.position);
+                
                 // if player too far away, reduce speed
-                if (TargetDist > 180)
+                if (TargetDist > 80)
                 {
-                    desiredSpeed = desiredSpeed / 1.5f;
+                    desiredSpeed = desiredSpeed * (80 / TargetDist);
                 }
             }
 
@@ -164,6 +165,13 @@ namespace PG
 
             // Acceleration and brake logic
             Vertical = ((desiredSpeed / Car.CurrentSpeed - 1)).Clamp (-1, 1);
+            
+            // Modify Vertical to use ConvoyVerticalRef
+            // if value between 0.05 and 0.2, use ConvoyVerticalRef
+            if (ConvoyVerticalRef != 0 && ConvoyVerticalRef < Vertical && Vertical > 0.05f && Vertical < 0.95f)
+            {
+                Vertical = Mathf.Lerp(Vertical, ConvoyVerticalRef * 0.7f, 0.8f);
+            }
 
             //Horizontal offset logic
             //Changing the offset for overtaking.

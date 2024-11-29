@@ -157,6 +157,23 @@ public class ConvoySystem : MonoBehaviour
             _isPlayerFinished = false;
             _isOtherVehiclesFinished = false;
         }
+        // hack: get last vehicle vertical speed for reference
+        if (_vehicleControls.Count > 0)
+        {
+            ConvoyAIControl lastVehicle = _vehicleControls[_vehicleControls.Count - 1];
+            if (lastVehicle.Car)
+            {
+                // set reference speed to other vehicles
+                for (var i = 0; i < _vehicleControls.Count - 1; i++)
+                {
+                    ConvoyAIControl vehicle = _vehicleControls[i];
+                    if (vehicle.Car)
+                    {
+                        vehicle.ConvoyVerticalRef = lastVehicle.Vertical;
+                    }
+                }
+            }
+        }
     }
 
     private void EnableTrigger(GameObject Trigger)
