@@ -11,6 +11,7 @@ namespace PG
     public class ConvoyAIControl :PositioningAIControl
     {
         ConvoyAIConfig ConvoyAIConfig;
+        [SerializeField] private ConvoySpeedController _speedController;
 
         float Aggressiveness { get { return ConvoyAIConfig.Aggressiveness; } }
         float ObstacleHitDistance { get { return ConvoyAIConfig.ObstacleHitDistance; } }
@@ -125,7 +126,16 @@ namespace PG
                                                             transform.up).Abs();
             
             float desiredSpeed = (1 - (angleToPredictionPoint / LookAngleSppedFactor)).AbsClamp ();
-            desiredSpeed = desiredSpeed * (SpeedLimit - MinSpeed) + MinSpeed;
+
+            float calculatedSpeedLimit = SpeedLimit;
+            
+            if (_speedController != null)
+            {
+                calculatedSpeedLimit = _speedController.GetUsedSpeedLimit(SpeedLimit);
+            }
+            
+
+            desiredSpeed = desiredSpeed * (calculatedSpeedLimit - MinSpeed) + MinSpeed;
             desiredSpeed = desiredSpeed.Clamp (MinSpeed, MaxSpeed);
 
             if (_playerPosition != null)
@@ -157,10 +167,10 @@ namespace PG
                 float aheadRBSpeed = Mathf.Lerp(adjustedSpeed, desiredSpeed, Aggressiveness);
 
                 desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(aheadRBSpeed, desiredSpeed, ((DistanceToAheadCollider - 1) / ObstacleHitDistance).Clamp()));
-            }
+            }           
 
             //Apply speed limit.
-            desiredSpeed = Mathf.Min (SpeedLimit, desiredSpeed);
+            desiredSpeed = Mathf.Min (calculatedSpeedLimit, desiredSpeed);
 
             // Acceleration and brake logic
             Vertical = ((desiredSpeed / Car.CurrentSpeed - 1)).Clamp (-1, 1);
