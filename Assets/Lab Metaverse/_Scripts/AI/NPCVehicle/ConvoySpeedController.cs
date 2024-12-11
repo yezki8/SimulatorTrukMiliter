@@ -9,6 +9,8 @@ public class ConvoySpeedController : MonoBehaviour
     public float CurrentOnFrontDistance;
     public float SpeedLimitMultiplierThreshold = 2;
 
+    [SerializeField] private ConvoySpeedController _lastCarSpeedController;
+
     [Header("For Car Leader")]
     [SerializeField] private bool _isLeader = false;
     [SerializeField] private Transform _lastVehicle;
@@ -53,6 +55,10 @@ public class ConvoySpeedController : MonoBehaviour
     public float GetDynamicSpeedLimit(float speedLimit)
     {
         float dynamicLimit = speedLimit;
+        if (_lastCarSpeedController != null)
+        {
+            dynamicLimit = _lastCarSpeedController.CurrentSpeedLimit;
+        }
         if (_isLeader)
         {
             if (CurrentWholeDistance > _wholeDistanceThreshold)
