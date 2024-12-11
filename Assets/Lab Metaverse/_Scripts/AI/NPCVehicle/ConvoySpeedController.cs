@@ -1,24 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PG;
 
 public class ConvoySpeedController : MonoBehaviour
 {
     [SerializeField] private Transform _onFrontVehicle;
     [SerializeField] private float _distanceThreshold;
     public float CurrentOnFrontDistance;
-    public float SpeedLimitMultiplierThreshold = 2;
 
     [SerializeField] private ConvoySpeedController _lastCarSpeedController;
-
-    [Header("For Car Leader")]
-    [SerializeField] private bool _isLeader = false;
-    [SerializeField] private Transform _lastVehicle;
     [SerializeField] private Transform _onBehindVehicle;
-    [SerializeField] private float _behindDistanceThreshold;
-    [SerializeField] private float _wholeDistanceThreshold;
     public float CurrentBehindDistance;
-    public float CurrentWholeDistance;
 
     [SerializeField] [Range(1, 9)] private float _speedLimitLevel = 5;
 
@@ -38,46 +31,32 @@ public class ConvoySpeedController : MonoBehaviour
 
     void CalculateDistance()
     {
-        if (_isLeader && _lastVehicle != null)
+        if (_onFrontVehicle != null)
         {
-            CurrentWholeDistance = Vector3.Distance(this.transform.position, _lastVehicle.position);
-            CurrentBehindDistance = Vector3.Distance(this.transform.position, _onBehindVehicle.position);
+            CurrentOnFrontDistance = Vector3.Distance(this.transform.position, _onFrontVehicle.position);
         }
-        else
+        if (_onBehindVehicle != null)
         {
-            if (_onFrontVehicle != null)
-            {
-                CurrentOnFrontDistance = Vector3.Distance(this.transform.position, _onFrontVehicle.position);
-            }
+            CurrentBehindDistance = Vector3.Distance(this.transform.position, _onBehindVehicle.position);
         }
     }
 
     public float GetDynamicSpeedLimit(float speedLimit)
     {
-        float dynamicLimit = speedLimit;
+        float targetLimit = speedLimit;
         if (_lastCarSpeedController != null)
         {
-            dynamicLimit = _lastCarSpeedController.CurrentSpeedLimit;
+            targetLimit = _lastCarSpeedController.CurrentSpeedLimit;
         }
-        if (_isLeader)
+        float dynamicLimit = targetLimit;
+
+        if (CurrentBehindDistance > _distanceThreshold && _onBehindVehicle !=null)
         {
-            if (CurrentWholeDistance > _wholeDistanceThreshold)
-            {
-                dynamicLimit = (speedLimit / 10) * _speedLimitLevel;
-            }
-            else
-            {
-                dynamicLimit = speedLimit * (CurrentBehindDistance / _behindDistanceThreshold);
-            }
+            dynamicLimit = targetLimit * (_distanceThreshold / CurrentBehindDistance);
         }
         else
         {
-            dynamicLimit = speedLimit * (CurrentOnFrontDistance /_distanceThreshold);
-        }
-
-        if (dynamicLimit > speedLimit * SpeedLimitMultiplierThreshold)
-        {
-            dynamicLimit = speedLimit * SpeedLimitMultiplierThreshold;
+            dynamicLimit = targetLimit;
         }
 
         CurrentSpeedLimit = dynamicLimit;
