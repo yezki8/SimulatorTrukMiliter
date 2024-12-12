@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 166625315271236848}
   serializedVersion: 2
   m_LocalRotation: {x: 0.4740067, y: -0, z: -0, w: 0.88052124}
-  m_LocalPosition: {x: 0.47, y: 1.67, z: 1.31}
+  m_LocalPosition: {x: 0.47, y: 1.67, z: 2.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -378,7 +378,7 @@ Transform:
   m_GameObject: {fileID: 253774011411516346}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 0.83333325, z: 0.83333325}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -492,7 +492,6 @@ MonoBehaviour:
   ForceFeedback: {fileID: 0}
   CanBrake: 1
   CanHandBrake: 1
-  IsPlayerCar: 0
   StartEngineInAwake: 0
   StartEngineDellay: 1.5
   Engine:
@@ -21071,7 +21070,7 @@ Transform:
   m_GameObject: {fileID: 1507022996822997127}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8833344, z: 0.89166653}
+  m_LocalPosition: {x: 0, y: 0.8833344, z: 1.8916665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26334,7 +26333,7 @@ Transform:
   m_GameObject: {fileID: 1754141431202196350}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.98, z: 2.15}
+  m_LocalPosition: {x: 0, y: 1.98, z: 3.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26551,7 +26550,6 @@ MonoBehaviour:
   CarLightType: 3
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -26589,7 +26587,7 @@ Transform:
   m_GameObject: {fileID: 2232914427567728758}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37850,7 +37848,7 @@ Transform:
   m_GameObject: {fileID: 4270586616311792134}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.41, z: -0.83}
+  m_LocalPosition: {x: 0, y: 0.41, z: 0.17000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37881,7 +37879,7 @@ Transform:
   m_GameObject: {fileID: 4350547989175827137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52908,7 +52906,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 0
   DriveWheel: 1
-  MaxBrakeTorque: 6000
+  MaxBrakeTorque: 10000
   HandBrakeWheel: 1
   WheelView: {fileID: 792134115684677230}
   WheelHub: {fileID: 0}
@@ -53058,7 +53056,6 @@ MonoBehaviour:
   CarLightType: 1
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 9ea9d7da4172ac247ab479cd6b56863c, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -53489,7 +53486,6 @@ MonoBehaviour:
   CarLightType: 2
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -63728,7 +63724,7 @@ Transform:
   m_GameObject: {fileID: 6305380698860604461}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.032001495, z: 0}
+  m_LocalPosition: {x: 0, y: -0.032001495, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -63911,7 +63907,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 1
   DriveWheel: 0
-  MaxBrakeTorque: 4000
+  MaxBrakeTorque: 6000
   HandBrakeWheel: 0
   WheelView: {fileID: 338895138953414371}
   WheelHub: {fileID: 0}
@@ -64458,7 +64454,6 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 2678787956209623856}
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 70, y: 193.466, z: 194.349}
   MainRange: 40
   MainSpotAngle: 50
@@ -64575,7 +64570,6 @@ MonoBehaviour:
   CarLightType: 3
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -69752,7 +69746,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 1
   DriveWheel: 0
-  MaxBrakeTorque: 4000
+  MaxBrakeTorque: 6000
   HandBrakeWheel: 0
   WheelView: {fileID: 879080834013362039}
   WheelHub: {fileID: 0}
@@ -69982,7 +69976,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 0
   DriveWheel: 1
-  MaxBrakeTorque: 8000
+  MaxBrakeTorque: 10000
   HandBrakeWheel: 1
   WheelView: {fileID: 1648004148823932334}
   WheelHub: {fileID: 0}
@@ -70100,7 +70094,6 @@ MonoBehaviour:
   CarLightType: 4
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -70253,7 +70246,7 @@ Transform:
   m_GameObject: {fileID: 7914879733683979307}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.02}
+  m_LocalPosition: {x: 0, y: 0, z: -0.01999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -70716,7 +70709,6 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 7859603761330823447}
   OnLightMaterial: {fileID: 2100000, guid: 06f29631e1ea059429e6a9cd65b2f741, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 70, y: 166.534, z: 165.651}
   MainRange: 40
   MainSpotAngle: 50
@@ -76498,7 +76490,6 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: cfd59c905e163124fb2def0c35d28cd8, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -76651,7 +76642,6 @@ MonoBehaviour:
   CarLightType: 2
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 6f97932b655e88b4f92d4dbf276b6e86, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -76721,7 +76711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4586766038092359383, guid: 7087b41aa398a4a41a8a4ce999c6a2bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4586766038092359383, guid: 7087b41aa398a4a41a8a4ce999c6a2bb, type: 3}
       propertyPath: m_LocalRotation.w

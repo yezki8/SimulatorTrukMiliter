@@ -37,6 +37,7 @@ namespace PG
         Vector3 HorizontalOffset;                                               //Offset target point for overtaking as Vector3, depends on the direction of the path.
         Rigidbody AheadRB;                                                      //Nearest ahead car.
         float DistanceToAheadCollider;                                          //Distance to the nearest car.
+        float PrevDistToAheadCollider = 0f;
 
         // lighting
         CarLighting CarLighting;
@@ -138,17 +139,17 @@ namespace PG
             desiredSpeed = desiredSpeed * (calculatedSpeedLimit - MinSpeed) + MinSpeed;
             desiredSpeed = desiredSpeed.Clamp (MinSpeed, MaxSpeed);
 
-            if (_playerPosition != null)
-            {
-                // get distance between player and AI
-                TargetDist = Vector3.Distance(_playerPosition, transform.position);
-
-                // if player too far away, reduce speed
-                if (TargetDist > 180)
-                {
-                    desiredSpeed = desiredSpeed / 1.5f;
-                }
-            }
+            // if (_playerPosition != null)
+            // {
+            //     // get distance between player and AI
+            //     TargetDist = Vector3.Distance(_playerPosition, transform.position);
+            // 
+            //     // if player too far away, reduce speed
+            //     if (TargetDist > 180)
+            //     {
+            //         desiredSpeed = desiredSpeed / 1.5f;
+            //     }
+            // }
 
             if (AheadRB) {
 
@@ -166,7 +167,14 @@ namespace PG
                 //Apply aggressiveness to the desired speed.
                 float aheadRBSpeed = Mathf.Lerp(adjustedSpeed, desiredSpeed, Aggressiveness);
 
-                desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(aheadRBSpeed, desiredSpeed, ((DistanceToAheadCollider - 1) / ObstacleHitDistance).Clamp()));
+                // desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(aheadRBSpeed, desiredSpeed, (DistanceToAheadCollider - (DistanceToAheadCollider - PrevDistToAheadCollider > 0.05f ? 3f : 1f) / ObstacleHitDistance).Clamp()));
+                desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(aheadRBSpeed, desiredSpeed, ((DistanceToAheadCollider - 2) / ObstacleHitDistance).Clamp()));
+
+                // if too close, brake a bit
+                if (DistanceToAheadCollider < 5)
+                {
+                    desiredSpeed = desiredSpeed * 0.7f;
+                }
             }           
 
             //Apply speed limit.
@@ -330,6 +338,7 @@ namespace PG
                                     ) && 
                     MainHits[i].distance < DistanceToAheadCollider)
                 {
+                    PrevDistToAheadCollider = DistanceToAheadCollider;
                     DistanceToAheadCollider = MainHits[i].distance;
                     AheadRB = MainHits[i].rigidbody;
                 }
