@@ -204,7 +204,6 @@ MonoBehaviour:
   CarLightType: 3
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 81491bcfe8166374081b89f76472ed4a, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -30044,7 +30043,6 @@ MonoBehaviour:
   CarLightType: 3
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 81491bcfe8166374081b89f76472ed4a, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -30083,7 +30081,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.65681106, z: -0.31009105}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 563705580477916170}
@@ -30317,7 +30315,6 @@ MonoBehaviour:
   ForceFeedback: {fileID: 0}
   CanBrake: 1
   CanHandBrake: 1
-  IsPlayerCar: 0
   StartEngineInAwake: 0
   StartEngineDellay: 1
   Engine:
@@ -30962,7 +30959,6 @@ MonoBehaviour:
   CarLightType: 2
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 81491bcfe8166374081b89f76472ed4a, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -36151,7 +36147,6 @@ MonoBehaviour:
   CarLightType: 1
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 81491bcfe8166374081b89f76472ed4a, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -41818,7 +41813,6 @@ MonoBehaviour:
   CarLightType: 2
   LightGO: {fileID: 0}
   OnLightMaterial: {fileID: 2100000, guid: 81491bcfe8166374081b89f76472ed4a, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50
@@ -42234,7 +42228,6 @@ MonoBehaviour:
   CarLightType: 0
   LightGO: {fileID: 1405408585881168299}
   OnLightMaterial: {fileID: 2100000, guid: 81491bcfe8166374081b89f76472ed4a, type: 2}
-  EnableLight: 1
   MainLightDirection: {x: 0, y: 0, z: 0}
   MainRange: 40
   MainSpotAngle: 50

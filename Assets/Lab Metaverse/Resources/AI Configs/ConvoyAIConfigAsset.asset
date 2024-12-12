@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ConvoyAIConfigAsset
   m_EditorClassIdentifier: 
   AIConfig:
-    MaxSpeed: 30
+    MaxSpeed: 50
     MinSpeed: 0
     SetSteerAngleMultiplayer: 1.8
     OffsetToTargetPoint: 8
@@ -25,13 +25,13 @@ MonoBehaviour:
     ReverseTime: 0.5
     BetweenReverseTimeForReset: 10
   ConvoyAIConfig:
-    Aggressiveness: 0
-    ObstacleHitDistance: 8
+    Aggressiveness: 0.419
+    ObstacleHitDistance: 16
     HitPointHeight: 0.5
     ChangeHorizontalOffsetSpeed: 3
-    OffsetForMainHitPoints: 0.7
+    OffsetForMainHitPoints: 0.3
     OffsetForMainHitDirections: 0.8
-    OffsetForAdditionalHitPoints: 0.9
-    OffsetForAdditionalHitDirections: 1.6
-    MainHitDellayTime: 0.4
-    AdditionalHitDellayTime: 0.6
+    OffsetForAdditionalHitPoints: 0.3
+    OffsetForAdditionalHitDirections: 0.6
+    MainHitDellayTime: 0.2
+    AdditionalHitDellayTime: 0.4
