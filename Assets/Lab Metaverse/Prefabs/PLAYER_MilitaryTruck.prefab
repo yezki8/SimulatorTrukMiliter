@@ -52906,7 +52906,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 0
   DriveWheel: 1
-  MaxBrakeTorque: 6000
+  MaxBrakeTorque: 10000
   HandBrakeWheel: 1
   WheelView: {fileID: 792134115684677230}
   WheelHub: {fileID: 0}
@@ -63907,7 +63907,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 1
   DriveWheel: 0
-  MaxBrakeTorque: 4000
+  MaxBrakeTorque: 6000
   HandBrakeWheel: 0
   WheelView: {fileID: 338895138953414371}
   WheelHub: {fileID: 0}
@@ -69746,7 +69746,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 1
   DriveWheel: 0
-  MaxBrakeTorque: 4000
+  MaxBrakeTorque: 6000
   HandBrakeWheel: 0
   WheelView: {fileID: 879080834013362039}
   WheelHub: {fileID: 0}
@@ -69976,7 +69976,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 0
   DriveWheel: 1
-  MaxBrakeTorque: 8000
+  MaxBrakeTorque: 10000
   HandBrakeWheel: 1
   WheelView: {fileID: 1648004148823932334}
   WheelHub: {fileID: 0}

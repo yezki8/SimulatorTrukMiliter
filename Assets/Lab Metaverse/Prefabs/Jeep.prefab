@@ -172,7 +172,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 0
   DriveWheel: 1
-  MaxBrakeTorque: 6000
+  MaxBrakeTorque: 10000
   HandBrakeWheel: 1
   WheelView: {fileID: 1754170484337994235}
   WheelHub: {fileID: 0}
@@ -25441,7 +25441,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 1
   DriveWheel: 0
-  MaxBrakeTorque: 4000
+  MaxBrakeTorque: 6000
   HandBrakeWheel: 0
   WheelView: {fileID: 491080404871033364}
   WheelHub: {fileID: 0}
@@ -30755,7 +30755,6 @@ MonoBehaviour:
   ForceFeedback: {fileID: 0}
   CanBrake: 1
   CanHandBrake: 1
-  IsPlayerCar: 0
   StartEngineInAwake: 0
   StartEngineDellay: 1.5
   Engine:
@@ -31112,6 +31111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AIConfigAsset: {fileID: 11400000, guid: 75264cfa41cef3e4d93170200cd35e1f, type: 2}
   AIPath: {fileID: 0}
+  _speedController: {fileID: 0}
   ConvoyEnabled: 0
   OnVehicleFinish:
     m_PersistentCalls:
@@ -55964,7 +55964,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 0
   DriveWheel: 1
-  MaxBrakeTorque: 6000
+  MaxBrakeTorque: 10000
   HandBrakeWheel: 1
   WheelView: {fileID: 3266391630540792651}
   WheelHub: {fileID: 0}
@@ -62010,7 +62010,7 @@ MonoBehaviour:
   MaxDamage: Infinity
   SteerPercent: 1
   DriveWheel: 0
-  MaxBrakeTorque: 4000
+  MaxBrakeTorque: 6000
   HandBrakeWheel: 0
   WheelView: {fileID: 4969378878563815795}
   WheelHub: {fileID: 0}
