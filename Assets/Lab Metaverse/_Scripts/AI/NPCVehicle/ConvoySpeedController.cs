@@ -66,9 +66,9 @@ public class ConvoySpeedController : MonoBehaviour
                     (_speedLimitLevel/10));
 
 
-                if (tempLimit < targetLimit / 8)
+                if (tempLimit < targetLimit / 4)
                 {
-                    dynamicLimit = targetLimit / 8;
+                    dynamicLimit = targetLimit / 4;
                 }
                 else
                 {
