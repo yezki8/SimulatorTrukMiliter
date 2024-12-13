@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PG
@@ -148,12 +147,45 @@ namespace PG
 
                 if (anyWheelIsGrounded && !forwardIsSlip && EngineRPM > Engine.RPMToNextGear && CurrentGear >= 0 && CurrentGear < (AllGearsRatio.Length - 2))
                 {
-                    NextGear ();
+                    // use heuristic if convoy vehicle
+                    if (VehicleName.Contains("Military"))
+                    {
+                        // heuristic based on velocity
+                        if (CurrentGear == 1 && CurrentSpeed > 2f)
+                        {
+                            NextGear();
+                        }
+                        else if (CurrentGear == 2 && CurrentSpeed > 5.5f)
+                        {
+                            NextGear();
+                        }
+                        else if (CurrentGear == 3 && CurrentSpeed > 7.2f)
+                        {
+                            NextGear();
+                        }
+                        else if (CurrentGear == 4 && CurrentSpeed > 8f)
+                        {
+                            NextGear();
+                        }
+                    }
+                    else
+                    {
+                        NextGear();
+                    }
+                    if (VehicleName.Contains("Military Truck 1"))
+                    {
+                        Debug.Log("Upshift to Gear: " + CurrentGear);
+                    }
+
                 }
                 else if (CurrentGear > 0 && (EngineRPM + 10 <= MinRPM || CurrentGear != 1) &&
                     Engine.RPMToNextGear > EngineRPM / AllGearsRatio[CurrentGearIndex] * AllGearsRatio[CurrentGearIndex - 1] + Engine.RPMToPrevGearDiff)
                 {
                     PrevGear ();
+                    if (VehicleName.Contains("Military Truck 1"))
+                    {
+                        Debug.Log("Downshift to Gear: " + CurrentGear);
+                    }
                 }
 
                 //Switching logic from neutral gear.
