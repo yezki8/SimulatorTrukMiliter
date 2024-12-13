@@ -154,24 +154,24 @@ namespace PG
             if (AheadRB) {
 
                 var vehicleDirection = transform.forward;
-                var adjustedSpeed = 0f;
+                var aheadRBSpeed = 0f;
 
                 // compare the velocity direction of the current car and the ahead car
                 var dot = Vector3.Dot(AheadRB.velocity.normalized, vehicleDirection);
 
                 if (dot > 0.3f)
                 {
-                    adjustedSpeed = AheadRB.velocity.magnitude;
+                    aheadRBSpeed = AheadRB.velocity.magnitude;
                 }
 
                 //Apply aggressiveness to the desired speed.
-                float aheadRBSpeed = Mathf.Lerp(adjustedSpeed, desiredSpeed, Aggressiveness);
+                float adjustedSpeed = Mathf.Lerp(aheadRBSpeed, desiredSpeed, Aggressiveness);
 
-                // desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(aheadRBSpeed, desiredSpeed, (DistanceToAheadCollider - (DistanceToAheadCollider - PrevDistToAheadCollider > 0.05f ? 3f : 1f) / ObstacleHitDistance).Clamp()));
-                desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(aheadRBSpeed, desiredSpeed, ((DistanceToAheadCollider - 2) / ObstacleHitDistance).Clamp()));
+                desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(aheadRBSpeed, desiredSpeed, ((DistanceToAheadCollider - (PrevDistToAheadCollider - DistanceToAheadCollider > 0.05f ? 1f : 0.2f)) / ObstacleHitDistance).Clamp()));
+                // desiredSpeed = Mathf.Min (desiredSpeed, Mathf.Lerp(adjustedSpeed, desiredSpeed, ((DistanceToAheadCollider - 1) / ObstacleHitDistance).Clamp()));
 
                 // if too close, brake a bit
-                if (DistanceToAheadCollider < 5)
+                if (DistanceToAheadCollider < 5 && PrevDistToAheadCollider > DistanceToAheadCollider)
                 {
                     desiredSpeed = desiredSpeed * 0.7f;
                 }

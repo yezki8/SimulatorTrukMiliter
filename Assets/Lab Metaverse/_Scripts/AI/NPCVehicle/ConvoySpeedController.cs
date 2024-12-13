@@ -59,7 +59,7 @@ public class ConvoySpeedController : MonoBehaviour
         if (_isWaitingForVehicleBehind)
         {
             // checks: vehicle behind exist, distance threshold, currentSpeed - prevSpeed > 0f
-            if (_onBehindVehicle != null && CurrentBehindDistance > _distanceThreshold && _prevBehindDistance - CurrentBehindDistance < 1f)
+            if (_onBehindVehicle != null && CurrentBehindDistance > _distanceThreshold && CurrentBehindDistance - _prevBehindDistance > 0f)
             {
                 float tempLimit = targetLimit - 
                     ((targetLimit * ((CurrentBehindDistance - _distanceThreshold) / _distanceThreshold)) * 

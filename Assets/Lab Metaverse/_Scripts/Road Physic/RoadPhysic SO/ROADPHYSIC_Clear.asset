@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0aa82465cd5fa845975be9694261b1d, type: 3}
   m_Name: ROADPHYSIC_Clear
   m_EditorClassIdentifier: 
-  ForwardExtremumValue: 8
-  ForwardAsymptoteValue: 6
-  FrontSidewayExtremumValue: 4
-  FrontSidewayAsymptoteValue: 3.2
-  RearSidewayExtremumValue: 5
-  RearSidewayAsymptoteValue: 4
+  ForwardExtremumValue: 3.2
+  ForwardAsymptoteValue: 2.6
+  FrontSidewayExtremumValue: 3
+  FrontSidewayAsymptoteValue: 2.4
+  RearSidewayExtremumValue: 3
+  RearSidewayAsymptoteValue: 2.4
